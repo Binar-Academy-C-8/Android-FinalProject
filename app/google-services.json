@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034563359971",
+    "project_id": "finalproject-binar",
+    "storage_bucket": "finalproject-binar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034563359971:android:c252d1f38a17db9871a1d6",
+        "android_client_info": {
+          "package_name": "com.raveendra.finalproject_binar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD85Xg7cRnQv56FftlY8gzuq25CFYEKqTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

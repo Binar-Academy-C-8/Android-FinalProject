@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FinalProjectBinar" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/primary_dark_blue_04</item>
+        <item name="colorPrimaryDark">@color/primary_dark_blue_05</item>
+    </style>
+
+    <style name="Theme.FinalProjectBinar" parent="Base.Theme.FinalProjectBinar" />
+</resources>

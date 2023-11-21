@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextRegular10" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium10" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold10" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextRegular12" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium12" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold12" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextRegular14" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium14" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold14" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextRegular16" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium16" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold16" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextRegular18" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium18" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold18" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextRegular20" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium20" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold20" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextRegular24" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextMedium24" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextBold24" parent="android:TextAppearance">
+        <item name="android:textColor">@color/neutral_05</item>
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+</resources>
