@@ -11,4 +11,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_search_course">Cari Kursus terbaik....</string>
+    <string name="txt_topik_kelas">Topik Kelas</string>
+    <string name="txt_filter">Filter</string>
+    <string name="txt_selamat">Selamat!</string>
+    <string name="txt_payment_success">Transaksi pembayaran kelas premium berhasil!</string>
+    <string name="txt_payment_success_2">E-Receipt telah dikirimkan ke email.</string>
+    <string name="txt_mulai_belajar">Mulai Belajar</string>
+    <string name="txt_kembali_ke_beranda">Kembali ke Beranda</string>
+    <string name="txt_onboarding">Onboarding...</string>
+    <string name="txt_onboarding_1">Persiapkan hal berikut untuk belajar yang maksimal</string>
+    <string name="txt_onboarding_2">Mempunyai akun Figma atau Install Adobe XD Menggunakan internet minimal kecepatan 2Mbps Belajar di tempat yang nyaman</string>
+    <string name="txt_ikuti_kelas">Ikuti Kelas</string>
+    <string name="txt_oops">Oops!</string>
+    <string name="txt_maaf_anda_harus_login">Maaf, anda harus login terlebih dahulu!</string>
+    <string name="txt_masuk">Masuk</string>
 </resources>
