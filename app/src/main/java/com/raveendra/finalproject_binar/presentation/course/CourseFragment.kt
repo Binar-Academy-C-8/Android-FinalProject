@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.raveendra.finalproject_binar.data.dummy.ProductDataSourceImpl
+import com.raveendra.finalproject_binar.data.dummy.CourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
-import com.raveendra.finalproject_binar.model.Product
-import com.raveendra.finalproject_binar.presentation.course.adapter.ProductAdapter
+import com.raveendra.finalproject_binar.model.Course
+import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,8 +16,8 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
 
     private val viewModel: CourseViewModel by viewModel()
 
-    private val adapterProduct: ProductAdapter by lazy {
-        ProductAdapter { product: Product ->
+    private val adapterProduct: CourseAdapter by lazy {
+        CourseAdapter { course: Course ->
 
         }
     }
@@ -34,7 +34,7 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
 
     private fun setupRecyclerView() {
         binding.rvList.adapter = adapterProduct
-        adapterProduct.setData(ProductDataSourceImpl().getProductList())
+        adapterProduct.setData(CourseDataSourceImpl().getCourseList())
     }
 
 }

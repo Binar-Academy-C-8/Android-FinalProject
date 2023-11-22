@@ -1,14 +1,14 @@
 package com.raveendra.finalproject_binar.data.dummy
 
-import com.raveendra.finalproject_binar.model.Product
+import com.raveendra.finalproject_binar.model.Course
 
-interface ProductDataSource {
-    fun getProductList(): List<Product>
+interface CourseDataSource {
+    fun getCourseList(): List<Course>
 }
 
-class ProductDataSourceImpl() : ProductDataSource {
-    override fun getProductList(): List<Product> = listOf(
-        Product(
+class CourseDataSourceImpl() : CourseDataSource {
+    override fun getCourseList(): List<Course> = listOf(
+        Course(
             name = "Intro to Basic of User Interaction Design",
             imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             author = "Maman",
@@ -17,7 +17,7 @@ class ProductDataSourceImpl() : ProductDataSource {
             modul = "11 Modul",
             duration = "120 Menit"
         ),
-        Product(
+        Course(
             name = "Intro to Basic of User Interaction Design",
             imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             author = "Jack",
@@ -26,7 +26,7 @@ class ProductDataSourceImpl() : ProductDataSource {
             modul = "8 Modul",
             duration = "60 Menit"
         ),
-        Product(
+        Course(
             name = "Intro to Basic of User Interaction Design",
             imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             author = "Maman",

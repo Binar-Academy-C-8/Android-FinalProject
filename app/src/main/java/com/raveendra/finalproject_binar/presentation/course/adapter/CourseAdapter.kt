@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raveendra.finalproject_binar.core.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListCourseBinding
-import com.raveendra.finalproject_binar.model.Product
+import com.raveendra.finalproject_binar.model.Course
 
-class ProductAdapter (
-    private val onItemClick: (Product) -> Unit)
+class CourseAdapter (
+    private val onItemClick: (Course) -> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Course>() {
+        override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     })
@@ -29,21 +29,21 @@ class ProductAdapter (
         return ProductViewHolder(binding, onItemClick)
     }
 
-    fun setData(data: List<Product>) {
+    fun setData(data: List<Course>) {
         differ.submitList(data)
     }
 
     override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolderBinder<Product>).bind(differ.currentList[position])
+        (holder as ViewHolderBinder<Course>).bind(differ.currentList[position])
     }
 
     class ProductViewHolder(
         private val binding: ItemListCourseBinding,
-        private val onClickListener: (Product) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Product> {
-        override fun bind(item: Product) {
+        private val onClickListener: (Course) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Course> {
+        override fun bind(item: Course) {
             binding.ivImg.load(item.imgUrl) {
                 crossfade(true)
             }
