@@ -8,6 +8,7 @@ import com.raveendra.finalproject_binar.data.dummy.CourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.model.Course
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
+import com.raveendra.finalproject_binar.presentation.course.adapter.CourseTypeAdapter
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,7 +18,7 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
     private val viewModel: CourseViewModel by viewModel()
 
     private val adapterProduct: CourseAdapter by lazy {
-        CourseAdapter { course: Course ->
+        CourseAdapter(CourseTypeAdapter.PREMIUM) { course: Course ->
 
         }
     }

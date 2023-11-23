@@ -84,7 +84,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/chip_group_filter"
             tools:itemCount="3"
-            tools:listitem="@layout/item_list_course" />
+            tools:listitem="@layout/item_list_course_premium" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
