@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.raveendra.finalproject_binar.data.dummy.CourseDataSourceImpl
+import com.raveendra.finalproject_binar.data.dummy.DummyCourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.model.Course
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
@@ -17,7 +17,7 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
 
     private val viewModel: CourseViewModel by viewModel()
 
-    private val adapterProduct: CourseAdapter by lazy {
+    private val adapterCourse: CourseAdapter by lazy {
         CourseAdapter(CourseTypeAdapter.PREMIUM) { course: Course ->
 
         }
@@ -34,8 +34,8 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvList.adapter = adapterProduct
-        adapterProduct.setData(CourseDataSourceImpl().getCourseList())
+        binding.rvList.adapter = adapterCourse
+        adapterCourse.setData(DummyCourseDataSourceImpl().getCourseList())
     }
 
 }

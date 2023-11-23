@@ -31,11 +31,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_bold"
+                style="@style/TextBold14"
                 android:textColor="@color/primary_dark_blue_05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="UI/UX Design" />
+                tools:text="UI/UX Design" />
 
             <LinearLayout
                 android:id="@+id/ll_rating"
@@ -58,26 +58,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/poppins_bold"
+                    style="@style/TextBold14"
                     android:textAlignment="center"
-                    android:text="4.8" />
+                    tools:text="4.8" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
+                style="@style/TextBold14"
                 app:layout_constraintTop_toBottomOf="@id/tv_category"
-                android:text="Intro to Basic of User Interaction Design" />
+                tools:text="Intro to Basic of User Interaction Design" />
 
             <TextView
                 android:id="@+id/tv_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                style="@style/TextMedium14"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                android:text="By Simone Doe" />
+                tools:text="By Simone Doe" />
 
             <LinearLayout
                 android:id="@+id/ll_level"
@@ -100,15 +100,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/poppins_medium"
+                    style="@style/TextMedium12"
                     android:maxLines="1"
                     android:textColor="@color/primary_dark_blue_05"
-                    android:textSize="12sp"
-                    android:text="Intermediate Level" />
+                    tools:text="Intermediate Level" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_modul"
+                android:id="@+id/ll_module"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -124,14 +123,13 @@
                     android:src="@drawable/ic_modul" />
 
                 <TextView
-                    android:id="@+id/tv_modul"
+                    android:id="@+id/tv_module"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textSize="12sp"
-                    android:text="10 Modul" />
+                    style="@style/TextMedium12"
+                    tools:text="10 Modul" />
             </LinearLayout>
 
             <LinearLayout
@@ -141,7 +139,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ll_modul"
+                app:layout_constraintStart_toEndOf="@id/ll_module"
                 app:layout_constraintTop_toBottomOf="@id/tv_author">
 
                 <ImageView
@@ -156,9 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textSize="12sp"
-                    android:text="120 Menit" />
+                    style="@style/TextMedium12"
+                    tools:text="120 Menit" />
 
             </LinearLayout>
 
@@ -179,10 +176,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginVertical="8dp"
-                    android:fontFamily="@font/poppins_medium"
+                    style="@style/TextMedium14"
                     android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:text="Mulai Kelas" />
+                    tools:text="Mulai Kelas" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

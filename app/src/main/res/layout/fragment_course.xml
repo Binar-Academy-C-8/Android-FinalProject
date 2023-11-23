@@ -22,12 +22,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_topik"
+                android:id="@+id/tv_topic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
                 android:text="@string/txt_topik_kelas"
-                android:textSize="20sp"
+                style="@style/TextBold20"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +34,7 @@
                 android:id="@+id/tv_filter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
+                style="@style/TextBold14"
                 android:text="@string/txt_filter"
                 android:textColor="@color/primary_dark_blue_05"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -56,24 +55,21 @@
                 android:id="@+id/chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="All" />
+                android:text="@string/txt_all" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primary_dark_blue_05"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Kelas Premium"
+                android:text="@string/txt_kelas_premium"
                 android:textColor="@color/white" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Kelas Gratis" />
+                android:text="@string/txt_kelas_gratis" />
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView

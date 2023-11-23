@@ -25,4 +25,7 @@
     <string name="txt_oops">Oops!</string>
     <string name="txt_maaf_anda_harus_login">Maaf, anda harus login terlebih dahulu!</string>
     <string name="txt_masuk">Masuk</string>
+    <string name="txt_all">All</string>
+    <string name="txt_kelas_premium">Kelas Premium</string>
+    <string name="txt_kelas_gratis">Kelas Gratis</string>
 </resources>

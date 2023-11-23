@@ -2,11 +2,11 @@ package com.raveendra.finalproject_binar.data.dummy
 
 import com.raveendra.finalproject_binar.model.Course
 
-interface CourseDataSource {
+interface DummyCourseDataSource {
     fun getCourseList(): List<Course>
 }
 
-class CourseDataSourceImpl() : CourseDataSource {
+class DummyCourseDataSourceImpl() : DummyCourseDataSource {
     override fun getCourseList(): List<Course> = listOf(
         Course(
             name = "Intro to Basic of User Interaction Design",
