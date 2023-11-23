@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/text_notifications"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/iv_notification"
+        android:layout_margin="2dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_menu_notif"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/iv_notification"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/tv_promo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Promo"
+                android:textColor="@color/primary_dark_blue_05"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_date_and_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="11dp"
+                android:gravity="end"
+                android:layout_marginEnd="8dp"
+                android:text="2 Maret, 12:00"
+                android:textColor="@color/neutral_03" />
+
+            <ImageView
+                android:id="@+id/iv_elipse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_elipse" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_notif_line2"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Dapatkan Potongan 50% selama Bulan Maret!"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_notif_line3"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Syarat dan Ketentuan berlaku!"
+            android:textColor="@color/neutral_03"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <View
+        android:layout_marginVertical="12dp"
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="2dp"
+        android:background="@color/neutral_02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_menu_notif" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
