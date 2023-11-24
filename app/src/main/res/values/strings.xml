@@ -10,6 +10,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_buy">Beli %s</string>
+    <string name="text_category">Kategori</string>
+    <string name="text_view_all">Lihat Semua</string>
+    <string name="text_popular_course">Kursus Populer</string>
     <string name="label_search_course">Cari Kursus terbaik....</string>
     <string name="txt_topik_kelas">Topik Kelas</string>
     <string name="txt_filter">Filter</string>
