@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raveendra.finalproject_binar.databinding.ItemCategoryCourseBinding
-import com.raveendra.finalproject_binar.model.Course
+import com.raveendra.finalproject_binar.model.CourseCategory
 
-class AdapterCourse(): RecyclerView.Adapter<CourseViewHolder>(){
-    private val differ = AsyncListDiffer(this, object : DiffUtil. ItemCallback<Course>(){
-        override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
+class AdapterCourseCategory(): RecyclerView.Adapter<CourseViewHolder>(){
+    private val differ = AsyncListDiffer(this, object : DiffUtil. ItemCallback<CourseCategory>(){
+        override fun areItemsTheSame(oldItem: CourseCategory, newItem: CourseCategory): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
+        override fun areContentsTheSame(oldItem: CourseCategory, newItem: CourseCategory): Boolean {
             return oldItem.id == newItem.id
         }})
 
-    fun setData(data: List<Course>) {
+    fun setData(data: List<CourseCategory>) {
         differ.submitList(data)
         notifyItemChanged(0, data.size)
     }
@@ -42,7 +42,7 @@ class AdapterCourse(): RecyclerView.Adapter<CourseViewHolder>(){
 class CourseViewHolder(
     private val binding: ItemCategoryCourseBinding
 ): RecyclerView.ViewHolder(binding.root){
-    fun bind(item: Course) {
+    fun bind(item: CourseCategory) {
         binding.ivCategoryCourse.load(item.imgCategoryCourse)
         binding.tvNameCategoryCourse.text = item.nameCourse
     }
