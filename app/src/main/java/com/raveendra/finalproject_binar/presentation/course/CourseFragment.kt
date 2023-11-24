@@ -23,8 +23,6 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
         }
     }
 
-
-
     override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCourseBinding
         get() = FragmentCourseBinding::inflate
 
@@ -38,4 +36,6 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
         adapterCourse.setData(DummyCourseDataSourceImpl().getCourseList())
     }
 
+    private fun setClickChips(){
+    }
 }

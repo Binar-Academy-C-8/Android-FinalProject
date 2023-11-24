@@ -62,5 +62,9 @@ class CourseAdapter(
         (holder as ViewHolderBinder<Course>).bind(differ.currentList[position])
     }
 
+    fun refreshList() {
+        notifyItemRangeChanged(0, differ.currentList.size)
+    }
+
 
 }
