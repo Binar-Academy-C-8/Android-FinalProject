@@ -52,7 +52,7 @@ class PopularCourseViewHolder(
         binding.ivPopularCourse.load(item.imgPopularCourse)
         binding.tvNamePopularCourse.text = item.namePopularCourse
         binding.tvCourseRate.text = item.ratingCourse
-        binding.tvTittleCourse.text = item.tittleCourse
+        binding.tvTitleCourse.text = item.titleCourse
         binding.tvAuthorCourse.text = item.authorCourse
         binding.tvLevelCourse.text = item.levelCourse
         binding.tvDurationCourse.text = item.durationCourse

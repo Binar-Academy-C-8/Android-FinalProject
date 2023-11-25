@@ -10,7 +10,7 @@ data class PopularCourse(
     val imgPopularCourse: String,
     val namePopularCourse: String,
     val ratingCourse: String,
-    val tittleCourse: String,
+    val titleCourse: String,
     val authorCourse: String,
     val levelCourse: String,
     val durationCourse: String,

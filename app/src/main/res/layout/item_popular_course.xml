@@ -88,7 +88,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_course_rating">
                 <TextView
-                    android:id="@+id/tv_tittle_course"
+                    android:id="@+id/tv_title_course"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Belajar data cleaning dan sorting \ndengan Phyton"
