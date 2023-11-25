@@ -11,6 +11,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_search_course">Cari Kursus terbaik....</string>
+    <string name="text_notification">Notification</string>
     <string name="txt_topik_kelas">Topik Kelas</string>
     <string name="txt_filter">Filter</string>
     <string name="txt_selamat">Selamat!</string>

@@ -33,7 +33,7 @@ class NotificationsFragment  : BaseFragment<FragmentNotificationsBinding>() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvMenuNotif.adapter = adapterProduct
+        binding.rvMenuNotification.adapter = adapterProduct
         adapterProduct.setData(DummyNotificationdataSourceImpl().getNotificationData())
     }
 }
