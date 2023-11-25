@@ -66,7 +66,7 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:layout_marginEnd="2dp"
-                        android:src="@drawable/ic_rate" />
+                        android:src="@drawable/ic_rating" />
 
                     <TextView
                         android:id="@+id/tv_course_rate"
@@ -129,9 +129,9 @@
                         android:layout_marginEnd="12dp">
                         <ImageView
                             android:id="@+id/iv_level_course"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_level"/>
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic_badge"/>
                         <TextView
                             android:id="@+id/tv_level_course"
                             android:layout_width="wrap_content"
@@ -144,9 +144,9 @@
                     </LinearLayout>
                     <ImageView
                         android:id="@+id/iv_module_course"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_module"/>
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_modul"/>
                     <TextView
                         android:id="@+id/tv_module_course"
                         android:layout_width="wrap_content"
@@ -166,8 +166,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/ll_detail_popular_course_1">
                     <ImageView
                         android:id="@+id/iv_time_course"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
                         android:src="@drawable/ic_time"/>
                     <TextView
                         android:id="@+id/tv_duration_course"
