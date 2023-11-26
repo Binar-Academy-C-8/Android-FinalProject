@@ -1,14 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_light_blue_05"
     tools:context=".presentation.account.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       android:padding="18dp">
+      <TextView
+          android:id="@+id/tv_account"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/text_account"
+          android:textSize="24sp"
+          android:layout_margin="8dp"
+          android:fontFamily="@font/poppins_bold"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="parent"/>
+      <androidx.cardview.widget.CardView
+          android:id="@+id/cv_account"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@+id/tv_account"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:cardCornerRadius="10dp"
+          android:layout_margin="8dp">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginHorizontal="15dp"
+           android:layout_marginTop="15dp"
+           android:layout_marginBottom="30dp">
+          <LinearLayout
+              android:id="@+id/ll_my_profile"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              android:orientation="horizontal"
+              android:layout_margin="8dp">
+             <ImageView
+                 android:layout_width="24dp"
+                 android:layout_height="24dp"
+                 android:src="@drawable/ic_profile"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/text_my_profile"
+                 android:layout_marginStart="10dp"
+                 android:fontFamily="@font/poppins_medium"
+                 android:textSize="12sp"
+                 android:textStyle="bold"/>
+          </LinearLayout>
+          <View
+              android:layout_width="wrap_content"
+              android:layout_height="1dp"
+              app:layout_constraintStart_toStartOf="parent"
+              android:background="@color/neutral_06"
+              android:layout_marginTop="8dp"
+              android:layout_margin="8dp"/>
 
-</FrameLayout>
+          <LinearLayout
+              android:id="@+id/change_password"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              android:orientation="horizontal"
+              android:layout_margin="8dp">
+             <ImageView
+                 android:layout_width="24dp"
+                 android:layout_height="24dp"
+                 android:src="@drawable/ic_settings"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/text_change_password"
+                 android:layout_marginStart="10dp"
+                 android:fontFamily="@font/poppins_medium"
+                 android:textSize="12sp"
+                 android:textStyle="bold"/>
+          </LinearLayout>
+          <View
+              android:layout_width="wrap_content"
+              android:layout_height="1dp"
+              app:layout_constraintStart_toStartOf="parent"
+              android:background="@color/neutral_06"
+              android:layout_marginTop="8dp"
+              android:layout_margin="8dp"/>
+
+          <LinearLayout
+              android:id="@+id/ll_payment_history"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              android:orientation="horizontal"
+              android:layout_margin="8dp">
+             <ImageView
+                 android:layout_width="24dp"
+                 android:layout_height="24dp"
+                 android:src="@drawable/ic_cart"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/text_payment_history"
+                 android:layout_marginStart="10dp"
+                 android:fontFamily="@font/poppins_medium"
+                 android:textSize="12sp"
+                 android:textStyle="bold"/>
+          </LinearLayout>
+          <View
+              android:layout_width="wrap_content"
+              android:layout_height="1dp"
+              app:layout_constraintStart_toStartOf="parent"
+              android:background="@color/neutral_06"
+              android:layout_marginTop="8dp"
+              android:layout_margin="8dp"/>
+
+          <LinearLayout
+              android:id="@+id/ll_log_out"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              android:orientation="horizontal"
+              android:layout_margin="8dp">
+             <ImageView
+                 android:layout_width="24dp"
+                 android:layout_height="24dp"
+                 android:src="@drawable/ic_log_out"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/text_log_out"
+                 android:layout_marginStart="10dp"
+                 android:fontFamily="@font/poppins_medium"
+                 android:textSize="12sp"
+                 android:textStyle="bold"/>
+          </LinearLayout>
+          <View
+              android:layout_width="wrap_content"
+              android:layout_height="1dp"
+              app:layout_constraintStart_toStartOf="parent"
+              android:background="@color/neutral_06"
+              android:layout_marginTop="8dp"
+              android:layout_margin="8dp"/>
+       </LinearLayout>
+      </androidx.cardview.widget.CardView>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@+id/cv_account"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:text="Version 1.1.0"
+          android:textSize="12sp"
+          android:fontFamily="@font/poppins_medium"
+          android:textColor="@color/neutral_03"/>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

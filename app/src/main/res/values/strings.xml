@@ -32,4 +32,9 @@
     <string name="txt_all">All</string>
     <string name="txt_kelas_premium">Kelas Premium</string>
     <string name="txt_kelas_gratis">Kelas Gratis</string>
+    <string name="text_account">Akun</string>
+    <string name="text_my_profile">Profile Saya</string>
+    <string name="text_change_password">Ubah Password</string>
+    <string name="text_payment_history">Riwayat Pembayaran</string>
+    <string name="text_log_out">Keluar</string>
 </resources>
