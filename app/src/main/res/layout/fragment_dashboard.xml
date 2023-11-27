@@ -4,19 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_light_blue_05"
     tools:context=".presentation.class.DashboardFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/layout_search_bar"
+                layout="@layout/layout_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_search_bar"
+                >
+
+                <TextView
+                    android:id="@+id/tv_topic"
+                    style="@style/TextBold20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_kelas_berjalan"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_title"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip1"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_all" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip2"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_in_progress" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip3"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_selesai" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/chip_group_filter"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_list_class" />
+
+            <TextView
+                android:id="@+id/tv_category"
+                style="@style/TextBold20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:padding="6dp"
+                android:text="@string/text_category"
+                app:layout_constraintTop_toBottomOf="@id/rv_list"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_category_course"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="4"
+                app:layout_constraintTop_toBottomOf="@id/tv_category"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_category_course"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:spanCount="2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
