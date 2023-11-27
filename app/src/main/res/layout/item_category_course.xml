@@ -34,9 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_category_course"
         tools:text="Web Development"
-        android:textSize="12sp"
         android:gravity="center"
-        android:fontFamily="@font/poppins_medium"
+        style="@style/TextMedium12"
         android:textStyle="bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
