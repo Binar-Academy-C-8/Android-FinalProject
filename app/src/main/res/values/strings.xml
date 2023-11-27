@@ -41,4 +41,7 @@
     <string name="txt_kelas_berjalan">Kelas Berjalan</string>
     <string name="txt_in_progress">In Progress</string>
     <string name="txt_selesai">Selesai</string>
+    <string name="text_label">History Payment</string>
+    <string name="text_paid">Paid</string>
+    <string name="text_not_paid">Waiting for payment</string>
 </resources>
