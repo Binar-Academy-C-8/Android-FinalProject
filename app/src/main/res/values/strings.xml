@@ -15,6 +15,7 @@
     <string name="text_view_all">Lihat Semua</string>
     <string name="text_popular_course">Kursus Populer</string>
     <string name="label_search_course">Cari Kursus terbaik....</string>
+    <string name="text_notification">Notification</string>
     <string name="txt_topik_kelas">Topik Kelas</string>
     <string name="txt_filter">Filter</string>
     <string name="txt_selamat">Selamat!</string>
