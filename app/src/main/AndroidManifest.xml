@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectBinar"
         tools:targetApi="31">
+
+        <activity android:name=".presentation.paymenthistory.PaymentHistoryActivity"
+            android:exported="false"/>
         <activity
             android:name=".presentation.paymenthistory.PaymentHistoryActivity"
             android:exported="false" />
