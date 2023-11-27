@@ -37,4 +37,7 @@
     <string name="text_change_password">Ubah Password</string>
     <string name="text_payment_history">Riwayat Pembayaran</string>
     <string name="text_log_out">Keluar</string>
+    <string name="txt_kelas_berjalan">Kelas Berjalan</string>
+    <string name="txt_in_progress">In Progress</string>
+    <string name="txt_selesai">Selesai</string>
 </resources>
