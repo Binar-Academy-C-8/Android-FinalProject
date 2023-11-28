@@ -45,10 +45,8 @@ class NotificationAdapter(
         private val onItemClick: (Notification) -> Unit
     ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Notification> {
         override fun bind(item: Notification) {
-            binding.ivNotification.load(item.image)
             binding.tvPromo.text = item.label
             binding.tvDateAndTime.text = item.date
-            binding.ivElipse.load(item.elipse)
             binding.tvNotifLine2.text = item.text
             binding.tvNotifLine3.text = item.description
             binding.root.setOnClickListener {

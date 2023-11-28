@@ -7,7 +7,7 @@ interface NotificationRepository {
     fun getNotification(): List<Notification>
 }
 
-class CourseRepositoryImpl(
+class NotificationRepositoryImpl(
     private val notificationDataSource: DummyNotificationDataSource
 ) : NotificationRepository {
     override fun getNotification(): List<Notification> {
