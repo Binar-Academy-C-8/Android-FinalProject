@@ -3,8 +3,10 @@ package com.raveendra.finalproject_binar.presentation.classviewholder
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raveendra.finalproject_binar.core.ViewHolderBinder
+import com.raveendra.finalproject_binar.databinding.ItemCategoryCourseBinding
 import com.raveendra.finalproject_binar.databinding.ItemListClassBinding
 import com.raveendra.finalproject_binar.model.Course
+import com.raveendra.finalproject_binar.model.CourseCategory
 
 class DashboardViewHolder(
     private val binding: ItemListClassBinding,
@@ -26,3 +28,4 @@ class DashboardViewHolder(
         }
     }
 }
+
