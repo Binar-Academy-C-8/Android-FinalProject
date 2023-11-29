@@ -10,19 +10,19 @@ interface DummyCategoryCourseDataSource {
 class DummyCategoryCourseDataSourceImpl(): DummyCategoryCourseDataSource{
     override fun getCategoryCourse(): List<CourseCategory> = listOf(
         CourseCategory(
-            imgCategoryCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_ui_ux.png",
+            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             nameCourse = "UI/UX Design"
         ),
         CourseCategory(
-            imgCategoryCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_pm.png",
+            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             nameCourse = "Product Management"
         ),
         CourseCategory(
-            imgCategoryCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_web_development.png",
+            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             nameCourse = "Web Development"
         ),
         CourseCategory(
-            imgCategoryCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_android_development.png",
+            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
             nameCourse = "Android Development"
         )
     )

@@ -10,12 +10,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_img"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
 
@@ -23,24 +23,24 @@
             android:id="@+id/ll_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/tv_category"
-                style="@style/TextBold12"
-                android:layout_width="wrap_content"
+                style="@style/TextBold14"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
                 android:textColor="@color/primary_dark_blue_05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ll_rating"
                 tools:text="UI/UX Design" />
 
             <LinearLayout
                 android:id="@+id/ll_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
+                android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -48,16 +48,16 @@
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:src="@drawable/ic_rating" />
 
                 <TextView
                     android:id="@+id/tv_rating"
-                    style="@style/TextMedium12"
+                    style="@style/TextMedium14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
-                    android:layout_marginVertical="4dp"
+                    android:gravity="center"
                     android:textAlignment="center"
                     tools:text="4.8" />
             </LinearLayout>
@@ -65,9 +65,10 @@
             <TextView
                 android:id="@+id/tv_title"
                 style="@style/TextBold12"
-                android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:maxLines="2"
                 app:layout_constraintTop_toBottomOf="@id/tv_category"
                 tools:text="Memulai Prototyping dengan Figma dan Adobe XD" />
 
@@ -172,11 +173,11 @@
                     android:id="@+id/progressBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    app:indicatorColor="@color/primary_dark_blue_05"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progress="1" />
+                    android:padding="8dp"
+                    android:progress="1"
+                    app:indicatorColor="@color/primary_dark_blue_05" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
