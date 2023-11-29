@@ -84,4 +84,10 @@
     <string name="text_not_paid">Waiting for payment</string>
     <string name="text_greeting_header_1">Pelajari Keterampilan Anda</string>
     <string name="text_greeting_header_2">Temukan kursus terbaik Anda di sini.</string>
+    <string name="kelas_lainnya">Kelas Lainnya</string>
+    <string name="title_about_class">About Class</string>
+    <string name="title_list_class">List Class</string>
+    <string name="tab_text_1">About Class</string>
+    <string name="tab_text_2">List Class</string>
+    <string name="titles_ic_play">ic_play</string>
 </resources>

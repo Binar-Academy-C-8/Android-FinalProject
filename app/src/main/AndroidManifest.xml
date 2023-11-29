@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -20,6 +21,11 @@
         <activity
             android:name=".presentation.onboarding.OnBoardingActivity"
             android:exported="true" >
+            android:name=".presentation.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.detailcourse.DetailCourseActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
