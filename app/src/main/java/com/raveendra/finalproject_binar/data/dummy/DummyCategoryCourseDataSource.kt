@@ -14,7 +14,7 @@ class DummyCategoryCourseDataSourceImpl(): DummyCategoryCourseDataSource{
             nameCourse = "UI/UX Design"
         ),
         CourseCategory(
-            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
+            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfccc.png",
             nameCourse = "Product Management"
         ),
         CourseCategory(
@@ -22,7 +22,7 @@ class DummyCategoryCourseDataSourceImpl(): DummyCategoryCourseDataSource{
             nameCourse = "Web Development"
         ),
         CourseCategory(
-            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
+            imgCategoryCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfccc.png",
             nameCourse = "Android Development"
         )
     )
