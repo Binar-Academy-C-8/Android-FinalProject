@@ -18,11 +18,7 @@ class DashboardViewHolder(
         }
         binding.tvTitle.text = item.name
         binding.tvAuthor.text = item.author
-        binding.tvRating.text = item.rating.toString()
         binding.tvTitle.text = item.name
-        binding.tvLevel.text = item.level
-        binding.tvModule.text = item.modul
-        binding.tvDuration.text = item.duration
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
         }
