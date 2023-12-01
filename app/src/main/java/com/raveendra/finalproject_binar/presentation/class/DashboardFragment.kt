@@ -11,6 +11,7 @@ import com.raveendra.finalproject_binar.data.dummy.DummyCourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentDashboardBinding
 import com.raveendra.finalproject_binar.model.CourseCategory
 import com.raveendra.finalproject_binar.presentation.classdadapter.DashboardAdapter
+import com.raveendra.finalproject_binar.presentation.classdadapter.DashboardCategoryAdapter
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterCourseCategory
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +22,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
 
     private val adapterDashboard: DashboardAdapter by lazy {
         DashboardAdapter() {
+
+        }
+    }
+
+    private val adapterCategoryDashboard: DashboardCategoryAdapter by lazy {
+        DashboardCategoryAdapter() {
 
         }
     }
@@ -40,12 +47,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
     }
 
     private fun showCategoryCourse() {
-        val adapterCourseCategory = AdapterCourseCategory()
-        binding.rvCategoryCourse.adapter = adapterCourseCategory
-        binding.rvCategoryCourse.layoutManager = GridLayoutManager(requireContext(), 2 )
-        val dummyCategoryCourseDataSource: DummyCategoryCourseDataSource = DummyCategoryCourseDataSourceImpl()
-        val courseList: List<CourseCategory> = dummyCategoryCourseDataSource.getCategoryCourse()
-        adapterCourseCategory.setData(courseList)
+        binding.rvCategoryCourse.adapter = adapterCategoryDashboard
+        adapterCategoryDashboard.setData(DummyCategoryCourseDataSourceImpl().getCategoryCourse())
 
     }
 

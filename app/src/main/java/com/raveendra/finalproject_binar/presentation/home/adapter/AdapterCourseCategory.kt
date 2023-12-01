@@ -43,7 +43,9 @@ class CourseViewHolder(
     private val binding: ItemCategoryCourseBinding
 ): RecyclerView.ViewHolder(binding.root){
     fun bind(item: CourseCategory) {
-        binding.ivCategoryCourse.load(item.imgCategoryCourse)
+        binding.ivCategoryCourse.load(item.imgCategoryCourse) {
+            crossfade(true)
+        }
         binding.tvNameCategoryCourse.text = item.nameCourse
     }
 }

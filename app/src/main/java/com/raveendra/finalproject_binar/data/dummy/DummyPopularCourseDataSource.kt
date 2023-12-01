@@ -10,7 +10,7 @@ interface DummyPopularCourseDataSource {
 class DummyPopularCourseDataSourceImpl(): DummyPopularCourseDataSource{
     override fun getPopularCourse(): List<PopularCourse> = listOf(
         PopularCourse(
-            imgPopularCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_web_development.png",
+            imgPopularCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfc.png",
             namePopularCourse = "Web Development",
             ratingCourse = "4.9",
             titleCourse = "Belajar Web Development mudah",
@@ -21,7 +21,7 @@ class DummyPopularCourseDataSourceImpl(): DummyPopularCourseDataSource{
             priceCourse = 249000.0
         ),
         PopularCourse(
-            imgPopularCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_web_development.png",
+            imgPopularCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfc.png",
             namePopularCourse = "Web Development",
             ratingCourse = "4.5",
             titleCourse = "Memahami Web Development dari dasar",
@@ -32,7 +32,7 @@ class DummyPopularCourseDataSourceImpl(): DummyPopularCourseDataSource{
             priceCourse = 259000.0
         ),
         PopularCourse(
-            imgPopularCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_web_development.png",
+            imgPopularCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfc.png",
             namePopularCourse = "Web Development",
             ratingCourse = "4.9",
             titleCourse = "Kupas tuntas Web Development",
@@ -43,7 +43,7 @@ class DummyPopularCourseDataSourceImpl(): DummyPopularCourseDataSource{
             priceCourse = 249000.0
         ),
         PopularCourse(
-            imgPopularCourse = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_web_development.png",
+            imgPopularCourse = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfc.png",
             namePopularCourse = "Web Development",
             ratingCourse = "4.3",
             titleCourse = "Web Development bagi pemula",
