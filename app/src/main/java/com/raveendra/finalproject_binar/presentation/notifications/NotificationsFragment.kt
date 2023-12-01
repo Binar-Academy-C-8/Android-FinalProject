@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.raveendra.finalproject_binar.data.dummy.DummyNotificationdataSourceImpl
+import com.raveendra.finalproject_binar.data.dummy.DummyPaymentDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentAccountBinding
 import com.raveendra.finalproject_binar.databinding.FragmentNotificationsBinding
 import com.raveendra.finalproject_binar.model.Notification
@@ -20,7 +21,7 @@ class NotificationsFragment  : BaseFragment<FragmentNotificationsBinding>() {
 
     private val viewModel: NotificationsViewModel by viewModel()
     private val adapterProduct: NotificationAdapter by lazy {
-        NotificationAdapter() { notification: Notification   ->
+        NotificationAdapter() { notification: Notification ->
 
         }
     }

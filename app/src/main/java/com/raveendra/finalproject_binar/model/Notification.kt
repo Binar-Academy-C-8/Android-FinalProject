@@ -10,5 +10,5 @@ data class Notification (
     val date: String,
     val text: String,
     val description: String
-    //    val elipse: String,
+
 ) : Parcelable
