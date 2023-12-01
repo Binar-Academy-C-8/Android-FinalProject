@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_light_blue_05"
+    android:paddingHorizontal="@dimen/dimen_24_dp">
+
+    <TextView
+        android:id="@+id/tvLogin"
+        style="@style/TextBold24"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_64_dp"
+        android:text="@string/label_register"
+        android:textColor="@color/primary_dark_blue_05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.raveendra.finalproject_binar.utils.LabelTextFieldView
+        android:id="@+id/etName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/label_fullname"
+        android:inputType="textCapSentences"
+        android:textColorHint="@color/neutral_03"
+        android:layout_marginTop="@dimen/dimen_24_dp"
+        app:customLabelText="@string/label_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
+
+    <com.raveendra.finalproject_binar.utils.LabelTextFieldView
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/label_hint_email"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/neutral_03"
+        app:customLabelText="@string/label_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+    <com.raveendra.finalproject_binar.utils.LabelTextFieldView
+        android:id="@+id/etPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/label_phone_62"
+        android:inputType="phone"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:textColorHint="@color/neutral_03"
+        app:customLabelText="@string/label_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <com.raveendra.finalproject_binar.utils.LabelTextFieldView
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/label_enter_password"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:inputType="textPassword"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/neutral_03"
+        app:customLabelText="@string/label_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btRegister"
+        style="@style/TextMedium14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_24_dp"
+        android:background="@drawable/bg_button_dark_blue"
+        android:text="@string/label_register"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    <TextView
+        android:id="@+id/tvNavToLogin"
+        style="@style/TextRegular14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_32_dp"
+        android:text="@string/text_already_have_account_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btRegister"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
