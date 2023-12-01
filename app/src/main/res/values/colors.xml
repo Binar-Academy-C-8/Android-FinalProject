@@ -5,11 +5,13 @@
 
     <color name="primary_light_blue_05">#EBF3FC</color>
 
+    <color name="primary_dark_blue_06">#0092A4</color>
     <color name="primary_dark_blue_05">#6148FF</color>
     <color name="primary_dark_blue_04">#c9c0ff</color>
     <color name="primary_dark_blue_03">#489CFF</color>
     <color name="primary_dark_blue_02">#D0B7E6</color>
     <color name="primary_dark_blue_01">#E2D4F0</color>
+
 
     <color name="primary_lime_green_05">#AA9B87</color>
     <color name="primary_lime_green_04">#D4C2A8</color>

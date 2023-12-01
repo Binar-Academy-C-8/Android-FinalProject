@@ -33,6 +33,9 @@
     <string name="txt_all">All</string>
     <string name="txt_kelas_premium">Kelas Premium</string>
     <string name="txt_kelas_gratis">Kelas Gratis</string>
+    <string name="text_highlight_have_account">Masuk di sini</string>
+    <string name="tv_desc_title_onboarding">Belajar</string>
+    <string name="text_have_account">Sudah punya akun? Masuk di sini</string>
     <string name="text_account">Akun</string>
     <string name="text_my_profile">Profile Saya</string>
     <string name="text_change_password">Ubah Password</string>
