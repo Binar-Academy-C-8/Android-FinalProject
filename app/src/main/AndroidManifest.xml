@@ -21,11 +21,20 @@
             android:name=".presentation.onboarding.OnBoardingActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.auth.otp.OtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.login.LoginActivity"
+            android:exported="true"/>
+        <activity
             android:name=".presentation.search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

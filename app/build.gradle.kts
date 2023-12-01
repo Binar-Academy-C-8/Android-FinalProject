@@ -123,4 +123,8 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
     testImplementation("app.cash.turbine:turbine:1.0.0")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    // otp view
+    
+    implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
 }

@@ -15,6 +15,41 @@
     <string name="text_view_all">Lihat Semua</string>
     <string name="text_popular_course">Kursus Populer</string>
     <string name="label_search_course">Cari Kursus terbaik....</string>
+    <string name="label_phone_62">+62</string>
+
+    <string name="label_name">Nama</string>
+    <string name="label_fullname">Nama Lengkap</string>
+    <string name="label_email">Email</string>
+    <string name="label_phone">Nomor Telepon</string>
+    <string name="label_password">Password</string>
+    <string name="label_create_password">Buat Password</string>
+    <string name="label_enter_password">Masukkan password</string>
+
+    <string name="label_hint_email">Contoh: johndoe@gmail.com</string>
+
+    <string name="input_type_text">text</string>
+    <string name="input_type_text_area">text_area</string>
+    <string name="input_type_text_phone">text_phone</string>
+    <string name="label_login">Login</string>
+    <string name="label_register">Daftar</string>
+    <string name="label_input_otp">Masukkan OTP</string>
+    <string name="label_desc_login">Mulailah petualangan belajar Anda sekarang! Login untuk mengakses pengetahuan tanpa batas.</string>
+    <string name="label_enter">Masuk</string>
+    <string name="label_forgot_password">Lupa Kata Sandi</string>
+    <string name="label_otp_desc">Ketik 4 digit kode yang dikirimkan ke %s</string>
+    <string name="label_otp_timer">Kirim Ulang OTP dalam %s detik</string>
+    <string name="label_sent_code_via_email">Kirim ulang OTP melalui Email</string>
+    <string name="text_error_email_empty">Email tidak boleh kosong</string>
+    <string name="text_error_name_empty">Nama tidak boleh kosong</string>
+    <string name="text_error_phone_empty">Nomor Telefon tidak boleh kosong</string>
+    <string name="text_error_email_invalid">Masukan format email yang valid</string>
+    <string name="text_error_password_empty">Password tidak boleh kosong</string>
+    <string name="text_error_password_less_than_8_char">Password minimal 8 karakter</string>
+    <string name="text_already_have_account_login">Sudah punya akun? Masuk di sini</string>
+    <string name="text_already_have_account_login_highlight">Masuk di sini</string>
+
+    <string name="text_dont_have_account_register">Belum punya akun? Daftar di sini</string>
+    <string name="text_dont_have_account_register_highlight">Daftar di sini</string>
     <string name="text_notification">Notification</string>
     <string name="txt_topik_kelas">Topik Kelas</string>
     <string name="txt_filter">Filter</string>

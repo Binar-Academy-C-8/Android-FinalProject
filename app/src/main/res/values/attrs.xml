@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <attr name="customLabelTextColor" format="reference|color" />
+    <attr name="customLabelTextStyle" format="reference" />
+    <attr name="customLabelText" format="string" />
+    <attr name="customTextColor" format="reference|color" />
+    <attr name="customTextStyle" format="reference" />
+    <attr name="customTextIcon" format="reference|integer" />
+    <attr name="customText" format="string" />
+    <attr name="customBackgroundOnFocus" format="reference|integer" />
+    <attr name="customTag" format="string" />
+    <attr name="customErrorText" format="string" />
+    <attr name="customErrorEnabled" format="boolean" />
+    <attr name="customInputType" format="string" />
+
+
+    <declare-styleable name="LabelEditTextView">
+        <attr name="customLabelTextColor" />
+        <attr name="customLabelTextStyle" />
+        <attr name="customLabelText" />
+        <attr name="customTextColor" />
+        <attr name="customInputType" />
+        <attr name="customTextStyle" />
+        <attr name="customTag" />
+        <attr name="customTextIcon" />
+        <attr name="customText" />
+        <attr name="customErrorText" />
+        <attr name="customErrorEnabled" />
+        <attr name="android:hint" />
+        <attr name="android:textColorHint" />
+        <attr name="android:enabled" />
+        <attr name="customBackgroundOnFocus" />
+        <attr name="android:inputType" />
+        <attr name="android:maxLines" />
+        <attr name="android:lines" />
+        <attr name="android:drawableStart"/>
+        <attr name="android:maxLength"/>
+        <attr name="passwordToggleEnabled"/>
+    </declare-styleable>
+
+</resources>

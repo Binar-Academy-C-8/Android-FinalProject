@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_custom_view_label"
+        style="@style/TextRegular14"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_4_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/title_account"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_custom_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_border_default"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_custom_view_label"
+        app:layout_constraintStart_toStartOf="@id/tv_custom_view_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_custom_view_label">
+
+        <TextView
+            android:id="@+id/labelCountry"
+            style="@style/TextRegular14"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_phone_62"
+            android:textColor="@color/black"  />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_custom_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxStrokeWidth="0dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_custom_text_view"
+                style="@style/TextRegular14"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_height="48dp"
+                android:paddingVertical="@dimen/dimen_0_dp"
+                android:maxLength="255"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ellipsize="end"
+                android:textColorHint="@color/neutral_03"
+                tools:hint="testasdasdadsasd"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <ImageView
+            android:id="@+id/iv_custom_text_view_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:visibility="gone"
+            app:srcCompat="@color/neutral_03"
+            tools:ignore="ContentDescription" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/tv_custom_text_error"
+        style="@style/TextRegular12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/alert_warning"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tv_custom_view_label"
+        app:layout_constraintStart_toStartOf="@id/tv_custom_view_label"
+        app:layout_constraintTop_toBottomOf="@id/layout_custom_text_view"
+        tools:text="Kata sandi yang Anda masukkan salah"
+        tools:visibility="visible" />
+</androidx.appcompat.widget.LinearLayoutCompat>
