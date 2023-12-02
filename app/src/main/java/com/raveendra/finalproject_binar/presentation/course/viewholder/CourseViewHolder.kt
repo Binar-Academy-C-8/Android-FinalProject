@@ -16,6 +16,7 @@ class CoursePremiumViewHolder(
             crossfade(true)
         }
         binding.tvTitle.text = item.name
+        binding.tvCategory.text = item.level
         binding.tvAuthor.text = item.author
         binding.tvRating.text = item.rating.toString()
         binding.tvTitle.text = item.name
@@ -37,6 +38,7 @@ class CourseFreeViewHolder(
             crossfade(true)
         }
         binding.tvTitle.text = item.name
+        binding.tvCategory.text = item.level
         binding.tvAuthor.text = item.author
         binding.tvRating.text = item.rating.toString()
         binding.tvTitle.text = item.name

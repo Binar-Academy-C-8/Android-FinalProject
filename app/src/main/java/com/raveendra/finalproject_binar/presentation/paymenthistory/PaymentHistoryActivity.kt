@@ -1,17 +1,26 @@
 package com.raveendra.finalproject_binar.presentation.paymenthistory
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
-import com.raveendra.finalproject_binar.data.dummy.DummyPaymentDataSource
 import com.raveendra.finalproject_binar.data.dummy.DummyPaymentDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.ActivityPaymentHistoryBinding
 import com.raveendra.finalproject_binar.model.Payment
 import com.raveendra.finalproject_binar.presentation.paymenthistory.adapter.PaymentAdapter
 import com.raveendra.finalproject_binar.presentation.paymenthistory.adapter.PaymentTypeAdadpter
 import com.raveendra.finalproject_binar.utils.base.BaseActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
+    companion object {
+        fun navigate(context: Context) = with(context) {
+            startActivity(
+                Intent(
+                    this,
+                    PaymentHistoryActivity::class.java
+                )
+            )
+        }
+    }
     private val adapterPayment : PaymentAdapter by lazy {
         PaymentAdapter(PaymentTypeAdadpter.PAID) {payment: Payment ->
 

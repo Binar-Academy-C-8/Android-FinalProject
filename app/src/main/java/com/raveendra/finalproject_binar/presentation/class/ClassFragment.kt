@@ -4,21 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import com.raveendra.finalproject_binar.data.dummy.DummyCategoryCourseDataSource
 import com.raveendra.finalproject_binar.data.dummy.DummyCategoryCourseDataSourceImpl
 import com.raveendra.finalproject_binar.data.dummy.DummyCourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentDashboardBinding
-import com.raveendra.finalproject_binar.model.CourseCategory
-import com.raveendra.finalproject_binar.presentation.classdadapter.DashboardAdapter
-import com.raveendra.finalproject_binar.presentation.classdadapter.DashboardCategoryAdapter
-import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterCourseCategory
+import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.DashboardAdapter
+import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.DashboardCategoryAdapter
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
+class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
 
-    private val viewModel: DashboardViewModel by viewModel()
+    private val viewModel: ClassViewModel by viewModel()
 
     private val adapterDashboard: DashboardAdapter by lazy {
         DashboardAdapter() {

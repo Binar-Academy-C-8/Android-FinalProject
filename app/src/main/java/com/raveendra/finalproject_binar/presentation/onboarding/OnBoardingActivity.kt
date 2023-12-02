@@ -1,7 +1,6 @@
 package com.raveendra.finalproject_binar.presentation.onboarding
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityOnBoardingBinding
+import com.raveendra.finalproject_binar.presentation.MainActivity
+import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.onboarding.adapter.OnBoardingPagerAdapter
 import com.raveendra.finalproject_binar.utils.highLightWord
 
@@ -27,13 +28,10 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun setClickListeners() {
-        binding.tvHaveAccount.highLightWord(getString(R.string.text_highlight_have_account)) {}
-        binding.ibNext.setOnClickListener {
-            val currentItem = binding.viewPager2.currentItem
-            if (currentItem < binding.viewPager2.adapter?.itemCount ?: 0 - 1) {
-                binding.viewPager2.setCurrentItem(currentItem + 1, true)
-            }
+        binding.tvHaveAccount.highLightWord(getString(R.string.text_highlight_have_account)) {
+            LoginActivity.navigate(this@OnBoardingActivity)
         }
+
     }
 
     private fun setupViewPager() {
@@ -44,9 +42,16 @@ class OnBoardingActivity : AppCompatActivity() {
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 if (position == adapter.itemCount - 1) {
-                    binding.ibNext.visibility = View.GONE
+                    binding.ibNext.setOnClickListener{
+                        MainActivity.navigate(this@OnBoardingActivity)
+                    }
                 } else {
-                    binding.ibNext.visibility = View.VISIBLE
+                    binding.ibNext.setOnClickListener {
+                        val currentItem = binding.viewPager2.currentItem
+                        if (currentItem < (binding.viewPager2.adapter?.itemCount ?: (0 - 1))) {
+                            binding.viewPager2.setCurrentItem(currentItem + 1, true)
+                        }
+                    }
                 }
                 updatePageIndicator(position)
             }

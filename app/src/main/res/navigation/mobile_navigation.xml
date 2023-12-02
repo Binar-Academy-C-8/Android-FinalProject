@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_class"
-        android:name="com.raveendra.finalproject_binar.presentation.class.DashboardFragment"
+        android:name="com.raveendra.finalproject_binar.presentation.class.ClassFragment"
         android:label="@string/title_class"
         tools:layout="@layout/fragment_dashboard" />
 

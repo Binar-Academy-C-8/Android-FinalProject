@@ -14,10 +14,11 @@
 
         <ImageView
             android:id="@+id/iv_img"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_detail"
@@ -67,7 +68,8 @@
                     android:id="@+id/iv_progress"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_progressbar" />
+                    android:src="@drawable/ic_progressbar"
+                    tools:ignore="ContentDescription" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/progressBar"

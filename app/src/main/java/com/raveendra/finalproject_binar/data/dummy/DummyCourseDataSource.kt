@@ -10,7 +10,7 @@ class DummyCourseDataSourceImpl() : DummyCourseDataSource {
     override fun getCourseList(): List<Course> = listOf(
         Course(
             name = "Intro to Basic of User Interaction Design",
-            imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
+            imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfccc.png",
             author = "Maman",
             rating = 4.8,
             level = "Intermediate Level",
@@ -19,7 +19,7 @@ class DummyCourseDataSourceImpl() : DummyCourseDataSource {
         ),
         Course(
             name = "Intro to Basic of User Interaction Design",
-            imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
+            imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfccc.png",
             author = "Jack",
             rating = 4.3,
             level = "Advanced Level",
@@ -28,7 +28,7 @@ class DummyCourseDataSourceImpl() : DummyCourseDataSource {
         ),
         Course(
             name = "Intro to Basic of User Interaction Design",
-            imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/Thumbnail.png",
+            imgUrl = "https://raw.githubusercontent.com/ryhanhxx/img_asset_final/main/unsplash__x335IZXxfccc.png",
             author = "Maman",
             rating = 4.5,
             level = "Intermediate Level",

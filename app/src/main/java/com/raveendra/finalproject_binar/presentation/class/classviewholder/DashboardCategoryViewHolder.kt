@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.classviewholder
+package com.raveendra.finalproject_binar.presentation.`class`.classviewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load

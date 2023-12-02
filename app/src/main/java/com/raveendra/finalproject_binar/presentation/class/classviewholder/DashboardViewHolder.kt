@@ -1,12 +1,10 @@
-package com.raveendra.finalproject_binar.presentation.classviewholder
+package com.raveendra.finalproject_binar.presentation.`class`.classviewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raveendra.finalproject_binar.core.ViewHolderBinder
-import com.raveendra.finalproject_binar.databinding.ItemCategoryCourseBinding
 import com.raveendra.finalproject_binar.databinding.ItemListClassBinding
 import com.raveendra.finalproject_binar.model.Course
-import com.raveendra.finalproject_binar.model.CourseCategory
 
 class DashboardViewHolder(
     private val binding: ItemListClassBinding,
@@ -16,9 +14,10 @@ class DashboardViewHolder(
         binding.ivImg.load(item.imgUrl) {
             crossfade(true)
         }
+        binding.tvCategory.text = item.modul
         binding.tvTitle.text = item.name
         binding.tvAuthor.text = item.author
-        binding.tvTitle.text = item.name
+
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
         }

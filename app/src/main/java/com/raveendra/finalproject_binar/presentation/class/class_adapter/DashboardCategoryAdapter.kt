@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.classdadapter
+package com.raveendra.finalproject_binar.presentation.`class`.class_adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.raveendra.finalproject_binar.core.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemCategoryCourseBinding
 import com.raveendra.finalproject_binar.model.CourseCategory
-import com.raveendra.finalproject_binar.presentation.classviewholder.DashboardCategoryViewHolder
+import com.raveendra.finalproject_binar.presentation.`class`.classviewholder.DashboardCategoryViewHolder
 
 class DashboardCategoryAdapter(
     private val onItemClick: (CourseCategory) -> Unit
