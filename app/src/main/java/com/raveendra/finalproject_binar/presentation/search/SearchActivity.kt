@@ -8,8 +8,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchActivity  : BaseViewModelActivity<SearchViewModel, ActivitySearchBinding>() {
     override val viewModel: SearchViewModel by viewModel()
 
-
-
     override val bindingInflater: (LayoutInflater) -> ActivitySearchBinding
         get() = ActivitySearchBinding::inflate
 
