@@ -82,4 +82,6 @@
     <string name="text_label">History Payment</string>
     <string name="text_paid">Paid</string>
     <string name="text_not_paid">Waiting for payment</string>
+    <string name="text_greeting_header_1">Pelajari Keterampilan Anda</string>
+    <string name="text_greeting_header_2">Temukan kursus terbaik Anda di sini.</string>
 </resources>
