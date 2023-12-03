@@ -76,21 +76,21 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip1"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_all" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_in_progress" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip3"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_selesai" />
