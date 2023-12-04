@@ -19,12 +19,8 @@ import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
 
 class ListClassFragment : BaseFragment<FragmentListClassBinding>() {
-//    private val viewModel: DetailViewModel by viewModels {
-//        val localDataSource: LocalDataSource = LocalDataSourceimpl()
-//        val repository: RepositoryVideos = RepositoryVideosImpl(localDataSource)
-//        GenericViewModelFactory.create(DetailViewModel(repository))
-//    }
-    private val viewModel:DetailViewModel by activityViewModel()
+
+    private val viewModel: DetailViewModel by activityViewModel()
     private val adapterGropie: GroupieAdapter by lazy {
         GroupieAdapter()
     }
@@ -56,8 +52,7 @@ class ListClassFragment : BaseFragment<FragmentListClassBinding>() {
 
                         val listVideos = itemVideoList.map { itemVideo ->
                             DataItem(itemVideo) { data ->
-                                Toast.makeText(requireContext(), "${data}", Toast.LENGTH_SHORT).show()
-                                onItemClick(sectionName, itemVideo.titleVideos)
+                                onItemClick(itemVideo)
                             }
                         }
 
@@ -73,25 +68,9 @@ class ListClassFragment : BaseFragment<FragmentListClassBinding>() {
 
     }
 
-    private fun onItemClick(sectionName: String, videoTitle: String) {
-        val sectionDataList = viewModel.listVideos.value?.payload
-        val matchingSection = sectionDataList?.find { it.name == sectionName }
-
-        // Jika section ditemukan, cari video dengan judul yang sesuai
-        matchingSection?.let { section ->
-            val matchingVideo = section.data.find { it.titleVideos == videoTitle }
-
-            // Jika video ditemukan, ambil URL video dan atur ke ViewModel
-            matchingVideo?.let { video ->
-                val videoUrl = video.urlVideos
-                val itemVideos = ItemVideos("", videoUrl)
-                val result = ResultWrapper.Success(itemVideos)
-                viewModel.setUrlVideos(result)
-            }
-        }
-
-
-        // Tidak ada perpindahan halaman di sini
+    private fun onItemClick(itemVideo:ItemVideos) {
+        val videoTitle = itemVideo.titleVideos
+        viewModel.getVideoUrl(videoTitle)
     }
 
 }

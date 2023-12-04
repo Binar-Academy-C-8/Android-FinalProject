@@ -1,65 +1,67 @@
 package com.raveendra.finalproject_binar.presentation.detailcourse
 
 import android.os.Bundle
-import android.os.StrictMode
-import android.util.Log
 import android.widget.Toast
-
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
-import com.raveendra.finalproject_binar.utils.DataItem
-import com.raveendra.finalproject_binar.utils.HeaderItem
 import com.raveendra.finalproject_binar.utils.proceedWhen
-import com.xwray.groupie.Section
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailCourseActivity : AppCompatActivity() {
+class DetailCourseActivity() : AppCompatActivity() {
     private val binding: ActivityDetailCourseBinding by lazy {
         ActivityDetailCourseBinding.inflate(layoutInflater)
     }
     private val viewModel: DetailViewModel by viewModel()
 
+    private var youTubePlayer : YouTubePlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initYoutube()
         sectionPageFragment()
-        playVideos()
     }
-    private fun playVideos() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.urlVideos.observe(this@DetailCourseActivity){
-                if (!it.payload?.urlVideos.isNullOrEmpty()) {
-                    val youTubePlayerView = binding.playerView
-                    lifecycle.addObserver(youTubePlayerView)
-                    val videoId = it.payload?.urlVideos.orEmpty()
-                    youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                        override fun onReady(youTubePlayer: YouTubePlayer) {
-                            youTubePlayer.loadVideo(videoId, 0f)
-                        }
 
-                        override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
-                            super.onError(youTubePlayer, error)
-                            Log.e("YouTubePlayer", "Error: ${error.name}")
-                        }
-                    })
-
-                }
+    private fun initYoutube() {
+        binding.playerView.enableAutomaticInitialization = false
+        binding.playerView.initialize(object : AbstractYouTubePlayerListener(){
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                super.onReady(youTubePlayer)
+                this@DetailCourseActivity.youTubePlayer = youTubePlayer
+                observeDataVideo()
             }
+        })
+        lifecycle.addObserver(binding.playerView)
+    }
 
+    private fun observeDataVideo() {
+        viewModel.videoUrl.observe(this) { result ->
+            result.proceedWhen(
+                doOnSuccess = {
+                    val resultVideoUrl = result.payload
+                    Toast.makeText(this, "$resultVideoUrl", Toast.LENGTH_SHORT).show()
+                    playVideo(resultVideoUrl)
+                },
+                doOnError = {
+                    val errorMessage = it.message
+                    Toast.makeText(this, "Error $errorMessage", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
 
+    }
 
-
+    private fun playVideo(videoUrl: String?) {
+        if (!videoUrl.isNullOrBlank()) {
+            youTubePlayer?.loadVideo(videoUrl,0f)
         }
     }
+
     private fun loadVideos(videoUrl: String?) {
         if (!videoUrl.isNullOrBlank()) {
             val youTubePlayerView = binding.playerView
@@ -84,6 +86,7 @@ class DetailCourseActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
     }
+
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(

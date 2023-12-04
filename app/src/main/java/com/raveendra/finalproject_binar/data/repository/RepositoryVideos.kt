@@ -13,12 +13,12 @@ import kotlinx.coroutines.flow.onStart
  **/
 interface RepositoryVideos {
     fun getVideos(): Flow<ResultWrapper<List<SectionedData>>>
-
+    fun getVideoUrl(videoTitle: String): Flow<ResultWrapper<String>>
 }
 
 class RepositoryVideosImpl(
     private val localDataSource: LocalDataSource
-):RepositoryVideos{
+) : RepositoryVideos {
     override fun getVideos(): Flow<ResultWrapper<List<SectionedData>>> {
         return proceedFlow {
             localDataSource.getVideos()
@@ -27,4 +27,9 @@ class RepositoryVideosImpl(
         }
     }
 
+    override fun getVideoUrl(videoTitle: String): Flow<ResultWrapper<String>> {
+        return proceedFlow {
+            localDataSource.getVideoUrl(videoTitle)!!
+        }
+    }
 }

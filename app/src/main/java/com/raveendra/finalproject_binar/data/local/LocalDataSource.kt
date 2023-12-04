@@ -8,7 +8,7 @@ import com.raveendra.finalproject_binar.data.network.api.service.dummydatavideos
  **/
 interface LocalDataSource {
     fun getVideos(): List<SectionedData>
-
+    fun getVideoUrl(videoTitle:String):String?
 }
 
 class LocalDataSourceimpl() : LocalDataSource {
@@ -37,5 +37,11 @@ class LocalDataSourceimpl() : LocalDataSource {
             ),
         )
     }
+
+    override fun getVideoUrl(videoTitle: String): String? {
+        val allVideos = getVideos().flatMap { it.data }
+        return allVideos.find{it.titleVideos == videoTitle}?.urlVideos
+    }
+
 
 }
