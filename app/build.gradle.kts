@@ -35,13 +35,13 @@ android {
     flavorDimensions += "env"
     productFlavors {
         create("production") {
-            buildConfigField("String", "BASE_URL", "\"https://9b6fde46-4bd2-4fda-a0b2-b8d5cf94d766.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\"https://backend-production-f9e7.up.railway.app/api/v1/\"")
         }
         create("development") {
-            buildConfigField("String", "BASE_URL", "\"https://9b6fde46-4bd2-4fda-a0b2-b8d5cf94d766.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\"https://backend-production-f9e7.up.railway.app/api/v1/\"")
         }
         create("mockup") {
-            buildConfigField("String", "BASE_URL", "\"https://9b6fde46-4bd2-4fda-a0b2-b8d5cf94d766.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\"https://backend-production-f9e7.up.railway.app/api/v1/\"")
         }
     }
     compileOptions {
@@ -58,6 +58,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
@@ -82,6 +84,15 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
+    // retrofit & okhttp
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
     // Image
 
     implementation("io.coil-kt:coil:2.4.0")
@@ -103,14 +114,6 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    // retrofit & okhttp
-
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-
-    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
-    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
     // koin
 

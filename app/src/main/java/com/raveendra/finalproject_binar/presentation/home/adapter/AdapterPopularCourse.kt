@@ -10,7 +10,7 @@ import coil.load
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemPopularCourseBinding
 import com.raveendra.finalproject_binar.model.PopularCourse
-import com.raveendra.finalproject_binar.utils.toIdrCurrency
+import com.c8.core.utils.toIdrCurrency
 
 
 class AdapterPopularCourse(): RecyclerView.Adapter<PopularCourseViewHolder>(){

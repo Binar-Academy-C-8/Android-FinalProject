@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.raveendra.finalproject_binar.core.ViewHolderBinder
-import com.raveendra.finalproject_binar.databinding.FragmentNotificationsBinding
+import com.c8.core.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemNotificationBinding
 import com.raveendra.finalproject_binar.model.Notification
 

@@ -8,9 +8,9 @@ import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityRegisterBinding
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
+import com.c8.core.utils.base.BaseViewModelActivity
+import com.c8.core.utils.highLightWord
 import com.raveendra.finalproject_binar.utils.LabelTextFieldView
-import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
-import com.raveendra.finalproject_binar.utils.highLightWord
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterBinding>()  {

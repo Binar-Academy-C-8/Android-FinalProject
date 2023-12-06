@@ -2,7 +2,7 @@ package com.raveendra.finalproject_binar.presentation.paymenthistory.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.raveendra.finalproject_binar.core.ViewHolderBinder
+import com.c8.core.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListCourseNotPaidBinding
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePaidBinding
 import com.raveendra.finalproject_binar.model.Payment
@@ -30,7 +30,7 @@ class PaymentPaidViewHolder(
 class PaymentNotPaidViewHolder(
     private val binding: ItemListCourseNotPaidBinding,
     private val onClickListener: (Payment) -> Unit
-): RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Payment>{
+): RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Payment> {
     override fun bind(item: Payment) {
         binding.ivImg.load(item.imgUrl) {
             crossfade(true)

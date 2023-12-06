@@ -10,7 +10,7 @@ import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityOtpBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
-import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.c8.core.utils.base.BaseViewModelActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
