@@ -123,8 +123,17 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
     testImplementation("app.cash.turbine:turbine:1.0.0")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
+    //youtube
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:12.1.0")
+
+    //viewpager
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    //groupie adapter recycleview
+    implementation ("com.github.lisawray.groupie:groupie:2.10.1")
+    implementation ("com.github.lisawray.groupie:groupie-viewbinding:2.10.1")
 
     // otp view
-    
+
     implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
 }
