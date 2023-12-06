@@ -8,7 +8,7 @@ import com.raveendra.finalproject_binar.databinding.ActivityPaymentHistoryBindin
 import com.raveendra.finalproject_binar.model.Payment
 import com.raveendra.finalproject_binar.presentation.paymenthistory.adapter.PaymentAdapter
 import com.raveendra.finalproject_binar.presentation.paymenthistory.adapter.PaymentTypeAdadpter
-import com.raveendra.finalproject_binar.utils.base.BaseActivity
+import com.c8.core.utils.base.BaseActivity
 
 class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
     companion object {

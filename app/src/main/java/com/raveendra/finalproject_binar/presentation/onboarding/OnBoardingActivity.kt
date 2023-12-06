@@ -11,7 +11,7 @@ import com.raveendra.finalproject_binar.databinding.ActivityOnBoardingBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.onboarding.adapter.OnBoardingPagerAdapter
-import com.raveendra.finalproject_binar.utils.highLightWord
+import com.c8.core.utils.highLightWord
 
 class OnBoardingActivity : AppCompatActivity() {
 

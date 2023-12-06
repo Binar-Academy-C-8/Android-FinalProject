@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.raveendra.finalproject_binar.core.ViewHolderBinder
+import com.c8.core.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListClassBinding
 import com.raveendra.finalproject_binar.model.Course
 import com.raveendra.finalproject_binar.presentation.`class`.classviewholder.DashboardViewHolder

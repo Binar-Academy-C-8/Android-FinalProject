@@ -2,7 +2,7 @@ package com.raveendra.finalproject_binar.presentation.course.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.raveendra.finalproject_binar.core.ViewHolderBinder
+import com.c8.core.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListCourseFreeBinding
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePremiumBinding
 import com.raveendra.finalproject_binar.model.Course
