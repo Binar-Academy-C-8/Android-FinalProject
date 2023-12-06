@@ -1,12 +1,16 @@
 package com.raveendra.finalproject_binar.presentation.detailcourse
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
 import com.raveendra.finalproject_binar.utils.proceedWhen
@@ -19,13 +23,27 @@ class DetailCourseActivity() : AppCompatActivity() {
     private val viewModel: DetailViewModel by viewModel()
 
     private var youTubePlayer : YouTubePlayer? = null
+    private var isFullscreen = false
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (isFullscreen) {
+                // if the player is in fullscreen, exit fullscreen
+                youTubePlayer?.toggleFullscreen()
+            } else {
+                finish()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setVideoFullScreen()
         initYoutube()
         sectionPageFragment()
     }
+
+
 
     private fun initYoutube() {
         binding.playerView.enableAutomaticInitialization = false
