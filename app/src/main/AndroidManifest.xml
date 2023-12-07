@@ -11,7 +11,6 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectBinar"
@@ -21,17 +20,20 @@
             android:exported="false"/>
         <activity
             android:name=".presentation.onboarding.OnBoardingActivity"
-            android:exported="true" >
-            android:name=".presentation.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.detailcourse.DetailCourseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.detailcourse.DetailCourseActivity"
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".presentation.auth.otp.OtpActivity"
@@ -45,11 +47,7 @@
         <activity
             android:name=".presentation.search.SearchActivity"
             android:exported="false" />
-        <activity
-            android:name=".presentation.MainActivity"
-            android:exported="true" >
 
-        </activity>
     </application>
 
 </manifest>

@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.c8.core.utils.base.BaseFragment
+import com.c8.core.utils.proceedWhen
 import com.raveendra.finalproject_binar.data.network.api.service.dummydatavideos.ItemVideos
 import com.raveendra.finalproject_binar.databinding.FragmentListClassBinding
 import com.raveendra.finalproject_binar.utils.DataItem
 import com.raveendra.finalproject_binar.utils.HeaderItem
-import com.raveendra.finalproject_binar.utils.ResultWrapper
-import com.raveendra.finalproject_binar.utils.base.BaseFragment
-import com.raveendra.finalproject_binar.utils.proceedWhen
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
 
