@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.raveendra.finalproject_binar.databinding.FragmentAccountBinding
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.paymenthistory.PaymentHistoryActivity
-import com.c8.core.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : BaseFragment<FragmentAccountBinding>() {

@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.c8.core.utils.base.BaseFragment
-import com.c8.core.utils.proceedWhen
 import com.raveendra.finalproject_binar.data.dummy.DummyPopularCourseDataSource
 import com.raveendra.finalproject_binar.data.dummy.DummyPopularCourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.model.PopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
+import com.raveendra.finalproject_binar.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment  : BaseFragment<FragmentHomeBinding>() {

@@ -1,4 +1,4 @@
-package com.c8.core.utils
+package com.raveendra.finalproject_binar.utils
 
 import com.google.gson.annotations.SerializedName
 

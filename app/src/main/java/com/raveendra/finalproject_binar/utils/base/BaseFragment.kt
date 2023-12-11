@@ -1,4 +1,4 @@
-package com.c8.core.utils.base
+package com.raveendra.finalproject_binar.utils.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

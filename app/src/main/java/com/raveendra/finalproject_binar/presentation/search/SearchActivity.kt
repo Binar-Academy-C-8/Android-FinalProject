@@ -2,7 +2,7 @@ package com.raveendra.finalproject_binar.presentation.search
 
 import android.view.LayoutInflater
 import com.raveendra.finalproject_binar.databinding.ActivitySearchBinding
-import com.c8.core.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity  : BaseViewModelActivity<SearchViewModel, ActivitySearchBinding>() {

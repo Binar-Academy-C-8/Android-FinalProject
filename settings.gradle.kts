@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "FinalProject-Binar"
 include(":app")
-include(":core")
