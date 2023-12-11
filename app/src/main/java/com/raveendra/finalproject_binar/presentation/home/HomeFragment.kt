@@ -44,9 +44,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //                binding.layoutStateCategory.root.isVisible = false
 //                binding.layoutStateCategory.pbLoading.isVisible = false
 //                binding.layoutStateCategory.tvError.isVisible = false
-                //Stop Shimmer
                 binding.shimmerView.stopShimmer()
-                //Hide Shimmer view
                 binding.shimmerView.isVisible = false
                 binding.rvCategoryCourse.apply {
                     isVisible = true
@@ -60,7 +58,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //                binding.layoutStateCategory.root.isVisible = true
 //                binding.layoutStateCategory.pbLoading.isVisible = true
 //                binding.layoutStateCategory.tvError.isVisible = false
-//                  binding.rvCategoryCourse.isVisible = false
+//                binding.rvCategoryCourse.isVisible = false
                 binding.rvCategoryCourse.isVisible = false
             }, doOnError = {
 //                binding.layoutStateCategory.root.isVisible = true
