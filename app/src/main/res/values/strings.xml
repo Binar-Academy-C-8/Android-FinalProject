@@ -91,4 +91,6 @@
     <string name="tab_text_2">List Class</string>
     <string name="titles_ic_play">ic_play</string>
     <string name="toggle_full_screen">toggle full screen</string>
+
+    <string name="label_error_no_internet">Koneksi bermasalah, silahkan coba lagi nanti</string>
 </resources>

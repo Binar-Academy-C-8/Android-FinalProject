@@ -1,5 +1,8 @@
 package com.raveendra.finalproject_binar.di
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSource
 import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSourceImpl
@@ -7,29 +10,40 @@ import com.raveendra.finalproject_binar.data.network.api.repository.CourseReposi
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepositoryImpl
 import com.raveendra.finalproject_binar.data.local.LocalDataSource
 import com.raveendra.finalproject_binar.data.local.LocalDataSourceimpl
+import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
+import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManagerImpl
 import com.raveendra.finalproject_binar.data.network.api.service.CourseService
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
+import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
+import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
+import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 object AppModules {
 
-    private val localModule = module {
+    private const val MAIN_PREFS_LOCAL = "MAIN_PREFS_LOCAL"
+    private fun provideSettingsPreferences(app: Application): SharedPreferences =
+        app.getSharedPreferences(MAIN_PREFS_LOCAL, Context.MODE_PRIVATE)
 
+    private val localModule = module {
+        single { provideSettingsPreferences(androidApplication()) }
+        single<PreferenceManager> { PreferenceManagerImpl(get()) }
     }
 
     private val networkModule = module {
         single { ChuckerInterceptor(androidContext()) }
-        single { CourseService.invoke(get()) }
+        single { CourseService.invoke(get(), get()) }
     }
 
     private val dataSourceModule = module {
         single<CourseDataSource> { CourseDataSourceImpl(get()) }
-    single <LocalDataSource>{LocalDataSourceimpl()  }
+        single<LocalDataSource> { LocalDataSourceimpl() }
     }
 
     private val repositoryModule = module {
@@ -40,6 +54,9 @@ object AppModules {
     private val viewModelModule = module {
         viewModelOf(::HomeViewModel)
         viewModelOf(::DetailViewModel)
+        viewModelOf(::LoginViewModel)
+        viewModelOf(::RegisterViewModel)
+        viewModelOf(::OtpViewModel)
     }
 
     val modules = listOf(

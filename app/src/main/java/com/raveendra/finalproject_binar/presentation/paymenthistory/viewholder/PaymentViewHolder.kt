@@ -2,7 +2,7 @@ package com.raveendra.finalproject_binar.presentation.paymenthistory.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.c8.core.utils.ViewHolderBinder
+import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListCourseNotPaidBinding
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePaidBinding
 import com.raveendra.finalproject_binar.model.Payment

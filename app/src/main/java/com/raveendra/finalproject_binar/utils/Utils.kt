@@ -1,4 +1,4 @@
-package com.c8.core.utils
+package com.raveendra.finalproject_binar.utils
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned

@@ -9,7 +9,7 @@ import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.model.Course
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseTypeAdapter
-import com.c8.core.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

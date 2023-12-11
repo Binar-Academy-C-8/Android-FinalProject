@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.c8.core.utils.ResultWrapper
+import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain

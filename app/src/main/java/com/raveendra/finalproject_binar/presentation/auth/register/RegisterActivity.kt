@@ -4,16 +4,22 @@ import android.content.Context
 import android.content.Intent
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.highLightWord
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import com.raveendra.finalproject_binar.R
+import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.databinding.ActivityRegisterBinding
-import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
-import com.c8.core.utils.base.BaseViewModelActivity
-import com.c8.core.utils.highLightWord
+import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.LabelTextFieldView
+import com.raveendra.finalproject_binar.utils.NoInternetException
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterBinding>()  {
+class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegisterBinding>() {
     companion object {
         fun navigate(context: Context) = with(context) {
             startActivity(
@@ -24,7 +30,8 @@ class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterB
             )
         }
     }
-    override val viewModel: LoginViewModel by viewModel()
+
+    override val viewModel: RegisterViewModel by viewModel()
 
     override val bindingInflater: (LayoutInflater) -> ActivityRegisterBinding
         get() = ActivityRegisterBinding::inflate
@@ -36,21 +43,39 @@ class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterB
         }
         binding.btRegister.setOnClickListener {
             doRegister()
-//            viewModel.doRegister(
-//                binding.etName.text.toString(),
-//                binding.etEmail.text.toString(),
-//                binding.etEmail.text.toString(),
-//                binding.etPassword.text.toString()
-//            )
         }
     }
 
     override fun setupObservers() {
-
+        lifecycleScope.launch {
+            viewModel.registerResult.collect {
+                it.proceedWhen(
+                    doOnSuccess = { result ->
+                        result.payload?.data?.dataValues?.id?.let { id -> navigateToOtp(id) }
+                    },
+                    doOnError = { error ->
+                        if(error.exception is ApiException){
+                            val exceptionMessage = error.exception.getParsedError()?.message
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                exceptionMessage,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }else if (error.exception is NoInternetException){
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                getString(R.string.label_error_no_internet),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                )
+            }
+        }
     }
 
-    private fun navigateToOtp() {
-        OtpActivity.navigate(this@RegisterActivity, binding.etEmail.getText().toString())
+    private fun navigateToOtp(id: Int) {
+        OtpActivity.navigate(this@RegisterActivity, binding.etEmail.getText().toString(), id)
     }
 
     private fun navigateToLogin() {
@@ -63,8 +88,14 @@ class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterB
             val password = binding.etPassword.getText().toString().trim()
             val fullName = binding.etName.getText().toString().trim()
             val phone = binding.etPhone.getText().toString().trim()
-//            viewModel.doRegister(fullName, email,phone, password)
-            navigateToOtp()
+            viewModel.postRegister(
+                RegisterRequest(
+                    email = email,
+                    name = fullName,
+                    password = password,
+                    phoneNumber = phone,
+                )
+            )
         }
     }
 
@@ -74,13 +105,15 @@ class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterB
         val phone = binding.etPhone.getText().toString().trim()
         val email = binding.etEmail.getText().toString().trim()
 
-        return checkNameValidation(fullName) && checkEmailValidation(email) && checkPhoneValidation(phone) &&
+        return checkNameValidation(fullName) && checkEmailValidation(email) && checkPhoneValidation(
+            phone
+        ) &&
                 checkPasswordValidation(password, binding.etPassword)
     }
 
     private fun checkNameValidation(fullName: String): Boolean {
         return if (fullName.isEmpty()) {
-            binding.etName.setError(true,getString(R.string.text_error_name_empty))
+            binding.etName.setError(true, getString(R.string.text_error_name_empty))
             false
         } else {
             binding.etName.setError(false)
@@ -100,9 +133,10 @@ class RegisterActivity : BaseViewModelActivity<LoginViewModel, ActivityRegisterB
             true
         }
     }
+
     private fun checkPhoneValidation(phone: String): Boolean {
         return if (phone.isEmpty()) {
-            binding.etPhone.setError(true,getString(R.string.text_error_phone_empty))
+            binding.etPhone.setError(true, getString(R.string.text_error_phone_empty))
             false
         } else {
             binding.etPhone.setError(false)

@@ -9,7 +9,7 @@ import com.raveendra.finalproject_binar.data.dummy.DummyCourseDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentDashboardBinding
 import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.DashboardAdapter
 import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.DashboardCategoryAdapter
-import com.c8.core.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClassFragment : BaseFragment<FragmentDashboardBinding>() {

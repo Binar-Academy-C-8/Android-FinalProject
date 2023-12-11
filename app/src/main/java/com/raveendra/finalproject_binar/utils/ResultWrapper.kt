@@ -1,9 +1,11 @@
-package com.c8.core.utils
+package com.raveendra.finalproject_binar.utils
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import retrofit2.HttpException
+import java.io.IOException
 
 sealed class ResultWrapper<T>(
     val payload: T? = null,
@@ -56,7 +58,12 @@ fun <T> proceedFlow(block: suspend () -> T): Flow<ResultWrapper<T>> {
             }
         )
     }.catch { e ->
-        emit(ResultWrapper.Error(exception = Exception(e)))
+        val exception = when(e){
+            is IOException -> NoInternetException()
+            is HttpException -> ApiException(e.message().orEmpty(),e.code(),e.response())
+            else -> Exception(e)
+        }
+        emit(ResultWrapper.Error<T>(exception = exception))
     }.onStart {
         emit(ResultWrapper.Loading())
     }

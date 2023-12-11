@@ -1,7 +1,7 @@
 package com.raveendra.finalproject_binar.data.repository
 
-import com.c8.core.utils.ResultWrapper
-import com.c8.core.utils.proceedFlow
+import com.raveendra.finalproject_binar.utils.ResultWrapper
+import com.raveendra.finalproject_binar.utils.proceedFlow
 import com.raveendra.finalproject_binar.data.local.LocalDataSource
 import com.raveendra.finalproject_binar.data.network.api.service.dummydatavideos.SectionedData
 import kotlinx.coroutines.delay

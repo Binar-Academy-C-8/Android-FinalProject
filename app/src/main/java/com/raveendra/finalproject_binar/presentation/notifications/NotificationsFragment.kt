@@ -8,7 +8,7 @@ import com.raveendra.finalproject_binar.data.dummy.DummyNotificationdataSourceIm
 import com.raveendra.finalproject_binar.databinding.FragmentNotificationsBinding
 import com.raveendra.finalproject_binar.model.Notification
 import com.raveendra.finalproject_binar.presentation.notifications.adapter.NotificationAdapter
-import com.c8.core.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationsFragment  : BaseFragment<FragmentNotificationsBinding>() {
