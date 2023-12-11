@@ -15,9 +15,10 @@ import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.model.PopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -43,18 +44,24 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
 //                binding.layoutStateCategory.root.isVisible = false
 //                binding.layoutStateCategory.pbLoading.isVisible = false
 //                binding.layoutStateCategory.tvError.isVisible = false
+                //Stop Shimmer
+                binding.shimmerView.stopShimmer()
+                //Hide Shimmer view
+                binding.shimmerView.isVisible = false
                 binding.rvCategoryCourse.apply {
                     isVisible = true
                     adapter = categoryAdapter
-                    layoutManager = GridLayoutManager(requireContext(), 2 )
                 }
                 it.payload?.let { data -> categoryAdapter.setData(data) }
                 categoryAdapter.refreshList()
             }, doOnLoading = {
+                binding.shimmerView.startShimmer()
+                binding.shimmerView.isVisible = true
 //                binding.layoutStateCategory.root.isVisible = true
 //                binding.layoutStateCategory.pbLoading.isVisible = true
 //                binding.layoutStateCategory.tvError.isVisible = false
-//                binding.rvCategory.isVisible = false
+//                  binding.rvCategoryCourse.isVisible = false
+                binding.rvCategoryCourse.isVisible = false
             }, doOnError = {
 //                binding.layoutStateCategory.root.isVisible = true
 //                binding.layoutStateCategory.pbLoading.isVisible = false
@@ -110,4 +117,6 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
         val popularCourseList: List<PopularCourse> = dummyPopularCourseDataSource.getPopularCourse()
         adapterPopularCourse.setData(popularCourseList)
     }
+
+
 }

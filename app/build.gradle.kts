@@ -139,4 +139,7 @@ dependencies {
     // otp view
 
     implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
+
+    //shimmer
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
 }
