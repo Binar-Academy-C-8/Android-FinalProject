@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.raveendra.finalproject_binar.R
-import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.databinding.ItemCategoryCourseBinding
+import com.raveendra.finalproject_binar.domain.CategoryDomain
 
 class CategoryAdapter(private val itemClick: (CategoryDomain) -> Unit): RecyclerView.Adapter<CourseViewHolder>(){
     private val differ = AsyncListDiffer(this, object : DiffUtil. ItemCallback<CategoryDomain>(){
@@ -30,7 +30,7 @@ class CategoryAdapter(private val itemClick: (CategoryDomain) -> Unit): Recycler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         return CourseViewHolder(
-            binding = ItemCategoryCourseBinding.inflate(
+            binding =  ItemCategoryCourseBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             ),
             itemClick
@@ -50,14 +50,14 @@ class CourseViewHolder(
     private val itemClick: (CategoryDomain) -> Unit
 ): RecyclerView.ViewHolder(binding.root){
     fun bind(item: CategoryDomain) {
-        binding.root.setOnClickListener {
-            itemClick.invoke(item)
+        with(item) {
+            binding.ivCategoryCourse.load(item.image) {
+                placeholder(R.color.primary_dark_blue_06)
+                error(R.color.primary_dark_blue_06)
+                crossfade(true)
+            }
+            binding.tvNameCategoryCourse.text = item.categoryName
+            itemView.setOnClickListener { itemClick(this) }
         }
-        binding.ivCategoryCourse.load(item.image) {
-            placeholder(R.color.primary_dark_blue_06)
-            error(R.color.primary_dark_blue_06)
-            crossfade(true)
-        }
-        binding.tvNameCategoryCourse.text = item.categoryName
     }
 }
