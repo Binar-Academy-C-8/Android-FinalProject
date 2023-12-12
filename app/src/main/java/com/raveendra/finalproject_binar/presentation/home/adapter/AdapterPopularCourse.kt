@@ -10,30 +10,37 @@ import coil.load
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemPopularCourseBinding
 import com.raveendra.finalproject_binar.model.PopularCourse
+import com.raveendra.finalproject_binar.domain.CategoryDomain
+import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.utils.toIdrCurrency
 
 
-class AdapterPopularCourse(): RecyclerView.Adapter<PopularCourseViewHolder>(){
+class AdapterPopularCourse(private val itemClick: (CourseDomain) -> Unit): RecyclerView.Adapter<PopularCourseViewHolder>(){
 
-    private val differ = AsyncListDiffer(this, object : DiffUtil. ItemCallback<PopularCourse>(){
-        override fun areItemsTheSame(oldItem: PopularCourse, newItem: PopularCourse): Boolean {
+    private val differ = AsyncListDiffer(this, object : DiffUtil. ItemCallback<CourseDomain>(){
+        override fun areItemsTheSame(oldItem: CourseDomain, newItem: CourseDomain): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: PopularCourse, newItem: PopularCourse): Boolean {
+        override fun areContentsTheSame(oldItem: CourseDomain, newItem: CourseDomain): Boolean {
             return oldItem.id == newItem.id
         }})
 
-    fun setData(data: List<PopularCourse>) {
+
+    fun setData(data: List<CourseDomain>) {
         differ.submitList(data)
-        notifyItemChanged(0, data.size)
+    }
+
+    fun refreshList() {
+        notifyItemRangeChanged(0, differ.currentList.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularCourseViewHolder {
         return PopularCourseViewHolder(
             binding = ItemPopularCourseBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ),
+            itemClick
         )
     }
 
@@ -47,16 +54,23 @@ class AdapterPopularCourse(): RecyclerView.Adapter<PopularCourseViewHolder>(){
 
 class PopularCourseViewHolder(
     private val binding: ItemPopularCourseBinding,
+    private val itemClick: (CourseDomain) -> Unit
 ) : RecyclerView.ViewHolder(binding.root){
-    fun bind(item: PopularCourse) {
-        binding.ivPopularCourse.load(item.imgPopularCourse)
-        binding.tvNamePopularCourse.text = item.namePopularCourse
-        binding.tvCourseRate.text = item.ratingCourse
-        binding.tvTitleCourse.text = item.titleCourse
-        binding.tvAuthorCourse.text = item.authorCourse
-        binding.tvLevelCourse.text = item.levelCourse
-        binding.tvDurationCourse.text = item.durationCourse
-        binding.tvModuleCourse.text = item.moduleCourse
-        binding.btnAddToCart.text =  binding.root.context.getString(R.string.label_buy, item.priceCourse.toIdrCurrency().toString())
+    fun bind(item: CourseDomain) {
+        binding.root.setOnClickListener {
+            itemClick.invoke(item)
+        }
+        binding.ivPopularCourse.load(item.image){
+            placeholder(R.color.primary_dark_blue_06)
+            error(R.color.primary_dark_blue_06)
+            crossfade(true)
+        }
+        binding.tvNamePopularCourse.text = item.courseName
+        binding.tvTitleCourse.text = item.aboutCourse
+        binding.tvAuthorCourse.text = item.courseBy
+        binding.tvLevelCourse.text = item.courseLevel
+        binding.tvDurationCourse.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(R.string.duration_course)}"
+        binding.tvModuleCourse.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
+        binding.btnAddToCart.text =  binding.root.context.getString(R.string.label_buy, item.coursePrice.toString())
     }
 }

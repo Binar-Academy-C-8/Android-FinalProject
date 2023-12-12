@@ -92,5 +92,8 @@
     <string name="titles_ic_play">ic_play</string>
     <string name="toggle_full_screen">toggle full screen</string>
 
+    <string name="module_course">Modul</string>
+    <string name="duration_course">Menit</string>
+
     <string name="label_error_no_internet">Koneksi bermasalah, silahkan coba lagi nanti</string>
 </resources>
