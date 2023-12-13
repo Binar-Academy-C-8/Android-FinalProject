@@ -40,9 +40,12 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
     private fun setupObservers() {
         viewModel.categories.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
-                binding.layoutStateCategory.root.isVisible = false
+                /*binding.layoutStateCategory.root.isVisible = false
                 binding.layoutStateCategory.pbLoading.isVisible = false
-                binding.layoutStateCategory.tvError.isVisible = false
+                binding.layoutStateCategory.tvError.isVisible = false*/
+                binding.shimmerView.stopShimmer()
+                //Hide Shimmer view
+                binding.shimmerView.isVisible = false
                 binding.rvCategoryCourse.apply {
                     isVisible = true
                     adapter = categoryAdapter
@@ -50,15 +53,17 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
                 it.payload?.let { data -> categoryAdapter.setData(data) }
                 categoryAdapter.refreshList()
             }, doOnLoading = {
+                binding.shimmerView.startShimmer()
+                binding.shimmerView.isVisible = true/*
                 binding.layoutStateCategory.root.isVisible = true
                 binding.layoutStateCategory.pbLoading.isVisible = true
-                binding.layoutStateCategory.tvError.isVisible = false
+                binding.layoutStateCategory.tvError.isVisible = false*/
                 binding.rvCategoryCourse.isVisible = false
-            }, doOnError = {
+            }, doOnError = {/*
                 binding.layoutStateCategory.root.isVisible = true
                 binding.layoutStateCategory.pbLoading.isVisible = false
                 binding.layoutStateCategory.tvError.isVisible = true
-                binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()
+                binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()*/
                 binding.rvCategoryCourse.isVisible = false
             })
         }
