@@ -38,7 +38,9 @@ data class CourseResponse(
     @SerializedName("updatedAt")
     val updatedAt: String?,
     @SerializedName("userId")
-    val userId: Int?
+    val userId: Int?,
+    @SerializedName("rating")
+    val ratingCourse: Double
 )
 
 fun CourseResponse.toDomain() = CourseDomain(
@@ -59,6 +61,7 @@ fun CourseResponse.toDomain() = CourseDomain(
     modulePerCourse = this.modulePerCourse,
     updatedAt = this.updatedAt,
     userId = this.userId,
+    ratingCourse = this.ratingCourse
 )
 
 fun Collection<CourseResponse>.toDomain() = this.map {

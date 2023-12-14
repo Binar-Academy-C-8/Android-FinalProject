@@ -19,5 +19,6 @@ data class CourseDomain(
     val intendedFor: String?,
     val modulePerCourse: Int?,
     val updatedAt: String?,
-    val userId: Int?
+    val userId: Int?,
+    val ratingCourse: Double?
 )

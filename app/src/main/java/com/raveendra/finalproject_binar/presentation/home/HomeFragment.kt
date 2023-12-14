@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
+import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,6 +27,7 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
         AdapterPopularCourse {
         }
     }
+
 
     override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
@@ -103,9 +105,10 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
 
     private fun setOnClickListener(){
         binding.tvViewAll.setOnClickListener{
-
+            SeeAllPopularCourseActivity.navigate(requireContext())
         }
     }
+
 
 
 }
