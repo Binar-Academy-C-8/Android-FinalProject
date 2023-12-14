@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_popular_course"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_popular_course"
+            android:layout_width="230dp"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+            android:src="@color/neutral_03"
+            app:layout_constraintBottom_toTopOf="@+id/ll_course_rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_course_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/neutral_03"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_popular_course">
+
+            <TextView
+                android:id="@+id/tv_name_popular_course"
+                style="@style/TextBold12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/neutral_03"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/primary_dark_blue_05"
+                tools:text="Data Science" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/neutral_03"
+                android:gravity="end"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_course_rate"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:src="@drawable/ic_rating" />
+
+                <TextView
+                    android:id="@+id/tv_course_rate"
+                    style="@style/TextBold12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.7" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tittle_author_course"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:background="@color/neutral_03"
+            android:backgroundTint="@color/neutral_03"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_course_rating">
+
+            <TextView
+                android:id="@+id/tv_title_course"
+                style="@style/TextBold12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Belajar data cleaning dan sorting \ndengan Phyton" />
+
+            <TextView
+                android:id="@+id/tv_author_course"
+                style="@style/TextMedium12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="by John Doe" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_detail_popular_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/neutral_03"
+            android:backgroundTint="@color/neutral_03"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_to_cart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_tittle_author_course">
+
+            <LinearLayout
+                android:id="@+id/ll_detail_popular_course_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_level_course"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_badge" />
+
+                    <TextView
+                        android:id="@+id/tv_level_course"
+                        style="@style/TextMedium12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/primary_dark_blue_05"
+                        tools:text="Advanced Level" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_module_course"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_modul" />
+
+                <TextView
+                    android:id="@+id/tv_module_course"
+                    style="@style/TextMedium12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    tools:text="19 Modul" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_detail_popular_course_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_detail_popular_course_1">
+
+                <ImageView
+                    android:id="@+id/iv_time_course"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_time" />
+
+                <TextView
+                    android:id="@+id/tv_duration_course"
+                    style="@style/TextMedium12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    tools:text="60 menit" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/btn_add_to_cart"
+            style="@style/TextBold10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:src="@color/neutral_03"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_detail_popular_course"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
