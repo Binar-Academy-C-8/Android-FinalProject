@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
+import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
-import com.raveendra.finalproject_binar.presentation.course.adapter.CourseTypeAdapter
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
