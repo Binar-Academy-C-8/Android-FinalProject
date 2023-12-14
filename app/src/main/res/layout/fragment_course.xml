@@ -82,6 +82,16 @@
                 android:text="@string/txt_kelas_gratis" />
         </com.google.android.material.chip.ChipGroup>
 
+        <include
+            android:id="@+id/layout_state_category"
+            layout="@layout/common_layout_content_state"
+            app:layout_constraintTop_toTopOf="@id/chip_group_filter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
@@ -92,5 +102,6 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_list_course_premium" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
