@@ -20,6 +20,7 @@ import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
+import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -57,6 +58,7 @@ object AppModules {
         viewModelOf(::LoginViewModel)
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
+        viewModelOf(::SeeAllPopularCourseViewModel)
     }
 
     val modules = listOf(
