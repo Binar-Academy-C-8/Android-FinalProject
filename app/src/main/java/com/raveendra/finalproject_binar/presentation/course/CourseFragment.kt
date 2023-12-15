@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.raveendra.finalproject_binar.data.dummy.DummyCourseFreeImpl
+import com.raveendra.finalproject_binar.data.dummy.DummyCoursePremiumImpl
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
@@ -31,6 +33,7 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeData()
+        setClickChips()
     }
 
     private fun observeData() {
@@ -69,6 +72,15 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
     }
 
     private fun setClickChips(){
+        binding.chip1.setOnClickListener {
+            viewModel.getCourse()
+        }
+        binding.chip2.setOnClickListener {
+            adapterCourse.setData(DummyCoursePremiumImpl().getCoursePremium())
+        }
+        binding.chip3.setOnClickListener {
+            adapterCourse.setData(DummyCourseFreeImpl().getCourseFree())
+        }
     }
 
 }
