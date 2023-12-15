@@ -16,6 +16,7 @@ import com.raveendra.finalproject_binar.data.network.api.service.CourseService
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
+import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
@@ -54,6 +55,7 @@ object AppModules {
 
     private val viewModelModule = module {
         viewModelOf(::HomeViewModel)
+        viewModelOf(::CourseViewModel)
         viewModelOf(::DetailViewModel)
         viewModelOf(::LoginViewModel)
         viewModelOf(::RegisterViewModel)
