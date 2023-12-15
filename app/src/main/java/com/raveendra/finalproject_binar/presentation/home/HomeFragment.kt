@@ -70,10 +70,13 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
             })
         }
         viewModel.course.observe(viewLifecycleOwner) {
-            it.proceedWhen(doOnSuccess = {
+            it.proceedWhen(doOnSuccess = {/*
                 binding.layoutStatePopularCourse.root.isVisible = false
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
-                binding.layoutStatePopularCourse.tvError.isVisible = false
+                binding.layoutStatePopularCourse.tvError.isVisible = false*/
+                binding.shimmerViewCourse.stopShimmer()
+                //Hide Shimmer view
+                binding.shimmerViewCourse.isVisible = false
                 binding.rvPopularCourse.apply {
                     isVisible = true
                     adapter = popularCourseAdapter
@@ -83,21 +86,23 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
                 it.payload?.let { data -> popularCourseAdapter.setData(data) }
                 popularCourseAdapter.refreshList()
             }, doOnLoading = {
+                binding.shimmerViewCourse.startShimmer()
+                binding.shimmerViewCourse.isVisible = true/*
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = true
-                binding.layoutStatePopularCourse.tvError.isVisible = false
+                binding.layoutStatePopularCourse.tvError.isVisible = false*/
                 binding.rvPopularCourse.isVisible = false
-            }, doOnError = {
+            }, doOnError = {/*
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStatePopularCourse.tvError.isVisible = true
-                binding.layoutStatePopularCourse.tvError.text = it.exception?.message.orEmpty()
+                binding.layoutStatePopularCourse.tvError.text = it.exception?.message.orEmpty()*/
                 binding.rvPopularCourse.isVisible = false
-            }, doOnEmpty = {
+            }, doOnEmpty = {/*
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStatePopularCourse.tvError.isVisible = true
-                binding.layoutStatePopularCourse.tvError.text = "Course not found"
+                binding.layoutStatePopularCourse.tvError.text = "Course not found"*/
                 binding.rvPopularCourse.isVisible = false
             })
         }

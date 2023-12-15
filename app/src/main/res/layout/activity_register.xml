@@ -6,17 +6,26 @@
     android:background="@color/primary_light_blue_05"
     android:paddingHorizontal="@dimen/dimen_24_dp">
 
+    <ImageView
+        android:id="@+id/iv_logo_app"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        android:src="@drawable/img_logo"/>
+
     <TextView
         android:id="@+id/tvLogin"
         style="@style/TextBold24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_64_dp"
+        android:layout_marginTop="@dimen/dimen_24_dp"
         android:text="@string/label_register"
-        android:textColor="@color/primary_dark_blue_05"
+        android:textColor="@color/primary_dark_blue_06"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/iv_logo_app"/>
 
     <com.raveendra.finalproject_binar.utils.LabelTextFieldView
         android:id="@+id/etName"
