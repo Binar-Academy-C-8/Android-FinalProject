@@ -19,9 +19,12 @@ class CourseViewModel(
     val course:LiveData<ResultWrapper<List<CourseDomain>>>
         get() = _course
 
-    fun getCourse(){
+    fun getCourse(
+        courseType : String? = null
+    ){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCourse().collect(){
+            repository.getCourse(courseType = if (courseType == "all")null else courseType
+            ).collect(){
                 _course.postValue(it)
             }
         }

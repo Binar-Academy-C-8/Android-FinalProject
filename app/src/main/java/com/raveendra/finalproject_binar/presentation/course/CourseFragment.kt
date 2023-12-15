@@ -71,16 +71,15 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
         viewModel.getCourse()
     }
 
-    private fun setClickChips(){
+    private fun setClickChips() {
         binding.chip1.setOnClickListener {
-            viewModel.getCourse()
+            viewModel.getCourse(courseType = null)
         }
         binding.chip2.setOnClickListener {
-            adapterCourse.setData(DummyCoursePremiumImpl().getCoursePremium())
+            viewModel.getCourse(courseType = "Premium")
         }
         binding.chip3.setOnClickListener {
-            adapterCourse.setData(DummyCourseFreeImpl().getCourseFree())
+            viewModel.getCourse(courseType = "Free")
         }
     }
-
 }

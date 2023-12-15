@@ -17,7 +17,7 @@ import com.raveendra.finalproject_binar.domain.StatusMessageDomain
 import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
-    suspend fun getCourse(category: String? = null): Flow<ResultWrapper<List<CourseDomain>>>
+    suspend fun getCourse(category: String? = null, courseType: String?= null): Flow<ResultWrapper<List<CourseDomain>>>
 
     suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>>
 
@@ -34,8 +34,8 @@ interface CourseRepository {
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
 
-    override suspend fun getCourse(category: String?): Flow<ResultWrapper<List<CourseDomain>>> {
-        return proceedFlow { dataSource.getCourse(category).data?.toDomain().orEmpty() }
+    override suspend fun getCourse(category: String?, courseType: String?): Flow<ResultWrapper<List<CourseDomain>>> {
+        return proceedFlow { dataSource.getCourse(category, courseType).data?.toDomain().orEmpty() }
     }
 
     override suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>> {

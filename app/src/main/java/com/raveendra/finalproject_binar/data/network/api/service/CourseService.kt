@@ -28,7 +28,8 @@ interface CourseService {
     @GET("course")
     suspend fun getCourse(
         @Query("order_by") orderBy: String? = "asc",
-        @Query("sort_by") sortBy: String? = "createdAt"
+        @Query("sort_by") sortBy: String? = "createdAt",
+        @Query("type") courseType : String? = null
     ): ResponseListWrapper<CourseResponse>
 
     @GET("category")

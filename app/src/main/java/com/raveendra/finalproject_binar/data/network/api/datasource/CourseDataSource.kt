@@ -15,7 +15,7 @@ import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 
 interface CourseDataSource {
 
-    suspend fun getCourse(category: String?): ResponseListWrapper<CourseResponse>
+    suspend fun getCourse(category: String?, courseType : String?): ResponseListWrapper<CourseResponse>
     suspend fun getCategory(): ResponseListWrapper<CategoryResponse>
     suspend fun postLogin(loginRequest: LoginRequest): LoginResponse
     suspend fun postRegister(registerRequest: RegisterRequest): RegisterResponse
@@ -31,8 +31,8 @@ class CourseDataSourceImpl(
     private val service: CourseService
 ) : CourseDataSource {
 
-    override suspend fun getCourse(category: String?): ResponseListWrapper<CourseResponse> {
-        return service.getCourse()
+    override suspend fun getCourse(category: String?, courseType: String?): ResponseListWrapper<CourseResponse> {
+        return service.getCourse(courseType = courseType)
     }
 
     override suspend fun getCategory(): ResponseListWrapper<CategoryResponse> {
