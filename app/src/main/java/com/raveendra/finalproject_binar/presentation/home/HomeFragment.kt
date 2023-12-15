@@ -42,10 +42,10 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
     private fun setupObservers() {
         viewModel.categories.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
-                binding.layoutStateCategory.root.isVisible = false
-                binding.layoutStateCategory.tvError.isVisible = false
                 binding.shimmerView.stopShimmer()
                 binding.shimmerView.isVisible = false
+                binding.layoutStateCategory.root.isVisible = false
+                binding.layoutStateCategory.tvError.isVisible = false
                 binding.rvCategoryCourse.apply {
                     isVisible = true
                     adapter = categoryAdapter
@@ -65,13 +65,10 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
             })
         }
         viewModel.course.observe(viewLifecycleOwner) {
-            it.proceedWhen(doOnSuccess = {/*
-                binding.layoutStatePopularCourse.root.isVisible = false
-                binding.layoutStatePopularCourse.pbLoading.isVisible = false
-                binding.layoutStatePopularCourse.tvError.isVisible = false*/
+            it.proceedWhen(doOnSuccess = {
                 binding.shimmerViewCourse.stopShimmer()
-                //Hide Shimmer view
                 binding.shimmerViewCourse.isVisible = false
+                binding.layoutStatePopularCourse.tvError.isVisible = false
                 binding.rvPopularCourse.apply {
                     isVisible = true
                     adapter = popularCourseAdapter
@@ -82,22 +79,19 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
                 popularCourseAdapter.refreshList()
             }, doOnLoading = {
                 binding.shimmerViewCourse.startShimmer()
-                binding.shimmerViewCourse.isVisible = true/*
-                binding.layoutStatePopularCourse.root.isVisible = true
-                binding.layoutStatePopularCourse.pbLoading.isVisible = true
-                binding.layoutStatePopularCourse.tvError.isVisible = false*/
+                binding.shimmerViewCourse.isVisible = true
                 binding.rvPopularCourse.isVisible = false
-            }, doOnError = {/*
+            }, doOnError = {
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStatePopularCourse.tvError.isVisible = true
-                binding.layoutStatePopularCourse.tvError.text = it.exception?.message.orEmpty()*/
+                binding.layoutStatePopularCourse.tvError.text = it.exception?.message.orEmpty()
                 binding.rvPopularCourse.isVisible = false
-            }, doOnEmpty = {/*
+            }, doOnEmpty = {
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStatePopularCourse.tvError.isVisible = true
-                binding.layoutStatePopularCourse.tvError.text = "Course not found"*/
+                binding.layoutStatePopularCourse.tvError.text = "Course not found"
                 binding.rvPopularCourse.isVisible = false
             })
         }
