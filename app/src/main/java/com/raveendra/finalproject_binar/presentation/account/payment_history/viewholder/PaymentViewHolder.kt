@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.paymenthistory.viewholder
+package com.raveendra.finalproject_binar.presentation.account.payment_history.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load

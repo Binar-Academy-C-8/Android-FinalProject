@@ -95,5 +95,9 @@
     <string name="module_course">Modul</string>
     <string name="duration_course">Menit</string>
 
+
     <string name="label_error_no_internet">Koneksi bermasalah, silahkan coba lagi nanti</string>
+
+    <string name="label_pay">Bayar</string>
+    <string name="label_free">Gratis</string>
 </resources>

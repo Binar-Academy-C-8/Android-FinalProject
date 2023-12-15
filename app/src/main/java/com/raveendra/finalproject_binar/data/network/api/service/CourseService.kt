@@ -7,12 +7,13 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
-import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
+import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
+import com.raveendra.finalproject_binar.data.response.TransactionResponse
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -29,6 +30,7 @@ interface CourseService {
     suspend fun getCourse(
         @Query("order_by") orderBy: String? = "asc",
         @Query("sort_by") sortBy: String? = "createdAt",
+        @Query("category") category : Int?,
         @Query("type") courseType : String? = null
     ): ResponseListWrapper<CourseResponse>
 
@@ -48,7 +50,16 @@ interface CourseService {
     suspend fun postVerifyOtp(
         @Path("userId") userId: Int,
         @Body verifyOtpRequest: VerifyOtpRequest
-    ): BaseResponse
+    ): LoginResponse
+
+    @GET("auth/me")
+    suspend fun getProfile(): ProfileResponse
+
+    @POST("transaction/{courseId}")
+    suspend fun postTransaction(
+        @Path("courseId") courseId: Int,
+    ): TransactionResponse
+
 
     companion object {
 
@@ -58,7 +69,7 @@ interface CourseService {
                 .addInterceptor(chucker)
                 .addInterceptor { chain ->
                     val newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", preferenceManager.appToken)
+                        .addHeader("Authorization", "Bearer ${preferenceManager.appToken}")
                         .build()
                     chain.proceed(newRequest)
                 }

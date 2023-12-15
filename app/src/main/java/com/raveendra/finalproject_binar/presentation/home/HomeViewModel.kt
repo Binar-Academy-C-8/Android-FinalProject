@@ -21,9 +21,9 @@ class HomeViewModel(private val repository: CourseRepository) : ViewModel() {
     val course: LiveData<ResultWrapper<List<CourseDomain>>>
         get() = _course
 
-    fun getCourses(category: String? = null) {
+    fun getCourses(category: Int? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCourse(if (category == "all") null else category).collect {
+            repository.getCourse(if (category == 0) null else category).collect {
                 _course.postValue(it)
             }
         }

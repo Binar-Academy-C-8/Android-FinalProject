@@ -7,7 +7,7 @@ import com.raveendra.finalproject_binar.data.network.api.repository.CourseReposi
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
-import com.raveendra.finalproject_binar.domain.StatusMessageDomain
+import com.raveendra.finalproject_binar.domain.LoginDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -17,8 +17,8 @@ class OtpViewModel(private val repository: CourseRepository) : ViewModel() {
     val requestOtpResult: MutableSharedFlow<ResultWrapper<NewOtpDomain>>
         get() = _requestOtpResult
 
-    private val _verifyOtpResult = MutableSharedFlow<ResultWrapper<StatusMessageDomain>>()
-    val verifyOtpResult: MutableSharedFlow<ResultWrapper<StatusMessageDomain>>
+    private val _verifyOtpResult = MutableSharedFlow<ResultWrapper<LoginDomain>>()
+    val verifyOtpResult: MutableSharedFlow<ResultWrapper<LoginDomain>>
         get() = _verifyOtpResult
 
 

@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.paymenthistory
+package com.raveendra.finalproject_binar.presentation.account.payment_history
 
 import android.content.Context
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import com.raveendra.finalproject_binar.data.dummy.DummyPaymentDataSourceImpl
 import com.raveendra.finalproject_binar.databinding.ActivityPaymentHistoryBinding
 import com.raveendra.finalproject_binar.model.Payment
-import com.raveendra.finalproject_binar.presentation.paymenthistory.adapter.PaymentAdapter
-import com.raveendra.finalproject_binar.presentation.paymenthistory.adapter.PaymentTypeAdadpter
+import com.raveendra.finalproject_binar.presentation.account.payment_history.adapter.PaymentAdapter
+import com.raveendra.finalproject_binar.presentation.account.payment_history.adapter.PaymentTypeAdadpter
 import com.raveendra.finalproject_binar.utils.base.BaseActivity
 
 class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
@@ -22,7 +22,7 @@ class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
         }
     }
     private val adapterPayment : PaymentAdapter by lazy {
-        PaymentAdapter(PaymentTypeAdadpter.PAID) {payment: Payment ->
+        PaymentAdapter(PaymentTypeAdadpter.PAID) { payment: Payment ->
 
         }
     }

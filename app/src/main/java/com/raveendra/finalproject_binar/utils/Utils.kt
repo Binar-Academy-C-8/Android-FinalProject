@@ -17,6 +17,13 @@ fun Double.toIdrCurrency(): String {
     val subStr = formatted.substring(2, formatted.length)
     return "Rp " + subStr.replace(",", ".")
 }
+fun Int.toIdrCurrency(): String {
+    val numberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+    numberFormat.maximumFractionDigits = 0
+    val formatted = numberFormat.format(this)
+    val subStr = formatted.substring(2, formatted.length)
+    return "Rp " + subStr.replace(",", ".")
+}
 fun TextView.highLightWord(word: String, onClick: () -> Unit) {
     val ssBuilder = SpannableStringBuilder(this.text)
     val clickAbleSpan = object : ClickableSpan() {

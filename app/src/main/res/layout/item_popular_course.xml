@@ -21,9 +21,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_course_rating"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -37,37 +38,38 @@
             <TextView
                 android:id="@+id/tv_name_popular_course"
                 style="@style/TextBold12"
+                android:layout_width="@dimen/dimen_0_dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:layout_marginEnd="@dimen/dimen_4_dp"
+                android:maxLines="1"
+                android:textColor="@color/primary_dark_blue_05"
+                app:layout_constraintEnd_toStartOf="@+id/iv_course_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Data Science" />
+
+            <ImageView
+                android:id="@+id/iv_course_rate"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="@dimen/dimen_4_dp"
+                android:src="@drawable/ic_rating"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_course_rate"
+                app:layout_constraintEnd_toStartOf="@+id/tv_course_rate"
+                app:layout_constraintTop_toTopOf="@+id/tv_course_rate" />
+
+            <TextView
+                android:id="@+id/tv_course_rate"
+                style="@style/TextBold12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_dark_blue_05"
-                tools:text="Data Science"
-                android:maxLines="1"
-                android:ellipsize="end"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:orientation="horizontal"
+                android:text="4.7"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_course_rate"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginEnd="2dp"
-                    android:src="@drawable/ic_rating" />
-
-                <TextView
-                    android:id="@+id/tv_course_rate"
-                    style="@style/TextBold12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4.7" />
-            </LinearLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/ll_tittle_author_course"
@@ -84,7 +86,8 @@
                 style="@style/TextBold12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
+                android:lines="2"
+                android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="Belajar data cleaning dan sorting \ndengan Phyton" />
 

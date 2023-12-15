@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.paymenthistory.adapter
+package com.raveendra.finalproject_binar.presentation.account.payment_history.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +9,8 @@ import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListCourseNotPaidBinding
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePaidBinding
 import com.raveendra.finalproject_binar.model.Payment
-import com.raveendra.finalproject_binar.presentation.paymenthistory.viewholder.PaymentNotPaidViewHolder
-import com.raveendra.finalproject_binar.presentation.paymenthistory.viewholder.PaymentPaidViewHolder
+import com.raveendra.finalproject_binar.presentation.account.payment_history.viewholder.PaymentNotPaidViewHolder
+import com.raveendra.finalproject_binar.presentation.account.payment_history.viewholder.PaymentPaidViewHolder
 
 class PaymentAdapter(
     var courseTypeAdapter: PaymentTypeAdadpter,

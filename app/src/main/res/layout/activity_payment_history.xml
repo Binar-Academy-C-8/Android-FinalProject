@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_light_blue_05"
-    tools:context=".presentation.paymenthistory.PaymentHistoryActivity">
+    tools:context=".presentation.account.payment_history.PaymentHistoryActivity">
 
     <LinearLayout
         android:id="@+id/cl_body"
@@ -21,7 +21,8 @@
             android:layout_height="25dp"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/ic_back"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_marginStart="20dp"

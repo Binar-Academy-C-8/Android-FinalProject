@@ -1,13 +1,11 @@
 package com.raveendra.finalproject_binar.domain
 
 
-import com.google.gson.annotations.SerializedName
-
 data class LoginDomain(
-    @SerializedName("data")
-    val token: String,
-    @SerializedName("message")
-    val message: String?,
-    @SerializedName("status")
-    val status: String?
+    val message: String,
+    val status: String,
+    val data : LoginDataDomain?
+)
+data class LoginDataDomain(
+    val token: String
 )
