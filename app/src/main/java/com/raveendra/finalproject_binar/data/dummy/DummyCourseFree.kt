@@ -25,7 +25,8 @@ class DummyCourseFreeImpl(): DummyCourseFree{
             intendedFor = "unutk pemula yang belum menjadi sepuh",
             modulePerCourse = 5,
             updatedAt ="2023-11-06" ,
-            userId = 1
+            userId = 1,
+            ratingCourse = null
         )
     )
 }

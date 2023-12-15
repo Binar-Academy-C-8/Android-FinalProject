@@ -41,15 +41,17 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
             it.proceedWhen (
                 doOnSuccess = {
                     binding.rvList.isVisible = true
-                    binding.layoutStateCategory.pbLoading.isVisible = false
                     binding.layoutStateCategory.tvError.isVisible = false
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = false
                     it.payload?.let {
                         adapterCourse.setData(it)
                     }
                 },
                 doOnLoading = {
                     binding.rvList.isVisible = false
-                    binding.layoutStateCategory.pbLoading.isVisible = true
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
                     binding.layoutStateCategory.tvError.isVisible = false
                 },
                 doOnError = {

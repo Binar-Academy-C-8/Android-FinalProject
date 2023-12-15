@@ -25,7 +25,8 @@ class DummyCoursePremiumImpl(): DummyCoursePremium{
             intendedFor = "unutk sepuh yang berkedok pemula",
             modulePerCourse = 5,
             updatedAt ="2023-11-06" ,
-            userId = 2
+            userId = 2,
+            ratingCourse = null
         )
     )
 }
