@@ -16,6 +16,7 @@ import com.raveendra.finalproject_binar.data.network.api.service.CourseService
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
+import com.raveendra.finalproject_binar.presentation.account.AccountViewModel
 import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileViewModel
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
@@ -67,6 +68,7 @@ object AppModules {
         viewModelOf(::PaymentSummaryViewModel)
         viewModelOf(::PaymentWebViewViewModel)
         viewModelOf(::ProfileViewModel)
+        viewModelOf(::AccountViewModel)
     }
 
     val modules = listOf(

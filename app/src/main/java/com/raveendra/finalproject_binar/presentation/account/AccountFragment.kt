@@ -1,15 +1,24 @@
 package com.raveendra.finalproject_binar.presentation.account
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.raveendra.finalproject_binar.BuildConfig
+import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.FragmentAccountBinding
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryActivity
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
+import com.raveendra.finalproject_binar.utils.ApiException
+import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,6 +36,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         setupViews()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupViews() = with(binding) {
         llPaymentHistory.setOnClickListener {
             PaymentHistoryActivity.navigate(requireContext())
@@ -38,6 +48,46 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         llLogOut.setOnClickListener {
             preferences.clear()
             LoginActivity.navigate(requireContext())
+        }
+        tvVersion.text = "${BuildConfig.FLAVOR} (${BuildConfig.VERSION_NAME})"
+
+        viewModel.getProfile()
+        setupObservers()
+    }
+
+    private fun setupObservers(){
+        viewModel.resultProfile.observe(viewLifecycleOwner) {
+            it.proceedWhen(doOnSuccess = { result ->
+                binding.ivProfile.load(R.drawable.bg_button_dark_blue){
+                    placeholder(R.color.primary_dark_blue_06)
+                    error(R.color.primary_dark_blue_06)
+                    transformations(
+                        CircleCropTransformation()
+                    )
+                    crossfade(true)
+                }
+                binding.tvName.text = result.payload?.data?.name ?: "-"
+                binding.tvEmail.text = result.payload?.data?.email ?: "-"
+            }, doOnLoading = {
+
+            }, doOnError = { error ->
+                if (error.exception is ApiException) {
+                    val exceptionMessage = error.exception.getParsedError()?.message
+                    Toast.makeText(
+                        requireContext(),
+                        exceptionMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else if (error.exception is NoInternetException) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.label_error_no_internet),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }, doOnEmpty = {
+
+            })
         }
     }
 }

@@ -17,7 +17,7 @@ class SeeAllPopularCourseViewModel(private val repository: CourseRepository): Vi
 
     fun getCourses(category: String? = null) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCourse(if (category == "all") null else category).collect {
+            repository.getCourse().collect {
                 _course.postValue(it)
             }
         }

@@ -26,7 +26,7 @@ class DummyCoursePremiumImpl(): DummyCoursePremium{
             modulePerCourse = 5,
             updatedAt ="2023-11-06" ,
             userId = 2,
-            ratingCourse = null
+            ratingCourse = 4.9
         )
     )
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemCategoryCourseBinding
 import com.raveendra.finalproject_binar.domain.CategoryDomain
@@ -55,6 +56,9 @@ class CourseViewHolder(
                 placeholder(R.color.primary_dark_blue_06)
                 error(R.color.primary_dark_blue_06)
                 crossfade(true)
+                transformations(
+                    CircleCropTransformation()
+                )
             }
             binding.tvNameCategoryCourse.text = item.categoryName
             itemView.setOnClickListener { itemClick(this) }

@@ -10,6 +10,7 @@ import coil.load
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemPopularCourseBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
+import com.raveendra.finalproject_binar.utils.toIdrCurrency
 
 
 class AdapterPopularCourse(private val itemClick: (CourseDomain) -> Unit,private val buttonClick: (CourseDomain) -> Unit): RecyclerView.Adapter<PopularCourseViewHolder>(){
@@ -59,6 +60,7 @@ class PopularCourseViewHolder(
             itemClick.invoke(item)
         }
         binding.btnAddToCart.setOnClickListener {
+            if (item.coursePrice == 0) return@setOnClickListener
             buttonClick.invoke(item)
         }
         binding.ivPopularCourse.load(item.image){

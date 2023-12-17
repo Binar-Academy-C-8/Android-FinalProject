@@ -26,7 +26,7 @@ class DummyCourseFreeImpl(): DummyCourseFree{
             modulePerCourse = 5,
             updatedAt ="2023-11-06" ,
             userId = 1,
-            ratingCourse = null
+            ratingCourse = 4.9
         )
     )
 }

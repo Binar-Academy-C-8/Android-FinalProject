@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.domain.CategoryDomain
-import com.raveendra.finalproject_binar.presentation.MainActivity
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
@@ -77,7 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             categoryName = "Show All",
                             createdAt = "",
                             id = 0,
-                            image = "",
+                            image = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_show_all.png",
                             updatedAt = ""
                         )
                     )
