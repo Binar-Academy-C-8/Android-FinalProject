@@ -2,24 +2,23 @@ package com.raveendra.finalproject_binar.presentation.auth.login
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
+import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.databinding.ActivityLoginBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
-import com.raveendra.finalproject_binar.presentation.auth.register.RegisterActivity
-import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
-import com.raveendra.finalproject_binar.utils.highLightWord
-import com.raveendra.finalproject_binar.utils.proceedWhen
-import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
+import com.raveendra.finalproject_binar.presentation.auth.register.RegisterActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.LabelTextFieldView
 import com.raveendra.finalproject_binar.utils.NoInternetException
+import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.highLightWord
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,19 +58,18 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
             viewModel.loginResult.collect {
                 it.proceedWhen(
                     doOnSuccess = { result ->
-                        preferences.appToken = result.payload?.token.toString()
+                        preferences.appToken = result.payload?.data?.token.toString()
                         MainActivity.navigateWithFlag(this@LoginActivity)
                     },
                     doOnError = {error ->
                         if(error.exception is ApiException){
                             val exceptionMessage = error.exception.getParsedError()?.message
-                            if (exceptionMessage.equals("User not verified", ignoreCase = true)) {
+                            if (exceptionMessage.equals("Pengguna belum diverifikasi", ignoreCase = true)) {
                                 OtpActivity.navigate(
                                     this@LoginActivity,
                                     binding.etEmail.getText().toString().trim()
                                 )
                             } else {
-                                Log.d("test22", error.exception.getParsedError()?.message.toString())
                                 Toast.makeText(
                                     this@LoginActivity,
                                     exceptionMessage,

@@ -19,7 +19,19 @@
             android:name=".presentation.seeallpopularcourse.SeeAllPopularCourseActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.paymenthistory.PaymentHistoryActivity"
+            android:name=".presentation.account.change_password.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.account.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.payment.payment_webview.PaymentWebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.payment.payment_summary.PaymentSummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.account.payment_history.PaymentHistoryActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.onboarding.OnBoardingActivity"

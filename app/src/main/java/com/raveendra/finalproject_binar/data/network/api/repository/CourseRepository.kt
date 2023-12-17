@@ -1,7 +1,5 @@
 package com.raveendra.finalproject_binar.data.network.api.repository
 
-import com.raveendra.finalproject_binar.utils.ResultWrapper
-import com.raveendra.finalproject_binar.utils.proceedFlow
 import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSource
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
@@ -12,12 +10,15 @@ import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
+import com.raveendra.finalproject_binar.domain.ProfileDomain
 import com.raveendra.finalproject_binar.domain.RegisterDomain
-import com.raveendra.finalproject_binar.domain.StatusMessageDomain
+import com.raveendra.finalproject_binar.domain.TransactionDomain
+import com.raveendra.finalproject_binar.utils.ResultWrapper
+import com.raveendra.finalproject_binar.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
-    suspend fun getCourse(category: String? = null, courseType: String?= null): Flow<ResultWrapper<List<CourseDomain>>>
+    suspend fun getCourse(category: Int? = null, courseType: String?= null): Flow<ResultWrapper<List<CourseDomain>>>
 
     suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>>
 
@@ -29,12 +30,16 @@ interface CourseRepository {
     suspend fun postVerifyOtp(
         userId: Int,
         verifyOtpRequest: VerifyOtpRequest
-    ): Flow<ResultWrapper<StatusMessageDomain>>
+    ): Flow<ResultWrapper<LoginDomain>>
+
+    suspend fun getProfile(): Flow<ResultWrapper<ProfileDomain>>
+
+    suspend fun postTransaction(courseId: Int): Flow<ResultWrapper<TransactionDomain>>
 }
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
 
-    override suspend fun getCourse(category: String?, courseType: String?): Flow<ResultWrapper<List<CourseDomain>>> {
+    override suspend fun getCourse(category: Int?, courseType: String?): Flow<ResultWrapper<List<CourseDomain>>> {
         return proceedFlow { dataSource.getCourse(category, courseType).data?.toDomain().orEmpty() }
     }
 
@@ -63,9 +68,21 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
     override suspend fun postVerifyOtp(
         userId: Int,
         verifyOtpRequest: VerifyOtpRequest
-    ): Flow<ResultWrapper<StatusMessageDomain>> {
+    ): Flow<ResultWrapper<LoginDomain>> {
         return proceedFlow {
             dataSource.postVerifyOtp(userId,verifyOtpRequest).toDomain()
+        }
+    }
+
+    override suspend fun getProfile(): Flow<ResultWrapper<ProfileDomain>> {
+        return proceedFlow {
+            dataSource.getProfile().toDomain()
+        }
+    }
+
+    override suspend fun postTransaction(courseId: Int): Flow<ResultWrapper<TransactionDomain>> {
+        return proceedFlow {
+            dataSource.postTransaction(courseId).toDomain()
         }
     }
 

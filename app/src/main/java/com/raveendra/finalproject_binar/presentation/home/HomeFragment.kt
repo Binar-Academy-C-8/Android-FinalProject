@@ -1,31 +1,50 @@
 package com.raveendra.finalproject_binar.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
+import com.raveendra.finalproject_binar.domain.CategoryDomain
+import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
+import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryActivity
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
 
     private val categoryAdapter: CategoryAdapter by lazy {
         CategoryAdapter {
-            viewModel.getCourses(it.categoryName)
+            viewModel.getCourses(it.id)
         }
     }
 
     private val popularCourseAdapter: AdapterPopularCourse by lazy {
-        AdapterPopularCourse {
-        }
+        AdapterPopularCourse(
+            itemClick = {
+                startActivity(
+                    Intent(
+                        requireContext(),
+                        DetailCourseActivity::class.java
+                    )
+                )
+            },
+            buttonClick = {
+                it.id?.let { id ->
+                    PaymentSummaryActivity.navigate(
+                        requireContext(),
+                        id
+                    )
+                }
+            })
     }
 
 
@@ -50,7 +69,19 @@ class HomeFragment  : BaseFragment<FragmentHomeBinding>() {
                     isVisible = true
                     adapter = categoryAdapter
                 }
-                it.payload?.let { data -> categoryAdapter.setData(data) }
+                it.payload?.let { data ->
+                    val allData = data.toMutableList()
+                    allData.add(
+                        0, CategoryDomain(
+                            categoryName = "Show All",
+                            createdAt = "",
+                            id = 0,
+                            image = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_show_all.png",
+                            updatedAt = ""
+                        )
+                    )
+                    categoryAdapter.setData(allData)
+                }
                 categoryAdapter.refreshList()
             }, doOnLoading = {
                 binding.shimmerView.startShimmer()

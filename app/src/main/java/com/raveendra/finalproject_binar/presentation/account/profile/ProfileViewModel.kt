@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.account
+package com.raveendra.finalproject_binar.presentation.account.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,8 +10,7 @@ import com.raveendra.finalproject_binar.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AccountViewModel(private val repository: CourseRepository) : ViewModel() {
-
+class ProfileViewModel(private val repository: CourseRepository) : ViewModel() {
     private val _resultProfile = MutableLiveData<ResultWrapper<ProfileDomain>>()
     val resultProfile: LiveData<ResultWrapper<ProfileDomain>>
         get() = _resultProfile

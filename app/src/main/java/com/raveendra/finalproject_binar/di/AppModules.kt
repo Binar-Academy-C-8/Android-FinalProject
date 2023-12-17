@@ -16,12 +16,16 @@ import com.raveendra.finalproject_binar.data.network.api.service.CourseService
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
+import com.raveendra.finalproject_binar.presentation.account.AccountViewModel
 import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
+import com.raveendra.finalproject_binar.presentation.account.profile.ProfileViewModel
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseViewModel
+import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel
+import com.raveendra.finalproject_binar.presentation.payment.payment_webview.PaymentWebViewViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -61,6 +65,10 @@ object AppModules {
         viewModelOf(::RegisterViewModel)
         viewModelOf(::OtpViewModel)
         viewModelOf(::SeeAllPopularCourseViewModel)
+        viewModelOf(::PaymentSummaryViewModel)
+        viewModelOf(::PaymentWebViewViewModel)
+        viewModelOf(::ProfileViewModel)
+        viewModelOf(::AccountViewModel)
     }
 
     val modules = listOf(

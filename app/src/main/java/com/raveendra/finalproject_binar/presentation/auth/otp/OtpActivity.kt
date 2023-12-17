@@ -8,16 +8,18 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
-import com.raveendra.finalproject_binar.databinding.ActivityOtpBinding
-import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
-import com.raveendra.finalproject_binar.utils.proceedWhen
+import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
-import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
+import com.raveendra.finalproject_binar.databinding.ActivityOtpBinding
+import com.raveendra.finalproject_binar.presentation.MainActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
+import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
@@ -48,6 +50,8 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
             )
         }
     }
+
+    private val preferences: PreferenceManager by inject()
 
     private val emailExtra by lazy {
         intent.getStringExtra(EXTRA_EMAIL) ?: "-"
@@ -141,10 +145,9 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
         lifecycleScope.launch {
             viewModel.verifyOtpResult.collect {
                 it.proceedWhen(
-                    doOnSuccess = {
-                        LoginActivity.navigate(this@OtpActivity)
-                        //TODO sementara lempar ke login dulu nunggu balikan token waktu verify
-//                        MainActivity.navigateWithFlag(this@OtpActivity)
+                    doOnSuccess = { result ->
+                        preferences.appToken = result.payload?.data?.token.toString()
+                        MainActivity.navigateWithFlag(this@OtpActivity)
                     },
                     doOnError = { error ->
                         if(error.exception is ApiException){

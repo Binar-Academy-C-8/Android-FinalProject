@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.auth.login
+package com.raveendra.finalproject_binar.presentation.account.change_password
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: CourseRepository) : ViewModel() {
+class ChangePasswordViewModel(private val repository: CourseRepository) : ViewModel() {
     private val _loginResult = MutableSharedFlow<ResultWrapper<LoginDomain>>()
     val loginResult: MutableSharedFlow<ResultWrapper<LoginDomain>>
         get() = _loginResult

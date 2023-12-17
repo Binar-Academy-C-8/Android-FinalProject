@@ -72,7 +72,7 @@
     <string name="tv_desc_title_onboarding">Belajar</string>
     <string name="text_have_account">Sudah punya akun? Masuk di sini</string>
     <string name="text_account">Akun</string>
-    <string name="text_my_profile">Profile Saya</string>
+    <string name="text_my_profile">Ubah Profile</string>
     <string name="text_change_password">Ubah Password</string>
     <string name="text_payment_history">Riwayat Pembayaran</string>
     <string name="text_log_out">Keluar</string>
@@ -95,5 +95,13 @@
     <string name="module_course">Modul</string>
     <string name="duration_course">Menit</string>
 
+
     <string name="label_error_no_internet">Koneksi bermasalah, silahkan coba lagi nanti</string>
+
+    <string name="label_pay">Bayar</string>
+    <string name="label_free">Gratis</string>
+
+    <string name="label_enter_old_password">Masukkan Password Lama</string>
+    <string name="label_enter_new_password">Masukkan Password Baru</string>
+    <string name="label_repeat_new_password">Ulangi Password Baru</string>
 </resources>
