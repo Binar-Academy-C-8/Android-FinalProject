@@ -40,16 +40,18 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
         viewModel.course.observe(viewLifecycleOwner){
             it.proceedWhen (
                 doOnSuccess = {
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = true
-                    binding.layoutStateCategory.pbLoading.isVisible = false
                     binding.layoutStateCategory.tvError.isVisible = false
                     it.payload?.let {
                         adapterCourse.setData(it)
                     }
                 },
                 doOnLoading = {
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = false
-                    binding.layoutStateCategory.pbLoading.isVisible = true
                     binding.layoutStateCategory.tvError.isVisible = false
                 },
                 doOnError = {
