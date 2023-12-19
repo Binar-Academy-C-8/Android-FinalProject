@@ -13,6 +13,8 @@ import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
+import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 
 interface CourseDataSource {
 
@@ -27,6 +29,12 @@ interface CourseDataSource {
     ): LoginResponse
     suspend fun getProfile(): ProfileResponse
     suspend fun postTransaction(courseId: Int): TransactionResponse
+
+    suspend fun getCourseById(
+        courseId: Int
+    ): CourseApiResponseNew
+
+
 }
 
 class CourseDataSourceImpl(
@@ -59,6 +67,12 @@ class CourseDataSourceImpl(
     ): LoginResponse {
         return service.postVerifyOtp(userId,verifyOtpRequest)
     }
+
+    override suspend fun getCourseById(courseId: Int): CourseApiResponseNew {
+        return service.getCourseById(courseId)
+    }
+
+
 
     override suspend fun getProfile(): ProfileResponse {
         return service.getProfile()

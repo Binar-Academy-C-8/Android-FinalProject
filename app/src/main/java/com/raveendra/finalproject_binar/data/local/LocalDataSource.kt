@@ -16,8 +16,8 @@ class LocalDataSourceimpl() : LocalDataSource {
         return listOf(
             SectionedData(
                 "Beginner", listOf(
-                    ItemVideos("UI/UX", "t0aCoqXKFOU"),
-                    ItemVideos("Web development", "kD0en6bbJPI"),
+                    ItemVideos("UI/UX", "https://www.youtube.com/watch?v=UTrXsVBrohg"),
+                    ItemVideos("Web development", "https://youtu.be/ixOd42SEUF0"),
                 )
             ),
             SectionedData(

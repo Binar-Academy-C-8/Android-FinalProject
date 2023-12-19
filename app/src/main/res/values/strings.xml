@@ -104,4 +104,8 @@
     <string name="label_enter_old_password">Masukkan Password Lama</string>
     <string name="label_enter_new_password">Masukkan Password Baru</string>
     <string name="label_repeat_new_password">Ulangi Password Baru</string>
+    <string name="about_class">About Class</string>
+    <string name="intended_for">Intended For</string>
+    <string name="kelas_ini_ditujukan_untuk">Kelas ini ditujukan Untuk</string>
+    <string name="about_course">About Course</string>
 </resources>

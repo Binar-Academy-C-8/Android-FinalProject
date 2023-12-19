@@ -14,6 +14,7 @@ import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -61,10 +62,19 @@ interface CourseService {
     ): TransactionResponse
 
 
+    @GET("course/{id}")
+    suspend fun getCourseById(
+        @Path("id") courseId: Int
+    ): CourseApiResponseNew
+
+
     companion object {
 
         @JvmStatic
-        operator fun invoke(chucker: ChuckerInterceptor, preferenceManager: PreferenceManager,): CourseService {
+        operator fun invoke(
+            chucker: ChuckerInterceptor,
+            preferenceManager: PreferenceManager,
+        ): CourseService {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(chucker)
                 .addInterceptor { chain ->
