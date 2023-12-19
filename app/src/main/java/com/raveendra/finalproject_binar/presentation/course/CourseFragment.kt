@@ -14,12 +14,12 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CourseFragment: BaseFragment<FragmentCourseBinding>() {
+class CourseFragment : BaseFragment<FragmentCourseBinding>() {
 
     private val viewModel: CourseViewModel by viewModel()
 
     private val adapterCourse: CourseAdapter by lazy {
-        CourseAdapter{ course: CourseDomain ->
+        CourseAdapter { course: CourseDomain ->
 
         }
     }
@@ -35,11 +35,14 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
     }
 
     private fun observeData() {
-        viewModel.course.observe(viewLifecycleOwner){
-            it.proceedWhen (
+        viewModel.course.observe(viewLifecycleOwner) {
+            it.proceedWhen(
                 doOnSuccess = {
-                    binding.shimmerView.startShimmer()
+                    binding.chipGroupFilter.isVisible = true
+                    binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
+                    binding.courseChipShimmer.isVisible = false
+                    binding.courseChipShimmer.stopShimmer()
                     binding.rvList.isVisible = true
                     binding.layoutStateCategory.tvError.isVisible = false
                     it.payload?.let {
@@ -47,15 +50,23 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
                     }
                 },
                 doOnLoading = {
-                    binding.shimmerView.stopShimmer()
-                    binding.shimmerView.isVisible = false
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = true
+                    binding.courseChipShimmer.isVisible = true
+                    binding.courseChipShimmer.startShimmer()
+                    binding.chipGroupFilter.isVisible = false
                     binding.rvList.isVisible = false
                     binding.layoutStateCategory.tvError.isVisible = false
                 },
+                doOnEmpty = {
+                    binding.layoutStateCategory.ivNotFound.isVisible = true
+                    binding.chipGroupFilter.isVisible = true
+                },
                 doOnError = {
                     binding.rvList.isVisible = false
+                    binding.chipGroupFilter.isVisible = false
                     binding.layoutStateCategory.tvError.error
-                        it.exception?.message.toString()
+                    it.exception?.message.toString()
                     Toast.makeText(
                         requireContext(),
                         it.exception?.message.toString(),
