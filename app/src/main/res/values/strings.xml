@@ -97,6 +97,7 @@
 
 
     <string name="label_error_no_internet">Koneksi bermasalah, silahkan coba lagi nanti</string>
+    <string name="text_rupiah">Rp</string>
 
     <string name="label_pay">Bayar</string>
     <string name="label_free">Gratis</string>
