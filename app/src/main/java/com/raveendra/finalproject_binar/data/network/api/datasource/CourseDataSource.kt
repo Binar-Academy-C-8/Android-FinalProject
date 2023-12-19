@@ -13,6 +13,8 @@ import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
+import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.UserTransactionResponse
 import com.raveendra.finalproject_binar.domain.UserTransactionDomain

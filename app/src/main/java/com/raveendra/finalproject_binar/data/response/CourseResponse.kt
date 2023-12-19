@@ -42,7 +42,6 @@ data class CourseResponse(
     @SerializedName("rating")
     val ratingCourse: Double
 )
-
 fun CourseResponse.toDomain() = CourseDomain(
     aboutCourse = this.aboutCourse,
     category = this.category,
