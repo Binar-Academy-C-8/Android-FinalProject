@@ -40,7 +40,7 @@ data class CourseResponse(
     @SerializedName("userId")
     val userId: Int?,
     @SerializedName("rating")
-    val ratingCourse: Double
+    val ratingCourse: Double,
 )
 fun CourseResponse.toDomain() = CourseDomain(
     aboutCourse = this.aboutCourse,
