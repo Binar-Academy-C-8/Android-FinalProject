@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.raveendra.finalproject_binar.utils.base.BaseFragment
-import com.raveendra.finalproject_binar.utils.proceedWhen
-import com.raveendra.finalproject_binar.data.network.api.service.dummydatavideos.ItemVideos
 import com.raveendra.finalproject_binar.databinding.FragmentListClassBinding
 import com.raveendra.finalproject_binar.utils.DataItem
 import com.raveendra.finalproject_binar.utils.HeaderItem
+import com.raveendra.finalproject_binar.utils.base.BaseFragment
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class ListClassFragment : BaseFragment<FragmentListClassBinding>() {
 
@@ -35,40 +33,29 @@ class ListClassFragment : BaseFragment<FragmentListClassBinding>() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = adapterGropie
         }
-        viewModel.listVideos.observe(viewLifecycleOwner) {
+
+        viewModel.detailData.observe(viewLifecycleOwner) {
             it.proceedWhen(
-                doOnSuccess = { succes ->
-                    val sectionDataList = succes.payload
-                    val sectionList: List<Section> = sectionDataList?.map { sectionedData ->
-                        val sectionName = sectionedData.name
-                        val itemVideoList = sectionedData.data
-
-                        val section = Section()
-                        section.setHeader(HeaderItem(sectionName) { data ->
-                            Toast.makeText(requireContext(), "${data}", Toast.LENGTH_SHORT).show()
-                        })
-
-                        val listVideos = itemVideoList.map { itemVideo ->
-                            DataItem(itemVideo) { data ->
-                                onItemClick(itemVideo)
+                doOnSuccess = { success ->
+                    val sectionName = success.payload?.data?.chapters
+                    val section = Section()
+                    sectionName?.forEach { chapter ->
+                        section.setHeader(HeaderItem(chapter.chapterTitle))
+                        val contentList = chapter.contents.map { contentDomain ->
+                            DataItem(contentDomain) { contentUrl ->
+                                viewModel.getContentUrl(contentUrl.contentUrl)
                             }
                         }
-
-
-                        section.addAll(listVideos)
-                        section
-                    } ?: emptyList()
-                    adapterGropie.addAll(sectionList)
+                        section.addAll(contentList)
+                    }
+                    adapterGropie.add(section)
+                },
+                doOnError = { error ->
+                    error.message.toString()
                 }
             )
         }
-        viewModel.getvideos()
-
+        viewModel.getVideos(1)
     }
-
-    private fun onItemClick(itemVideo:ItemVideos) {
-        val videoTitle = itemVideo.titleVideos
-        viewModel.getVideoUrl(videoTitle)
-    }
-
 }
+

@@ -46,6 +46,7 @@
             android:name=".presentation.MainActivity"
             android:exported="false" />
         <activity
+            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
             android:name=".presentation.detailcourse.DetailCourseActivity"
             android:exported="true" />
         <activity

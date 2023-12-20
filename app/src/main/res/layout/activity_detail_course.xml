@@ -42,8 +42,10 @@
         android:id="@+id/player_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:videoId="ixOd42SEUF0"
+        app:autoPlay="true"
+        app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_item" />
 
@@ -65,31 +67,15 @@
         android:id="@+id/viewPager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/dimen_10_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabs_layout" />
 
     <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/player_view_fullscreen"
+        android:id="@+id/fullScreenView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_item" />
+        android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/enter_fullscreen_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/toggle_full_screen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,9 +5,11 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
+import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
 import com.raveendra.finalproject_binar.domain.ProfileDomain
@@ -35,6 +37,10 @@ interface CourseRepository {
     suspend fun getProfile(): Flow<ResultWrapper<ProfileDomain>>
 
     suspend fun postTransaction(courseId: Int): Flow<ResultWrapper<TransactionDomain>>
+
+    suspend fun getCourseById(
+        courseId: Int
+    ): Flow<ResultWrapper<DetailResponseCourseDomain>>
 }
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
@@ -70,7 +76,7 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
         verifyOtpRequest: VerifyOtpRequest
     ): Flow<ResultWrapper<LoginDomain>> {
         return proceedFlow {
-            dataSource.postVerifyOtp(userId,verifyOtpRequest).toDomain()
+            dataSource.postVerifyOtp(userId, verifyOtpRequest).toDomain()
         }
     }
 
@@ -83,6 +89,12 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
     override suspend fun postTransaction(courseId: Int): Flow<ResultWrapper<TransactionDomain>> {
         return proceedFlow {
             dataSource.postTransaction(courseId).toDomain()
+        }
+    }
+
+    override suspend fun getCourseById(courseId: Int): Flow<ResultWrapper<DetailResponseCourseDomain>> {
+        return proceedFlow {
+            dataSource.getCourseById(courseId).toDomain()
         }
     }
 
