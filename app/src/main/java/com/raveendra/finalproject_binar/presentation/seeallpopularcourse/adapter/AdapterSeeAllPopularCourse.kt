@@ -9,8 +9,10 @@ import coil.load
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemSeeAllPopulerCourseBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
+import com.raveendra.finalproject_binar.utils.toIdrCurrency
 
 class AdapterSeeAllPopularCourse(private val itemClick: (CourseDomain) -> Unit,private val buttonClick: (CourseDomain) -> Unit): RecyclerView.Adapter<SeeAllPopularCourseViewHolder>(){
+
     private val differ = AsyncListDiffer(this, object : DiffUtil. ItemCallback<CourseDomain>(){
         override fun areItemsTheSame(oldItem: CourseDomain, newItem: CourseDomain): Boolean {
             return oldItem.id == newItem.id
@@ -56,7 +58,8 @@ class SeeAllPopularCourseViewHolder(
         binding.root.setOnClickListener {
             itemClick.invoke(item)
         }
-        binding.btnAddToCart.setOnClickListener {
+        binding.clAddToCart.setOnClickListener {
+            if (item.coursePrice == 0) return@setOnClickListener
             buttonClick.invoke(item)
         }
         binding.ivPopularCourse.load(item.image){
@@ -64,14 +67,13 @@ class SeeAllPopularCourseViewHolder(
             error(R.color.primary_dark_blue_06)
             crossfade(true)
         }
-        binding.tvNamePopularCourse.text = item.courseName
+        binding.tvNamePopularCourse.text = item.category
         binding.tvRating.text = item.ratingCourse.toString()
-        binding.tvTitle.text = item.aboutCourse
+        binding.tvTitle.text = item.courseName
         binding.tvAuthor.text = item.courseBy
         binding.tvLevel.text = item.courseLevel
-        binding.tvDuration.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(
-            R.string.duration_course)}"
+        binding.tvDuration.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(R.string.duration_course)}"
         binding.tvModule.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
-        binding.btnAddToCart.text =  binding.root.context.getString(R.string.label_buy, item.coursePrice.toString())
+        binding.tvBuy.text =  if (item.coursePrice == 0) binding.root.context.getString(R.string.label_free) else binding.root.context.getString(R.string.label_buy, item.coursePrice?.toIdrCurrency())
     }
 }

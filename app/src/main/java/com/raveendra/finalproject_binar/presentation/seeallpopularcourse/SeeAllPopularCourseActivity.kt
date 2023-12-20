@@ -5,6 +5,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.databinding.ActivitySeeAllPopularCourseBinding
+import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
+import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryActivity
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.adapter.AdapterSeeAllPopularCourse
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
@@ -34,17 +36,27 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
 
     private val seeAllPopularCoursesAdapter: AdapterSeeAllPopularCourse by lazy {
         AdapterSeeAllPopularCourse(itemClick = {
-
+            startActivity(
+                Intent(
+                    this,
+                    DetailCourseActivity::class.java
+                )
+            )
         }, buttonClick = {
-
+            it.id?.let { id ->
+                PaymentSummaryActivity.navigate(
+                    this,
+                    id
+                )
+            }
         })
     }
 
     override fun setupObservers() {
         viewModel.course.observe(this) {
             it.proceedWhen(doOnSuccess = {
-                binding.layoutStateSeeAllPopularCourse.root.isVisible = false
-                binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
+                binding.shimmerViewAllCourse.stopShimmer()
+                binding.shimmerViewAllCourse.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
                 binding.rvSeeAllPopularCourse.apply {
                     isVisible = true
@@ -55,15 +67,20 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
                 it.payload?.let { data -> seeAllPopularCoursesAdapter.setData(data) }
                 seeAllPopularCoursesAdapter.refreshList()
             }, doOnLoading = {
-                binding.layoutStateSeeAllPopularCourse.root.isVisible = true
-                binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = true
-                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
+                binding.shimmerViewAllCourse.startShimmer()
+                binding.shimmerViewAllCourse.isVisible = true
                 binding.rvSeeAllPopularCourse.isVisible = false
             }, doOnError = {
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.tvError.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.tvError.text = it.exception?.message.orEmpty()
+                binding.rvSeeAllPopularCourse.isVisible = false
+            }, doOnEmpty = {
+                binding.layoutStateSeeAllPopularCourse.root.isVisible = true
+                binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
+                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = true
+                binding.layoutStateSeeAllPopularCourse.tvError.text = "Course not found"
                 binding.rvSeeAllPopularCourse.isVisible = false
             })
         }

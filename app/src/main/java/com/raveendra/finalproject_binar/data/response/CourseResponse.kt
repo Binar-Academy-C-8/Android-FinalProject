@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class CourseResponse(
     @SerializedName("aboutCourse")
     val aboutCourse: String?,
-    @SerializedName("Category")
+    @SerializedName("category")
     val category: String?,
     @SerializedName("categoryId")
     val categoryId: Int?,
