@@ -16,12 +16,12 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CourseFragment: BaseFragment<FragmentCourseBinding>() {
+class CourseFragment : BaseFragment<FragmentCourseBinding>() {
 
     private val viewModel: CourseViewModel by viewModel()
 
     private val adapterCourse: CourseAdapter by lazy {
-        CourseAdapter{ course: CourseDomain ->
+        CourseAdapter { course: CourseDomain ->
 
         }
     }
@@ -37,10 +37,10 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
     }
 
     private fun observeData() {
-        viewModel.course.observe(viewLifecycleOwner){
-            it.proceedWhen (
+        viewModel.course.observe(viewLifecycleOwner) {
+            it.proceedWhen(
                 doOnSuccess = {
-                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = true
                     binding.layoutStateCourse.tvError.isVisible = false
@@ -50,8 +50,8 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
                     }
                 },
                 doOnLoading = {
-                    binding.shimmerView.stopShimmer()
-                    binding.shimmerView.isVisible = false
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = true
                     binding.rvList.isVisible = false
                     binding.layoutStateCourse.tvError.isVisible = false
                     binding.layoutStateCourse.ivEmpty.isVisible = false
@@ -61,7 +61,7 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
                     binding.layoutStateCourse.pbLoading.isVisible = false
                     binding.layoutStateCourse.ivEmpty.isVisible = true
                     binding.layoutStateCourse.tvError.error
-                        it.exception?.message.toString()
+                    it.exception?.message.toString()
                     Toast.makeText(
                         requireContext(),
                         it.exception?.message.toString(),
