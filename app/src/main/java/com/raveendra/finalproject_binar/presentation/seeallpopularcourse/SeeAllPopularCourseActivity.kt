@@ -58,6 +58,7 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
                 binding.shimmerViewAllCourse.stopShimmer()
                 binding.shimmerViewAllCourse.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
+                binding.layoutStateSeeAllPopularCourse.ivNotFound.isVisible = false
                 binding.rvSeeAllPopularCourse.apply {
                     isVisible = true
                     adapter = seeAllPopularCoursesAdapter
@@ -71,16 +72,19 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
                 binding.shimmerViewAllCourse.isVisible = true
                 binding.rvSeeAllPopularCourse.isVisible = false
             }, doOnError = {
+                binding.shimmerViewAllCourse.stopShimmer()
+                binding.shimmerViewAllCourse.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
-                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = true
-                binding.layoutStateSeeAllPopularCourse.tvError.text = it.exception?.message.orEmpty()
+                binding.layoutStateSeeAllPopularCourse.ivNotFound.isVisible = true
                 binding.rvSeeAllPopularCourse.isVisible = false
             }, doOnEmpty = {
+                binding.shimmerViewAllCourse.stopShimmer()
+                binding.shimmerViewAllCourse.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
-                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = true
-                binding.layoutStateSeeAllPopularCourse.tvError.text = "Course not found"
+                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
+                binding.layoutStateSeeAllPopularCourse.ivNotFound.isVisible = true
                 binding.rvSeeAllPopularCourse.isVisible = false
             })
         }

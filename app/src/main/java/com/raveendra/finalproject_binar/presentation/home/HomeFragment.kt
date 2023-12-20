@@ -108,7 +108,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             it.proceedWhen(doOnSuccess = {
                 binding.shimmerViewCourse.stopShimmer()
                 binding.shimmerViewCourse.isVisible = false
-                binding.layoutStatePopularCourse.root.isVisible = false
+                binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.tvError.isVisible = false
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStatePopularCourse.ivNotFound.isVisible = false
