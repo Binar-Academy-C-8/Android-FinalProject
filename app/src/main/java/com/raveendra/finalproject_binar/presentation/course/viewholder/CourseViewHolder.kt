@@ -16,14 +16,14 @@ class CourseViewHolder(
             crossfade(true)
         }
         binding.tvTitle.text = item.courseName
-        binding.tvType  .text = item.courseType
+        binding.tvType.text = item.courseType
         binding.tvCategory.text = item.courseName
         binding.tvAuthor.text = item.courseBy
         binding.tvRating.text = "4.8"
         binding.tvLevel.text = item.courseLevel
-        binding.tvModule.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(
-            R.string.duration_course)}"
+        binding.tvModule.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(R.string.duration_course)}"
         binding.tvDuration.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
+        binding.tvPrice.text = "${binding.root.context.getString(R.string.text_rupiah)} ${item.coursePrice}"
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
         }
