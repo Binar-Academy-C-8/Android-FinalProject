@@ -36,7 +36,7 @@
             android:text="@string/txt_oops"
             android:textAlignment="center"
             android:textSize="34sp"
-            android:textColor="@color/primary_dark_blue_05"
+            android:textColor="@color/primary_dark_blue_06"
             android:textStyle="bold" />
 
         <ImageView
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="20dp"
-        android:backgroundTint="@color/primary_dark_blue_05"
+        android:backgroundTint="@color/primary_dark_blue_06"
         style="@style/TextBold16"
         android:paddingVertical="14dp"
         android:textColor="@color/white"

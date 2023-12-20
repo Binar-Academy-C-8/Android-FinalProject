@@ -40,7 +40,7 @@
                 android:layout_weight="2"
                 android:fontFamily="@font/poppins_medium"
                 tools:text="Promo"
-                android:textColor="@color/primary_dark_blue_05"
+                android:textColor="@color/primary_dark_blue_06"
                 android:textSize="15sp" />
 
             <TextView
