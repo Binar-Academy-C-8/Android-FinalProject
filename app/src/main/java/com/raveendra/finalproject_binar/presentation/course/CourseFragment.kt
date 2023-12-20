@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.raveendra.finalproject_binar.data.dummy.DummyCourseFreeImpl
+import com.raveendra.finalproject_binar.data.dummy.DummyCoursePremiumImpl
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
@@ -44,6 +46,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.courseChipShimmer.isVisible = false
                     binding.chipGroupFilter.isVisible = false
                     binding.rvList.isVisible = true
+                    binding.layoutStateCourse.root.isVisible = false
                     binding.layoutStateCourse.tvError.isVisible = false
                     binding.layoutStateCourse.ivEmpty.isVisible = false
                     it.payload?.let {
@@ -60,6 +63,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.rvList.isVisible = false
                     binding.chipGroupFilter.isVisible = false
                     binding.layoutStateCourse.root.isVisible = true
+                    binding.layoutStateCourse.root.isVisible = false
                     binding.layoutStateCourse.tvError.isVisible = false
                     binding.layoutStateCourse.ivEmpty.isVisible = false
                 },
@@ -83,6 +87,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.layoutStateCourse.tvError.error
                     it.exception?.message.toString()
                     it.exception?.message.toString()
+                    binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
                     binding.layoutStateCourse.ivEmpty.isVisible = true

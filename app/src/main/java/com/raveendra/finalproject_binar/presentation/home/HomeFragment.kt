@@ -88,6 +88,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }, doOnLoading = {
                 binding.shimmerView.startShimmer()
                 binding.shimmerView.isVisible = true
+                binding.layoutStatePopularCourse.root.isVisible = false
+                binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStateCategory.tvError.isVisible = false
                 binding.layoutStateCategory.ivEmpty.isVisible = false
                 binding.rvCategoryCourse.isVisible = false
@@ -95,6 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.shimmerView.stopShimmer()
                 binding.shimmerView.isVisible = false
                 binding.layoutStateCategory.root.isVisible = true
+                binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStateCategory.tvError.isVisible = true
                 binding.layoutStateCategory.ivEmpty.isVisible = false
                 binding.layoutStateCategory.tvError.text = "Category Tidak Tersedia"
@@ -149,12 +152,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         viewModel.getCourses()
     }
 
-    private fun setOnClickListener(){
-        binding.tvViewAll.setOnClickListener{
+    private fun setOnClickListener() {
+        binding.tvViewAll.setOnClickListener {
             SeeAllPopularCourseActivity.navigate(requireContext())
         }
     }
-
 
 
 }

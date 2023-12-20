@@ -24,6 +24,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:padding="6dp"
+            app:layout_constraintTop_toTopOf="parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_title"
                 android:layout_width="match_parent"
@@ -127,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:duration="800"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
