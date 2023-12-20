@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.layoutStateCategory.root.isVisible = false
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStateCategory.tvError.isVisible = false
-                binding.layoutStateCategory.ivEmpty.isVisible = false
+                binding.layoutStateCategory.ivNotFound.isVisible = false
                 binding.rvCategoryCourse.apply {
                     isVisible = true
                     adapter = categoryAdapter
@@ -91,7 +91,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.layoutStatePopularCourse.root.isVisible = false
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStateCategory.tvError.isVisible = false
-                binding.layoutStateCategory.ivEmpty.isVisible = false
+                binding.layoutStateCategory.ivNotFound.isVisible = false
                 binding.rvCategoryCourse.isVisible = false
             }, doOnError = {
                 binding.shimmerView.stopShimmer()
@@ -99,7 +99,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.layoutStateCategory.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
                 binding.layoutStateCategory.tvError.isVisible = true
-                binding.layoutStateCategory.ivEmpty.isVisible = false
+                binding.layoutStateCategory.ivNotFound.isVisible = false
                 binding.layoutStateCategory.tvError.text = "Category Tidak Tersedia"
                 binding.rvCategoryCourse.isVisible = false
             })
@@ -108,10 +108,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             it.proceedWhen(doOnSuccess = {
                 binding.shimmerViewCourse.stopShimmer()
                 binding.shimmerViewCourse.isVisible = false
-                binding.layoutStatePopularCourse.root.isVisible = true
+                binding.layoutStatePopularCourse.root.isVisible = false
                 binding.layoutStatePopularCourse.tvError.isVisible = false
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
-                binding.layoutStatePopularCourse.ivEmpty.isVisible = false
+                binding.layoutStatePopularCourse.ivNotFound.isVisible = false
                 binding.rvPopularCourse.apply {
                     isVisible = true
                     adapter = popularCourseAdapter
@@ -123,16 +123,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }, doOnLoading = {
                 binding.shimmerViewCourse.startShimmer()
                 binding.shimmerViewCourse.isVisible = true
-                binding.layoutStatePopularCourse.root.isVisible = true
+                binding.layoutStatePopularCourse.root.isVisible = false
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
-                binding.layoutStatePopularCourse.ivEmpty.isVisible = false
+                binding.layoutStatePopularCourse.ivNotFound.isVisible = false
                 binding.rvPopularCourse.isVisible = false
             }, doOnError = {
                 binding.shimmerViewCourse.stopShimmer()
                 binding.shimmerViewCourse.isVisible = false
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
-                binding.layoutStatePopularCourse.ivEmpty.isVisible = true
+                binding.layoutStatePopularCourse.ivNotFound.isVisible = true
                 /*binding.layoutStatePopularCourse.tvError.text = it.exception?.message.orEmpty()*/
                 binding.rvPopularCourse.isVisible = false
             }, doOnEmpty = {
@@ -140,7 +140,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.shimmerViewCourse.isVisible = false
                 binding.layoutStatePopularCourse.root.isVisible = true
                 binding.layoutStatePopularCourse.pbLoading.isVisible = false
-                binding.layoutStatePopularCourse.ivEmpty.isVisible = true
+                binding.layoutStatePopularCourse.ivNotFound.isVisible = true
                 /*binding.layoutStatePopularCourse.tvError.text = "Course not found"*/
                 binding.rvPopularCourse.isVisible = false
             })

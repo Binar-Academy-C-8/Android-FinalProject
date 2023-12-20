@@ -44,11 +44,11 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.shimmerView.isVisible = false
                     binding.courseChipShimmer.stopShimmer()
                     binding.courseChipShimmer.isVisible = false
-                    binding.chipGroupFilter.isVisible = false
+                    binding.chipGroupFilter.isVisible = true
                     binding.rvList.isVisible = true
                     binding.layoutStateCourse.root.isVisible = false
                     binding.layoutStateCourse.tvError.isVisible = false
-                    binding.layoutStateCourse.ivEmpty.isVisible = false
+                    binding.layoutStateCourse.ivNotFound.isVisible = false
                     it.payload?.let {
                         adapterCourse.setData(it)
                     }
@@ -56,41 +56,36 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                 doOnLoading = {
                     binding.shimmerView.startShimmer()
                     binding.shimmerView.isVisible = true
-                    binding.shimmerView.startShimmer()
-                    binding.shimmerView.isVisible = true
-                    binding.courseChipShimmer.isVisible = true
                     binding.courseChipShimmer.startShimmer()
+                    binding.courseChipShimmer.isVisible = true
                     binding.rvList.isVisible = false
                     binding.chipGroupFilter.isVisible = false
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.root.isVisible = false
                     binding.layoutStateCourse.tvError.isVisible = false
-                    binding.layoutStateCourse.ivEmpty.isVisible = false
+                    binding.layoutStateCourse.ivNotFound.isVisible = false
                 },
                 doOnEmpty = {
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = false
                     binding.courseChipShimmer.stopShimmer()
+                    binding.courseChipShimmer.isVisible = false
                     binding.chipGroupFilter.isVisible = false
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.ivNotFound.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
-                    binding.layoutStateCourse.ivEmpty.isVisible = true
                 },
                 doOnError = {
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
                     binding.courseChipShimmer.stopShimmer()
+                    binding.courseChipShimmer.isVisible = false
                     binding.chipGroupFilter.isVisible = false
                     binding.rvList.isVisible = false
-                    binding.layoutStateCourse.tvError.error
-                    it.exception?.message.toString()
-                    it.exception?.message.toString()
-                    binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
-                    binding.layoutStateCourse.ivEmpty.isVisible = true
+                    binding.layoutStateCourse.ivNotFound.isVisible = true
                     it.exception?.message.toString()
                     Toast.makeText(
                         requireContext(),
