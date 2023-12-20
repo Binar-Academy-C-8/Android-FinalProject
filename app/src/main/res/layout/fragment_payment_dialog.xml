@@ -35,7 +35,7 @@
             android:padding="12dp"
             android:text="@string/txt_selamat"
             android:textAlignment="center"
-            android:textColor="@color/primary_dark_blue_05"
+            android:textColor="@color/primary_dark_blue_06"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="20dp"
-        android:backgroundTint="@color/primary_dark_blue_05"
+        android:backgroundTint="@color/primary_dark_blue_06"
         android:paddingVertical="14dp"
         android:text="@string/txt_mulai_belajar"
         android:textColor="@color/white"
@@ -94,7 +94,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="@string/txt_kembali_ke_beranda"
         android:textAlignment="center"
-        android:textColor="@color/primary_dark_blue_05"
+        android:textColor="@color/primary_dark_blue_06"
         style="@style/TextMedium16"
         app:layout_constraintBottom_toBottomOf="parent" />
 

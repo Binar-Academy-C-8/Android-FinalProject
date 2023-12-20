@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_light_blue_05"
     tools:context=".presentation.course.CourseFragment">
 
     <LinearLayout
@@ -83,7 +82,7 @@
         </com.google.android.material.chip.ChipGroup>
 
         <include
-            android:id="@+id/layout_state_category"
+            android:id="@+id/layout_state_course"
             layout="@layout/common_layout_content_state"
             app:layout_constraintTop_toTopOf="@id/chip_group_filter"
             app:layout_constraintBottom_toBottomOf="parent"

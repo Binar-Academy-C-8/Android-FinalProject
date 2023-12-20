@@ -46,6 +46,7 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
+                binding.layoutStateSeeAllPopularCourse.ivEmpty.isVisible = false
                 binding.rvSeeAllPopularCourse.apply {
                     isVisible = true
                     adapter = seeAllPopularCoursesAdapter
@@ -58,12 +59,13 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
+                binding.layoutStateSeeAllPopularCourse.ivEmpty.isVisible = false
                 binding.rvSeeAllPopularCourse.isVisible = false
             }, doOnError = {
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
-                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = true
-                binding.layoutStateSeeAllPopularCourse.tvError.text = it.exception?.message.orEmpty()
+                binding.layoutStateSeeAllPopularCourse.ivEmpty.isVisible = true
+                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = false
                 binding.rvSeeAllPopularCourse.isVisible = false
             })
         }

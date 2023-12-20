@@ -43,7 +43,8 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
                     binding.shimmerView.startShimmer()
                     binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = true
-                    binding.layoutStateCategory.tvError.isVisible = false
+                    binding.layoutStateCourse.tvError.isVisible = false
+                    binding.layoutStateCourse.ivEmpty.isVisible = false
                     it.payload?.let {
                         adapterCourse.setData(it)
                     }
@@ -52,11 +53,14 @@ class CourseFragment: BaseFragment<FragmentCourseBinding>() {
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = false
-                    binding.layoutStateCategory.tvError.isVisible = false
+                    binding.layoutStateCourse.tvError.isVisible = false
+                    binding.layoutStateCourse.ivEmpty.isVisible = false
                 },
                 doOnError = {
                     binding.rvList.isVisible = false
-                    binding.layoutStateCategory.tvError.error
+                    binding.layoutStateCourse.pbLoading.isVisible = false
+                    binding.layoutStateCourse.ivEmpty.isVisible = true
+                    binding.layoutStateCourse.tvError.error
                         it.exception?.message.toString()
                     Toast.makeText(
                         requireContext(),

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/neutral_07"
     tools:context=".presentation.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -120,7 +119,7 @@
                         android:layout_gravity="center"
                         android:visibility="gone"
                         app:duration="1000"
-                        tools:visibility="visible">
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -179,7 +178,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/text_view_all"
-                        android:textColor="@color/primary_dark_blue_06"
+                        android:textColor="@color/primary_dark_blue_05"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@id/tv_popular_course"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +209,7 @@
                         android:layout_gravity="center"
                         android:visibility="gone"
                         app:duration="1000"
-                        tools:visibility="visible">
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"

@@ -164,10 +164,9 @@
 
             <Button
                 android:id="@+id/btn_add_to_cart"
-                style="@style/TextBold10"
+                style="@style/TextMedium12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:backgroundTint="@color/primary_dark_blue_03"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
