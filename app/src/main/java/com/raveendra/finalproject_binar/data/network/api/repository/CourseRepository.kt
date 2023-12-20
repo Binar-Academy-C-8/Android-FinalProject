@@ -17,7 +17,6 @@ import com.raveendra.finalproject_binar.domain.RegisterDomain
 import com.raveendra.finalproject_binar.domain.TransactionDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.utils.proceedFlow
-import com.raveendra.finalproject_binar.domain.StatusMessageDomain
 import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
@@ -38,7 +37,6 @@ interface CourseRepository {
     suspend fun getProfile(): Flow<ResultWrapper<ProfileDomain>>
 
     suspend fun postTransaction(courseId: Int): Flow<ResultWrapper<TransactionDomain>>
-    ): Flow<ResultWrapper<StatusMessageDomain>>
 
     suspend fun getCourseById(
         courseId: Int
