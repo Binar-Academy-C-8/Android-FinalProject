@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/neutral_07"
     tools:context=".presentation.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -120,6 +119,7 @@
                         android:layout_gravity="center"
                         android:visibility="gone"
                         app:duration="1000"
+                        android:layout_marginHorizontal="14dp"
                         tools:visibility="visible">
 
                         <LinearLayout
@@ -175,12 +175,11 @@
 
                     <TextView
                         android:id="@+id/tv_view_all"
-                        style="@style/TextMedium12"
+                        style="@style/TextBold14"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/text_view_all"
                         android:textColor="@color/primary_dark_blue_06"
-                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@id/tv_popular_course"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/tv_popular_course" />
@@ -210,6 +209,7 @@
                         android:layout_gravity="center"
                         android:visibility="gone"
                         app:duration="1000"
+                        android:layout_marginHorizontal="14dp"
                         tools:visibility="visible">
 
                         <LinearLayout
@@ -234,7 +234,8 @@
                         android:id="@+id/rv_popular_course"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
+                        android:paddingHorizontal="8dp"
+                        android:clipToPadding="false"
                         android:orientation="horizontal"
                         android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

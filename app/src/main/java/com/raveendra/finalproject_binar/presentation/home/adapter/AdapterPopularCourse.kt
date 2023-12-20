@@ -59,7 +59,7 @@ class PopularCourseViewHolder(
         binding.root.setOnClickListener {
             itemClick.invoke(item)
         }
-        binding.btnAddToCart.setOnClickListener {
+        binding.clAddToCart.setOnClickListener {
             if (item.coursePrice == 0) return@setOnClickListener
             buttonClick.invoke(item)
         }
@@ -68,13 +68,13 @@ class PopularCourseViewHolder(
             error(R.color.primary_dark_blue_06)
             crossfade(true)
         }
-        binding.tvNamePopularCourse.text = item.courseName
+        binding.tvNamePopularCourse.text = item.category
         binding.tvCourseRate.text = item.ratingCourse.toString()
-        binding.tvTitleCourse.text = item.aboutCourse
+        binding.tvTitleCourse.text = item.courseName
         binding.tvAuthorCourse.text = item.courseBy
         binding.tvLevelCourse.text = item.courseLevel
         binding.tvDurationCourse.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(R.string.duration_course)}"
         binding.tvModuleCourse.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
-        binding.btnAddToCart.text =  if (item.coursePrice == 0) binding.root.context.getString(R.string.label_free) else binding.root.context.getString(R.string.label_buy, item.coursePrice?.toIdrCurrency())
+        binding.tvBuy.text =  if (item.coursePrice == 0) binding.root.context.getString(R.string.label_free) else binding.root.context.getString(R.string.label_buy, item.coursePrice?.toIdrCurrency())
     }
 }
