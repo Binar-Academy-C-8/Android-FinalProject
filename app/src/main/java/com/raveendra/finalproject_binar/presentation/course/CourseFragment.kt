@@ -44,8 +44,6 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.courseChipShimmer.isVisible = false
                     binding.chipGroupFilter.isVisible = false
                     binding.rvList.isVisible = true
-                    binding.chipGroupFilter.isVisible = true
-                    binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.tvError.isVisible = false
                     binding.layoutStateCourse.ivEmpty.isVisible = false
                     it.payload?.let {
@@ -53,6 +51,8 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     }
                 },
                 doOnLoading = {
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = true
                     binding.shimmerView.startShimmer()
                     binding.shimmerView.isVisible = true
                     binding.courseChipShimmer.isVisible = true
@@ -81,6 +81,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.chipGroupFilter.isVisible = false
                     binding.rvList.isVisible = false
                     binding.layoutStateCourse.tvError.error
+                    it.exception?.message.toString()
                     it.exception?.message.toString()
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
