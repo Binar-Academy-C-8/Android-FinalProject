@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_light_blue_05"
     tools:context=".presentation.account.AccountFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +53,8 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars"/>
 
                     <TextView
                         android:id="@+id/tvName"
@@ -103,7 +103,7 @@
 
                     <ImageView
                         android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_height="match_parent"
                         android:src="@drawable/ic_profile"
                         tools:ignore="ContentDescription" />
 

@@ -102,7 +102,7 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@id/cl_popular_course"
                     app:layout_constraintTop_toBottomOf="@id/tv_category"
-                    tools:visibility="visible" />
+                    tools:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/ll_category_course"
@@ -117,8 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:visibility="gone"
-                        app:duration="1000"
+                        app:duration="500"
                         android:layout_marginHorizontal="14dp"
                         tools:visibility="visible">
 
@@ -207,10 +206,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:visibility="gone"
-                        app:duration="1000"
+                        app:duration="500"
                         android:layout_marginHorizontal="14dp"
-                        tools:visibility="visible">
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"

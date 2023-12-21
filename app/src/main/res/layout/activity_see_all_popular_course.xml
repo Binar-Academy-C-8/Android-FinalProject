@@ -31,6 +31,7 @@
             android:id="@+id/tv_title_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginHorizontal="18dp"
             android:text="@string/text_popular_course"
             style="@style/TextBold20"/>
