@@ -70,7 +70,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            params.setMargins(8, 0, 8, 0)
+            params.setMargins(16, 0, 16, 0)
             indicatorLayout.addView(dot, params)
         }
 

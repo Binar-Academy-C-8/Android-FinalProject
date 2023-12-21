@@ -14,13 +14,13 @@ class OnBoardingPagerAdapter(
 ) : RecyclerView.Adapter<OnBoardingPagerAdapter.ViewHolder>() {
 
     private val onBoardingItems = listOf(
-        Pair("dari Pengalaman Terbaik!", R.drawable.ic_onboarding_1),
-        Pair("dari Praktisi Terbaik!", R.drawable.ic_onboarding_2),
-        Pair("darimana saja!", R.drawable.ic_onboarding_3)
+        Pair("Menggali Ilmu dari \n Pengalaman Paling Baik!", R.drawable.ic_onboarding_1),
+        Pair("Belajar dari ahli \n yang berpengalaman", R.drawable.ic_onboarding_2),
+        Pair("Pelajari lebih,\n Belajar lebih cepat!", R.drawable.ic_onboarding_3)
     )
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.tv_tagline_onboarding_2)
+        val textView: TextView = itemView.findViewById(R.id.tv_tagline_onboarding)
         val imageView: ImageView = itemView.findViewById(R.id.iv_on_boarding)
     }
 
