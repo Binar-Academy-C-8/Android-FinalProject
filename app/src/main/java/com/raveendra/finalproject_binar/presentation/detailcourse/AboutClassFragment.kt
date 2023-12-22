@@ -36,6 +36,5 @@ class AboutClassFragment : BaseFragment<FragmentAboutClassBinding>() {
                 }
             )
         }
-        viewModel.getVideos(1)
     }
 }

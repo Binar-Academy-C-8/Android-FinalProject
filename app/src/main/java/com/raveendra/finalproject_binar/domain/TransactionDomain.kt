@@ -6,7 +6,7 @@ data class TransactionDomain(
     val email: String,
     val status: String,
     val token: String,
-    val url: String
+
 )
 data class CreatedTransactionDataDomain(
     val courseId: Int,
@@ -20,5 +20,6 @@ data class CreatedTransactionDataDomain(
     val price: Int,
     val totalPrice: Int,
     val updatedAt: String,
-    val userId: Int
+    val userId: Int,
+    val linkPayment: String
 )

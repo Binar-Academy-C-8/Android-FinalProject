@@ -37,25 +37,42 @@ class ListClassFragment : BaseFragment<FragmentListClassBinding>() {
         viewModel.detailData.observe(viewLifecycleOwner) {
             it.proceedWhen(
                 doOnSuccess = { success ->
-                    val sectionName = success.payload?.data?.chapters
-                    val section = Section()
-                    sectionName?.forEach { chapter ->
-                        section.setHeader(HeaderItem(chapter.chapterTitle))
-                        val contentList = chapter.contents.map { contentDomain ->
-                            DataItem(contentDomain) { contentUrl ->
-                                viewModel.getContentUrl(contentUrl.contentUrl)
+                    val section = success.payload?.data?.chapters?.map {chapters ->
+                        val section = Section()
+                        section.setHeader(HeaderItem(chapters?.chapterTitle.orEmpty()))
+
+                        val dataSection = chapters?.contents?.map { data ->
+                            data?.let { contents ->
+                                DataItem(contents) { data ->
+                                    viewModel.getContentUrl(data.contentUrl)
+                                }
                             }
                         }
-                        section.addAll(contentList)
+                        dataSection?.let { it1 -> section.addAll(it1) }
+                        section
                     }
-                    adapterGropie.add(section)
+                    section?.let { data -> adapterGropie.addAll(data) }
+
+//                    val sectionName = success.payload?.data?.chapters
+//                    val section = Section()
+//                    sectionName?.forEach { chapter ->
+//                        section.setHeader(HeaderItem(chapter?.chapterTitle.toString()))
+//                        val contentList = chapter?.contents?.map { contentDomain ->
+//                            contentDomain?.let { content ->
+//                                DataItem(content) { contentUrl ->
+//                                    viewModel.getContentUrl(contentUrl.contentUrl)
+//                                }
+//                            }
+//                        }
+//                        contentList?.let { content -> section.addAll(content) }
+//                    }
+//                    adapterGropie.add(section)
                 },
                 doOnError = { error ->
                     error.message.toString()
                 }
             )
         }
-        viewModel.getVideos(1)
     }
 }
 

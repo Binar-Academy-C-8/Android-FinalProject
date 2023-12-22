@@ -7,41 +7,41 @@ import androidx.annotation.Keep
 @Keep
 data class Data(
     @SerializedName("aboutCourse")
-    val aboutCourse: String,
+    val aboutCourse: String? = null,
     @SerializedName("category")
-    val category: String,
+    val category: String? = null,
     @SerializedName("categoryId")
-    val categoryId: Int,
+    val categoryId: Int? = null,
     @SerializedName("chapters")
     val chapters: List<Chapter>,
     @SerializedName("courseBy")
-    val courseBy: String,
+    val courseBy: String? = null,
     @SerializedName("courseCode")
-    val courseCode: String,
+    val courseCode: String? = null,
     @SerializedName("courseLevel")
-    val courseLevel: String,
+    val courseLevel: String? = null,
     @SerializedName("courseName")
-    val courseName: String,
+    val courseName: String? = null,
     @SerializedName("coursePrice")
-    val coursePrice: Int,
+    val coursePrice: Int? = null,
     @SerializedName("courseType")
-    val courseType: String,
+    val courseType: String? = null,
     @SerializedName("createdAt")
-    val createdAt: String,
+    val createdAt: String? = null,
     @SerializedName("durationPerCourseInMinutes")
-    val durationPerCourseInMinutes: Int,
+    val durationPerCourseInMinutes: Int? = null,
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
     @SerializedName("image")
-    val image: String,
+    val image: String? = null,
     @SerializedName("intendedFor")
-    val intendedFor: String,
+    val intendedFor: String? = null,
     @SerializedName("modulePerCourse")
-    val modulePerCourse: Int,
+    val modulePerCourse: Int? = null,
     @SerializedName("rating")
-    val rating: Double,
+    val rating: Double? = null,
     @SerializedName("updatedAt")
-    val updatedAt: String,
+    val updatedAt: String? = null,
     @SerializedName("userId")
-    val userId: Int
+    val userId: Int? = null
 )

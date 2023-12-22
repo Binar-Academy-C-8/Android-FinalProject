@@ -11,61 +11,65 @@ import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 @Keep
 data class CourseApiResponseNew(
     @SerializedName("data")
-    val `data`: Data,
+    val `data`: Data? = null,
     @SerializedName("status")
-    val status: String
+    val status: String? = null
 )
 
 fun CourseApiResponseNew.toDomain() = DetailResponseCourseDomain(
-    status = this.status,
-    data = this.data.toDomain()
+    status = this.status.orEmpty(),
+    data = this.data?.toDomain()
 )
+
 fun Data.toDomain() = DetailCourseDomain(
-    id = this.id,
-    courseCode = this.courseCode,
-    categoryId = this.categoryId,
-    userId = this.userId,
-    courseName = this.courseName,
-    image = this.image,
-    courseType = this.courseType,
-    courseLevel = this.courseLevel,
-    aboutCourse = this.aboutCourse,
-    intendedFor = this.intendedFor,
-    coursePrice = this.coursePrice,
-    createdAt = this.createdAt,
-    updatedAt = this.updatedAt,
-    category = this.category,
-    courseBy = this.courseBy,
-    rating = this.rating,
-    durationPerCourseInMinutes = this.durationPerCourseInMinutes,
-    modulePerCourse = this.modulePerCourse,
+    id = this.id ?: 0,
+    courseCode = this.courseCode.orEmpty(),
+    categoryId = this.categoryId?: 0,
+    userId = this.userId?: 0,
+    courseName = this.courseName.orEmpty(),
+    image = this.image.orEmpty(),
+    courseType = this.courseType.orEmpty(),
+    courseLevel = this.courseLevel.orEmpty(),
+    aboutCourse = this.aboutCourse.orEmpty(),
+    intendedFor = this.intendedFor.orEmpty(),
+    coursePrice = this.coursePrice?: 0,
+    createdAt = this.createdAt.orEmpty(),
+    updatedAt = this.updatedAt.orEmpty(),
+    category = this.category.orEmpty(),
+    courseBy = this.courseBy.orEmpty(),
+    rating = this.rating?: 0.0,
+    durationPerCourseInMinutes = this.durationPerCourseInMinutes ?: 0,
+    modulePerCourse = this.modulePerCourse?: 0,
     chapters = this.chapters.map { it.toDomain() }
 )
+
 fun Collection<Data>.courseDataToDomain() = this.map {
     it.toDomain()
 }
+
 fun Chapter.toDomain() = ChapterDomain(
-    id = this.id,
-    chapterTitle = this.chapterTitle,
-    courseId = this.courseId,
-    createdAt = this.createdAt,
-    updatedAt = this.updatedAt,
-    contents = this.contents.map { it.toDomain() },
-    durationPerChapterInMinutes = this.durationPerChapterInMinutes
+    id = this.id ?: 0,
+    chapterTitle = this.chapterTitle.orEmpty(),
+    courseId = this.courseId ?: 0,
+    createdAt = this.createdAt.orEmpty(),
+    updatedAt = this.updatedAt.orEmpty(),
+    contents = this.contents.map { it?.toDomain() },
+    durationPerChapterInMinutes = this.durationPerChapterInMinutes ?: 0
 )
 
-fun Content.toDomain()= ContentDomain(
-    id = this.id,
-    contentTitle = this.contentTitle,
-    contentUrl = this.contentUrl,
-    duration = this.duration,
-    status = this.status,
-    chapterId = this.chapterId,
-    createdAt = this.createdAt,
-    updatedAt = this.updatedAt,
-    youtubeId = this.youtubeId
+fun Content.toDomain() = ContentDomain(
+    id = this.id ?: 0,
+    contentTitle = this.contentTitle.orEmpty(),
+    contentUrl = this.contentUrl.orEmpty(),
+    duration = this.duration.orEmpty(),
+    status = this.status ?: false,
+    chapterId = this.chapterId ?: 0,
+    createdAt = this.createdAt.orEmpty(),
+    updatedAt = this.updatedAt.orEmpty(),
+    youtubeId = this.youtubeId.orEmpty()
 )
+
 fun Collection<Chapter>.chapterToDomain() = this.map { it.toDomain() }
 
-fun Collection<Content>.contentToDomain() = this.map { it.toDomain()}
+fun Collection<Content>.contentToDomain() = this.map { it.toDomain() }
 

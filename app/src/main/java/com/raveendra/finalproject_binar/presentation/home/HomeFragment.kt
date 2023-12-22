@@ -1,6 +1,5 @@
 package com.raveendra.finalproject_binar.presentation.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,12 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val popularCourseAdapter: AdapterPopularCourse by lazy {
         AdapterPopularCourse(
             itemClick = {
-                startActivity(
-                    Intent(
-                        requireContext(),
-                        DetailCourseActivity::class.java
-                    )
-                )
+                it.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id) }
             },
             buttonClick = {
                 it.id?.let { id ->
