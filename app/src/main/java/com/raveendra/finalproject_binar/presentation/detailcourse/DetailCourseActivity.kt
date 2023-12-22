@@ -1,12 +1,13 @@
 package com.raveendra.finalproject_binar.presentation.detailcourse
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.os.Bundle
 import android.provider.Settings
+import android.view.LayoutInflater
 import android.view.OrientationEventListener
 import android.view.View
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -18,14 +19,39 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Ful
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
+import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.regex.Pattern
 
-class DetailCourseActivity : AppCompatActivity() {
-    private val binding: ActivityDetailCourseBinding by lazy {
-        ActivityDetailCourseBinding.inflate(layoutInflater)
+class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDetailCourseBinding>() {
+
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2
+        )
+        const val EXTRA_COURSE_ID = "EXTRA_COURSE_ID"
+        fun navigate(context: Context, courseId: Int) = with(context) {
+            startActivity(
+                Intent(
+                    this,
+                    DetailCourseActivity::class.java
+                ).putExtra(EXTRA_COURSE_ID, courseId)
+            )
+        }
     }
-    private val viewModel: DetailViewModel by viewModel()
+
+    private val courseIdExtra by lazy {
+        intent.getIntExtra(EXTRA_COURSE_ID, 0)
+    }
+
+    override val viewModel: DetailViewModel by viewModel()
+
+
+    override val bindingInflater: (LayoutInflater) -> ActivityDetailCourseBinding
+        get() = ActivityDetailCourseBinding::inflate
 
     private var youTubePlayer: YouTubePlayer? = null
     private var isFullscreen = false
@@ -35,14 +61,12 @@ class DetailCourseActivity : AppCompatActivity() {
 
     private var previousOrientation: Int = -1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun setupViews() = with(binding) {
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         initYoutube()
-        val orientationEventListener = object : OrientationEventListener(this) {
+        val orientationEventListener = object : OrientationEventListener(this@DetailCourseActivity) {
             override fun onOrientationChanged(orientation: Int) {
                 val newOrientation = when (orientation) {
                     in 0..44 -> 0
@@ -68,6 +92,25 @@ class DetailCourseActivity : AppCompatActivity() {
             orientationEventListener.disable()
         }
         sectionPageFragment()
+
+        viewModel.getVideos(courseIdExtra)
+    }
+
+    override fun setupObservers() {
+        viewModel.detailData.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = { success ->
+                    success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.contentUrl?.let { firstUrl ->
+                        viewModel.getContentUrl(
+                            firstUrl
+                        )
+                    }
+                },
+                doOnError = { error ->
+                    error.message.toString()
+                }
+            )
+        }
     }
 
     private fun extractVideoIdFromUrl(videoUrl: String): String? {
@@ -127,7 +170,6 @@ class DetailCourseActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         isFullscreen = false
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
-        binding.titleItem.isVisible = true
         binding.playerView.isVisible = true
         binding.viewPager2.isVisible = true
         binding.fullScreenView.apply {
@@ -140,7 +182,6 @@ class DetailCourseActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
         isFullscreen = true
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-        binding.titleItem.isVisible = false
         binding.playerView.isVisible = false
         binding.viewPager2.isVisible = false
         binding.fullScreenView.apply {
@@ -151,18 +192,13 @@ class DetailCourseActivity : AppCompatActivity() {
 
 
     private fun sectionPageFragment() {
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        val sectionsPagerAdapter = SectionsPagerAdapter(this@DetailCourseActivity)
         binding.viewPager2.adapter = sectionsPagerAdapter
         TabLayoutMediator(binding.tabsLayout, binding.viewPager2) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+
     }
 
-    companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
-    }
+
 }

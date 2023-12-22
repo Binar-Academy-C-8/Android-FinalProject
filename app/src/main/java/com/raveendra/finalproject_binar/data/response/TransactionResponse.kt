@@ -13,9 +13,7 @@ data class TransactionResponse(
     @SerializedName("status")
     val status: String?,
     @SerializedName("token")
-    val token: String?,
-    @SerializedName("url")
-    val url: String?
+    val token: String?
 )
 
 data class CreatedTransactionDataResponse(
@@ -42,15 +40,16 @@ data class CreatedTransactionDataResponse(
     @SerializedName("updatedAt")
     val updatedAt: String?,
     @SerializedName("userId")
-    val userId: Int?
+    val userId: Int?,
+    @SerializedName("linkPayment")
+    val linkPayment: String?
 )
 
 fun TransactionResponse.toDomain() = TransactionDomain(
     createdTransactionData = this.createdTransactionData?.toDomain(),
     email = this.email.orEmpty(),
     status = this.status.orEmpty(),
-    token = this.token.orEmpty(),
-    url = this.url.orEmpty()
+    token = this.token.orEmpty()
 )
 
 fun CreatedTransactionDataResponse.toDomain() = CreatedTransactionDataDomain(
@@ -66,6 +65,7 @@ fun CreatedTransactionDataResponse.toDomain() = CreatedTransactionDataDomain(
     totalPrice = this.totalPrice ?: 0,
     updatedAt = this.updatedAt.orEmpty(),
     userId = this.userId ?: 0,
+    linkPayment = this.linkPayment.orEmpty()
 )
 
 

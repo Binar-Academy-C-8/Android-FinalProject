@@ -12,7 +12,8 @@ import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseViewModel, ActivitySeeAllPopularCourseBinding>() {
+class SeeAllPopularCourseActivity :
+    BaseViewModelActivity<SeeAllPopularCourseViewModel, ActivitySeeAllPopularCourseBinding>() {
     companion object {
         fun navigate(context: Context) = with(context) {
             startActivity(
@@ -35,21 +36,18 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
     }
 
     private val seeAllPopularCoursesAdapter: AdapterSeeAllPopularCourse by lazy {
-        AdapterSeeAllPopularCourse(itemClick = {
-            startActivity(
-                Intent(
-                    this,
-                    DetailCourseActivity::class.java
-                )
-            )
-        }, buttonClick = {
-            it.id?.let { id ->
-                PaymentSummaryActivity.navigate(
-                    this,
-                    id
-                )
-            }
-        })
+        AdapterSeeAllPopularCourse(
+            itemClick = {
+                it.id?.let { id -> DetailCourseActivity.navigate(this, id) }
+            },
+            buttonClick = {
+                it.id?.let { id ->
+                    PaymentSummaryActivity.navigate(
+                        this,
+                        id
+                    )
+                }
+            })
     }
 
     override fun setupObservers() {
@@ -77,6 +75,9 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
                 binding.layoutStateSeeAllPopularCourse.root.isVisible = true
                 binding.layoutStateSeeAllPopularCourse.pbLoading.isVisible = false
                 binding.layoutStateSeeAllPopularCourse.ivNotFound.isVisible = true
+                binding.layoutStateSeeAllPopularCourse.tvError.isVisible = true
+                binding.layoutStateSeeAllPopularCourse.tvError.text =
+                    it.exception?.message.orEmpty()
                 binding.rvSeeAllPopularCourse.isVisible = false
             }, doOnEmpty = {
                 binding.shimmerViewAllCourse.stopShimmer()
@@ -94,7 +95,7 @@ class SeeAllPopularCourseActivity : BaseViewModelActivity<SeeAllPopularCourseVie
         viewModel.getCourses()
     }
 
-    private fun setClickListener(){
+    private fun setClickListener() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }

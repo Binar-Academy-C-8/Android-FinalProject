@@ -109,4 +109,5 @@
     <string name="intended_for">Intended For</string>
     <string name="kelas_ini_ditujukan_untuk">Kelas ini ditujukan Untuk</string>
     <string name="about_course">About Course</string>
+    <string name="label_payment_summary">Rincian Pembayaran</string>
 </resources>

@@ -7,17 +7,17 @@ import androidx.annotation.Keep
 @Keep
 data class Chapter(
     @SerializedName("chapterTitle")
-    val chapterTitle: String,
+    val chapterTitle: String? = null,
     @SerializedName("contents")
-    val contents: List<Content>,
+    val contents: List<Content?> ,
     @SerializedName("courseId")
-    val courseId: Int,
+    val courseId: Int? = null,
     @SerializedName("createdAt")
-    val createdAt: String,
+    val createdAt: String? = null,
     @SerializedName("durationPerChapterInMinutes")
-    val durationPerChapterInMinutes: Int,
+    val durationPerChapterInMinutes: Int? = null,
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
     @SerializedName("updatedAt")
-    val updatedAt: String
+    val updatedAt: String? = null
 )

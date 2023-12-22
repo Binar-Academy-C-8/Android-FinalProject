@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityPaymentSummaryBinding
 import com.raveendra.finalproject_binar.presentation.payment.payment_webview.PaymentWebViewActivity
@@ -39,9 +40,15 @@ class PaymentSummaryActivity :
         get() = ActivityPaymentSummaryBinding::inflate
 
     override fun setupViews() = with(binding) {
+        inclToolbar.tvToolbarTitle.text = getString(R.string.label_payment_summary)
+        inclToolbar.ivToolbarBack.setOnClickListener {
+            finish()
+        }
         btPay.setOnClickListener {
             viewModel.postTransaction(courseIdExtra)
         }
+
+        viewModel.getDetailCourse(courseIdExtra)
 
     }
 
@@ -52,7 +59,7 @@ class PaymentSummaryActivity :
                     doOnSuccess = { result ->
                         PaymentWebViewActivity.navigate(
                             this@PaymentSummaryActivity,
-                            result.payload?.url ?: ""
+                            result.payload?.createdTransactionData?.linkPayment ?: ""
                         )
                     },
                     doOnError = { error ->
@@ -73,6 +80,28 @@ class PaymentSummaryActivity :
                     }
                 )
             }
+        }
+        viewModel.detailData.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = { success ->
+                    val data = success.payload?.data
+                    binding.apply {
+                        ivImg.load(data?.image){
+                            crossfade(true)
+                        }
+                        tvCategory.text = data?.category
+                        tvRating.text = data?.rating.toString()
+                        tvTitle.text = data?.courseName
+                        tvAuthor.text = data?.courseBy
+                        tvLevel.text = data?.courseLevel
+                        tvModule.text = data?.modulePerCourse.toString()
+                        tvDuration.text = data?.durationPerCourseInMinutes.toString()
+                    }
+                },
+                doOnError = { error ->
+                    error.message.toString()
+                }
+            )
         }
     }
 

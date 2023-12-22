@@ -6,14 +6,14 @@ package com.raveendra.finalproject_binar.domain
 
 data class DetailResponseCourseDomain(
     val status: String,
-    val data: DetailCourseDomain,
+    val data: DetailCourseDomain?,
 )
 
 data class DetailCourseDomain(
     val aboutCourse: String,
     val category: String,
     val categoryId: Int,
-    val chapters: List<ChapterDomain>,
+    val chapters: List<ChapterDomain?>,
     val courseBy: String,
     val courseCode: String,
     val courseLevel: String,
@@ -33,7 +33,7 @@ data class DetailCourseDomain(
 
 data class ChapterDomain(
     val chapterTitle: String,
-    val contents: List<ContentDomain>,
+    val contents: List<ContentDomain?>,
     val courseId: Int,
     val createdAt: String,
     val durationPerChapterInMinutes: Int,
