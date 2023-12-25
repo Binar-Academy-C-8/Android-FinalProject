@@ -22,7 +22,6 @@ import com.raveendra.finalproject_binar.presentation.account.profile.ProfileView
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
-import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel

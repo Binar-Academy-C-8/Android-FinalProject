@@ -13,8 +13,8 @@ class PaymentHistoryViewHolder(
     fun bind(item: UserTransactionDomain) {
         with(item){
             binding.ivImg.load(item.course?.image)
-            binding.tvCategory.text = item.courseId.toString()
-            binding.tvTitle.text = item.course?.courseName
+            binding.tvCategory.text = item.course?.courseName.toString()
+            binding.tvTitle.text = item.course?.intendedFor
             binding.tvRating.text = item.course?.rating.toString()
             binding.tvAuthor.text = item.course?.adminId.toString()
             binding.tvLevel.text = item.course?.courseLevel
