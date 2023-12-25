@@ -2,49 +2,24 @@ package com.raveendra.finalproject_binar.presentation.account.payment_history.vi
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.raveendra.finalproject_binar.utils.ViewHolderBinder
-import com.raveendra.finalproject_binar.databinding.ItemListCourseNotPaidBinding
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePaidBinding
-import com.raveendra.finalproject_binar.model.Payment
+import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 
-class PaymentPaidViewHolder(
+class PaymentHistoryViewHolder(
     private val binding: ItemListCoursePaidBinding,
-    private val onClickListener: (Payment) -> Unit
-) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Payment> {
-    override fun bind(item: Payment) {
-        binding.ivImg.load(item.imgUrl) {
-            crossfade(true)
-        }
-        binding.tvTitle.text = item.name
-        binding.tvAuthor.text = item.author
-        binding.tvRating.text = item.rating.toString()
-        binding.tvLevel.text = item.level
-        binding.tvModule.text = item.modul
-        binding.tvDuration.text = item.duration
-        binding.root.setOnClickListener {
-            onClickListener.invoke(item)
+    private val onClickListener: (UserTransactionDomain) -> Unit
+) : RecyclerView.ViewHolder(binding.root){
+
+    fun bind(item: UserTransactionDomain) {
+        with(item){
+            binding.ivImg.load(item.course?.image)
+            binding.tvCategory.text = item.courseId.toString()
+            binding.tvTitle.text = item.course?.courseName
+            binding.tvRating.text = item.course?.rating.toString()
+            binding.tvAuthor.text = item.course?.adminId.toString()
+            binding.tvLevel.text = item.course?.courseLevel
+            binding.tvType.text = item.paymentStatus
+
         }
     }
-}
-
-class PaymentNotPaidViewHolder(
-    private val binding: ItemListCourseNotPaidBinding,
-    private val onClickListener: (Payment) -> Unit
-): RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Payment> {
-    override fun bind(item: Payment) {
-        binding.ivImg.load(item.imgUrl) {
-            crossfade(true)
-        }
-        binding.tvTitle.text = item.name
-        binding.tvAuthor.text = item.author
-        binding.tvRating.text = item.rating.toString()
-        binding.tvTitle.text = item.name
-        binding.tvLevel.text = item.level
-        binding.tvModule.text = item.modul
-        binding.tvDuration.text = item.duration
-        binding.root.setOnClickListener {
-            onClickListener.invoke(item)
-        }
-    }
-
 }

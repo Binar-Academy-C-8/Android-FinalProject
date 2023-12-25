@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemNotificationBinding
+import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.model.Notification
 
 class NotificationAdapter(

@@ -6,6 +6,7 @@ import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePremiumBinding
 import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.domain.CourseDomain
+import com.raveendra.finalproject_binar.domain.CoursePaymentDomain
 
 class CourseViewHolder(
     private val binding: ItemListCoursePremiumBinding,
@@ -28,4 +29,5 @@ class CourseViewHolder(
             onClickListener.invoke(item)
         }
     }
+
 }
