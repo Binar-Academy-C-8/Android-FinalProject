@@ -7,24 +7,12 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_tagline_onboarding_1"
+        android:id="@+id/tv_tagline_onboarding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/tv_desc_title_onboarding"
-        android:textColor="@color/primary_dark_blue_06"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_tagline_onboarding_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_tagline_onboarding_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="dari Pengalaman Terbaik!"
-        android:textSize="22sp"
-        android:fontFamily="@font/poppins_bold"
+        tools:text="Menggali Ilmu dari \n pengalaman Paling Baik"
+        android:gravity="center"
+        style="@style/TextBold24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/iv_on_boarding"/>
@@ -36,6 +24,6 @@
         tools:src="@drawable/ic_onboarding_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tagline_onboarding_2" />
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tagline_onboarding" />
 </androidx.constraintlayout.widget.ConstraintLayout>
