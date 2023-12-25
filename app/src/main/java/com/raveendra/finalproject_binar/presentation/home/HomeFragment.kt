@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.domain.CategoryDomain
+import com.raveendra.finalproject_binar.presentation.home.SwipeRefreshList
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
@@ -21,11 +25,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
 
+    var category: Int? = null
+
     private val categoryAdapter: CategoryAdapter by lazy {
         CategoryAdapter {
-            viewModel.getCourses(it.id)
+            category = it.id
+            viewModel.getCourses(category)
         }
     }
+
 
     private val popularCourseAdapter: AdapterPopularCourse by lazy {
         AdapterPopularCourse(
@@ -47,6 +55,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             })
     }
 
+    private val swipeRefreshListener = SwipeRefreshList {
+        viewModel.getCategories()
+        viewModel.getCourses(category)
+    }
+
 
     override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
@@ -56,7 +69,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         getData()
         setupObservers()
         setOnClickListener()
+        setupSwipeRefreshLayout()
     }
+
 
     private fun setupObservers() {
         viewModel.categories.observe(viewLifecycleOwner) {
@@ -85,6 +100,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     categoryAdapter.setData(allData)
                 }
                 categoryAdapter.refreshList()
+                binding.swipeRefreshLayout.isRefreshing = false
             }, doOnLoading = {
                 binding.shimmerView.startShimmer()
                 binding.shimmerView.isVisible = true
@@ -102,6 +118,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.layoutStateCategory.ivNotFound.isVisible = false
                 binding.layoutStateCategory.tvError.text = "Category Tidak Tersedia"
                 binding.rvCategoryCourse.isVisible = false
+                binding.swipeRefreshLayout.isRefreshing = false
             })
         }
         viewModel.course.observe(viewLifecycleOwner) {
@@ -120,6 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.rvPopularCourse.smoothScrollToPosition(0)
                 it.payload?.let { data -> popularCourseAdapter.setData(data) }
                 popularCourseAdapter.refreshList()
+                binding.swipeRefreshLayout.isRefreshing = false
             }, doOnLoading = {
                 binding.shimmerViewCourse.startShimmer()
                 binding.shimmerViewCourse.isVisible = true
@@ -135,6 +153,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.layoutStatePopularCourse.ivNotFound.isVisible = true
                 /*binding.layoutStatePopularCourse.tvError.text = it.exception?.message.orEmpty()*/
                 binding.rvPopularCourse.isVisible = false
+                binding.swipeRefreshLayout.isRefreshing = false
             }, doOnEmpty = {
                 binding.shimmerViewCourse.stopShimmer()
                 binding.shimmerViewCourse.isVisible = false
@@ -143,6 +162,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.layoutStatePopularCourse.ivNotFound.isVisible = true
                 /*binding.layoutStatePopularCourse.tvError.text = "Course not found"*/
                 binding.rvPopularCourse.isVisible = false
+                binding.swipeRefreshLayout.isRefreshing = false
             })
         }
     }
@@ -156,6 +176,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.tvViewAll.setOnClickListener {
             SeeAllPopularCourseActivity.navigate(requireContext())
         }
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
+        swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
+        )
     }
 
 

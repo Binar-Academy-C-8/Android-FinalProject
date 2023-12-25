@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.raveendra.finalproject_binar.data.dummy.DummyCourseFreeImpl
-import com.raveendra.finalproject_binar.data.dummy.DummyCoursePremiumImpl
+import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
@@ -16,14 +16,20 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CourseFragment : BaseFragment<FragmentCourseBinding>() {
+class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
 
     private val viewModel: CourseViewModel by viewModel()
+
+    var courseType: String? = null
 
     private val adapterCourse: CourseAdapter by lazy {
         CourseAdapter { course: CourseDomain ->
 
         }
+    }
+
+    private val swipeRefreshListener = SwipeRefreshList {
+        viewModel.getCourse(courseType)
     }
 
     override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCourseBinding
@@ -32,8 +38,10 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        getData()
         observeData()
         setClickChips()
+        setupSwipeRefreshLayout()
     }
 
     private fun observeData() {
@@ -52,6 +60,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     it.payload?.let {
                         adapterCourse.setData(it)
                     }
+                    binding.swipeRefreshLayout.isRefreshing = false
                 },
                 doOnLoading = {
                     binding.shimmerView.startShimmer()
@@ -75,6 +84,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.ivNotFound.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
+                    binding.swipeRefreshLayout.isRefreshing = false
                 },
                 doOnError = {
                     binding.shimmerView.stopShimmer()
@@ -92,6 +102,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
                         it.exception?.message.toString(),
                         Toast.LENGTH_LONG
                     ).show()
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
             )
         }
@@ -105,12 +116,26 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>() {
     private fun setClickChips() {
         binding.chip1.setOnClickListener {
             viewModel.getCourse(courseType = null)
+            courseType = null
         }
         binding.chip2.setOnClickListener {
             viewModel.getCourse(courseType = "Premium")
+            courseType = "Premium"
         }
         binding.chip3.setOnClickListener {
             viewModel.getCourse(courseType = "Free")
+            courseType = "Free"
         }
+    }
+    private fun getData() {
+        viewModel.getCourse()
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
+        swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
+        )
     }
 }

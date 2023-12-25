@@ -141,4 +141,7 @@ dependencies {
 
     //shimmer
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+    //swipe to refresh list
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }

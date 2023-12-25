@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.raveendra.finalproject_binar.BuildConfig
@@ -15,6 +17,7 @@ import com.raveendra.finalproject_binar.databinding.FragmentAccountBinding
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryActivity
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
+import com.raveendra.finalproject_binar.presentation.account.SwipeRefreshList
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
@@ -22,18 +25,25 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AccountFragment : BaseFragment<FragmentAccountBinding>() {
+class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
 
     private val viewModel: AccountViewModel by viewModel()
 
     private val preferences: PreferenceManager by inject()
+
+
+    private val swipeRefreshListener = SwipeRefreshList {
+        viewModel.getProfile()
+    }
 
     override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAccountBinding
         get() = FragmentAccountBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getData()
         setupViews()
+        setupSwipeRefreshLayout()
     }
 
     @SuppressLint("SetTextI18n")
@@ -68,6 +78,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                 }
                 binding.tvName.text = result.payload?.data?.name ?: "-"
                 binding.tvEmail.text = result.payload?.data?.email ?: "-"
+                binding.swipeRefreshLayout.isRefreshing = false
             }, doOnLoading = {
 
             }, doOnError = { error ->
@@ -85,9 +96,24 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                binding.swipeRefreshLayout.isRefreshing = false
             }, doOnEmpty = {
+                binding.swipeRefreshLayout.isRefreshing = false
 
             })
         }
+    }
+
+    private fun getData() {
+       viewModel.getProfile()
+    }
+
+
+    private fun setupSwipeRefreshLayout() {
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
+        swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
+        )
     }
 }
