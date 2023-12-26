@@ -11,6 +11,7 @@ import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.databinding.ActivityLoginBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
+import com.raveendra.finalproject_binar.presentation.auth.forgotpassword.ForgotPasswordActivity
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterActivity
 import com.raveendra.finalproject_binar.utils.ApiException
@@ -47,6 +48,9 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
         get() = ActivityLoginBinding::inflate
 
     override fun setupViews() = with(binding) {
+        tvForgetPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,ForgotPasswordActivity::class.java))
+        }
         btLogin.setOnClickListener {
             doLogin()
         }

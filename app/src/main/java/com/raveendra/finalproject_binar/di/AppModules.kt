@@ -17,7 +17,6 @@ import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
 import com.raveendra.finalproject_binar.presentation.account.AccountViewModel
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryViewModel
-import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileViewModel
 import com.raveendra.finalproject_binar.presentation.auth.forgotpassword.ForgotPasswordViewModel
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
