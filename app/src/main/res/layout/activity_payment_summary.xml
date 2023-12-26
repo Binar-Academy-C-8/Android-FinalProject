@@ -29,9 +29,8 @@
                 android:id="@+id/cvCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -81,7 +80,8 @@
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_rating" />
+                                android:src="@drawable/ic_rating"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/tv_rating"
@@ -117,13 +117,15 @@
                             android:gravity="center"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_author">
+                            app:layout_constraintTop_toBottomOf="@id/tv_author"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_badge" />
+                                android:src="@drawable/ic_badge"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/tv_level"
@@ -145,13 +147,15 @@
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toStartOf="@id/ll_duration"
                             app:layout_constraintStart_toEndOf="@id/ll_level"
-                            app:layout_constraintTop_toBottomOf="@id/tv_author">
+                            app:layout_constraintTop_toBottomOf="@id/tv_author"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_modul" />
+                                android:src="@drawable/ic_modul"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/tv_module"
@@ -171,13 +175,15 @@
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/ll_module"
-                            app:layout_constraintTop_toBottomOf="@id/tv_author">
+                            app:layout_constraintTop_toBottomOf="@id/tv_author"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_time" />
+                                android:src="@drawable/ic_time"
+                                tools:ignore="ContentDescription" />
 
                             <TextView
                                 android:id="@+id/tv_duration"
@@ -194,6 +200,105 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/cvCourse"
+                android:layout_marginTop="@dimen/dimen_16_dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextMedium16"
+                    android:text="Ringkasan Pembayaran"
+                    android:layout_marginHorizontal="@dimen/dimen_16_dp"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/dimen_16_dp"
+                    android:paddingVertical="@dimen/dimen_8_dp">
+
+                    <TextView
+                        style="@style/TextRegular14"
+                        android:layout_width="@dimen/dimen_0_dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvBasePriceValue"
+                        app:layout_constraintEnd_toStartOf="@+id/tvBasePriceValue"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvBasePriceValue"
+                        android:text="@string/label_price" />
+
+                    <TextView
+                        android:id="@+id/tvBasePriceValue"
+                        style="@style/TextMedium14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Rp 150.000" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/dimen_16_dp"
+                    android:paddingVertical="@dimen/dimen_8_dp">
+
+                    <TextView
+                        style="@style/TextRegular14"
+                        android:layout_width="@dimen/dimen_0_dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPpnValue"
+                        app:layout_constraintEnd_toStartOf="@+id/tvPpnValue"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvPpnValue"
+                        android:text="@string/label_ppn_11" />
+
+                    <TextView
+                        android:id="@+id/tvPpnValue"
+                        style="@style/TextMedium14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Rp 150.000" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dimen_8_dp"
+                    android:layout_marginHorizontal="@dimen/dimen_16_dp"
+                    android:background="@color/neutral_06"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/dimen_16_dp"
+                    android:paddingVertical="@dimen/dimen_8_dp">
+
+                    <TextView
+                        style="@style/TextRegular14"
+                        android:layout_width="@dimen/dimen_0_dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvTotalValue"
+                        app:layout_constraintEnd_toStartOf="@+id/tvTotalValue"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvTotalValue"
+                        android:text="@string/label_total_price" />
+
+                    <TextView
+                        android:id="@+id/tvTotalValue"
+                        style="@style/TextMedium14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Rp 150.000" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

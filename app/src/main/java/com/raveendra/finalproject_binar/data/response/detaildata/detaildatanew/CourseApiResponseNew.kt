@@ -40,6 +40,8 @@ fun Data.toDomain() = DetailCourseDomain(
     rating = this.rating?: 0.0,
     durationPerCourseInMinutes = this.durationPerCourseInMinutes ?: 0,
     modulePerCourse = this.modulePerCourse?: 0,
+    courseDiscountInPercent = this.courseDiscountInPercent?: 0,
+    rawPrice = this.rawPrice?: 0,
     chapters = this.chapters.map { it.toDomain() }
 )
 

@@ -24,6 +24,10 @@ data class Data(
     val courseName: String? = null,
     @SerializedName("coursePrice")
     val coursePrice: Int? = null,
+    @SerializedName("courseDiscountInPercent")
+    val courseDiscountInPercent: Int? = null,
+    @SerializedName("rawPrice")
+    val rawPrice: Int? = null,
     @SerializedName("courseType")
     val courseType: String? = null,
     @SerializedName("createdAt")

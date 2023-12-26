@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FinalProject-Binar</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Beranda</string>
@@ -11,9 +11,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_buy">Beli %s</string>
-    <string name="text_category">Kategori Populer</string>
+    <string name="text_category" tools:ignore="Typos">Kategori Populer</string>
     <string name="text_view_all">Lihat Semua</string>
-    <string name="text_popular_course">Kursus Populer</string>
+    <string name="text_popular_course" tools:ignore="Typos">Kursus Populer</string>
     <string name="label_search_course">Cari Kursus terbaik....</string>
     <string name="label_phone_62">+62</string>
 
@@ -58,7 +58,7 @@
     <string name="txt_payment_success_2">E-Receipt telah dikirimkan ke email.</string>
     <string name="txt_mulai_belajar">Mulai Belajar</string>
     <string name="txt_kembali_ke_beranda">Kembali ke Beranda</string>
-    <string name="txt_onboarding">Onboarding...</string>
+    <string name="txt_onboarding" tools:ignore="TypographyEllipsis">Onboarding...</string>
     <string name="txt_onboarding_1">Persiapkan hal berikut untuk belajar yang maksimal</string>
     <string name="txt_onboarding_2">Mempunyai akun Figma atau Install Adobe XD Menggunakan internet minimal kecepatan 2Mbps Belajar di tempat yang nyaman</string>
     <string name="txt_ikuti_kelas">Ikuti Kelas</string>
@@ -116,4 +116,10 @@
     <string name="lihat_deskripsi">Lihat Deskripsi</string>
     <string name="materi_belajar">Materi Belajar</string>
     <string name="sembunyikan_deskripsi">Sembunyikan Deskripsi</string>
+    <string name="label_price">Harga</string>
+    <string name="label_ppn_11">PPN 11%</string>
+    <string name="label_total_price">Total Harga</string>
+
+    <string name="label_var_module">%s Modul</string>
+    <string name="label_var_minute">%s Menit</string>
 </resources>

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16_dp"
         android:padding="10dp"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_back_black"
         android:layout_marginVertical="@dimen/dimen_12_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

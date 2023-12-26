@@ -13,6 +13,7 @@ import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import com.raveendra.finalproject_binar.utils.toIdrCurrency
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -94,8 +95,14 @@ class PaymentSummaryActivity :
                         tvTitle.text = data?.courseName
                         tvAuthor.text = data?.courseBy
                         tvLevel.text = data?.courseLevel
-                        tvModule.text = data?.modulePerCourse.toString()
-                        tvDuration.text = data?.durationPerCourseInMinutes.toString()
+                        tvModule.text = getString(R.string.label_var_module,data?.modulePerCourse.toString())
+                        tvDuration.text = getString(R.string.label_var_minute,data?.durationPerCourseInMinutes.toString())
+
+                        tvBasePriceValue.text = data?.coursePrice?.toIdrCurrency()
+                        val ppnValue = (data?.coursePrice ?: 0) * 0.11
+                        tvPpnValue.text = ppnValue.toIdrCurrency()
+                        val totalValue = (data?.coursePrice ?: 0) + ppnValue
+                        tvTotalValue.text = totalValue.toIdrCurrency()
                     }
                 },
                 doOnError = { error ->
