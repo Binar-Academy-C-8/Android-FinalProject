@@ -3,22 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/rounded_background_about_class"
+    android:layout_height="wrap_content"
+    android:background="@color/neutral_02"
+    android:padding="@dimen/dimen_8_dp"
     tools:context=".presentation.detailcourse.AboutClassFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_about_title"
             style="@style/TextMedium16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_8_dp"
-            android:text="@string/about_course"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/about_course" />
 
         <TextView
             android:id="@+id/tv_about"
@@ -26,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/about_class"
-            app:layout_constraintTop_toBottomOf="@id/tv_about_title" />
+            android:text="@string/about_class" />
 
 
         <TextView
@@ -36,9 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_8_dp"
-            android:text="@string/kelas_ini_ditujukan_untuk"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_about" />
+            android:text="@string/kelas_ini_ditujukan_untuk" />
 
         <TextView
             android:id="@+id/tv_intended_for"
@@ -46,9 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/intended_for"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_intended_for_title" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="@string/intended_for" />
+    </LinearLayout>
 
 </ScrollView>

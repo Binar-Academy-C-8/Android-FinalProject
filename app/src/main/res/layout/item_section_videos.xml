@@ -1,40 +1,41 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
-    android:layout_marginVertical="10dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="0dp">
+    android:layout_marginVertical="2dp"
+    android:padding="8dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/tv_section_data"
-            android:layout_width="wrap_content"
+            style="@style/TextMedium14"
+            android:layout_width="308dp"
             android:layout_height="wrap_content"
-            tools:text="Ini data"
-            style="@style/TextAppearance.Material3.BodyMedium"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nama Video" />
 
         <ImageButton
             android:id="@+id/ic_play"
             android:layout_width="44dp"
             android:layout_height="44dp"
+            android:background="@drawable/rounded_background_green"
             android:contentDescription="@string/titles_ic_play"
             android:gravity="fill"
-            android:src="@drawable/ic_class"
-            android:background="@drawable/rounded_background_green"
+            android:src="@drawable/ic_play_rv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>
