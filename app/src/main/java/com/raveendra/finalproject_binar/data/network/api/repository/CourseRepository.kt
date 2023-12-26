@@ -5,16 +5,20 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
+import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
+import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
 import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
 import com.raveendra.finalproject_binar.domain.ProfileDomain
 import com.raveendra.finalproject_binar.domain.RegisterDomain
 import com.raveendra.finalproject_binar.domain.TransactionDomain
+import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
@@ -41,11 +45,16 @@ interface CourseRepository {
     suspend fun getCourseById(
         courseId: Int
     ): Flow<ResultWrapper<DetailResponseCourseDomain>>
+
+    suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>>
 }
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
 
-    override suspend fun getCourse(category: Int?, courseType: String?): Flow<ResultWrapper<List<CourseDomain>>> {
+    override suspend fun getCourse(
+        category: Int?,
+        courseType: String?
+    ): Flow<ResultWrapper<List<CourseDomain>>> {
         return proceedFlow { dataSource.getCourse(category, courseType).data?.toDomain().orEmpty() }
     }
 
@@ -98,4 +107,9 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
         }
     }
 
+    override suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>> {
+        return proceedFlow {
+            dataSource.getHistoryPayment().toDomain()
+        }
+    }
 }

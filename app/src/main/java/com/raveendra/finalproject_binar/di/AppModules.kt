@@ -16,11 +16,12 @@ import com.raveendra.finalproject_binar.data.network.api.service.CourseService
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
 import com.raveendra.finalproject_binar.presentation.account.AccountViewModel
+import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryViewModel
+import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileViewModel
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
-import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel
@@ -69,6 +70,7 @@ object AppModules {
         viewModelOf(::PaymentWebViewViewModel)
         viewModelOf(::ProfileViewModel)
         viewModelOf(::AccountViewModel)
+        viewModelOf(::PaymentHistoryViewModel)
     }
 
     val modules = listOf(
@@ -76,6 +78,6 @@ object AppModules {
         networkModule,
         dataSourceModule,
         repositoryModule,
-        viewModelModule
+        viewModelModule,
     )
 }

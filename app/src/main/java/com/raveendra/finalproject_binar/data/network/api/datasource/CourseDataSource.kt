@@ -13,6 +13,9 @@ import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
+import com.raveendra.finalproject_binar.data.response.historypayment.UserTransactionResponse
+import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
 import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 
@@ -29,6 +32,8 @@ interface CourseDataSource {
     ): LoginResponse
     suspend fun getProfile(): ProfileResponse
     suspend fun postTransaction(courseId: Int): TransactionResponse
+
+    suspend fun getHistoryPayment(): HistoryPaymentResponse
 
     suspend fun getCourseById(
         courseId: Int
@@ -81,5 +86,11 @@ class CourseDataSourceImpl(
     override suspend fun postTransaction(courseId: Int): TransactionResponse {
         return service.postTransaction(courseId)
     }
+
+    override suspend fun getHistoryPayment(): HistoryPaymentResponse{
+        return service.getHistoryPayment()
+    }
+
+
 
 }
