@@ -2,10 +2,13 @@ package com.raveendra.finalproject_binar.data.network.api.datasource
 
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import com.raveendra.finalproject_binar.data.network.api.service.CourseService
+import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
+import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
@@ -41,7 +44,19 @@ interface CourseDataSource {
         courseId: Int
     ): CourseApiResponseNew
 
+    suspend fun forgotPassword(
+        email: ForgotPasswordRequest
+    ): NewOtpResponse
 
+    suspend fun forgotPasswordUserId(
+        userId: Int,
+        verifyOtpRequest: VerifyOtpRequest
+    ): LoginResponse
+
+    suspend fun resetPasswordUser(
+        userId: Int,
+        resetPasswordRequest: ResetPasswordRequest
+    ): BaseResponse
 }
 
 class CourseDataSourceImpl(
@@ -95,4 +110,27 @@ class CourseDataSourceImpl(
 
 
 
+    override suspend fun getCourseById(courseId: Int): CourseApiResponseNew {
+        return service.getCourseById(courseId)
+    }
+
+    override suspend fun forgotPassword(email: ForgotPasswordRequest): NewOtpResponse {
+        return service.forgotPassword(email)
+    }
+
+    override suspend fun forgotPasswordUserId(
+        userId: Int,
+        verifyOtpRequest: VerifyOtpRequest
+    ): LoginResponse {
+        return service.forgotPasswordUserId(userId, verifyOtpRequest)
+    }
+
+    override suspend fun resetPasswordUser(
+        userId: Int,
+        resetPasswordRequest: ResetPasswordRequest
+    ): BaseResponse {
+        return service.resetPasswordUserId(
+            userId, resetPasswordRequest
+        )
+    }
 }

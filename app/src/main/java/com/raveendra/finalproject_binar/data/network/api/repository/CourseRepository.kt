@@ -1,14 +1,18 @@
 package com.raveendra.finalproject_binar.data.network.api.repository
 
 import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSource
+import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
+import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
+import com.raveendra.finalproject_binar.domain.ForgotPasswordDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
@@ -47,6 +51,20 @@ interface CourseRepository {
     ): Flow<ResultWrapper<DetailResponseCourseDomain>>
 
     suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>>
+
+    suspend fun forgotPassword(
+        email: ForgotPasswordRequest
+    ): Flow<ResultWrapper<NewOtpDomain>>
+
+    suspend fun forgotPasswordUserId(
+        userId: Int,
+        verifyOtpRequest: VerifyOtpRequest
+    ): Flow<ResultWrapper<LoginDomain>>
+
+    suspend fun resetPassword(
+        userId: Int,
+        resetPasswordRequest: ResetPasswordRequest
+    ): Flow<ResultWrapper<BaseResponse>>
 }
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
@@ -106,6 +124,33 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
             dataSource.getCourseById(courseId).toDomain()
         }
     }
+
+    override suspend fun forgotPassword(email: ForgotPasswordRequest): Flow<ResultWrapper<NewOtpDomain>> {
+        return proceedFlow {
+            (dataSource.forgotPassword(email).toDomain() ?: "Email tidak ditemuka") as NewOtpDomain
+        }
+    }
+
+    override suspend fun forgotPasswordUserId(
+        userId: Int,
+        verifyOtpRequest: VerifyOtpRequest
+    ): Flow<ResultWrapper<LoginDomain>> {
+        return proceedFlow {
+            dataSource.forgotPasswordUserId(userId, verifyOtpRequest).toDomain()
+        }
+    }
+
+    override suspend fun resetPassword(
+        userId: Int,
+        resetPasswordRequest: ResetPasswordRequest
+    ): Flow<ResultWrapper<BaseResponse>> {
+        return proceedFlow {
+            dataSource.resetPasswordUser(userId, resetPasswordRequest)
+        }
+    }
+}
+
+
 
     override suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>> {
         return proceedFlow {

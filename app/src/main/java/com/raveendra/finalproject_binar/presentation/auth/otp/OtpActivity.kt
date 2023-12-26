@@ -13,10 +13,13 @@ import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.databinding.ActivityOtpBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
+import com.raveendra.finalproject_binar.presentation.auth.resetpassword.ResetPasswordActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
+import com.raveendra.finalproject_binar.utils.ToastyUtil
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -26,27 +29,28 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
     companion object {
         const val EXTRA_EMAIL = "EXTRA_EMAIL"
         const val EXTRA_ID = "EXTRA_ID"
-        const val EXTRA_IS_FROM_LOGIN = "EXTRA_IS_FROM_LOGIN"
-        fun navigate(context: Context, email: String, id: Int, isFromLogin : Boolean = false) = with(context) {
-            startActivity(
-                Intent(
-                    this,
-                    OtpActivity::class.java
+        const val EXTRA_ORIGIN = "EXTRA_ORIGIN"
+        fun navigate(context: Context, email: String, id: Int, origin: Int = 0) =
+            with(context) {
+                startActivity(
+                    Intent(
+                        this,
+                        OtpActivity::class.java
+                    )
+                        .putExtra(EXTRA_EMAIL, email)
+                        .putExtra(EXTRA_ID, id)
+                        .putExtra(EXTRA_ORIGIN, origin)
                 )
-                    .putExtra(EXTRA_EMAIL, email)
-                    .putExtra(EXTRA_ID, id)
-                    .putExtra(EXTRA_IS_FROM_LOGIN, isFromLogin)
-            )
-        }
+            }
 
-        fun navigate(context: Context, email: String,isFromLogin : Boolean = true) = with(context) {
+        fun navigate(context: Context, email: String, origin: Int = 0) = with(context) {
             startActivity(
                 Intent(
                     this,
                     OtpActivity::class.java
                 )
                     .putExtra(EXTRA_EMAIL, email)
-                    .putExtra(EXTRA_IS_FROM_LOGIN, isFromLogin)
+                    .putExtra(EXTRA_ORIGIN, origin)
             )
         }
     }
@@ -59,8 +63,8 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
     private val idExtra by lazy {
         intent.getIntExtra(EXTRA_ID, 0)
     }
-    private val isFromLoginExtra by lazy {
-        intent.getBooleanExtra(EXTRA_IS_FROM_LOGIN, false)
+    private val originExtra by lazy {
+        intent.getIntExtra(EXTRA_ORIGIN, 0)
     }
 
     override val viewModel: OtpViewModel by viewModel()
@@ -71,11 +75,19 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
     override fun setupViews(): Unit = with(binding) {
         tvOtpDesc.text = getString(R.string.label_otp_desc, emailExtra)
         tvResendOtpCountdown.text = getString(R.string.label_otp_timer, "56")
-        if (idExtra != 0){
+        if (originExtra == 2) {
             otpView.apply {
                 requestFocus()
                 setOtpCompletionListener {
                     viewModel.postVerifyOtp(idExtra, VerifyOtpRequest(code = it))
+                }
+            }
+        }
+        if (originExtra == 3) {
+            otpView.apply {
+                requestFocus()
+                setOtpCompletionListener {
+                    viewModel.forgotPassword(idExtra, VerifyOtpRequest(code = it))
                 }
             }
         }
@@ -87,7 +99,7 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
             startCountdown()
         }
 
-        if (isFromLoginExtra) viewModel.postRequestOtp(NewOtpRequest(emailExtra))
+        if (originExtra == 1) viewModel.postRequestOtp(NewOtpRequest(emailExtra))
     }
 
     private fun startCountdown() {
@@ -112,30 +124,35 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
         lifecycleScope.launch {
             viewModel.requestOtpResult.collect {
                 it.proceedWhen(
-                    doOnSuccess = {result ->
+                    doOnSuccess = { result ->
                         binding.otpView.apply {
                             requestFocus()
                             setOtpCompletionListener {
                                 result.payload?.data?.newOtpRequest?.userId?.let { userId ->
                                     viewModel.postVerifyOtp(
-                                        userId, VerifyOtpRequest(code = it))
+                                        userId, VerifyOtpRequest(code = it)
+                                    )
                                 }
                             }
                         }
                     },
                     doOnError = { error ->
-                        if(error.exception is ApiException){
+                        if (error.exception is ApiException) {
                             val exceptionMessage = error.exception.getParsedError()?.message
-                            Toast.makeText(
-                                this@OtpActivity,
-                                exceptionMessage,
-                                Toast.LENGTH_SHORT
+                            ToastyUtil.configureToasty()
+                            Toasty.error(
+                                applicationContext,
+                                "OTP Not Verified $exceptionMessage",
+                                Toast.LENGTH_SHORT,
+                                true
                             ).show()
-                        }else if (error.exception is NoInternetException){
-                            Toast.makeText(
-                                this@OtpActivity,
-                                getString(R.string.label_error_no_internet),
-                                Toast.LENGTH_SHORT
+                        } else if (error.exception is NoInternetException) {
+                            ToastyUtil.configureToasty()
+                            Toasty.error(
+                                applicationContext,
+                                "Connection Failed Please waiting and try again",
+                                Toast.LENGTH_SHORT,
+                                true
                             ).show()
                         }
                     }
@@ -150,13 +167,39 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
                         MainActivity.navigateWithFlag(this@OtpActivity)
                     },
                     doOnError = { error ->
-                        if(error.exception is ApiException){
+                        if (error.exception is ApiException) {
                             Toast.makeText(
                                 this@OtpActivity,
                                 error.exception.getParsedError()?.message,
                                 Toast.LENGTH_SHORT
                             ).show()
-                        }else if (error.exception is NoInternetException){
+                        } else if (error.exception is NoInternetException) {
+                            Toast.makeText(
+                                this@OtpActivity,
+                                getString(R.string.label_error_no_internet),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                )
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.forgotPasswordUserId.collect {
+                it.proceedWhen(
+                    doOnSuccess = { result ->
+                        val message = result.payload?.message
+                        ResetPasswordActivity.navigate(this@OtpActivity, idExtra)
+                        Toast.makeText(this@OtpActivity, "$message", Toast.LENGTH_SHORT).show()
+                    },
+                    doOnError = { error ->
+                        if (error.exception is ApiException) {
+                            Toast.makeText(
+                                this@OtpActivity,
+                                error.exception.getParsedError()?.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else if (error.exception is NoInternetException) {
                             Toast.makeText(
                                 this@OtpActivity,
                                 getString(R.string.label_error_no_internet),

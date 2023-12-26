@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectBinar"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".presentation.auth.resetpassword.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.forgotpassword.ForgotPasswordUserIdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.forgotpassword.ForgotPasswordActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.seeallpopularcourse.SeeAllPopularCourseActivity"
             android:exported="false" />
@@ -35,19 +50,13 @@
             android:exported="false" />
         <activity
             android:name=".presentation.onboarding.OnBoardingActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="false" />
         <activity
-            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
             android:name=".presentation.detailcourse.DetailCourseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
             android:exported="true" />
         <activity
             android:name=".presentation.auth.otp.OtpActivity"

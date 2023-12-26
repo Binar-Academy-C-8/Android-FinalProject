@@ -3,10 +3,13 @@ package com.raveendra.finalproject_binar.data.network.api.service
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.raveendra.finalproject_binar.BuildConfig
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
+import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
+import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
@@ -24,6 +27,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -72,6 +76,22 @@ interface CourseService {
         @Path("id") courseId: Int
     ): CourseApiResponseNew
 
+    @POST("auth/forgot-password")
+    suspend fun forgotPassword(
+        @Body email: ForgotPasswordRequest
+    ): NewOtpResponse
+
+    @POST("auth/forgot-password/{userId}")
+    suspend fun forgotPasswordUserId(
+        @Path("userId") userId: Int,
+        @Body verifyOtpRequest: VerifyOtpRequest
+    ): LoginResponse
+
+    @PATCH("auth/reset-password/{userId}")
+    suspend fun resetPasswordUserId(
+        @Path("userId") userId: Int,
+        @Body resetPasswordRequest: ResetPasswordRequest
+    ): BaseResponse
 
     companion object {
 

@@ -108,6 +108,9 @@
     <string name="intended_for">Intended For</string>
     <string name="kelas_ini_ditujukan_untuk">Kelas ini ditujukan Untuk</string>
     <string name="about_course">About Course</string>
+    <string name="label_new_otp">New OTP</string>
+    <string name="label_password_confirmation">Password Confirmation</string>
+    <string name="label_reset_password">Reset Password</string>
     <string name="label_payment_summary">Rincian Pembayaran</string>
     <string name="chapter_1_pendahuluan">Chapter 1 - Pendahuluan</string>
     <string name="lihat_deskripsi">Lihat Deskripsi</string>

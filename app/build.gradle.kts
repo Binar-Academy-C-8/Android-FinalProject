@@ -141,6 +141,9 @@ dependencies {
 
     //shimmer
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
+    //alert dialog
+    implementation ("com.github.gabriel-TheCode:AestheticDialogs:1.3.8")
+    implementation ("com.github.GrenderG:Toasty:1.5.2")
 
     //swipe to refresh list
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
