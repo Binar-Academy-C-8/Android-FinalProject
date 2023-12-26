@@ -6,6 +6,9 @@ import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.BaseResponse
+import com.raveendra.finalproject_binar.data.response.LoginResponse
+import com.raveendra.finalproject_binar.domain.ForgotPasswordDomain
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +23,17 @@ class OtpViewModel(private val repository: CourseRepository) : ViewModel() {
     private val _verifyOtpResult = MutableSharedFlow<ResultWrapper<LoginDomain>>()
     val verifyOtpResult: MutableSharedFlow<ResultWrapper<LoginDomain>>
         get() = _verifyOtpResult
+    private val _forgotPasswordUserId = MutableSharedFlow<ResultWrapper<LoginDomain>>()
+    val forgotPasswordUserId: MutableSharedFlow<ResultWrapper<LoginDomain>>
+        get() = _forgotPasswordUserId
 
+    fun forgotPassword(userId: Int, verifyOtpRequest: VerifyOtpRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.forgotPasswordUserId(userId, verifyOtpRequest).collect {
+                _forgotPasswordUserId.emit(it)
+            }
+        }
+    }
 
     fun postRequestOtp(newOtpRequest: NewOtpRequest) {
         viewModelScope.launch(Dispatchers.IO) {

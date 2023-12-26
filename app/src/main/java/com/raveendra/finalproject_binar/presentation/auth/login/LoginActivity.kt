@@ -11,14 +11,17 @@ import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.databinding.ActivityLoginBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
+import com.raveendra.finalproject_binar.presentation.auth.forgotpassword.ForgotPasswordActivity
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.LabelTextFieldView
 import com.raveendra.finalproject_binar.utils.NoInternetException
+import com.raveendra.finalproject_binar.utils.ToastyUtil
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.highLightWord
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,6 +48,9 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
         get() = ActivityLoginBinding::inflate
 
     override fun setupViews() = with(binding) {
+        tvForgetPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,ForgotPasswordActivity::class.java))
+        }
         btLogin.setOnClickListener {
             doLogin()
         }
@@ -61,26 +67,34 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
                         preferences.appToken = result.payload?.data?.token.toString()
                         MainActivity.navigateWithFlag(this@LoginActivity)
                     },
-                    doOnError = {error ->
-                        if(error.exception is ApiException){
+                    doOnError = { error ->
+                        if (error.exception is ApiException) {
                             val exceptionMessage = error.exception.getParsedError()?.message
-                            if (exceptionMessage.equals("Pengguna belum diverifikasi", ignoreCase = true)) {
+                            if (exceptionMessage.equals(
+                                    "Pengguna belum diverifikasi",
+                                    ignoreCase = true
+                                )
+                            ) {
                                 OtpActivity.navigate(
                                     this@LoginActivity,
                                     binding.etEmail.getText().toString().trim()
                                 )
                             } else {
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    exceptionMessage,
-                                    Toast.LENGTH_SHORT
+                                ToastyUtil.configureToasty()
+                                Toasty.error(
+                                    applicationContext,
+                                    "Login Failed Please check username and password",
+                                    Toast.LENGTH_SHORT,
+                                    true
                                 ).show()
                             }
-                        }else if (error.exception is NoInternetException){
-                            Toast.makeText(
-                                this@LoginActivity,
-                                getString(R.string.label_error_no_internet),
-                                Toast.LENGTH_SHORT
+                        } else if (error.exception is NoInternetException) {
+                            ToastyUtil.configureToasty()
+                            Toasty.error(
+                                applicationContext,
+                                "Connection Failed Please waiting and try again",
+                                Toast.LENGTH_SHORT,
+                                true
                             ).show()
                         }
                     }

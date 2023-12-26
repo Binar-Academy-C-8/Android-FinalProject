@@ -6,9 +6,6 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
-import com.raveendra.finalproject_binar.utils.highLightWord
-import com.raveendra.finalproject_binar.utils.proceedWhen
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.databinding.ActivityRegisterBinding
@@ -16,6 +13,11 @@ import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.LabelTextFieldView
 import com.raveendra.finalproject_binar.utils.NoInternetException
+import com.raveendra.finalproject_binar.utils.ToastyUtil
+import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.highLightWord
+import com.raveendra.finalproject_binar.utils.proceedWhen
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,18 +56,22 @@ class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegist
                         result.payload?.data?.dataValues?.id?.let { id -> navigateToOtp(id) }
                     },
                     doOnError = { error ->
-                        if(error.exception is ApiException){
+                        if (error.exception is ApiException) {
                             val exceptionMessage = error.exception.getParsedError()?.message
-                            Toast.makeText(
-                                this@RegisterActivity,
-                                exceptionMessage,
-                                Toast.LENGTH_SHORT
+                            ToastyUtil.configureToasty()
+                            Toasty.error(
+                                applicationContext,
+                                "Register Failed $exceptionMessage",
+                                Toast.LENGTH_SHORT,
+                                true
                             ).show()
-                        }else if (error.exception is NoInternetException){
-                            Toast.makeText(
-                                this@RegisterActivity,
-                                getString(R.string.label_error_no_internet),
-                                Toast.LENGTH_SHORT
+                        } else if (error.exception is NoInternetException) {
+                            ToastyUtil.configureToasty()
+                            Toasty.error(
+                                applicationContext,
+                                "Connection Failed Please waiting and try again",
+                                Toast.LENGTH_SHORT,
+                                true
                             ).show()
                         }
                     }

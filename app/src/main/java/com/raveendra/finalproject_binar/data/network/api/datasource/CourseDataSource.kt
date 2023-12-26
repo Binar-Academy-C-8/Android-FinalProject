@@ -1,23 +1,23 @@
 package com.raveendra.finalproject_binar.data.network.api.datasource
 
-import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import com.raveendra.finalproject_binar.data.network.api.service.CourseService
+import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
+import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
+import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
-import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
+import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
-import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
-import com.raveendra.finalproject_binar.data.response.historypayment.UserTransactionResponse
-import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
-import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
+import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
+import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 
 interface CourseDataSource {
 
@@ -39,7 +39,19 @@ interface CourseDataSource {
         courseId: Int
     ): CourseApiResponseNew
 
+    suspend fun forgotPassword(
+        email: ForgotPasswordRequest
+    ): NewOtpResponse
 
+    suspend fun forgotPasswordUserId(
+        userId: Int,
+        verifyOtpRequest: VerifyOtpRequest
+    ): LoginResponse
+
+    suspend fun resetPasswordUser(
+        userId: Int,
+        resetPasswordRequest: ResetPasswordRequest
+    ): BaseResponse
 }
 
 class CourseDataSourceImpl(
@@ -92,5 +104,23 @@ class CourseDataSourceImpl(
     }
 
 
+    override suspend fun forgotPassword(email: ForgotPasswordRequest): NewOtpResponse {
+        return service.forgotPassword(email)
+    }
 
+    override suspend fun forgotPasswordUserId(
+        userId: Int,
+        verifyOtpRequest: VerifyOtpRequest
+    ): LoginResponse {
+        return service.forgotPasswordUserId(userId, verifyOtpRequest)
+    }
+
+    override suspend fun resetPasswordUser(
+        userId: Int,
+        resetPasswordRequest: ResetPasswordRequest
+    ): BaseResponse {
+        return service.resetPasswordUserId(
+            userId, resetPasswordRequest
+        )
+    }
 }

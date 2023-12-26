@@ -1,7 +1,6 @@
 package com.raveendra.finalproject_binar.domain
 
 
-
 data class CourseDomain(
     val aboutCourse: String?,
     val category: String?,
@@ -20,5 +19,5 @@ data class CourseDomain(
     val modulePerCourse: Int?,
     val updatedAt: String?,
     val userId: Int?,
-    val ratingCourse: Double?
+    val ratingCourse: Double?,
 )
