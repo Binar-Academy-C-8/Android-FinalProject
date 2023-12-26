@@ -119,6 +119,7 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     binding.shimmerViewTitle.isVisible = false
                     binding.shimmerViewCourse.stopShimmer()
                     binding.shimmerViewCourse.isVisible = false
+                    binding.layoutStateRv.ivNotFound2.isVisible = false
                     success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.contentUrl?.let { firstUrl ->
                         viewModel.getContentUrl(
                             firstUrl
@@ -155,9 +156,11 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     binding.shimmerViewTitle.isVisible = true
                     binding.shimmerViewCourse.startShimmer()
                     binding.shimmerViewCourse.isVisible = true
+                    binding.layoutStateRv.ivNotFound2.isVisible = false
                 },
                 doOnError = { error ->
                     error.message.toString()
+                    binding.layoutStateRv.ivNotFound2.isVisible = true
                 }
             )
         }
