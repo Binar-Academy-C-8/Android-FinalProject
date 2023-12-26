@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.OrientationEventListener
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -19,12 +21,16 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Ful
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
+import com.raveendra.finalproject_binar.utils.DataItem
+import com.raveendra.finalproject_binar.utils.HeaderItem
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import com.xwray.groupie.GroupieAdapter
+import com.xwray.groupie.Section
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.regex.Pattern
 
-class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDetailCourseBinding>() {
+class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDetailCourseBinding>() {
 
     companion object {
         @StringRes
@@ -49,6 +55,9 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
 
     override val viewModel: DetailViewModel by viewModel()
 
+    private val adapterGropie: GroupieAdapter by lazy {
+        GroupieAdapter()
+    }
 
     override val bindingInflater: (LayoutInflater) -> ActivityDetailCourseBinding
         get() = ActivityDetailCourseBinding::inflate
@@ -66,22 +75,23 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         initYoutube()
-        val orientationEventListener = object : OrientationEventListener(this@DetailCourseActivity) {
-            override fun onOrientationChanged(orientation: Int) {
-                val newOrientation = when (orientation) {
-                    in 0..44 -> 0
-                    in 45..134 -> 1
-                    in 135..224 -> 2
-                    in 225..314 -> 3
-                    in 315..359 -> 0
-                    else -> ORIENTATION_UNKNOWN
+        val orientationEventListener =
+            object : OrientationEventListener(this@DetailCourseActivity) {
+                override fun onOrientationChanged(orientation: Int) {
+                    val newOrientation = when (orientation) {
+                        in 0..44 -> 0
+                        in 45..134 -> 1
+                        in 135..224 -> 2
+                        in 225..314 -> 3
+                        in 315..359 -> 0
+                        else -> ORIENTATION_UNKNOWN
+                    }
+                    if (newOrientation != previousOrientation && !isFullscreen) {
+                        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+                    }
+                    previousOrientation = newOrientation
                 }
-                if (newOrientation != previousOrientation && !isFullscreen) {
-                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
-                }
-                previousOrientation = newOrientation
             }
-        }
         val autoRotationOn = Settings.System.getInt(
             contentResolver,
             Settings.System.ACCELEROMETER_ROTATION, 0
@@ -91,25 +101,85 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
         } else {
             orientationEventListener.disable()
         }
-        sectionPageFragment()
+        /*sectionPageFragment()*/
 
         viewModel.getVideos(courseIdExtra)
+
+        prevPage()
+        showDesc()
+
     }
 
     override fun setupObservers() {
+
         viewModel.detailData.observe(this) {
             it.proceedWhen(
                 doOnSuccess = { success ->
+                    binding.shimmerViewTitle.stopShimmer()
+                    binding.shimmerViewTitle.isVisible = false
+                    binding.shimmerViewCourse.stopShimmer()
+                    binding.shimmerViewCourse.isVisible = false
                     success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.contentUrl?.let { firstUrl ->
                         viewModel.getContentUrl(
                             firstUrl
                         )
                     }
+
+                    val detailAbout = success.payload?.data
+                    binding.tvAbout.text = detailAbout?.aboutCourse
+                    binding.tvIntendedFor.text = detailAbout?.intendedFor
+
+                    binding.rvPage.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = adapterGropie
+                    }
+
+                    val section = success.payload?.data?.chapters?.map { chapters ->
+                        val section = Section()
+                        section.setHeader(HeaderItem(chapters?.chapterTitle.orEmpty()))
+
+                        val dataSection = chapters?.contents?.map { data ->
+                            data?.let { contents ->
+                                DataItem(contents) { data ->
+                                    viewModel.getContentUrl(data.contentUrl)
+                                }
+                            }
+                        }
+                        dataSection?.let { it1 -> section.addAll(it1) }
+                        section
+                    }
+                    section?.let { data -> adapterGropie.addAll(data) }
+
+                }, doOnLoading = {
+                    binding.shimmerViewTitle.startShimmer()
+                    binding.shimmerViewTitle.isVisible = true
+                    binding.shimmerViewCourse.startShimmer()
+                    binding.shimmerViewCourse.isVisible = true
                 },
                 doOnError = { error ->
                     error.message.toString()
                 }
             )
+        }
+    }
+
+    private fun prevPage() {
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun showDesc() {
+        binding.btDescription.setOnClickListener {
+            binding.llAboutCourse.isVisible = true
+            binding.btDescription.isVisible = false
+            binding.btDescription2.isVisible = true
+        }
+
+        binding.btDescription2.setOnClickListener {
+            binding.llAboutCourse.isVisible = false
+            binding.btDescription2.isVisible = false
+            binding.btDescription.isVisible = true
         }
     }
 
@@ -154,8 +224,8 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
     }
 
     private fun observeDataVideo() {
-        viewModel.contentUrl.observe(this){result ->
-            val urlVideo =extractVideoIdFromUrl(result)
+        viewModel.contentUrl.observe(this) { result ->
+            val urlVideo = extractVideoIdFromUrl(result)
             playVideo(urlVideo)
         }
     }
@@ -171,7 +241,11 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
         isFullscreen = false
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         binding.playerView.isVisible = true
-        binding.viewPager2.isVisible = true
+        /*binding.viewPager2.isVisible = true*/
+        binding.llAboutCourse.isVisible = true
+        binding.tvAbout.isVisible = true
+        binding.tvIntendedFor.isVisible = true
+        binding.rvPage.isVisible = true
         binding.fullScreenView.apply {
             isVisible = false
             removeAllViews()
@@ -183,7 +257,11 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
         isFullscreen = true
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
         binding.playerView.isVisible = false
-        binding.viewPager2.isVisible = false
+        binding.llAboutCourse.isVisible = false
+        binding.tvAbout.isVisible = false
+        binding.tvIntendedFor.isVisible = false
+        binding.rvPage.isVisible = false
+        /*binding.viewPager2.isVisible = false*/
         binding.fullScreenView.apply {
             isVisible = true
             addView(view)
@@ -191,14 +269,15 @@ class DetailCourseActivity :  BaseViewModelActivity<DetailViewModel, ActivityDet
     }
 
 
-    private fun sectionPageFragment() {
+    /*private fun sectionPageFragment() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this@DetailCourseActivity)
         binding.viewPager2.adapter = sectionsPagerAdapter
         TabLayoutMediator(binding.tabsLayout, binding.viewPager2) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-    }
+    }*/
 
+//
 
 }
