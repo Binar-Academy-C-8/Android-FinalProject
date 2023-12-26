@@ -311,6 +311,17 @@
 
             </com.facebook.shimmer.ShimmerFrameLayout>
 
+            <include
+                android:id="@+id/layout_state_rv"
+                layout="@layout/common_layout_content_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_materi_belajar"
+                tools:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_page"
                 android:layout_width="match_parent"
