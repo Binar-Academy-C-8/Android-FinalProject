@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/tv_section_data"
             style="@style/TextMedium14"
-            android:layout_width="308dp"
+            android:layout_width="306dp"
             android:layout_height="wrap_content"
             android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,8 +28,8 @@
 
         <ImageButton
             android:id="@+id/ic_play"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:background="@drawable/rounded_background_green"
             android:contentDescription="@string/titles_ic_play"
             android:gravity="fill"
