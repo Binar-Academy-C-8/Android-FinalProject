@@ -1,41 +1,46 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="2dp"
-    android:padding="8dp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="2dp">
+    android:paddingHorizontal="@dimen/dimen_16_dp"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/tv_section_data"
+        style="@style/TextMedium14"
+        android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginEnd="@dimen/dimen_8_dp"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ic_play"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nama Video" />
 
-        <TextView
-            android:id="@+id/tv_section_data"
-            style="@style/TextMedium14"
-            android:layout_width="306dp"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Nama Video" />
+    <ImageButton
+        android:id="@+id/ic_play"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginVertical="@dimen/dimen_16_dp"
+        android:background="@drawable/rounded_background_green"
+        android:contentDescription="@string/titles_ic_play"
+        android:gravity="fill"
+        android:src="@drawable/ic_play_rv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/ic_play"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@drawable/rounded_background_green"
-            android:contentDescription="@string/titles_ic_play"
-            android:gravity="fill"
-            android:src="@drawable/ic_play_rv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/dimen_16_dp"
+        android:background="@color/neutral_06"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

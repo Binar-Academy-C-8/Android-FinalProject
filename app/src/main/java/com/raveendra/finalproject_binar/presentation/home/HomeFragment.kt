@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.raveendra.finalproject_binar.R
+import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.domain.CategoryDomain
-import com.raveendra.finalproject_binar.presentation.home.SwipeRefreshList
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
@@ -18,11 +18,14 @@ import com.raveendra.finalproject_binar.presentation.payment.payment_summary.Pay
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
+
+    private val preferences: PreferenceManager by inject()
 
     var category: Int? = null
 
@@ -37,7 +40,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val popularCourseAdapter: AdapterPopularCourse by lazy {
         AdapterPopularCourse(
             itemClick = {
-                it.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id) }
+                if (preferences.isLoggedIn())  it.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id) }
+                else Toast.makeText(requireContext(), getString(R.string.label_error_not_login_general), Toast.LENGTH_SHORT).show()
+
             },
             buttonClick = {
                 it.id?.let { id ->

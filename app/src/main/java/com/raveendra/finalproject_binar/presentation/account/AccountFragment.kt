@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.raveendra.finalproject_binar.BuildConfig
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.FragmentAccountBinding
-import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryActivity
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
-import com.raveendra.finalproject_binar.presentation.account.SwipeRefreshList
+import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
@@ -84,11 +82,13 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
             }, doOnError = { error ->
                 if (error.exception is ApiException) {
                     val exceptionMessage = error.exception.getParsedError()?.message
-                    Toast.makeText(
-                        requireContext(),
-                        exceptionMessage,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if (!exceptionMessage.isNullOrBlank()){
+                        Toast.makeText(
+                            requireContext(),
+                            exceptionMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else if (error.exception is NoInternetException) {
                     Toast.makeText(
                         requireContext(),

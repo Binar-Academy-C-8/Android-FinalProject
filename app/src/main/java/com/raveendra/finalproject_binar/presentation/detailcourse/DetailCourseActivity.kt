@@ -4,22 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.OrientationEventListener
 import android.view.View
-import androidx.annotation.StringRes
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.tabs.TabLayoutMediator
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
-import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
 import com.raveendra.finalproject_binar.utils.DataItem
 import com.raveendra.finalproject_binar.utils.HeaderItem
@@ -28,16 +24,10 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Section
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.regex.Pattern
 
 class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDetailCourseBinding>() {
 
     companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
         const val EXTRA_COURSE_ID = "EXTRA_COURSE_ID"
         fun navigate(context: Context, courseId: Int) = with(context) {
             startActivity(
@@ -104,8 +94,10 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         /*sectionPageFragment()*/
 
         viewModel.getVideos(courseIdExtra)
-
-        prevPage()
+        binding.rvPage.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = adapterGropie
+        }
         showDesc()
 
     }
@@ -120,7 +112,7 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     binding.shimmerViewCourse.stopShimmer()
                     binding.shimmerViewCourse.isVisible = false
                     binding.layoutStateRv.ivNotFound2.isVisible = false
-                    success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.contentUrl?.let { firstUrl ->
+                    success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.youtubeId?.let { firstUrl ->
                         viewModel.getContentUrl(
                             firstUrl
                         )
@@ -130,19 +122,26 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     binding.tvAbout.text = detailAbout?.aboutCourse
                     binding.tvIntendedFor.text = detailAbout?.intendedFor
 
-                    binding.rvPage.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = adapterGropie
-                    }
 
+                    var headerPosition = 1
                     val section = success.payload?.data?.chapters?.map { chapters ->
                         val section = Section()
-                        section.setHeader(HeaderItem(chapters?.chapterTitle.orEmpty()))
+                        chapters?.let { chapter ->
+                            section.setHeader(
+                                HeaderItem(
+                                    chapter,
+                                    this@DetailCourseActivity,
+                                    headerPosition
+                                )
+                            )
+                            headerPosition++
+                        }
+
 
                         val dataSection = chapters?.contents?.map { data ->
                             data?.let { contents ->
-                                DataItem(contents) { data ->
-                                    viewModel.getContentUrl(data.contentUrl)
+                                DataItem(this@DetailCourseActivity,contents) { data ->
+                                    viewModel.getContentUrl(data.youtubeId)
                                 }
                             }
                         }
@@ -166,12 +165,6 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         }
     }
 
-    private fun prevPage() {
-        binding.ivBack.setOnClickListener {
-            onBackPressed()
-        }
-    }
-
     private fun showDesc() {
         binding.btDescription.setOnClickListener {
             binding.llAboutCourse.isVisible = true
@@ -185,19 +178,6 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
             binding.btDescription.isVisible = true
         }
     }
-
-    private fun extractVideoIdFromUrl(videoUrl: String): String? {
-        val pattern =
-            "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/|youtu.be\\/|v\\/|\\/\\?v=|\\/videos\\/|\\/embed\\/|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed&v=|%2Fvideos%2F|%2Fvideos%2F|watch\\?v=|v=|v/|/videos/|watch\\?v=|embed\\/|youtu.be\\/|v=|v\\/|watch\\?v=|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed&v=|%2Fvideos%2F|%2Fvideos%2F|%2Fvideos%2F|%2Fvideos%2F)([^#\\&\\?\\n]*)"
-        val compiledPattern = Pattern.compile(pattern)
-        val matcher = compiledPattern.matcher(videoUrl)
-        return if (matcher.find()) {
-            matcher.group()
-        } else {
-            null
-        }
-    }
-
 
     private fun initYoutube() {
         val iFramePlayerOptions = IFramePlayerOptions.Builder()
@@ -228,8 +208,7 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
 
     private fun observeDataVideo() {
         viewModel.contentUrl.observe(this) { result ->
-            val urlVideo = extractVideoIdFromUrl(result)
-            playVideo(urlVideo)
+            playVideo(result)
         }
     }
 
@@ -244,7 +223,6 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         isFullscreen = false
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         binding.playerView.isVisible = true
-        /*binding.viewPager2.isVisible = true*/
         binding.llAboutCourse.isVisible = true
         binding.tvAbout.isVisible = true
         binding.tvIntendedFor.isVisible = true
@@ -264,23 +242,9 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         binding.tvAbout.isVisible = false
         binding.tvIntendedFor.isVisible = false
         binding.rvPage.isVisible = false
-        /*binding.viewPager2.isVisible = false*/
         binding.fullScreenView.apply {
             isVisible = true
             addView(view)
         }
     }
-
-
-    /*private fun sectionPageFragment() {
-        val sectionsPagerAdapter = SectionsPagerAdapter(this@DetailCourseActivity)
-        binding.viewPager2.adapter = sectionsPagerAdapter
-        TabLayoutMediator(binding.tabsLayout, binding.viewPager2) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-
-    }*/
-
-//
-
 }

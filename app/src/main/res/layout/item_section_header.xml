@@ -8,14 +8,28 @@
 
     <TextView
         android:id="@+id/tv_section_header_name"
-        android:layout_width="match_parent"
+        style="@style/TextBold14"
+        android:textColor="@color/primary_dark_blue_06"
+        android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        tools:text="Ini header"
-        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_marginStart="@dimen/dimen_8_dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDuration"
+        app:layout_constraintEnd_toStartOf="@+id/tvDuration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvDuration"
+        tools:text="Ini header" />
+
+    <TextView
+        android:id="@+id/tvDuration"
+        style="@style/TextBold12"
+        android:layout_marginTop="@dimen/dimen_12_dp"
+        android:layout_width="wrap_content"
+        android:textColor="@color/primary_dark_blue_06"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_8_dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="60 menit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

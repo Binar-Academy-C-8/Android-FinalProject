@@ -52,5 +52,7 @@ data class ContentDomain(
     val id: Int,
     val status: Boolean,
     val updatedAt: String,
+    val isLocked: Boolean,
+    val isWatched: Boolean,
     val youtubeId: String
 )

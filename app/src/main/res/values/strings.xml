@@ -122,4 +122,7 @@
 
     <string name="label_var_module">%s Modul</string>
     <string name="label_var_minute">%s Menit</string>
+    <string name="label_var_chapter">Chapter %s</string>
+
+    <string name="label_error_not_login_general">Silahkan login untuk menikmati fitur ini</string>
 </resources>
