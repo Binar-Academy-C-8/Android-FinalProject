@@ -44,6 +44,8 @@ class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegist
             navigateToLogin()
         }
         binding.btRegister.setOnClickListener {
+            binding.lottie.speed = 5f
+            binding.lottie.playAnimation()
             doRegister()
         }
     }
