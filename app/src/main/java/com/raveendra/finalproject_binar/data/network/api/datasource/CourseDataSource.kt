@@ -12,6 +12,7 @@ import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
+import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
@@ -42,6 +43,8 @@ interface CourseDataSource {
     suspend fun forgotPassword(
         email: ForgotPasswordRequest
     ): NewOtpResponse
+    suspend fun getNotification(): NotificationResponse
+
 
     suspend fun forgotPasswordUserId(
         userId: Int,
@@ -89,6 +92,9 @@ class CourseDataSourceImpl(
         return service.getCourseById(courseId)
     }
 
+    override suspend fun getNotification(): NotificationResponse {
+        return service.getNotification()
+    }
 
 
     override suspend fun getProfile(): ProfileResponse {

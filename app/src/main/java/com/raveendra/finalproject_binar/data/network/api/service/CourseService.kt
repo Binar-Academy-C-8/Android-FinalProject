@@ -14,6 +14,7 @@ import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
+import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
@@ -92,6 +93,9 @@ interface CourseService {
         @Path("userId") userId: Int,
         @Body resetPasswordRequest: ResetPasswordRequest
     ): BaseResponse
+    @GET("notification/getAllNotif")
+    suspend fun getNotification(): NotificationResponse
+
 
     companion object {
 

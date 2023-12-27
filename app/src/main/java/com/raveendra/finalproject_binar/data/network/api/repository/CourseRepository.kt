@@ -8,6 +8,7 @@ import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
+import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
@@ -25,6 +26,7 @@ import com.raveendra.finalproject_binar.domain.TransactionDomain
 import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.utils.proceedFlow
+import com.raveendrag.finalproject_binar.domain.NotificationResponseDomain
 import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
@@ -65,6 +67,8 @@ interface CourseRepository {
         userId: Int,
         resetPasswordRequest: ResetPasswordRequest
     ): Flow<ResultWrapper<BaseResponse>>
+
+    suspend fun getNotification(): Flow<ResultWrapper<NotificationResponseDomain>>
 }
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
@@ -153,8 +157,10 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
             dataSource.getHistoryPayment().toDomain()
         }
     }
+
+    override suspend fun getNotification(): Flow<ResultWrapper<NotificationResponseDomain>> {
+        return proceedFlow {
+            dataSource.getNotification().toDomain()
+        }
+    }
 }
-
-
-
-
