@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.detailcourse.DetailCourseActivity">
 
-    <LinearLayout
-        android:id="@+id/ll_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary_dark_blue_06"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimen_14_dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            style="@style/TextBold18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="18dp"
-            android:text="@string/kelas_lainnya"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/player_view"
@@ -38,7 +13,7 @@
         android:layout_height="0dp"
         app:autoPlay="true"
         app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintTop_toBottomOf="@id/ll_header"
+        app:layout_constraintTop_toTopOf="parent"
         app:videoId="ixOd42SEUF0" />
 
     <!--<com.google.android.material.tabs.TabLayout
@@ -65,7 +40,10 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_0_dp"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -119,7 +97,7 @@
                         style="@style/TextBold20"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/primary_dark_blue_05"
+                        android:textColor="@color/primary_dark_blue_06"
                         app:layout_constraintEnd_toStartOf="@id/tv_level_course"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -131,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:textColor="@color/primary_dark_blue_05"
+                        android:textColor="@color/primary_dark_blue_06"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_category"
@@ -170,7 +148,8 @@
                             android:id="@+id/iv_module_course"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
-                            android:src="@drawable/ic_modul" />
+                            android:src="@drawable/ic_modul"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/tv_module_course"
@@ -193,7 +172,8 @@
                             android:id="@+id/iv_duration_course"
                             android:layout_width="14dp"
                             android:layout_height="14dp"
-                            android:src="@drawable/ic_time" />
+                            android:src="@drawable/ic_time"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/tv_duration_course"
@@ -276,11 +256,14 @@
 
             <TextView
                 android:id="@+id/tv_materi_belajar"
-                style="@style/TextBold20"
+                style="@style/TextBold16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_8_dp"
+                android:layout_marginHorizontal="@dimen/dimen_16_dp"
+                android:layout_marginTop="@dimen/dimen_16_dp"
                 android:text="@string/materi_belajar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_about_course" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
@@ -326,7 +309,7 @@
                 android:id="@+id/rv_page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_8_dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_materi_belajar"
                 tools:listitem="@layout/item_section_videos" />
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,6 +26,15 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.splash_screen.SplashScreenActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".presentation.seeallpopularcourse.SeeAllPopularCourseActivity"
             android:exported="false" />
         <activity
@@ -45,13 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.onboarding.OnBoardingActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="false" />

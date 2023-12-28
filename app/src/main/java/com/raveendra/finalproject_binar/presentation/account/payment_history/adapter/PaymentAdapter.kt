@@ -5,14 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemListCoursePaidBinding
-import com.raveendra.finalproject_binar.databinding.ItemListCoursePremiumBinding
-import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
 import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.presentation.account.payment_history.viewholder.PaymentHistoryViewHolder
-import com.raveendra.finalproject_binar.presentation.course.viewholder.CourseViewHolder
-import com.raveendra.finalproject_binar.presentation.home.adapter.PopularCourseViewHolder
 
 class PaymentAdapter(
     private val onItemClick: (UserTransactionDomain) -> Unit

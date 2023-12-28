@@ -76,9 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:indeterminate="false"
-                    android:max="100"
                     android:padding="8dp"
-                    android:progress="1"
                     app:indicatorColor="@color/primary_dark_blue_05" />
             </LinearLayout>
 

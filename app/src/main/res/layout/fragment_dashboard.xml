@@ -4,73 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.class.ClassFragment">
-
-    <androidx.core.widget.NestedScrollView
+    android:padding="@dimen/dimen_16_dp">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
-
+        android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_body"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <include
-                android:id="@+id/layout_search_bar"
-                layout="@layout/layout_search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv_category"
-                style="@style/TextBold20"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:padding="6dp"
-                android:text="@string/text_category"
-                app:layout_constraintTop_toBottomOf="@id/layout_search_bar" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_category_course"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_category"
-                tools:itemCount="4"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_category_course"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                app:layout_constraintTop_toBottomOf="@id/rv_category_course">
-
-                <TextView
-                    android:id="@+id/tv_topic"
-                    style="@style/TextBold20"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_kelas_berjalan"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                android:layout_margin="8dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/txt_kelas_berjalan"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group_filter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="@dimen/dimen_8_dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cl_title"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -95,6 +54,39 @@
                     android:text="@string/txt_selesai" />
             </com.google.android.material.chip.ChipGroup>
 
+            <include
+                android:id="@+id/layout_state_course"
+                layout="@layout/common_layout_content_state"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
+                tools:layout_editor_absoluteX="16dp"
+                tools:visibility="visible" />
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:duration="500"
+                app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
+                tools:layout_editor_absoluteX="16dp"
+                tools:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_list_course_shimmer" />
+
+                    <include layout="@layout/item_list_course_shimmer" />
+
+                    <include layout="@layout/item_list_course_shimmer" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list"
                 android:layout_width="match_parent"
@@ -105,7 +97,8 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_list_class" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

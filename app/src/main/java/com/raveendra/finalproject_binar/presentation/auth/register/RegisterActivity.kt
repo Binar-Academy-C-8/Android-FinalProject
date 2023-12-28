@@ -83,7 +83,7 @@ class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegist
     }
 
     private fun navigateToOtp(id: Int) {
-        OtpActivity.navigate(this@RegisterActivity, binding.etEmail.getText().toString(), id)
+        OtpActivity.navigate(this@RegisterActivity, binding.etEmail.getText().toString(), id, 1)
     }
 
     private fun navigateToLogin() {

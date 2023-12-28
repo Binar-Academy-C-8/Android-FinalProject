@@ -1,5 +1,7 @@
 package com.raveendra.finalproject_binar.presentation.onboarding
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -7,13 +9,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.raveendra.finalproject_binar.R
+import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.ActivityOnBoardingBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
 import com.raveendra.finalproject_binar.presentation.onboarding.adapter.OnBoardingPagerAdapter
 import com.raveendra.finalproject_binar.utils.highLightWord
+import org.koin.android.ext.android.inject
 
 class OnBoardingActivity : AppCompatActivity() {
+    companion object {
+        fun navigate(context: Context) = with(context) {
+            startActivity(
+                Intent(
+                    this,
+                    OnBoardingActivity::class.java
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+            )
+        }
+    }
+
+    private val preferences: PreferenceManager by inject()
 
     private val binding: ActivityOnBoardingBinding by lazy {
         ActivityOnBoardingBinding.inflate(layoutInflater)
@@ -25,6 +43,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setClickListeners()
         setupViewPager()
         createPageIndicator()
+        preferences.isPassOnboarding = true
     }
 
     private fun setClickListeners() {

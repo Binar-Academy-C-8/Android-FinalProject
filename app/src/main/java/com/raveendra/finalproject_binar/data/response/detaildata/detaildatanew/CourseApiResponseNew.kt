@@ -11,9 +11,97 @@ import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 @Keep
 data class CourseApiResponseNew(
     @SerializedName("data")
-    val `data`: Data? = null,
+    val `data`: DetailCourseDataResponse? = null,
     @SerializedName("status")
     val status: String? = null
+)
+@Keep
+data class DetailCourseDataResponse(
+    @SerializedName("aboutCourse")
+    val aboutCourse: String? = null,
+    @SerializedName("category")
+    val category: String? = null,
+    @SerializedName("categoryId")
+    val categoryId: Int? = null,
+    @SerializedName("chapters")
+    val chapters: List<ChapterResponse>,
+    @SerializedName("courseBy")
+    val courseBy: String? = null,
+    @SerializedName("courseCode")
+    val courseCode: String? = null,
+    @SerializedName("courseLevel")
+    val courseLevel: String? = null,
+    @SerializedName("courseName")
+    val courseName: String? = null,
+    @SerializedName("coursePrice")
+    val coursePrice: Int? = null,
+    @SerializedName("courseDiscountInPercent")
+    val courseDiscountInPercent: Int? = null,
+    @SerializedName("rawPrice")
+    val rawPrice: Int? = null,
+    @SerializedName("courseType")
+    val courseType: String? = null,
+    @SerializedName("createdAt")
+    val createdAt: String? = null,
+    @SerializedName("durationPerCourseInMinutes")
+    val durationPerCourseInMinutes: Int? = null,
+    @SerializedName("id")
+    val id: Int? = null,
+    @SerializedName("image")
+    val image: String? = null,
+    @SerializedName("intendedFor")
+    val intendedFor: String? = null,
+    @SerializedName("modulePerCourse")
+    val modulePerCourse: Int? = null,
+    @SerializedName("rating")
+    val rating: Double? = null,
+    @SerializedName("updatedAt")
+    val updatedAt: String? = null,
+    @SerializedName("userId")
+    val userId: Int? = null
+)
+@Keep
+data class ChapterResponse(
+    @SerializedName("chapterTitle")
+    val chapterTitle: String? = null,
+    @SerializedName("contents")
+    val contents: List<ContentResponse?>,
+    @SerializedName("courseId")
+    val courseId: Int? = null,
+    @SerializedName("createdAt")
+    val createdAt: String? = null,
+    @SerializedName("durationPerChapterInMinutes")
+    val durationPerChapterInMinutes: Int? = null,
+    @SerializedName("id")
+    val id: Int? = null,
+    @SerializedName("updatedAt")
+    val updatedAt: String? = null
+)
+
+@Keep
+data class ContentResponse(
+    @SerializedName("chapterId")
+    val chapterId: Int? = null,
+    @SerializedName("contentTitle")
+    val contentTitle: String? = null,
+    @SerializedName("contentUrl")
+    val contentUrl: String? = null,
+    @SerializedName("createdAt")
+    val createdAt: String? = null,
+    @SerializedName("duration")
+    val duration: String? = null,
+    @SerializedName("id")
+    val id: Int? = null,
+    @SerializedName("status")
+    val status: Boolean? = null,
+    @SerializedName("updatedAt")
+    val updatedAt: String? = null,
+    @SerializedName("isLocked")
+    val isLocked: Boolean? = null,
+    @SerializedName("isWatched")
+    val isWatched: Boolean? = null,
+    @SerializedName("youtubeId")
+    val youtubeId: String? = null
 )
 
 fun CourseApiResponseNew.toDomain() = DetailResponseCourseDomain(
@@ -21,7 +109,7 @@ fun CourseApiResponseNew.toDomain() = DetailResponseCourseDomain(
     data = this.data?.toDomain()
 )
 
-fun Data.toDomain() = DetailCourseDomain(
+fun DetailCourseDataResponse.toDomain() = DetailCourseDomain(
     id = this.id ?: 0,
     courseCode = this.courseCode.orEmpty(),
     categoryId = this.categoryId?: 0,
@@ -40,14 +128,12 @@ fun Data.toDomain() = DetailCourseDomain(
     rating = this.rating?: 0.0,
     durationPerCourseInMinutes = this.durationPerCourseInMinutes ?: 0,
     modulePerCourse = this.modulePerCourse?: 0,
+    courseDiscountInPercent = this.courseDiscountInPercent?: 0,
+    rawPrice = this.rawPrice?: 0,
     chapters = this.chapters.map { it.toDomain() }
 )
 
-fun Collection<Data>.courseDataToDomain() = this.map {
-    it.toDomain()
-}
-
-fun Chapter.toDomain() = ChapterDomain(
+fun ChapterResponse.toDomain() = ChapterDomain(
     id = this.id ?: 0,
     chapterTitle = this.chapterTitle.orEmpty(),
     courseId = this.courseId ?: 0,
@@ -57,7 +143,7 @@ fun Chapter.toDomain() = ChapterDomain(
     durationPerChapterInMinutes = this.durationPerChapterInMinutes ?: 0
 )
 
-fun Content.toDomain() = ContentDomain(
+fun ContentResponse.toDomain() = ContentDomain(
     id = this.id ?: 0,
     contentTitle = this.contentTitle.orEmpty(),
     contentUrl = this.contentUrl.orEmpty(),
@@ -66,10 +152,8 @@ fun Content.toDomain() = ContentDomain(
     chapterId = this.chapterId ?: 0,
     createdAt = this.createdAt.orEmpty(),
     updatedAt = this.updatedAt.orEmpty(),
+    isLocked = this.isLocked ?: false,
+    isWatched = this.isWatched ?: false,
     youtubeId = this.youtubeId.orEmpty()
 )
-
-fun Collection<Chapter>.chapterToDomain() = this.map { it.toDomain() }
-
-fun Collection<Content>.contentToDomain() = this.map { it.toDomain() }
 

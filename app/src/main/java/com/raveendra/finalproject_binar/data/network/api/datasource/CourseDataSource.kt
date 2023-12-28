@@ -9,6 +9,7 @@ import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
+import com.raveendra.finalproject_binar.data.response.ClassResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
@@ -22,7 +23,8 @@ import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 
 interface CourseDataSource {
 
-    suspend fun getCourse(category: Int?, courseType : String?): ResponseListWrapper<CourseResponse>
+    suspend fun getCourse(category: List<Int?>?, courseType : String?): ResponseListWrapper<CourseResponse>
+    suspend fun getClass(status : String?): ResponseListWrapper<ClassResponse>
     suspend fun getCategory(): ResponseListWrapper<CategoryResponse>
     suspend fun postLogin(loginRequest: LoginRequest): LoginResponse
     suspend fun postRegister(registerRequest: RegisterRequest): RegisterResponse
@@ -61,8 +63,15 @@ class CourseDataSourceImpl(
     private val service: CourseService
 ) : CourseDataSource {
 
-    override suspend fun getCourse(category: Int?, courseType: String?): ResponseListWrapper<CourseResponse> {
-        return service.getCourse(category = category,courseType = courseType)
+    override suspend fun getCourse(category: List<Int?>?, courseType: String?): ResponseListWrapper<CourseResponse> {
+        var listCategory = category ?: emptyList()
+        if (listCategory == listOf(null)) listCategory = emptyList()
+        val queryParams = mapOf("category" to listCategory)
+        return service.getCourse(category = queryParams,courseType = courseType)
+    }
+
+    override suspend fun getClass(status : String?): ResponseListWrapper<ClassResponse> {
+        return service.getClass(status)
     }
 
     override suspend fun getCategory(): ResponseListWrapper<CategoryResponse> {

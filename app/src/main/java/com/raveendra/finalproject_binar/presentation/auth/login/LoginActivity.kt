@@ -79,7 +79,8 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
                             ) {
                                 OtpActivity.navigate(
                                     this@LoginActivity,
-                                    binding.etEmail.getText().toString().trim()
+                                    binding.etEmail.getText().toString().trim(),
+                                    2
                                 )
                             } else {
                                 ToastyUtil.configureToasty()

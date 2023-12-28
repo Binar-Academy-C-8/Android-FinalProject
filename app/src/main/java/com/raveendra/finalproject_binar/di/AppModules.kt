@@ -23,6 +23,7 @@ import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpViewModel
 import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
 import com.raveendra.finalproject_binar.presentation.auth.resetpassword.ResetPasswordViewModel
+import com.raveendra.finalproject_binar.presentation.`class`.ClassViewModel
 import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
@@ -77,6 +78,7 @@ object AppModules {
         viewModelOf(::ResetPasswordViewModel)
         viewModelOf(::PaymentHistoryViewModel)
         viewModelOf(::NotificationsViewModel)
+        viewModelOf(::ClassViewModel)
     }
 
     val modules = listOf(

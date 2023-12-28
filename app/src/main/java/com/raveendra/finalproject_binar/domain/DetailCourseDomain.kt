@@ -19,6 +19,8 @@ data class DetailCourseDomain(
     val courseLevel: String,
     val courseName: String,
     val coursePrice: Int,
+    val rawPrice: Int,
+    val courseDiscountInPercent: Int,
     val courseType: String,
     val createdAt: String,
     val durationPerCourseInMinutes: Int,
@@ -50,5 +52,7 @@ data class ContentDomain(
     val id: Int,
     val status: Boolean,
     val updatedAt: String,
+    val isLocked: Boolean,
+    val isWatched: Boolean,
     val youtubeId: String
 )

@@ -11,6 +11,7 @@ import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
+import com.raveendra.finalproject_binar.data.response.ClassResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
@@ -18,10 +19,8 @@ import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
-import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
-import com.raveendra.finalproject_binar.data.response.historypayment.UserTransactionResponse
-import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
+import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -32,6 +31,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 import java.util.concurrent.TimeUnit
 
 interface CourseService {
@@ -39,9 +39,14 @@ interface CourseService {
     suspend fun getCourse(
         @Query("order_by") orderBy: String? = "asc",
         @Query("sort_by") sortBy: String? = "createdAt",
-        @Query("category") category : Int?,
+        @QueryMap category: Map<String, @JvmSuppressWildcards List<Int?>?>,
         @Query("type") courseType : String? = null
     ): ResponseListWrapper<CourseResponse>
+
+    @GET("course-user/my-course")
+    suspend fun getClass(
+        @Query("status") status: String? = null
+    ): ResponseListWrapper<ClassResponse>
 
     @GET("category")
     suspend fun getCategory(): ResponseListWrapper<CategoryResponse>
@@ -97,8 +102,8 @@ interface CourseService {
     suspend fun getNotification(): NotificationResponse
 
 
-    companion object {
 
+    companion object {
         @JvmStatic
         operator fun invoke(
             chucker: ChuckerInterceptor,
