@@ -40,6 +40,8 @@ class ForgotPasswordActivity :
 
     override fun setupViews() {
         binding.btLogin.setOnClickListener {
+            binding.lottie.speed = 5f
+            binding.lottie.playAnimation()
             doOtpSend()
         }
     }

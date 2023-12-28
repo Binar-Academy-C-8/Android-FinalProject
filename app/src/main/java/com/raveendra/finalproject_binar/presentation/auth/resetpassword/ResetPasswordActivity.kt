@@ -65,6 +65,8 @@ class ResetPasswordActivity :
 
     override fun setupViews() {
         binding.btResetPassword.setOnClickListener {
+            binding.lottie.speed = 5f
+            binding.lottie.playAnimation()
             resetPassword()
         }
     }

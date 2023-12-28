@@ -52,6 +52,8 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
             startActivity(Intent(this@LoginActivity,ForgotPasswordActivity::class.java))
         }
         btLogin.setOnClickListener {
+            binding.lottie.speed = 5f
+            binding.lottie.playAnimation()
             doLogin()
         }
         tvNavToRegister.highLightWord(getString(R.string.text_dont_have_account_register_highlight)) {
@@ -102,6 +104,8 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
             }
         }
     }
+
+
 
     private fun doLogin() = with(binding) {
         if (isFormValid()) {
