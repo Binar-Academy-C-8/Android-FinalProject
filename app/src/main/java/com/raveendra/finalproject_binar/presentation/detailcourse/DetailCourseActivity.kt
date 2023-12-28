@@ -16,6 +16,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
 import com.raveendra.finalproject_binar.utils.DataItem
 import com.raveendra.finalproject_binar.utils.HeaderItem
@@ -121,6 +122,13 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     val detailAbout = success.payload?.data
                     binding.tvAbout.text = detailAbout?.aboutCourse
                     binding.tvIntendedFor.text = detailAbout?.intendedFor
+
+                    binding.tvCategory.text = detailAbout?.category
+                    binding.tvLevelCourse.text = detailAbout?.category
+                    binding.tvCourseName.text = detailAbout?.courseName
+                    binding.tvAuthorName.text = detailAbout?.courseBy
+                    binding.tvModuleCourse.text = getString(R.string.label_var_module, detailAbout?.modulePerCourse.toString())
+                    binding.tvDurationCourse.text = getString(R.string.label_var_module, detailAbout?.durationPerCourseInMinutes.toString())
 
 
                     var headerPosition = 1

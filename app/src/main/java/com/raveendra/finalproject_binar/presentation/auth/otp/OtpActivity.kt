@@ -75,7 +75,7 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
     override fun setupViews(): Unit = with(binding) {
         tvOtpDesc.text = getString(R.string.label_otp_desc, emailExtra)
         tvResendOtpCountdown.text = getString(R.string.label_otp_timer, "56")
-        if (originExtra == 2) {
+        if (originExtra == 1) {
             otpView.apply {
                 requestFocus()
                 setOtpCompletionListener {
@@ -99,7 +99,7 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
             startCountdown()
         }
 
-        if (originExtra == 1) viewModel.postRequestOtp(NewOtpRequest(emailExtra))
+        if (originExtra == 2) viewModel.postRequestOtp(NewOtpRequest(emailExtra))
     }
 
     private fun startCountdown() {

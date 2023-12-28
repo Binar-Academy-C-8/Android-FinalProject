@@ -12,25 +12,27 @@ import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
+import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
-import com.raveendra.finalproject_binar.domain.ForgotPasswordDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
+import com.raveendra.finalproject_binar.domain.ClassDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
-import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
 import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
+import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
 import com.raveendra.finalproject_binar.domain.ProfileDomain
 import com.raveendra.finalproject_binar.domain.RegisterDomain
 import com.raveendra.finalproject_binar.domain.TransactionDomain
-import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.utils.proceedFlow
 import com.raveendrag.finalproject_binar.domain.NotificationResponseDomain
 import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
-    suspend fun getCourse(category: Int? = null, courseType: String?= null): Flow<ResultWrapper<List<CourseDomain>>>
+    suspend fun getCourse(category: List<Int?>? = null, courseType: String?= null): Flow<ResultWrapper<List<CourseDomain>>>
+
+    suspend fun getClass(status : String?): Flow<ResultWrapper<List<ClassDomain>>>
 
     suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>>
 
@@ -74,10 +76,14 @@ interface CourseRepository {
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
 
     override suspend fun getCourse(
-        category: Int?,
+        category: List<Int?>?,
         courseType: String?
     ): Flow<ResultWrapper<List<CourseDomain>>> {
         return proceedFlow { dataSource.getCourse(category, courseType).data?.toDomain().orEmpty() }
+    }
+
+    override suspend fun getClass(status : String?): Flow<ResultWrapper<List<ClassDomain>>> {
+        return proceedFlow { dataSource.getClass(status).data?.toDomain().orEmpty() }
     }
 
     override suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>> {
@@ -131,7 +137,7 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
 
     override suspend fun forgotPassword(email: ForgotPasswordRequest): Flow<ResultWrapper<NewOtpDomain>> {
         return proceedFlow {
-            (dataSource.forgotPassword(email).toDomain() ?: "Email tidak ditemuka") as NewOtpDomain
+            dataSource.forgotPassword(email).toDomain()
         }
     }
 

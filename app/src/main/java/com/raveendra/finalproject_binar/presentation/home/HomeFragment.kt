@@ -32,7 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val categoryAdapter: CategoryAdapter by lazy {
         CategoryAdapter {
             category = it.id
-            viewModel.getCourses(category)
+            viewModel.getCourses(listOf(category))
         }
     }
 
@@ -56,7 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val swipeRefreshListener = SwipeRefreshList {
         viewModel.getCategories()
-        viewModel.getCourses(category)
+        viewModel.getCourses(listOf(category))
     }
 
 
