@@ -9,16 +9,18 @@ import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.databinding.ItemNotificationBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.model.Notification
+import com.raveendra.finalproject_binar.presentation.notifications.viewholder.NotificationViewHolder
+import com.raveendrag.finalproject_binar.domain.DataDomain
 
 class NotificationAdapter(
-    private val onItemClick: (Notification) -> Unit
+    private val onItemClick: (DataDomain) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Notification>() {
-        override fun areItemsTheSame(oldItem: Notification, newItem: Notification): Boolean {
+    private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<DataDomain>() {
+        override fun areItemsTheSame(oldItem: DataDomain, newItem: DataDomain): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Notification, newItem: Notification): Boolean {
+        override fun areContentsTheSame(oldItem: DataDomain, newItem: DataDomain): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     })
@@ -29,28 +31,14 @@ class NotificationAdapter(
         return NotificationViewHolder(binding, onItemClick)
     }
 
-    fun setData(data: List<Notification>) {
+    fun setData(data: List<DataDomain>) {
         differ.submitList(data)
     }
 
     override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolderBinder<Notification>).bind(differ.currentList[position])
+        (holder as ViewHolderBinder<DataDomain>).bind(differ.currentList[position])
     }
 
-    class NotificationViewHolder(
-        private val binding: ItemNotificationBinding,
-        private val onItemClick: (Notification) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Notification> {
-        override fun bind(item: Notification) {
-            binding.tvPromo.text = item.label
-            binding.tvDateAndTime.text = item.date
-            binding.tvNotifLine2.text = item.text
-            binding.tvNotifLine3.text = item.description
-            binding.root.setOnClickListener {
-                onItemClick.invoke(item)
-            }
-        }
-    }
 }
