@@ -15,6 +15,7 @@ import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseAc
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
 import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryActivity
+import com.raveendra.finalproject_binar.presentation.popup.NonLoginDialogFragment
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
@@ -41,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         AdapterPopularCourse(
             itemClick = {
                 if (preferences.isLoggedIn())  it.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id) }
-                else Toast.makeText(requireContext(), getString(R.string.label_error_not_login_general), Toast.LENGTH_SHORT).show()
+                else showNonLoginDialog()
 
             },
             buttonClick = {
@@ -183,6 +184,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
         )
+    }
+
+    private fun showNonLoginDialog(){
+        NonLoginDialogFragment().show(childFragmentManager,null)
     }
 
 
