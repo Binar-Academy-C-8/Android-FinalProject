@@ -5,20 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.LifecycleOwner
-import com.raveendra.finalproject_binar.data.dummy.DummyNotificationdataSourceImpl
 import com.raveendra.finalproject_binar.databinding.FragmentNotificationsBinding
-import com.raveendra.finalproject_binar.model.Notification
 import com.raveendra.finalproject_binar.presentation.notifications.adapter.NotificationAdapter
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import com.raveendrag.finalproject_binar.domain.DataDomain
-import com.raveendrag.finalproject_binar.domain.UserDomain
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NotificationsFragment  : BaseFragment<FragmentNotificationsBinding>() {
+class NotificationFragment  : BaseFragment<FragmentNotificationsBinding>() {
 
-    private val viewModel: NotificationsViewModel by viewModel()
+    private val viewModel: NotificationViewModel by viewModel()
 
     private val adapterNotification: NotificationAdapter by lazy {
         NotificationAdapter() { notification: DataDomain ->

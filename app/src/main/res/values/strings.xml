@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">FinalProject-Binar</string>
+    <string name="app_name">Ascent</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Beranda</string>
     <string name="title_notifications">Notifikasi</string>
@@ -119,10 +119,17 @@
     <string name="label_price">Harga</string>
     <string name="label_ppn_11">PPN 11%</string>
     <string name="label_total_price">Total Harga</string>
+    <string name="label_buy_course">Beli Course ini</string>
+    <string name="label_add_course">Tambahkan Ke Kelas Anda</string>
+    <string name="label_empty_class">Maaf, Anda belum mengikuti kelas.</string>
+    <string name="label_fragment_not_login">Anda perlu login untuk mengakses fitur ini</string>
 
     <string name="label_var_module">%s Modul</string>
     <string name="label_var_minute">%s Menit</string>
     <string name="label_var_chapter">Chapter %s</string>
+    <string name="label_var_status_class">Status Kelas : %s</string>
+    <string name="label_var_author">Author : %s</string>
+    <string name="label_var_percent">%s%%</string>
 
     <string name="label_error_not_login_general">Silahkan login untuk menikmati fitur ini</string>
 </resources>

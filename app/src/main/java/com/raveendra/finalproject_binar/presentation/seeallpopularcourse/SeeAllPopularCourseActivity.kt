@@ -42,7 +42,7 @@ class SeeAllPopularCourseActivity :
     private val seeAllPopularCoursesAdapter: AdapterSeeAllPopularCourse by lazy {
         AdapterSeeAllPopularCourse(
             itemClick = {
-                if (preferences.isLoggedIn())  it.id?.let { id -> DetailCourseActivity.navigate(this, id) }
+                if (preferences.isLoggedIn())  it.id?.let { id -> DetailCourseActivity.navigate(this, id,false) }
                 else Toast.makeText(this, getString(R.string.label_error_not_login_general), Toast.LENGTH_SHORT).show()
             },
             buttonClick = {

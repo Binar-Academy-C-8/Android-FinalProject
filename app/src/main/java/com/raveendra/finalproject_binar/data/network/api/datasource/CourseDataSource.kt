@@ -17,6 +17,7 @@ import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.UpdateClassProgressResponse
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
@@ -41,6 +42,19 @@ interface CourseDataSource {
     suspend fun getCourseById(
         courseId: Int
     ): CourseApiResponseNew
+
+    suspend fun getClassById(
+        courseId: Int
+    ): CourseApiResponseNew
+
+    suspend fun patchClassUpdateProgress(
+        courseId: Int,
+        contentId: Int
+    ): UpdateClassProgressResponse
+
+    suspend fun postCreateClass(
+        courseId: Int
+    ): Unit
 
     suspend fun forgotPassword(
         email: ForgotPasswordRequest
@@ -99,6 +113,15 @@ class CourseDataSourceImpl(
 
     override suspend fun getCourseById(courseId: Int): CourseApiResponseNew {
         return service.getCourseById(courseId)
+    }
+    override suspend fun getClassById(courseId: Int): CourseApiResponseNew {
+        return service.getClassById(courseId)
+    }
+    override suspend fun patchClassUpdateProgress(courseId: Int, contentId: Int): UpdateClassProgressResponse {
+        return service.patchClassUpdateProgress(courseId,contentId)
+    }
+    override suspend fun postCreateClass(courseId: Int): Unit {
+        return service.postCreateClass(courseId)
     }
 
     override suspend fun getNotification(): NotificationResponse {

@@ -10,11 +10,12 @@ import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 
 @Keep
 data class CourseApiResponseNew(
-    @SerializedName("data")
+    @SerializedName(value = "data", alternate = ["course"])
     val `data`: DetailCourseDataResponse? = null,
     @SerializedName("status")
     val status: String? = null
 )
+
 @Keep
 data class DetailCourseDataResponse(
     @SerializedName("aboutCourse")
@@ -58,8 +59,23 @@ data class DetailCourseDataResponse(
     @SerializedName("updatedAt")
     val updatedAt: String? = null,
     @SerializedName("userId")
-    val userId: Int? = null
+    val userId: Int? = null,
+    @SerializedName("contentFinished")
+    val contentFinished: Int? = null,
+    @SerializedName("contentTotal")
+    val contentTotal: Int? = null,
+    @SerializedName("courseId")
+    val courseId: Int? = null,
+    @SerializedName("courseProgressInPercentage")
+    val courseProgressInPercentage: Int? = null,
+    @SerializedName("courseStatus")
+    val courseStatus: String? = null,
+    @SerializedName("telegramGroup")
+    val telegramGroup: String? = null,
+    @SerializedName("courseUserId")
+    val courseUserId: Int? = null,
 )
+
 @Keep
 data class ChapterResponse(
     @SerializedName("chapterTitle")
@@ -112,25 +128,33 @@ fun CourseApiResponseNew.toDomain() = DetailResponseCourseDomain(
 fun DetailCourseDataResponse.toDomain() = DetailCourseDomain(
     id = this.id ?: 0,
     courseCode = this.courseCode.orEmpty(),
-    categoryId = this.categoryId?: 0,
-    userId = this.userId?: 0,
+    categoryId = this.categoryId ?: 0,
+    userId = this.userId ?: 0,
     courseName = this.courseName.orEmpty(),
     image = this.image.orEmpty(),
     courseType = this.courseType.orEmpty(),
     courseLevel = this.courseLevel.orEmpty(),
     aboutCourse = this.aboutCourse.orEmpty(),
     intendedFor = this.intendedFor.orEmpty(),
-    coursePrice = this.coursePrice?: 0,
+    coursePrice = this.coursePrice ?: 0,
     createdAt = this.createdAt.orEmpty(),
     updatedAt = this.updatedAt.orEmpty(),
     category = this.category.orEmpty(),
     courseBy = this.courseBy.orEmpty(),
-    rating = this.rating?: 0.0,
+    rating = this.rating ?: 0.0,
     durationPerCourseInMinutes = this.durationPerCourseInMinutes ?: 0,
-    modulePerCourse = this.modulePerCourse?: 0,
-    courseDiscountInPercent = this.courseDiscountInPercent?: 0,
-    rawPrice = this.rawPrice?: 0,
-    chapters = this.chapters.map { it.toDomain() }
+    modulePerCourse = this.modulePerCourse ?: 0,
+    courseDiscountInPercent = this.courseDiscountInPercent ?: 0,
+    rawPrice = this.rawPrice ?: 0,
+    chapters = this.chapters.map { it.toDomain() },
+    contentFinished = this.contentFinished ?: 0,
+    contentTotal = this.contentTotal ?: 0,
+    courseId = this.courseId ?: 0,
+    courseProgressInPercentage = this.courseProgressInPercentage ?: 0,
+    courseStatus = this.courseStatus.orEmpty(),
+    telegramGroup = this.telegramGroup.orEmpty(),
+    courseUserId = this.courseUserId ?: 0,
+
 )
 
 fun ChapterResponse.toDomain() = ChapterDomain(

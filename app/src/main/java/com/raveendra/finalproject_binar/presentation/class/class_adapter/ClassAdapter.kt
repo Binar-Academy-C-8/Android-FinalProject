@@ -50,6 +50,7 @@ class ClassViewHolder(
         binding.tvCategory.text = item.category
         binding.tvTitle.text = item.courseName
         binding.tvAuthor.text = item.courseBy
+        binding.progressBar.progress = item.courseProgressInPercentage
 
         binding.root.setOnClickListener {
             onClickListener.invoke(item)

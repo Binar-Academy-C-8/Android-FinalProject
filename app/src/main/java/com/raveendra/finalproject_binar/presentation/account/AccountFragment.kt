@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.raveendra.finalproject_binar.BuildConfig
@@ -60,6 +61,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
         tvVersion.text = "${BuildConfig.FLAVOR} (${BuildConfig.VERSION_NAME})"
 
         viewModel.getProfile()
+        btLogin.setOnClickListener {
+            LoginActivity.navigate(requireContext())
+        }
         setupObservers()
     }
 
@@ -81,14 +85,20 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
 
             }, doOnError = { error ->
                 if (error.exception is ApiException) {
-                    val exceptionMessage = error.exception.getParsedError()?.message
-                    if (!exceptionMessage.isNullOrBlank()){
-                        Toast.makeText(
-                            requireContext(),
-                            exceptionMessage,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (error.exception.httpCode == 500){
+                        binding.swipeRefreshLayout.isVisible = false
+                        binding.clNotLogin.isVisible = true
+                    }else{
+                        val exceptionMessage = error.exception.getParsedError()?.message
+                        if (!exceptionMessage.isNullOrBlank()){
+                            Toast.makeText(
+                                requireContext(),
+                                exceptionMessage,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
+
                 } else if (error.exception is NoInternetException) {
                     Toast.makeText(
                         requireContext(),

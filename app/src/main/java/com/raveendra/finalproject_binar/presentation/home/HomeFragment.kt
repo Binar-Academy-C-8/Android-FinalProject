@@ -46,12 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             },
             buttonClick = {
-                it.id?.let { id ->
-                    PaymentSummaryActivity.navigate(
-                        requireContext(),
-                        id
-                    )
-                }
+
             })
     }
 

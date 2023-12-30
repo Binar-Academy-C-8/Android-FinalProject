@@ -8,11 +8,8 @@ import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
-import com.raveendra.finalproject_binar.data.response.NotificationResponse
-import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
-import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.ClassDomain
@@ -24,6 +21,7 @@ import com.raveendra.finalproject_binar.domain.NewOtpDomain
 import com.raveendra.finalproject_binar.domain.ProfileDomain
 import com.raveendra.finalproject_binar.domain.RegisterDomain
 import com.raveendra.finalproject_binar.domain.TransactionDomain
+import com.raveendra.finalproject_binar.domain.UpdateClassProgressDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.utils.proceedFlow
 import com.raveendrag.finalproject_binar.domain.NotificationResponseDomain
@@ -53,6 +51,13 @@ interface CourseRepository {
     suspend fun getCourseById(
         courseId: Int
     ): Flow<ResultWrapper<DetailResponseCourseDomain>>
+    suspend fun getClassById(
+        courseId: Int
+    ): Flow<ResultWrapper<DetailResponseCourseDomain>>
+
+    suspend fun patchClassUpdateProgress(courseId: Int, contentId: Int): Flow<ResultWrapper<UpdateClassProgressDomain>>
+
+    suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<Unit>>
 
     suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>>
 
@@ -132,6 +137,22 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
     override suspend fun getCourseById(courseId: Int): Flow<ResultWrapper<DetailResponseCourseDomain>> {
         return proceedFlow {
             dataSource.getCourseById(courseId).toDomain()
+        }
+    }
+    override suspend fun getClassById(courseId: Int): Flow<ResultWrapper<DetailResponseCourseDomain>> {
+        return proceedFlow {
+            dataSource.getClassById(courseId).toDomain()
+        }
+    }
+    override suspend fun patchClassUpdateProgress(courseId: Int, contentId: Int): Flow<ResultWrapper<UpdateClassProgressDomain>> {
+        return proceedFlow {
+            dataSource.patchClassUpdateProgress(courseId,contentId).toDomain()
+        }
+    }
+
+    override suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<Unit>> {
+        return proceedFlow {
+            dataSource.postCreateClass(courseId)
         }
     }
 

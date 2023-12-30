@@ -19,6 +19,7 @@ import com.raveendra.finalproject_binar.data.response.NotificationResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.UpdateClassProgressResponse
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
@@ -47,6 +48,7 @@ interface CourseService {
     suspend fun getClass(
         @Query("status") status: String? = null
     ): ResponseListWrapper<ClassResponse>
+
 
     @GET("category")
     suspend fun getCategory(): ResponseListWrapper<CategoryResponse>
@@ -82,10 +84,26 @@ interface CourseService {
         @Path("id") courseId: Int
     ): CourseApiResponseNew
 
+    @GET("course-user/my-course/{courseUserId}")
+    suspend fun getClassById( @Path("courseUserId") courseUserId: Int): CourseApiResponseNew
+
+    @PATCH("course-user/update-progress/{courseUserId}/progress/{contentId}")
+    suspend fun patchClassUpdateProgress(
+        @Path("courseUserId") courseUserId: Int,
+        @Path("contentId") contentId: Int,
+    ): UpdateClassProgressResponse
+
+    @POST("course-user/create/{courseId}")
+    suspend fun postCreateClass(
+        @Path("courseId") courseUserId: Int
+    )
+
     @POST("auth/forgot-password")
     suspend fun forgotPassword(
         @Body email: ForgotPasswordRequest
     ): NewOtpResponse
+
+
 
     @POST("auth/forgot-password/{userId}")
     suspend fun forgotPasswordUserId(

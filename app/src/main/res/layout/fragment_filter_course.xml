@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/bg_white_top_rounded_16"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dimen_16_dp"
+    android:paddingBottom="@dimen/dimen_16_dp"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <View
+        android:id="@+id/viewSlider"
+        android:layout_width="60dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_16_dp"
+        android:background="@drawable/bg_grey_rounded_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextMedium16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16_dp"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:layout_marginBottom="@dimen/dimen_8_dp"
+        android:text="@string/txt_filter"
+        app:layout_constraintBottom_toTopOf="@+id/viewSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewSlider" />
+
+    <View
+        android:id="@+id/viewSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/neutral_06"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/viewSeparator"
+        android:padding="@dimen/dimen_16_dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_kategori"
+            style="@style/TextBold20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="6dp"
+            android:text="Kategori" />
+
+        <LinearLayout
+            android:id="@+id/ll_course1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="UI/UX Design" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_course2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Web Development" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_course3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Android Development" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_course4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Data Science" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_course5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Business Intelligence" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_level"
+            style="@style/TextBold20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="6dp"
+            android:text="Level Kesulitan" />
+
+        <LinearLayout
+            android:id="@+id/ll_level1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Semua Level" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_level2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Begginer Level" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_level3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Intermediate Level" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_level4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:shadowRadius="4" />
+
+            <TextView
+                style="@style/TextMedium14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="Advanced Level" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_masuk"
+            style="@style/TextBold16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:backgroundTint="@color/primary_dark_blue_05"
+            android:paddingVertical="10dp"
+            android:text="Terapkan Filter"
+            android:textColor="@color/white" />
+
+        <TextView
+            style="@style/TextRegular14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hapus Filter"
+            android:textAlignment="center"
+            android:textColor="@color/alert_warning" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
