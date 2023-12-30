@@ -71,7 +71,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
         viewModel.resultProfile.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = { result ->
                 binding.ivProfile.load(R.drawable.bg_button_dark_blue){
-                    placeholder(R.color.primary_dark_blue_06)
                     error(R.color.primary_dark_blue_06)
                     transformations(
                         CircleCropTransformation()
