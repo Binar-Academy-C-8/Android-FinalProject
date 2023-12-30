@@ -3,6 +3,7 @@ package com.raveendra.finalproject_binar.data.network.api.service
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.raveendra.finalproject_binar.BuildConfig
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
+import com.raveendra.finalproject_binar.data.request.ChangePasswordRequest
 import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
@@ -116,6 +117,13 @@ interface CourseService {
         @Path("userId") userId: Int,
         @Body resetPasswordRequest: ResetPasswordRequest
     ): BaseResponse
+
+    @PATCH("user/change-password/{userId}")
+    suspend fun changePassword(
+        @Path("userId") userId: Int,
+        @Body changePasswordRequest: ChangePasswordRequest
+    ): BaseResponse
+
     @GET("notification/getAllNotif")
     suspend fun getNotification(): NotificationResponse
 

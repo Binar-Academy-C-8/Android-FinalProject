@@ -14,6 +14,7 @@ import com.raveendra.finalproject_binar.BuildConfig
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.FragmentAccountBinding
+import com.raveendra.finalproject_binar.presentation.account.change_password.ChangePasswordActivity
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryActivity
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
@@ -70,6 +71,13 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
     private fun setupObservers(){
         viewModel.resultProfile.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = { result ->
+                binding.changePassword.setOnClickListener {
+                    result.payload?.data?.id?.let { it1 ->
+                        ChangePasswordActivity.navigate(requireContext(),
+                            it1
+                        )
+                    }
+                }
                 binding.ivProfile.load(R.drawable.bg_button_dark_blue){
                     error(R.color.primary_dark_blue_06)
                     transformations(

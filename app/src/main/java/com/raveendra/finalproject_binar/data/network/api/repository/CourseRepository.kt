@@ -1,6 +1,7 @@
 package com.raveendra.finalproject_binar.data.network.api.repository
 
 import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSource
+import com.raveendra.finalproject_binar.data.request.ChangePasswordRequest
 import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
@@ -73,6 +74,11 @@ interface CourseRepository {
     suspend fun resetPassword(
         userId: Int,
         resetPasswordRequest: ResetPasswordRequest
+    ): Flow<ResultWrapper<BaseResponse>>
+
+    suspend fun changePassword(
+        userId: Int,
+        changePasswordRequest: ChangePasswordRequest
     ): Flow<ResultWrapper<BaseResponse>>
 
     suspend fun getNotification(): Flow<ResultWrapper<NotificationResponseDomain>>
@@ -179,6 +185,16 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
             dataSource.resetPasswordUser(userId, resetPasswordRequest)
         }
     }
+
+    override suspend fun changePassword(
+        userId: Int,
+        changePasswordRequest: ChangePasswordRequest
+    ): Flow<ResultWrapper<BaseResponse>> {
+        return proceedFlow {
+            dataSource.changePasswordUser(userId,changePasswordRequest)
+        }
+    }
+
     override suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>> {
         return proceedFlow {
             dataSource.getHistoryPayment().toDomain()
