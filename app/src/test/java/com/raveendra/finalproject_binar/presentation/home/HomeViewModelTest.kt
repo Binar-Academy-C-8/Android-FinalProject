@@ -73,12 +73,12 @@ class HomeViewModelTest{
             )
         }
 
-        val resultNotNullCategory = viewModel.getCourses(1)
+        val resultNotNullCategory = viewModel.getCourses(listOf(1))
         val coursesNotNullCategory = viewModel.course.getOrAwaitValue()
 
         assertEquals(resultNotNullCategory, Unit)
         assertEquals(coursesNotNullCategory.payload?.size, 3)
-        coVerify { repository.getCourse(1) }
+        coVerify { repository.getCourse(listOf(1)) }
     }
 
     @Test
@@ -95,7 +95,7 @@ class HomeViewModelTest{
             )
         }
 
-        val resultNullCategory = viewModel.getCourses(0)
+        val resultNullCategory = viewModel.getCourses(null)
         val coursesNullCategory = viewModel.course.getOrAwaitValue()
 
         assertEquals(resultNullCategory, Unit)
