@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
@@ -49,11 +50,9 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
 
     override fun setupViews() = with(binding) {
         tvForgetPassword.setOnClickListener {
-            startActivity(Intent(this@LoginActivity,ForgotPasswordActivity::class.java))
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
         }
         btLogin.setOnClickListener {
-            binding.lottie.speed = 5f
-            binding.lottie.playAnimation()
             doLogin()
         }
         tvNavToRegister.highLightWord(getString(R.string.text_dont_have_account_register_highlight)) {
@@ -68,8 +67,28 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
                     doOnSuccess = { result ->
                         preferences.appToken = result.payload?.data?.token.toString()
                         MainActivity.navigateWithFlag(this@LoginActivity)
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = false
+                        binding.btLogin.isVisible = false
+                        ToastyUtil.configureToasty()
+                        Toasty.success(
+                            applicationContext,
+                            "Login Berhasil, Selamat Datang!",
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
+                    }, doOnLoading = {
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = true
+                        binding.btLogin.isVisible = false
                     },
                     doOnError = { error ->
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.btLogin.isVisible = true
+                        binding.lottie.isVisible = false
                         if (error.exception is ApiException) {
                             val exceptionMessage = error.exception.getParsedError()?.message
                             if (exceptionMessage.equals(
@@ -105,7 +124,6 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
             }
         }
     }
-
 
 
     private fun doLogin() = with(binding) {

@@ -9,11 +9,11 @@
         android:id="@+id/iv_logo_app"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="8dp"
-        android:src="@drawable/img_logo"/>
+        android:src="@drawable/img_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvLogin"
@@ -24,16 +24,16 @@
         android:text="@string/label_register"
         android:textColor="@color/primary_dark_blue_06"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo_app"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_logo_app" />
 
     <com.raveendra.finalproject_binar.utils.LabelTextFieldView
         android:id="@+id/etName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_24_dp"
         android:hint="@string/label_fullname"
         android:inputType="textCapSentences"
         android:textColorHint="@color/neutral_03"
-        android:layout_marginTop="@dimen/dimen_24_dp"
         app:customLabelText="@string/label_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +43,8 @@
         android:id="@+id/etEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/label_hint_email"
         android:layout_marginTop="@dimen/dimen_16_dp"
+        android:hint="@string/label_hint_email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/neutral_03"
         app:customLabelText="@string/label_email"
@@ -56,9 +56,9 @@
         android:id="@+id/etPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16_dp"
         android:hint="@string/label_phone_62"
         android:inputType="phone"
-        android:layout_marginTop="@dimen/dimen_16_dp"
         android:textColorHint="@color/neutral_03"
         app:customLabelText="@string/label_phone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,15 +69,25 @@
         android:id="@+id/etPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/label_enter_password"
         android:layout_marginTop="@dimen/dimen_16_dp"
+        android:hint="@string/label_enter_password"
         android:inputType="textPassword"
-        app:passwordToggleEnabled="true"
         android:textColorHint="@color/neutral_03"
         app:customLabelText="@string/label_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
+        app:layout_constraintTop_toBottomOf="@+id/etPhone"
+        app:passwordToggleEnabled="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/dimen_24_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        app:lottie_rawRes="@raw/loading" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btRegister"
@@ -105,14 +115,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btRegister"
         app:layout_constraintVertical_bias="1.0" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/lottie_animation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

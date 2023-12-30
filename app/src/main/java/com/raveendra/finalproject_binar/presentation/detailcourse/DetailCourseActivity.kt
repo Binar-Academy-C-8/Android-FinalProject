@@ -168,10 +168,10 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         viewModel.detailCourseData.observe(this) {
             it.proceedWhen(
                 doOnSuccess = { success ->
-                    binding.shimmerViewTitle.stopShimmer()
-                    binding.shimmerViewTitle.isVisible = false
-                    binding.shimmerViewCourse.stopShimmer()
-                    binding.shimmerViewCourse.isVisible = false
+                    binding.shimmerDetailCourse.stopShimmer()
+                    binding.shimmerDetailCourse.isVisible = false
+                    binding.shimmerListDetailCourse.stopShimmer()
+                    binding.shimmerListDetailCourse.isVisible = false
                     binding.layoutStateRv.ivNotFound2.isVisible = false
                     success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.youtubeId?.let { firstUrl ->
                         viewModel.getContentUrl(
@@ -251,14 +251,18 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     section?.let { data -> adapterGropie.addAll(data) }
 
                 }, doOnLoading = {
-                    binding.shimmerViewTitle.startShimmer()
-                    binding.shimmerViewTitle.isVisible = true
-                    binding.shimmerViewCourse.startShimmer()
-                    binding.shimmerViewCourse.isVisible = true
+                    binding.shimmerDetailCourse.startShimmer()
+                    binding.shimmerDetailCourse.isVisible = true
+                    binding.shimmerListDetailCourse.startShimmer()
+                    binding.shimmerListDetailCourse.isVisible = true
                     binding.layoutStateRv.ivNotFound2.isVisible = false
                 },
                 doOnError = { error ->
                     error.message.toString()
+                    binding.shimmerDetailCourse.stopShimmer()
+                    binding.shimmerDetailCourse.isVisible = false
+                    binding.shimmerListDetailCourse.stopShimmer()
+                    binding.shimmerListDetailCourse.isVisible = false
                     binding.layoutStateRv.ivNotFound2.isVisible = true
                 }
             )

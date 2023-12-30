@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
@@ -44,8 +45,6 @@ class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegist
             navigateToLogin()
         }
         binding.btRegister.setOnClickListener {
-            binding.lottie.speed = 5f
-            binding.lottie.playAnimation()
             doRegister()
         }
     }
@@ -56,8 +55,28 @@ class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegist
                 it.proceedWhen(
                     doOnSuccess = { result ->
                         result.payload?.data?.dataValues?.id?.let { id -> navigateToOtp(id) }
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = false
+                        binding.btRegister.isVisible = false
+                        ToastyUtil.configureToasty()
+                        Toasty.success(
+                            applicationContext,
+                            "Daftar akun berhasil!",
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
+                    }, doOnLoading = {
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = true
+                        binding.btRegister.isVisible = false
                     },
                     doOnError = { error ->
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.btRegister.isVisible = true
+                        binding.lottie.isVisible = false
                         if (error.exception is ApiException) {
                             val exceptionMessage = error.exception.getParsedError()?.message
                             ToastyUtil.configureToasty()

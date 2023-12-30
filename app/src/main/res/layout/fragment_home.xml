@@ -220,13 +220,13 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <include layout="@layout/item_list_course_shimmer" />
+                            <include layout="@layout/item_list_popular_course_shimmer" />
 
-                            <include layout="@layout/item_list_course_shimmer" />
+                            <include layout="@layout/item_list_popular_course_shimmer" />
 
-                            <include layout="@layout/item_list_course_shimmer" />
+                            <include layout="@layout/item_list_popular_course_shimmer" />
 
-                            <include layout="@layout/item_list_course_shimmer" />
+                            <include layout="@layout/item_list_popular_course_shimmer" />
 
 
                         </LinearLayout>
