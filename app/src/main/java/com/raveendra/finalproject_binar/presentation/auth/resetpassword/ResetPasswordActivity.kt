@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
@@ -46,6 +47,10 @@ class ResetPasswordActivity :
                 it.proceedWhen(
                     doOnSuccess = {
                         MainActivity.navigateWithFlag(this@ResetPasswordActivity)
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = false
+                        binding.btResetPassword.isVisible = false
                         ToastyUtil.configureToasty()
                         Toasty.success(
                             applicationContext,
@@ -53,7 +58,16 @@ class ResetPasswordActivity :
                             Toast.LENGTH_SHORT,
                             true
                         ).show()
+                    }, doOnLoading = {
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = true
+                        binding.btResetPassword.isVisible = false
                     }, doOnError = {
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.btResetPassword.isVisible = true
+                        binding.lottie.isVisible = false
                         ToastyUtil.configureToasty()
                         Toasty.error(
                             applicationContext,

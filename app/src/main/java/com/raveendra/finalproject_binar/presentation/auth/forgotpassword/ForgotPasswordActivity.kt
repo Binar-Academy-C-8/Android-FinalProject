@@ -3,6 +3,7 @@ package com.raveendra.finalproject_binar.presentation.auth.forgotpassword
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
@@ -33,6 +34,10 @@ class ForgotPasswordActivity :
                                 3
                             )
                         }
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = false
+                        binding.btLogin.isVisible = false
                         ToastyUtil.configureToasty()
                         Toasty.success(
                             applicationContext,
@@ -40,8 +45,24 @@ class ForgotPasswordActivity :
                             Toast.LENGTH_SHORT,
                             true
                         ).show()
+                    }, doOnLoading = {
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.lottie.isVisible = true
+                        binding.btLogin.isVisible = false
                     },
                     doOnError = {
+                        binding.lottie.speed = 6f
+                        binding.lottie.playAnimation()
+                        binding.btLogin.isVisible = true
+                        binding.lottie.isVisible = false
+                        ToastyUtil.configureToasty()
+                        Toasty.error(
+                            applicationContext,
+                            "Email tidak terdaftar!",
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     }
                 )
             }
