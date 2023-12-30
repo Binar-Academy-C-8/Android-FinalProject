@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.R
@@ -14,7 +13,6 @@ import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
-import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryActivity
 import com.raveendra.finalproject_binar.presentation.popup.NonLoginDialogFragment
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
@@ -41,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val popularCourseAdapter: AdapterPopularCourse by lazy {
         AdapterPopularCourse(
             itemClick = {
-                if (preferences.isLoggedIn())  it.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id) }
+                if (preferences.isLoggedIn())  it.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id,false) }
                 else showNonLoginDialog()
 
             },
