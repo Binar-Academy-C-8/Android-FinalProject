@@ -2,13 +2,16 @@ package com.raveendra.finalproject_binar.presentation.auth.forgotpassword
 
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.databinding.ActivityForgotPasswordBinding
 import com.raveendra.finalproject_binar.presentation.auth.otp.OtpActivity
+import com.raveendra.finalproject_binar.utils.ToastyUtil
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,6 +33,13 @@ class ForgotPasswordActivity :
                                 3
                             )
                         }
+                        ToastyUtil.configureToasty()
+                        Toasty.success(
+                            applicationContext,
+                            "Berhasil mengirimkan kode verifikasi!",
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     },
                     doOnError = {
                     }
@@ -40,8 +50,6 @@ class ForgotPasswordActivity :
 
     override fun setupViews() {
         binding.btLogin.setOnClickListener {
-            binding.lottie.speed = 5f
-            binding.lottie.playAnimation()
             doOtpSend()
         }
     }

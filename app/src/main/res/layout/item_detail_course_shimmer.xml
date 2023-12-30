@@ -3,38 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".presentation.detailcourse.DetailCourseActivity">
-
-
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/player_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:autoPlay="true"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:videoId="ixOd42SEUF0" />
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_detail_course"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:duration="500"
-        app:layout_constraintTop_toBottomOf="@id/player_view">
-
-        <include layout="@layout/item_detail_course_shimmer" />
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0_dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_view">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -57,46 +34,45 @@
                     <TextView
                         android:id="@+id/tv_category"
                         style="@style/TextBold20"
-                        android:layout_width="0dp"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/primary_dark_blue_06"
-                        app:layout_constraintEnd_toStartOf="@id/tv_level_course"
+                        android:background="@color/neutral_03"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="UI/UX Design" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_level_course"
                         style="@style/TextBold14"
-                        android:layout_width="wrap_content"
+                        android:layout_width="110dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:textColor="@color/primary_dark_blue_06"
+                        android:background="@color/neutral_03"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_category"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Advanced Level" />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/tv_course_name"
                     style="@style/TextMedium16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/neutral_03"
                     tools:text="Introduction" />
 
                 <TextView
                     android:id="@+id/tv_author_name"
                     style="@style/TextRegular14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/neutral_03"
                     tools:text="Author" />
 
                 <LinearLayout
                     android:id="@+id/ll_detail_course"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/neutral_03"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -156,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16_dp"
                 android:layout_marginTop="@dimen/dimen_16_dp"
+                android:background="@color/neutral_03"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -208,72 +185,6 @@
                     tools:text="100%" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btDescription"
-                style="@style/TextBold14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/bg_button_dark_blue"
-                android:text="@string/lihat_deskripsi"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/clClassProgress" />
-
-            <LinearLayout
-                android:id="@+id/ll_about_course"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@color/neutral_07"
-                android:orientation="vertical"
-                android:padding="@dimen/dimen_8_dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/btDescription">
-
-                <TextView
-                    android:id="@+id/tv_about_title"
-                    style="@style/TextBold16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="8dp"
-                    android:text="@string/about_course" />
-
-                <TextView
-                    android:id="@+id/tv_about"
-                    style="@style/TextRegular14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_class" />
-
-                <TextView
-                    android:id="@+id/tv_intended_for_title"
-                    style="@style/TextBold16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="8dp"
-                    android:text="@string/kelas_ini_ditujukan_untuk" />
-
-                <TextView
-                    android:id="@+id/tv_intended_for"
-                    style="@style/TextRegular14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intended_for" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btDescription2"
-                    style="@style/TextBold14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/bg_button_dark_blue"
-                    android:text="@string/sembunyikan_deskripsi"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:layout_constraintTop_toBottomOf="@id/ll_detail" />
-            </LinearLayout>
-
             <View
                 android:id="@+id/divider"
                 android:layout_width="wrap_content"
@@ -283,64 +194,8 @@
                 android:background="@color/neutral_06"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_about_course" />
+                app:layout_constraintTop_toBottomOf="@id/clClassProgress" />
 
-            <TextView
-                android:id="@+id/tv_materi_belajar"
-                style="@style/TextBold16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dimen_16_dp"
-                android:layout_marginTop="@dimen/dimen_16_dp"
-                android:text="@string/materi_belajar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider" />
-
-            <include
-                android:id="@+id/layout_state_rv"
-                layout="@layout/common_layout_content_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_materi_belajar"
-                tools:visibility="visible" />
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_list_detail_course"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:duration="500"
-                app:layout_constraintTop_toBottomOf="@id/tv_materi_belajar">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <include layout="@layout/item_list_detail_course_shimmer" />
-
-                    <include layout="@layout/item_list_detail_course_shimmer" />
-
-                    <include layout="@layout/item_list_detail_course_shimmer" />
-
-                    <include layout="@layout/item_list_detail_course_shimmer" />
-                </LinearLayout>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_page"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/dimen_96_dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_materi_belajar"
-                tools:listitem="@layout/item_section_videos" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

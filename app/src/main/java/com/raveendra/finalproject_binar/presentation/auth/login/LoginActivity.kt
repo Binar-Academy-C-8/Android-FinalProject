@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
@@ -52,8 +53,6 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
             startActivity(Intent(this@LoginActivity,ForgotPasswordActivity::class.java))
         }
         btLogin.setOnClickListener {
-            binding.lottie.speed = 5f
-            binding.lottie.playAnimation()
             doLogin()
         }
         tvNavToRegister.highLightWord(getString(R.string.text_dont_have_account_register_highlight)) {
@@ -68,6 +67,13 @@ class LoginActivity : BaseViewModelActivity<LoginViewModel, ActivityLoginBinding
                     doOnSuccess = { result ->
                         preferences.appToken = result.payload?.data?.token.toString()
                         MainActivity.navigateWithFlag(this@LoginActivity)
+                        ToastyUtil.configureToasty()
+                        Toasty.success(
+                            applicationContext,
+                            "Login Berhasil, Selamat Datang!",
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     },
                     doOnError = { error ->
                         if (error.exception is ApiException) {

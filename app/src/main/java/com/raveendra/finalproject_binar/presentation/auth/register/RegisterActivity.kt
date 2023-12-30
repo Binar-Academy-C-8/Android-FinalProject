@@ -56,6 +56,13 @@ class RegisterActivity : BaseViewModelActivity<RegisterViewModel, ActivityRegist
                 it.proceedWhen(
                     doOnSuccess = { result ->
                         result.payload?.data?.dataValues?.id?.let { id -> navigateToOtp(id) }
+                        ToastyUtil.configureToasty()
+                        Toasty.success(
+                            applicationContext,
+                            "Daftar akun berhasil!",
+                            Toast.LENGTH_SHORT,
+                            true
+                        ).show()
                     },
                     doOnError = { error ->
                         if (error.exception is ApiException) {
