@@ -1,9 +1,10 @@
-package com.raveendra.finalproject_binar.presentation.auth.register
+package com.raveendra.finalproject_binar.presentation.account.payment_history
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
-import com.raveendra.finalproject_binar.data.request.RegisterRequest
-import com.raveendra.finalproject_binar.domain.RegisterDomain
+import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
+import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
+import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel
 import com.raveendra.finalproject_binar.tools.MainCoroutineRule
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import io.mockk.MockKAnnotations
@@ -15,15 +16,21 @@ import io.mockk.spyk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
+
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class RegisterViewModelTest {
+/**
+ * hrahm,28/12/2023, 22:12
+ */
+class PaymentHistoryViewModelTest {
     @MockK
-    lateinit var repository: CourseRepository
+    private lateinit var repo: CourseRepository
+    private lateinit var viewModel: PaymentHistoryViewModel
 
     @get:Rule
     val testRule: TestRule = InstantTaskExecutorRule()
@@ -32,25 +39,24 @@ class RegisterViewModelTest {
     @get:Rule
     val coroutineRule: TestRule = MainCoroutineRule(UnconfinedTestDispatcher())
 
-    private lateinit var viewModel: RegisterViewModel
-
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
         viewModel = spyk(
-            RegisterViewModel(repository),
+            PaymentHistoryViewModel(repo),
             recordPrivateCalls = true
         )
-        val registerResultMock = flow {
-            emit(ResultWrapper.Success((mockk<RegisterDomain> (relaxed = true))))
+    }
+    @Test
+    fun `payment history result  success`() {
+        runTest {
+            val getHistoryPayment = flow {
+                emit(ResultWrapper.Success((mockk<HistoryPaymentDomain> (relaxed = true))))
+            }
+            coEvery { repo.getHistoryPayment() } returns getHistoryPayment
         }
-        coEvery { repository.postRegister(any()) } returns registerResultMock
+        viewModel.getHistoryPayment()
+        coVerify { repo.getHistoryPayment()}
     }
 
-    @Test
-    fun postRegister() {
-      viewModel.postRegister(registerRequest = RegisterRequest(email = "pani@gmail.com",
-          name ="pani", password = "123", phoneNumber = "094473849"))
-        coVerify { repository.postRegister(any()) }
-    }
 }
