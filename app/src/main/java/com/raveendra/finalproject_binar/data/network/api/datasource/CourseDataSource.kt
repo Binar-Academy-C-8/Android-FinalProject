@@ -1,6 +1,7 @@
 package com.raveendra.finalproject_binar.data.network.api.datasource
 
 import com.raveendra.finalproject_binar.data.network.api.service.CourseService
+import com.raveendra.finalproject_binar.data.request.ChangePasswordRequest
 import com.raveendra.finalproject_binar.data.request.ForgotPasswordRequest
 import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
@@ -56,6 +57,11 @@ interface CourseDataSource {
     suspend fun resetPasswordUser(
         userId: Int,
         resetPasswordRequest: ResetPasswordRequest
+    ): BaseResponse
+
+    suspend fun changePasswordUser(
+        userId: Int,
+        changePasswordRequest: ChangePasswordRequest
     ): BaseResponse
 }
 
@@ -137,5 +143,12 @@ class CourseDataSourceImpl(
         return service.resetPasswordUserId(
             userId, resetPasswordRequest
         )
+    }
+
+    override suspend fun changePasswordUser(
+        userId: Int,
+        changePasswordRequest: ChangePasswordRequest
+    ): BaseResponse {
+        return service.changePassword(userId, changePasswordRequest)
     }
 }

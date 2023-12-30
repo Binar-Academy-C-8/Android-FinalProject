@@ -16,6 +16,7 @@ import com.raveendra.finalproject_binar.data.network.api.service.CourseService
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
 import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
 import com.raveendra.finalproject_binar.presentation.account.AccountViewModel
+import com.raveendra.finalproject_binar.presentation.account.change_password.ChangePasswordViewModel
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryViewModel
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileViewModel
 import com.raveendra.finalproject_binar.presentation.auth.forgotpassword.ForgotPasswordViewModel
@@ -79,6 +80,7 @@ object AppModules {
         viewModelOf(::PaymentHistoryViewModel)
         viewModelOf(::NotificationsViewModel)
         viewModelOf(::ClassViewModel)
+        viewModelOf(::ChangePasswordViewModel)
     }
 
     val modules = listOf(
