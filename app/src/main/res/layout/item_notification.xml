@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/text_notifications">
+    app:layout_constraintStart_toStartOf="parent">
 
     <ImageView
         android:id="@+id/iv_notification"
@@ -22,13 +21,12 @@
         android:id="@+id/tv_promo"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="2dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="@dimen/dimen_2_dp"
+        android:layout_marginStart="@dimen/dimen_10_dp"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/primary_dark_blue_06"
         android:layout_marginEnd="@dimen/dimen_8_dp"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_date_and_time"
         app:layout_constraintStart_toEndOf="@id/iv_notification"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Promo" />
@@ -38,29 +36,27 @@
         style="@style/TextMedium12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="2dp"
+        android:layout_marginTop="@dimen/dimen_2_dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
         android:gravity="end"
         android:textColor="@color/neutral_03"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_promo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_promo"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="2 Maret, 12:00" />
 
 
     <TextView
         android:id="@+id/tv_notif_line2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="@dimen/dimen_8_dp"
+        android:layout_marginEnd="@dimen/dimen_6_dp"
         android:layout_marginTop="@dimen/dimen_4_dp"
         android:fontFamily="@font/poppins_medium"
         android:maxLines="4"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_date_and_time"
         app:layout_constraintStart_toEndOf="@id/iv_notification"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_promo"
         tools:text="Dapatkan Potongan 50% selama Bulan Maret!" />
 

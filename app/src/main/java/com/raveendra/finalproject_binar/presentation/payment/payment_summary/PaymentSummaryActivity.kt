@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.raveendra.finalproject_binar.R
@@ -86,8 +87,9 @@ class PaymentSummaryActivity :
             it.proceedWhen(
                 doOnSuccess = { success ->
                     val data = success.payload?.data
+                    binding.clDetailSummary.isVisible = true
                     binding.apply {
-                        ivImg.load(data?.image){
+                        ivImg.load(data?.image) {
                             crossfade(true)
                         }
                         tvCategory.text = data?.category
@@ -95,8 +97,12 @@ class PaymentSummaryActivity :
                         tvTitle.text = data?.courseName
                         tvAuthor.text = data?.courseBy
                         tvLevel.text = data?.courseLevel
-                        tvModule.text = getString(R.string.label_var_module,data?.modulePerCourse.toString())
-                        tvDuration.text = getString(R.string.label_var_minute,data?.durationPerCourseInMinutes.toString())
+                        tvModule.text =
+                            getString(R.string.label_var_module, data?.modulePerCourse.toString())
+                        tvDuration.text = getString(
+                            R.string.label_var_minute,
+                            data?.durationPerCourseInMinutes.toString()
+                        )
 
                         tvBasePriceValue.text = data?.coursePrice?.toIdrCurrency()
                         val ppnValue = (data?.coursePrice ?: 0) * 0.11
@@ -104,6 +110,24 @@ class PaymentSummaryActivity :
                         val totalValue = (data?.coursePrice ?: 0) + ppnValue
                         tvTotalValue.text = totalValue.toIdrCurrency()
                     }
+                    binding.shimmerButton.stopShimmer()
+                    binding.shimmerButton.isVisible = false
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
+                    binding.btPay.isVisible = true
+                    binding.shimmerSum.stopShimmer()
+                    binding.shimmerSum.isVisible = false
+                },
+                doOnLoading = {
+                    binding.shimmerSum.startShimmer()
+                    binding.shimmerSum.isVisible = true
+                    binding.tvSum.isVisible = true
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = true
+                    binding.shimmerButton.startShimmer()
+                    binding.shimmerButton.isVisible = true
+                    binding.clDetailSummary.isVisible = false
+                    binding.btPay.isVisible = false
                 },
                 doOnError = { error ->
                     error.message.toString()
