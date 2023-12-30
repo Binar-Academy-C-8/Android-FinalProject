@@ -168,23 +168,24 @@
                 android:background="@drawable/bg_type_premium"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
+                android:paddingHorizontal="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_level">
 
                 <ImageView
+                    android:id="@+id/ivPremium"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_diamond" />
+                    android:src="@drawable/ic_diamond"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_type"
                     style="@style/TextMedium14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginStart="@dimen/dimen_8_dp"
                     android:layout_marginVertical="2dp"
                     android:textColor="@color/white"
                     tools:text="Premium" />

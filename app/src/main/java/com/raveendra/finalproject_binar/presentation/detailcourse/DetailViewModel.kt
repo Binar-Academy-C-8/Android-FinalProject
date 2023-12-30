@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
+import com.raveendra.finalproject_binar.domain.UpdateClassProgressDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,15 +17,66 @@ import kotlinx.coroutines.launch
 class DetailViewModel(
     private val repository: CourseRepository
 ) : ViewModel() {
-    private val _detailData = MutableLiveData<ResultWrapper<DetailResponseCourseDomain>>()
-    val detailData: LiveData<ResultWrapper<DetailResponseCourseDomain>>
-        get() = _detailData
+    private val _detailCourseData = MutableLiveData<ResultWrapper<DetailResponseCourseDomain>>()
+    val detailCourseData: LiveData<ResultWrapper<DetailResponseCourseDomain>>
+        get() = _detailCourseData
 
-    fun getVideos(courseId : Int) {
+    private val _detailRefreshCourseData = MutableLiveData<ResultWrapper<DetailResponseCourseDomain>>()
+    val detailRefreshCourseData: LiveData<ResultWrapper<DetailResponseCourseDomain>>
+        get() = _detailRefreshCourseData
+
+    private val _updateClassProgressResult = MutableLiveData<ResultWrapper<UpdateClassProgressDomain>>()
+    val updateClassProgressResult: LiveData<ResultWrapper<UpdateClassProgressDomain>>
+        get() = _updateClassProgressResult
+
+    private val _postCreateClassResult = MutableLiveData<ResultWrapper<Unit>>()
+    val postCreateClassResult: LiveData<ResultWrapper<Unit>>
+        get() = _postCreateClassResult
+
+
+    fun getDetailCourse(courseId : Int) {
         viewModelScope.launch(Dispatchers.IO) {
             courseId.let { courseId ->
                 repository.getCourseById(courseId).collect {
-                    _detailData.postValue(it)
+                    _detailCourseData.postValue(it)
+                }
+            }
+        }
+    }
+    fun getDetailClass(courseId : Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            courseId.let { courseId ->
+                repository.getClassById(courseId).collect {
+                    _detailCourseData.postValue(it)
+                }
+            }
+        }
+    }
+
+    fun getRefreshDetailClass(courseId : Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            courseId.let { courseId ->
+                repository.getClassById(courseId).collect {
+                    _detailRefreshCourseData.postValue(it)
+                }
+            }
+        }
+    }
+
+    fun patchClassUpdateProgress(courseId : Int, contentId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            courseId.let { courseId ->
+                repository.patchClassUpdateProgress(courseId,contentId).collect {
+                    _updateClassProgressResult.postValue(it)
+                }
+            }
+        }
+    }
+    fun postCreateClass(courseId : Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            courseId.let { courseId ->
+                repository.postCreateClass(courseId).collect {
+                    _postCreateClassResult.postValue(it)
                 }
             }
         }

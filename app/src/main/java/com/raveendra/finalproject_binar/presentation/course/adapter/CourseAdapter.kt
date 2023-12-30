@@ -2,6 +2,7 @@ package com.raveendra.finalproject_binar.presentation.course.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -69,6 +70,7 @@ class CourseViewHolder(
             R.string.duration_course)}"
         binding.tvDuration.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
         binding.tvPrice.text = "${binding.root.context.getString(R.string.text_rupiah)} ${item.coursePrice}"
+        if (item.coursePrice == 0) binding.ivPremium.isVisible = false
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
         }

@@ -27,7 +27,7 @@ import com.raveendra.finalproject_binar.presentation.`class`.ClassViewModel
 import com.raveendra.finalproject_binar.presentation.course.CourseViewModel
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailViewModel
 import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
-import com.raveendra.finalproject_binar.presentation.notifications.NotificationsViewModel
+import com.raveendra.finalproject_binar.presentation.notifications.NotificationViewModel
 import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel
 import com.raveendra.finalproject_binar.presentation.payment.payment_webview.PaymentWebViewViewModel
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseViewModel
@@ -77,7 +77,7 @@ object AppModules {
         viewModelOf(::ForgotPasswordViewModel)
         viewModelOf(::ResetPasswordViewModel)
         viewModelOf(::PaymentHistoryViewModel)
-        viewModelOf(::NotificationsViewModel)
+        viewModelOf(::NotificationViewModel)
         viewModelOf(::ClassViewModel)
     }
 

@@ -11,6 +11,7 @@ import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.FragmentDashboardBinding
 import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.ClassAdapter
 import com.raveendra.finalproject_binar.presentation.course.SwipeRefreshList
+import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,8 +21,8 @@ class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
     private val viewModel: ClassViewModel by viewModel()
 
     private val adapterDashboard: ClassAdapter by lazy {
-        ClassAdapter() {
-
+        ClassAdapter {
+            DetailCourseActivity.navigate(requireContext(),it.courseUserId, true)
         }
     }
 
@@ -76,6 +77,7 @@ class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.ivNotFound.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
+                    binding.layoutStateCourse.tvError.isVisible = true
                     binding.swipeRefreshLayout.isRefreshing = false
                 },
                 doOnError = {

@@ -10,6 +10,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.raveendra.finalproject_binar.databinding.ActivityPaymentWebviewBinding
+import com.raveendra.finalproject_binar.presentation.MainActivity
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,7 +24,7 @@ class PaymentWebViewActivity :
                 Intent(
                     this,
                     PaymentWebViewActivity::class.java
-                ).putExtra(EXTRA_TRANSACTION_URL, url)
+                ).putExtra(EXTRA_TRANSACTION_URL, url).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             )
         }
     }
@@ -36,6 +37,11 @@ class PaymentWebViewActivity :
 
     override val bindingInflater: (LayoutInflater) -> ActivityPaymentWebviewBinding
         get() = ActivityPaymentWebviewBinding::inflate
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        MainActivity.navigateWithFlag(this@PaymentWebViewActivity)
+    }
 
     override fun setupViews() = with(binding){
         openUrlFromWebView(transactionUrl)

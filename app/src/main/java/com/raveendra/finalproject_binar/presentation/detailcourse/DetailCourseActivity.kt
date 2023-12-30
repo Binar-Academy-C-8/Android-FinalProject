@@ -18,6 +18,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Ful
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityDetailCourseBinding
+import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryActivity
 import com.raveendra.finalproject_binar.utils.DataItem
 import com.raveendra.finalproject_binar.utils.HeaderItem
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
@@ -30,18 +31,23 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
 
     companion object {
         const val EXTRA_COURSE_ID = "EXTRA_COURSE_ID"
-        fun navigate(context: Context, courseId: Int) = with(context) {
+        const val EXTRA_IS_FROM_CLASS = "EXTRA_IS_FROM_CLASS"
+        fun navigate(context: Context, courseId: Int, isFromClass: Boolean) = with(context) {
             startActivity(
                 Intent(
                     this,
                     DetailCourseActivity::class.java
                 ).putExtra(EXTRA_COURSE_ID, courseId)
+                    .putExtra(EXTRA_IS_FROM_CLASS, isFromClass)
             )
         }
     }
 
     private val courseIdExtra by lazy {
         intent.getIntExtra(EXTRA_COURSE_ID, 0)
+    }
+    private val isFromClass by lazy {
+        intent.getBooleanExtra(EXTRA_IS_FROM_CLASS, false)
     }
 
     override val viewModel: DetailViewModel by viewModel()
@@ -92,20 +98,74 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         } else {
             orientationEventListener.disable()
         }
-        /*sectionPageFragment()*/
+        if (isFromClass) viewModel.getDetailClass(courseIdExtra)
+        else viewModel.getDetailCourse(courseIdExtra)
 
-        viewModel.getVideos(courseIdExtra)
         binding.rvPage.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = adapterGropie
         }
+
         showDesc()
 
     }
 
     override fun setupObservers() {
+        viewModel.updateClassProgressResult.observe(this){
+            it.proceedWhen (
+                doOnSuccess = {
+                    viewModel.getRefreshDetailClass(courseIdExtra)
+                },
+                doOnError = {
 
-        viewModel.detailData.observe(this) {
+                }
+            )
+        }
+        viewModel.detailRefreshCourseData.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = { success ->
+//                    adapterGropie.clear()
+                    val detailAbout = success.payload?.data
+                    binding.tvStatusClass.text = getString(R.string.label_var_status_class, detailAbout?.courseStatus)
+                    binding.tvClassPercent.text = getString(R.string.label_var_percent, detailAbout?.courseProgressInPercentage.toString())
+                    binding.pbClassProgress.progress = detailAbout?.courseProgressInPercentage ?: 0
+                    var headerPosition = 1
+                    val section = success.payload?.data?.chapters?.map { chapters ->
+                        val section = Section()
+                        chapters?.let { chapter ->
+                            section.setHeader(
+                                HeaderItem(
+                                    chapter,
+                                    this@DetailCourseActivity,
+                                    headerPosition
+                                )
+                            )
+                            headerPosition++
+                        }
+
+                        val dataSection = chapters?.contents?.map { data ->
+                            data?.let { contents ->
+                                DataItem(this@DetailCourseActivity, contents,isFromClass) { data ->
+                                    viewModel.getContentUrl(data.youtubeId)
+                                    if (isFromClass) viewModel.patchClassUpdateProgress(courseIdExtra,data.id)
+
+                                }
+                            }
+                        }
+                        dataSection?.let { it1 -> section.addAll(it1) }
+                        section
+                    }
+                    section?.let { data -> adapterGropie.update(data) }
+
+                }, doOnLoading = {
+
+                },
+                doOnError = { error ->
+
+                }
+            )
+        }
+        viewModel.detailCourseData.observe(this) {
             it.proceedWhen(
                 doOnSuccess = { success ->
                     binding.shimmerViewTitle.stopShimmer()
@@ -119,16 +179,46 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                         )
                     }
 
+
                     val detailAbout = success.payload?.data
                     binding.tvAbout.text = detailAbout?.aboutCourse
                     binding.tvIntendedFor.text = detailAbout?.intendedFor
 
                     binding.tvCategory.text = detailAbout?.category
-                    binding.tvLevelCourse.text = detailAbout?.category
+                    binding.tvLevelCourse.text = detailAbout?.courseLevel
                     binding.tvCourseName.text = detailAbout?.courseName
                     binding.tvAuthorName.text = detailAbout?.courseBy
-                    binding.tvModuleCourse.text = getString(R.string.label_var_module, detailAbout?.modulePerCourse.toString())
-                    binding.tvDurationCourse.text = getString(R.string.label_var_module, detailAbout?.durationPerCourseInMinutes.toString())
+                    binding.tvModuleCourse.text = getString(
+                        R.string.label_var_module,
+                        detailAbout?.modulePerCourse.toString()
+                    )
+                    binding.tvDurationCourse.text = getString(
+                        R.string.label_var_module,
+                        detailAbout?.durationPerCourseInMinutes.toString()
+                    )
+
+                    if (isFromClass){
+                        binding.clClassProgress.isVisible = true
+                        binding.tvStatusClass.text = getString(R.string.label_var_status_class, detailAbout?.courseStatus)
+                        binding.tvClassPercent.text = getString(R.string.label_var_percent, detailAbout?.courseProgressInPercentage.toString())
+                        binding.pbClassProgress.progress = detailAbout?.courseProgressInPercentage ?: 0
+                    }
+                    if (!isFromClass && detailAbout?.courseUserId == 0){
+                        binding.clBuyCourse.isVisible = true
+
+                        if (detailAbout.coursePrice != 0){
+                            binding.btBuyCourse.setOnClickListener {
+                                PaymentSummaryActivity.navigate(this@DetailCourseActivity,courseIdExtra)
+                            }
+                        }else{
+                            binding.btBuyCourse.text = getString(R.string.label_add_course)
+                            binding.btBuyCourse.setOnClickListener {
+                                viewModel.postCreateClass(courseIdExtra)
+                                binding.clBuyCourse.isVisible = false
+                            }
+                        }
+                    }
+
 
 
                     var headerPosition = 1
@@ -148,8 +238,10 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
 
                         val dataSection = chapters?.contents?.map { data ->
                             data?.let { contents ->
-                                DataItem(this@DetailCourseActivity,contents) { data ->
+                                DataItem(this@DetailCourseActivity, contents,isFromClass) { data ->
                                     viewModel.getContentUrl(data.youtubeId)
+                                    if (isFromClass) viewModel.patchClassUpdateProgress(courseIdExtra,data.id)
+
                                 }
                             }
                         }
@@ -178,12 +270,16 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
             binding.llAboutCourse.isVisible = true
             binding.btDescription.isVisible = false
             binding.btDescription2.isVisible = true
+            binding.clClassProgress.isVisible = false
         }
 
         binding.btDescription2.setOnClickListener {
             binding.llAboutCourse.isVisible = false
             binding.btDescription2.isVisible = false
             binding.btDescription.isVisible = true
+            if (isFromClass){
+                binding.clClassProgress.isVisible = true
+            }
         }
     }
 
@@ -231,10 +327,12 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
         isFullscreen = false
         windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         binding.playerView.isVisible = true
-        binding.llAboutCourse.isVisible = true
-        binding.tvAbout.isVisible = true
-        binding.tvIntendedFor.isVisible = true
+        binding.llAboutCourse.isVisible = false
+        binding.tvAbout.isVisible = false
+        binding.tvIntendedFor.isVisible = false
         binding.rvPage.isVisible = true
+        binding.btDescription.isVisible = true
+        binding.btDescription2.isVisible = false
         binding.fullScreenView.apply {
             isVisible = false
             removeAllViews()

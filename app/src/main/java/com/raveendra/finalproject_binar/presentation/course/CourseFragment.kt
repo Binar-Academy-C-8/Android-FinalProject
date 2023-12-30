@@ -11,6 +11,7 @@ import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
+import com.raveendra.finalproject_binar.presentation.popup.FilterCourseBottomSheet
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,6 +20,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
 
     private val viewModel: CourseViewModel by viewModel()
+
+    private var filterCourseBottomSheet: FilterCourseBottomSheet? = null
 
     var courseType: String? = null
 
@@ -42,6 +45,7 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
         observeData()
         setClickChips()
         setupSwipeRefreshLayout()
+        setupFilter()
     }
 
     private fun observeData() {
@@ -137,5 +141,16 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
         swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
         )
+    }
+    private fun setupFilter() = with(binding){
+        filterCourseBottomSheet = FilterCourseBottomSheet(
+            context = requireContext()
+        )
+        tvFilter.setOnClickListener {
+            filterCourseBottomSheet?.show(
+                requireActivity().supportFragmentManager,
+                CourseFragment::class.java.simpleName
+            )
+        }
     }
 }

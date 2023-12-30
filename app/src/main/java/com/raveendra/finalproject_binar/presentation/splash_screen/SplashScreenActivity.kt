@@ -27,7 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             checkIfUserLogin()
 
-        }, 2000)
+        }, 1000)
     }
 
     private fun checkIfUserLogin() {

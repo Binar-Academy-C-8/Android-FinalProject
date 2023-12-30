@@ -30,7 +30,14 @@ data class DetailCourseDomain(
     val modulePerCourse: Int,
     val rating: Double,
     val updatedAt: String,
-    val userId: Int
+    val userId: Int,
+    val contentFinished: Int,
+    val contentTotal: Int,
+    val courseId: Int,
+    val courseProgressInPercentage: Int,
+    val courseStatus: String,
+    val telegramGroup: String,
+    val courseUserId: Int,
 )
 
 data class ChapterDomain(

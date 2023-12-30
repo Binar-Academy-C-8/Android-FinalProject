@@ -5,13 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
-import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendrag.finalproject_binar.domain.NotificationResponseDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NotificationsViewModel(
+class NotificationViewModel(
     private val repo : CourseRepository
 ): ViewModel() {
     private val _notification = MutableLiveData<ResultWrapper<NotificationResponseDomain>>()

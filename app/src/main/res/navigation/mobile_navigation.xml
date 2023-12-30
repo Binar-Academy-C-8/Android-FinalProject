@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.raveendra.finalproject_binar.presentation.notifications.NotificationsFragment"
+        android:name="com.raveendra.finalproject_binar.presentation.notifications.NotificationFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
