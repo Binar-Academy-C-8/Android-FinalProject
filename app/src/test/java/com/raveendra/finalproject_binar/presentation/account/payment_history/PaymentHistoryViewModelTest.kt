@@ -2,9 +2,7 @@ package com.raveendra.finalproject_binar.presentation.account.payment_history
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
-import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
-import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel
 import com.raveendra.finalproject_binar.tools.MainCoroutineRule
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import io.mockk.MockKAnnotations
@@ -18,7 +16,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
-
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

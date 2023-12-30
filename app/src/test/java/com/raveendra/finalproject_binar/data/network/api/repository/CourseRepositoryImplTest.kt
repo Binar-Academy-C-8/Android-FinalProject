@@ -22,13 +22,9 @@ import com.raveendra.finalproject_binar.data.response.RegisterDataResponse
 import com.raveendra.finalproject_binar.data.response.RegisterDataValuesResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
-import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
-import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
 import com.raveendra.finalproject_binar.data.response.historypayment.CoursePaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.UserTransactionResponse
-import com.raveendra.finalproject_binar.data.response.toDomain
-import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import io.mockk.MockKAnnotations
@@ -38,8 +34,8 @@ import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
-
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 

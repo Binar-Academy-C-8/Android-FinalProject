@@ -2,7 +2,6 @@ package com.raveendra.finalproject_binar.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.util.UUID
 
 @Parcelize
 data class PopularCourse(

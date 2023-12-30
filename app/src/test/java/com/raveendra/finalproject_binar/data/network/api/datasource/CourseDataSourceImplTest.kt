@@ -10,7 +10,6 @@ import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
-import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.ProfileResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
@@ -22,8 +21,7 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
-
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 

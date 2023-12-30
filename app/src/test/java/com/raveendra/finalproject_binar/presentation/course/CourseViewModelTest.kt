@@ -2,7 +2,6 @@ package com.raveendra.finalproject_binar.presentation.course
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
-import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.tools.MainCoroutineRule
 import com.raveendra.finalproject_binar.tools.getOrAwaitValue
 import com.raveendra.finalproject_binar.utils.ResultWrapper
@@ -15,9 +14,7 @@ import io.mockk.spyk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
-
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

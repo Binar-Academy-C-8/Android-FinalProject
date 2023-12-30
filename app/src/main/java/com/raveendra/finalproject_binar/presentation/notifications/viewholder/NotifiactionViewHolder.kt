@@ -1,9 +1,7 @@
 package com.raveendra.finalproject_binar.presentation.notifications.viewholder
 
 import android.icu.text.SimpleDateFormat
-import android.icu.util.TimeZone
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.raveendra.finalproject_binar.databinding.ItemNotificationBinding
 import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendrag.finalproject_binar.domain.DataDomain

@@ -1,8 +1,5 @@
 package com.raveendrag.finalproject_binar.domain
 
-import android.icu.text.DateIntervalFormat.FormattedDateInterval
-import com.google.gson.annotations.SerializedName
-
 data class NotificationResponseDomain(
     val data : List<DataDomain>?,
     val message: String?,

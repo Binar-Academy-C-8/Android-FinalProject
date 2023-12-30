@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
-import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.raveendra.finalproject_binar.data.local.LocalDataSource
-import com.raveendra.finalproject_binar.data.local.LocalDataSourceimpl
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManagerImpl
 import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSource
@@ -13,8 +11,6 @@ import com.raveendra.finalproject_binar.data.network.api.datasource.CourseDataSo
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepositoryImpl
 import com.raveendra.finalproject_binar.data.network.api.service.CourseService
-import com.raveendra.finalproject_binar.data.repository.RepositoryVideos
-import com.raveendra.finalproject_binar.data.repository.RepositoryVideosImpl
 import com.raveendra.finalproject_binar.presentation.account.AccountViewModel
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryViewModel
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileViewModel
@@ -54,12 +50,10 @@ object AppModules {
 
     private val dataSourceModule = module {
         single<CourseDataSource> { CourseDataSourceImpl(get()) }
-        single<LocalDataSource> { LocalDataSourceimpl() }
     }
 
     private val repositoryModule = module {
         single<CourseRepository> { CourseRepositoryImpl(get()) }
-        single<RepositoryVideos> { RepositoryVideosImpl(get()) }
     }
 
     private val viewModelModule = module {

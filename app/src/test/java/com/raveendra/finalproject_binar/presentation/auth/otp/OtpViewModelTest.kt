@@ -2,13 +2,10 @@ package com.raveendra.finalproject_binar.presentation.auth.otp
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
-import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.domain.LoginDomain
 import com.raveendra.finalproject_binar.domain.NewOtpDomain
-import com.raveendra.finalproject_binar.presentation.auth.login.LoginViewModel
-import com.raveendra.finalproject_binar.presentation.auth.register.RegisterViewModel
 import com.raveendra.finalproject_binar.tools.MainCoroutineRule
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import io.mockk.MockKAnnotations
@@ -22,7 +19,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
-
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

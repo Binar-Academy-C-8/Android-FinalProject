@@ -2,15 +2,12 @@ package com.raveendra.finalproject_binar.presentation.auth.otp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
-import com.raveendra.finalproject_binar.data.response.BaseResponse
-import com.raveendra.finalproject_binar.data.response.LoginResponse
-import com.raveendra.finalproject_binar.domain.ForgotPasswordDomain
-import com.raveendra.finalproject_binar.domain.NewOtpDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
+import com.raveendra.finalproject_binar.domain.NewOtpDomain
+import com.raveendra.finalproject_binar.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
