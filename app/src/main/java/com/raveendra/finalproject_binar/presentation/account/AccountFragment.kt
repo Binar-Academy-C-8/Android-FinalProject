@@ -25,7 +25,7 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
+class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     private val viewModel: AccountViewModel by viewModel()
 
@@ -51,9 +51,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
         llPaymentHistory.setOnClickListener {
             PaymentHistoryActivity.navigate(requireContext())
         }
-        llMyProfile.setOnClickListener {
-            ProfileActivity.navigate(requireContext())
-        }
+
 
         llLogOut.setOnClickListener {
             preferences.clear()
@@ -68,9 +66,16 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
         setupObservers()
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModel.resultProfile.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = { result ->
+                binding.llMyProfile.setOnClickListener {
+                    result.payload?.data?.id.let {
+                        it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
+                    }
+                }
+                binding.ivProfile.load(R.drawable.bg_button_dark_blue) {
+                    placeholder(R.color.primary_dark_blue_06)
                 binding.changePassword.setOnClickListener {
                     result.payload?.data?.id?.let { it1 ->
                         ChangePasswordActivity.navigate(requireContext(),
@@ -104,6 +109,13 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
+                    val exceptionMessage = error.exception.getParsedError()?.message
+                    if (!exceptionMessage.isNullOrBlank()) {
+                        Toast.makeText(
+                            requireContext(),
+                            exceptionMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 } else if (error.exception is NoInternetException) {
@@ -122,7 +134,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
     }
 
     private fun getData() {
-       viewModel.getProfile()
+        viewModel.getProfile()
     }
 
 

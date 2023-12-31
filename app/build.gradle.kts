@@ -149,4 +149,7 @@ dependencies {
 
     //lottie
     implementation ("com.airbnb.android:lottie:6.2.0")
+
+    //imagepicker
+    implementation("com.github.dhaval2404:imagepicker:2.1")
 }

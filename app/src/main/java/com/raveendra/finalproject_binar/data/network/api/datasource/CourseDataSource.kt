@@ -7,6 +7,7 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
+import com.raveendra.finalproject_binar.data.request.UpdateUserRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
@@ -22,11 +23,19 @@ import com.raveendra.finalproject_binar.data.response.UpdateClassProgressRespons
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface CourseDataSource {
 
-    suspend fun getCourse(category: List<Int?>?, courseType : String?): ResponseListWrapper<CourseResponse>
-    suspend fun getClass(status : String?): ResponseListWrapper<ClassResponse>
+    suspend fun getCourse(
+        category: List<Int?>?,
+        courseType: String?
+    ): ResponseListWrapper<CourseResponse>
+
+    suspend fun getClass(status: String?): ResponseListWrapper<ClassResponse>
     suspend fun getCategory(): ResponseListWrapper<CategoryResponse>
     suspend fun postLogin(loginRequest: LoginRequest): LoginResponse
     suspend fun postRegister(registerRequest: RegisterRequest): RegisterResponse
@@ -35,6 +44,7 @@ interface CourseDataSource {
         userId: Int,
         verifyOtpRequest: VerifyOtpRequest
     ): LoginResponse
+
     suspend fun getProfile(): ProfileResponse
     suspend fun postTransaction(courseId: Int): TransactionResponse
 
@@ -60,6 +70,7 @@ interface CourseDataSource {
     suspend fun forgotPassword(
         email: ForgotPasswordRequest
     ): NewOtpResponse
+
     suspend fun getNotification(): NotificationResponse
 
 
@@ -73,6 +84,13 @@ interface CourseDataSource {
         resetPasswordRequest: ResetPasswordRequest
     ): BaseResponse
 
+    suspend fun updateProfile(
+        image: MultipartBody.Part,
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): BaseResponse
+
     suspend fun changePasswordUser(
         userId: Int,
         changePasswordRequest: ChangePasswordRequest
@@ -83,14 +101,17 @@ class CourseDataSourceImpl(
     private val service: CourseService
 ) : CourseDataSource {
 
-    override suspend fun getCourse(category: List<Int?>?, courseType: String?): ResponseListWrapper<CourseResponse> {
+    override suspend fun getCourse(
+        category: List<Int?>?,
+        courseType: String?
+    ): ResponseListWrapper<CourseResponse> {
         var listCategory = category ?: emptyList()
         if (listCategory == listOf(null)) listCategory = emptyList()
         val queryParams = mapOf("category" to listCategory)
-        return service.getCourse(category = queryParams,courseType = courseType)
+        return service.getCourse(category = queryParams, courseType = courseType)
     }
 
-    override suspend fun getClass(status : String?): ResponseListWrapper<ClassResponse> {
+    override suspend fun getClass(status: String?): ResponseListWrapper<ClassResponse> {
         return service.getClass(status)
     }
 
@@ -114,7 +135,7 @@ class CourseDataSourceImpl(
         userId: Int,
         verifyOtpRequest: VerifyOtpRequest
     ): LoginResponse {
-        return service.postVerifyOtp(userId,verifyOtpRequest)
+        return service.postVerifyOtp(userId, verifyOtpRequest)
     }
 
     override suspend fun getCourseById(courseId: Int): CourseApiResponseNew {
@@ -143,7 +164,7 @@ class CourseDataSourceImpl(
         return service.postTransaction(courseId)
     }
 
-    override suspend fun getHistoryPayment(): HistoryPaymentResponse{
+    override suspend fun getHistoryPayment(): HistoryPaymentResponse {
         return service.getHistoryPayment()
     }
 
@@ -166,6 +187,15 @@ class CourseDataSourceImpl(
         return service.resetPasswordUserId(
             userId, resetPasswordRequest
         )
+    }
+
+    override suspend fun updateProfile(
+        image: MultipartBody.Part,
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): BaseResponse {
+        return service.updateProfile(image, userId, name, phoneNumber)
     }
 
     override suspend fun changePasswordUser(

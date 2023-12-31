@@ -1,42 +1,71 @@
 package com.raveendra.finalproject_binar.presentation.account.profile
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toFile
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ActivityProfileBinding
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileBinding>() {
     companion object {
-        fun navigate(context: Context) = with(context) {
+        const val EXTRA_ID = "EXTRA_ID"
+        fun navigate(context: Context, id: Int) = with(context) {
             startActivity(
                 Intent(
                     this,
                     ProfileActivity::class.java
-                )
+                ).putExtra(EXTRA_ID, id)
             )
         }
     }
-    override val viewModel: ProfileViewModel by viewModel()
 
+    private val idExtra by lazy {
+        intent.getIntExtra(EXTRA_ID, 0)
+    }
+    override val viewModel: ProfileViewModel by viewModel()
+    private var getFile: File? = null
     override val bindingInflater: (LayoutInflater) -> ActivityProfileBinding
         get() = ActivityProfileBinding::inflate
 
-    override fun setupViews()  {
+
+    private fun imagePicker() {
+        ImagePicker.with(this)
+            .cropSquare()
+            .galleryOnly()
+            .compress(1024)
+            .maxResultSize(1000, 1000)
+            .start()
+    }
+
+
+    override fun setupViews() {
         binding.ivBack.setOnClickListener {
             finish()
         }
         binding.ivProfile.load(
             R.drawable.bg_button_dark_blue
-        ){
+        ) {
             transformations(
                 CircleCropTransformation()
             )
@@ -50,6 +79,55 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         binding.etProfilePhone.isClickable = false
 
         viewModel.getProfile()
+        binding.ivProfile.setOnClickListener {
+            imagePicker()
+        }
+        binding.btnUpdate.setOnClickListener {
+            updateProfile()
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            val uri: Uri? = data?.data
+            val img = uri?.toFile()
+            binding.ivProfile.load(uri)
+            getFile = img
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun updateProfile() {
+        val imageFile = getFile
+        if (imageFile != null) {
+            val imageRequestBody =
+                imageFile.asRequestBody("image/jpg".toMediaTypeOrNull())
+            val imageMultipart: MultipartBody.Part? = imageRequestBody?.let {
+                MultipartBody.Part.createFormData(
+                    "image",
+                    imageFile.name,
+                    it
+                )
+            }
+
+            val name = binding.etProfileName.getText().toString().trim()
+            val phone = binding.etProfilePhone.getText().toString().trim()
+
+            if (imageMultipart != null) {
+                viewModel.updateProfile(
+                    imageMultipart,
+                    idExtra,
+                    name.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
+                    phone.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
+                )
+            }
+        }
     }
 
     override fun setupObservers() {
@@ -65,7 +143,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
                     val exceptionMessage = error.exception.getParsedError()?.message
                     Toast.makeText(
                         this@ProfileActivity,
-                        exceptionMessage,
+                        "${it.payload?.status.toString()} ",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else if (error.exception is NoInternetException) {
@@ -78,6 +156,18 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
             }, doOnEmpty = {
 
             })
+        }
+
+        viewModel.updateProfile.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    Toast.makeText(this, "${it.payload?.message}", Toast.LENGTH_SHORT).show()
+
+                },
+                doOnError = {
+                    Toast.makeText(this, "${it.payload?.message}", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 
