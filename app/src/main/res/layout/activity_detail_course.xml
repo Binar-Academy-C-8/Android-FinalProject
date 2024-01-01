@@ -328,6 +328,10 @@
                     <include layout="@layout/item_list_detail_course_shimmer" />
 
                     <include layout="@layout/item_list_detail_course_shimmer" />
+
+                    <include layout="@layout/item_list_detail_course_shimmer" />
+
+                    <include layout="@layout/item_list_detail_course_shimmer" />
                 </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
