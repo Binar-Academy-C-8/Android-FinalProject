@@ -131,7 +131,7 @@ interface CourseService {
         @Body changePasswordRequest: ChangePasswordRequest
     ): BaseResponse
 
-    @GET("notification/getAllNotif")
+    @GET("notification/getNotifByUserId")
     suspend fun getNotification(): NotificationResponse
 
     @Multipart

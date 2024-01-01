@@ -196,6 +196,9 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                         R.string.label_var_module,
                         detailAbout?.durationPerCourseInMinutes.toString()
                     )
+                    binding.ivDurationCourse.isVisible = true
+                    binding.ivModuleCourse.isVisible = true
+                    binding.btDescription.isVisible = true
 
                     if (isFromClass){
                         binding.clClassProgress.isVisible = true

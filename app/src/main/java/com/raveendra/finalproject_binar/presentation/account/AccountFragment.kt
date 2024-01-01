@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.load
@@ -18,8 +17,6 @@ import com.raveendra.finalproject_binar.presentation.account.change_password.Cha
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryActivity
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
-import com.raveendra.finalproject_binar.utils.ApiException
-import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
@@ -46,6 +43,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         setupSwipeRefreshLayout()
     }
 
+
     @SuppressLint("SetTextI18n")
     private fun setupViews() = with(binding) {
         llPaymentHistory.setOnClickListener {
@@ -68,14 +66,22 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     private fun setupObservers() {
         viewModel.resultProfile.observe(viewLifecycleOwner) {
-            it.proceedWhen(doOnSuccess = { result ->
-                binding.llMyProfile.setOnClickListener {
-                    result.payload?.data?.id.let {
-                        it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
+            it.proceedWhen(
+                doOnSuccess = { result ->
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
+                    binding.llMyProfile.setOnClickListener {
+                        result.payload?.data?.id.let {
+                            it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
+                        }
                     }
-                }
-                binding.ivProfile.load(it.payload?.data?.image) {
-                    placeholder(R.color.primary_dark_blue_06)
+                    binding.ivProfile.load(result.payload?.data?.image) {
+                        placeholder(R.color.primary_dark_blue_06)
+                        transformations(
+                            CircleCropTransformation()
+                        )
+                        crossfade(true)
+                    }
                     binding.changePassword.setOnClickListener {
                         result.payload?.data?.id?.let { it1 ->
                             ChangePasswordActivity.navigate(
@@ -84,18 +90,18 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                             )
                         }
                     }
-                    binding.ivProfile.load(R.drawable.bg_button_dark_blue) {
-                        error(R.color.primary_dark_blue_06)
-                        transformations(
-                            CircleCropTransformation()
-                        )
-                        crossfade(true)
-                    }
                     binding.tvName.text = result.payload?.data?.name ?: "-"
                     binding.tvEmail.text = result.payload?.data?.email ?: "-"
                     binding.swipeRefreshLayout.isRefreshing = false
-                }
-            })
+                },
+                doOnLoading = {
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = true
+                },
+                doOnError = {
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
+                })
         }
 
 
@@ -105,12 +111,16 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         viewModel.getProfile()
     }
 
-
     private fun setupSwipeRefreshLayout() {
         val swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
         swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfile()
     }
 }

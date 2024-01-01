@@ -7,8 +7,8 @@
     android:layout_gravity="bottom"
     android:background="@drawable/bg_white_top_rounded_16"
     android:orientation="vertical"
-    android:paddingTop="@dimen/dimen_16_dp"
-    android:paddingBottom="@dimen/dimen_16_dp"
+    android:paddingTop="@dimen/dimen_8_dp"
+    android:paddingBottom="@dimen/dimen_8_dp"
     app:behavior_hideable="false"
     app:behavior_peekHeight="0dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16_dp"
-        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:layout_marginTop="@dimen/dimen_8_dp"
         android:layout_marginBottom="@dimen/dimen_8_dp"
         android:text="@string/txt_filter"
         app:layout_constraintBottom_toTopOf="@+id/viewSeparator"
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="6dp"
-            android:text="Kategori" />
+            android:text="@string/label_category" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Level Kesulitan" />
+            android:text="@string/label_level_kesulitan" />
 
         <RadioGroup
             android:id="@+id/rgLevel"
@@ -108,8 +108,6 @@
                 android:text="@string/label_advanced_level" />
         </RadioGroup>
 
-
-
         <Button
             android:id="@+id/btFilter"
             style="@style/TextBold16"
@@ -120,14 +118,6 @@
             android:paddingVertical="10dp"
             android:text="Terapkan Filter"
             android:textColor="@color/white" />
-
-        <TextView
-            style="@style/TextRegular14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hapus Filter"
-            android:textAlignment="center"
-            android:textColor="@color/alert_warning" />
     </LinearLayout>
 
 

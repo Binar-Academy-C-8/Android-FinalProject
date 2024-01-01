@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
                 style="@style/TextBold14"
-                android:textColor="@color/primary_dark_blue_05"
+                android:textColor="@color/primary_dark_blue_06"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="UI/UX Design" />
@@ -102,7 +102,7 @@
                     android:layout_marginVertical="8dp"
                     style="@style/TextMedium12"
                     android:maxLines="1"
-                    android:textColor="@color/primary_dark_blue_05"
+                    android:textColor="@color/primary_dark_blue_06"
                     tools:text="Intermediate Level" />
             </LinearLayout>
 

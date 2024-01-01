@@ -139,4 +139,7 @@
     <string name="label_beginner_level">Beginner</string>
     <string name="label_intermediate_level">Intermediate</string>
     <string name="label_advanced_level">Advanced</string>
+    <string name="label_category">Kategori</string>
+    <string name="label_level_kesulitan">Level Kesulitan</string>
+    <string name="label_update">Update</string>
 </resources>

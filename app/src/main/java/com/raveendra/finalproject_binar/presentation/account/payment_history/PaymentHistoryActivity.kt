@@ -64,7 +64,10 @@ class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
                     binding.layoutStateCategory.root.isVisible = false
                 },
                 doOnError = {
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = false
+                    binding.layoutStateCategory.root.isVisible = true
                     binding.layoutStateCategory.tvError.error
                     it.exception?.message.orEmpty()
                 }
