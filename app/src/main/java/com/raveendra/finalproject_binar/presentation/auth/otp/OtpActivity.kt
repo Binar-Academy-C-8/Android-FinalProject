@@ -13,6 +13,7 @@ import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.databinding.ActivityOtpBinding
 import com.raveendra.finalproject_binar.presentation.MainActivity
+import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
 import com.raveendra.finalproject_binar.presentation.auth.resetpassword.ResetPasswordActivity
 import com.raveendra.finalproject_binar.utils.ApiException
 import com.raveendra.finalproject_binar.utils.NoInternetException
@@ -165,6 +166,7 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
                     doOnSuccess = { result ->
                         preferences.appToken = result.payload?.data?.token.toString()
                         MainActivity.navigateWithFlag(this@OtpActivity)
+
                     },
                     doOnError = { error ->
                         if (error.exception is ApiException) {

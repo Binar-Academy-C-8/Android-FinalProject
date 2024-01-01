@@ -27,11 +27,16 @@ import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.utils.proceedFlow
 import com.raveendrag.finalproject_binar.domain.NotificationResponseDomain
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 interface CourseRepository {
-    suspend fun getCourse(category: List<Int?>? = null, courseType: String?= null): Flow<ResultWrapper<List<CourseDomain>>>
+    suspend fun getCourse(
+        category: List<Int?>? = null,
+        courseType: String? = null
+    ): Flow<ResultWrapper<List<CourseDomain>>>
 
-    suspend fun getClass(status : String?): Flow<ResultWrapper<List<ClassDomain>>>
+    suspend fun getClass(status: String?): Flow<ResultWrapper<List<ClassDomain>>>
 
     suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>>
 
@@ -82,6 +87,14 @@ interface CourseRepository {
     ): Flow<ResultWrapper<BaseResponse>>
 
     suspend fun getNotification(): Flow<ResultWrapper<NotificationResponseDomain>>
+
+    suspend fun updateProfile(
+        image: MultipartBody.Part,
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): Flow<ResultWrapper<BaseResponse>>
+
 }
 
 class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRepository {
@@ -93,7 +106,7 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
         return proceedFlow { dataSource.getCourse(category, courseType).data?.toDomain().orEmpty() }
     }
 
-    override suspend fun getClass(status : String?): Flow<ResultWrapper<List<ClassDomain>>> {
+    override suspend fun getClass(status: String?): Flow<ResultWrapper<List<ClassDomain>>> {
         return proceedFlow { dataSource.getClass(status).data?.toDomain().orEmpty() }
     }
 
@@ -195,6 +208,7 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
         }
     }
 
+
     override suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>> {
         return proceedFlow {
             dataSource.getHistoryPayment().toDomain()
@@ -204,6 +218,17 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
     override suspend fun getNotification(): Flow<ResultWrapper<NotificationResponseDomain>> {
         return proceedFlow {
             dataSource.getNotification().toDomain()
+        }
+    }
+
+    override suspend fun updateProfile(
+        image: MultipartBody.Part,
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): Flow<ResultWrapper<BaseResponse>> {
+        return proceedFlow {
+            dataSource.updateProfile(image, userId, name, phoneNumber)
         }
     }
 }

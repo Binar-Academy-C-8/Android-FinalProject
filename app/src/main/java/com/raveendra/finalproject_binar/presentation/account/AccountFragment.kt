@@ -25,7 +25,7 @@ import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
+class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     private val viewModel: AccountViewModel by viewModel()
 
@@ -51,9 +51,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
         llPaymentHistory.setOnClickListener {
             PaymentHistoryActivity.navigate(requireContext())
         }
-        llMyProfile.setOnClickListener {
-            ProfileActivity.navigate(requireContext())
-        }
+
 
         llLogOut.setOnClickListener {
             preferences.clear()
@@ -68,61 +66,43 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>()  {
         setupObservers()
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModel.resultProfile.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = { result ->
-                binding.changePassword.setOnClickListener {
-                    result.payload?.data?.id?.let { it1 ->
-                        ChangePasswordActivity.navigate(requireContext(),
-                            it1
-                        )
+                binding.llMyProfile.setOnClickListener {
+                    result.payload?.data?.id.let {
+                        it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
                     }
                 }
-                binding.ivProfile.load(R.drawable.bg_button_dark_blue){
-                    error(R.color.primary_dark_blue_06)
-                    transformations(
-                        CircleCropTransformation()
-                    )
-                    crossfade(true)
-                }
-                binding.tvName.text = result.payload?.data?.name ?: "-"
-                binding.tvEmail.text = result.payload?.data?.email ?: "-"
-                binding.swipeRefreshLayout.isRefreshing = false
-            }, doOnLoading = {
-
-            }, doOnError = { error ->
-                if (error.exception is ApiException) {
-                    if (error.exception.httpCode == 500){
-                        binding.swipeRefreshLayout.isVisible = false
-                        binding.clNotLogin.isVisible = true
-                    }else{
-                        val exceptionMessage = error.exception.getParsedError()?.message
-                        if (!exceptionMessage.isNullOrBlank()){
-                            Toast.makeText(
+                binding.ivProfile.load(it.payload?.data?.image) {
+                    placeholder(R.color.primary_dark_blue_06)
+                    binding.changePassword.setOnClickListener {
+                        result.payload?.data?.id?.let { it1 ->
+                            ChangePasswordActivity.navigate(
                                 requireContext(),
-                                exceptionMessage,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                it1
+                            )
                         }
                     }
-
-                } else if (error.exception is NoInternetException) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.label_error_no_internet),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    binding.ivProfile.load(R.drawable.bg_button_dark_blue) {
+                        error(R.color.primary_dark_blue_06)
+                        transformations(
+                            CircleCropTransformation()
+                        )
+                        crossfade(true)
+                    }
+                    binding.tvName.text = result.payload?.data?.name ?: "-"
+                    binding.tvEmail.text = result.payload?.data?.email ?: "-"
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
-                binding.swipeRefreshLayout.isRefreshing = false
-            }, doOnEmpty = {
-                binding.swipeRefreshLayout.isRefreshing = false
-
             })
         }
+
+
     }
 
     private fun getData() {
-       viewModel.getProfile()
+        viewModel.getProfile()
     }
 
 

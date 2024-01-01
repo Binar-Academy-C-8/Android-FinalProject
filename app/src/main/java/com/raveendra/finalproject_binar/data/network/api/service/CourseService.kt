@@ -9,6 +9,7 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
+import com.raveendra.finalproject_binar.data.request.UpdateUserRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
@@ -24,13 +25,17 @@ import com.raveendra.finalproject_binar.data.response.UpdateClassProgressRespons
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -126,6 +131,15 @@ interface CourseService {
 
     @GET("notification/getAllNotif")
     suspend fun getNotification(): NotificationResponse
+
+    @Multipart
+    @PATCH("user/update/{userId}")
+    suspend fun updateProfile(
+        @Part image:MultipartBody.Part?,
+        @Path("userId") userId: Int,
+        @Part ("name") name:RequestBody,
+        @Part ("phoneNumber") phoneNumber:RequestBody,
+    ):BaseResponse
 
 
 

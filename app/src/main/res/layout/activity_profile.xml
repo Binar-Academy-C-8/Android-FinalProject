@@ -28,6 +28,7 @@
         tools:ignore="ContentDescription" />
 
     <LinearLayout
+        android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_24_dp"
@@ -63,6 +64,18 @@
             android:textColorHint="@color/neutral_03"
             app:customLabelText="@string/label_phone" />
     </LinearLayout>
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdate"
+        style="@style/TextMedium14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:background="@drawable/bg_button_dark_blue"
+        android:text="Update"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textField"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
