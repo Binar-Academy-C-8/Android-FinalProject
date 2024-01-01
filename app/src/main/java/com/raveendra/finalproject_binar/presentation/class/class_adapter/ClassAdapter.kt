@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.databinding.ItemListClassBinding
 import com.raveendra.finalproject_binar.domain.ClassDomain
 import com.raveendra.finalproject_binar.utils.ViewHolderBinder
@@ -51,6 +52,7 @@ class ClassViewHolder(
         binding.tvTitle.text = item.courseName
         binding.tvAuthor.text = item.courseBy
         binding.progressBar.progress = item.courseProgressInPercentage
+        binding.tvClassPercent.text = binding.root.context.getString(R.string.label_var_percent, item.courseProgressInPercentage.toString())
 
         binding.root.setOnClickListener {
             onClickListener.invoke(item)

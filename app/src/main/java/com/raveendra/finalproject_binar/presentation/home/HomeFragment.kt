@@ -1,6 +1,7 @@
 package com.raveendra.finalproject_binar.presentation.home
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseAc
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
 import com.raveendra.finalproject_binar.presentation.popup.NonLoginDialogFragment
+import com.raveendra.finalproject_binar.presentation.search.SearchActivity
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
@@ -59,7 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getData()
+        setupViews()
         setupObservers()
         setOnClickListener()
         setupSwipeRefreshLayout()
@@ -160,9 +162,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun getData() {
+    private fun setupViews() = with(binding) {
         viewModel.getCategories()
         viewModel.getCourses()
+        layoutSearchBar.etSearch.inputType = InputType.TYPE_NULL
+        layoutSearchBar.etSearch.isFocusable = false
+        layoutSearchBar.etSearch.isCursorVisible = false
+        layoutSearchBar.etSearch.setOnClickListener {
+            SearchActivity.navigate(requireContext())
+        }
+        layoutSearchBar.ibSearch.setOnClickListener {
+            SearchActivity.navigate(requireContext())
+        }
     }
 
     private fun setOnClickListener() {

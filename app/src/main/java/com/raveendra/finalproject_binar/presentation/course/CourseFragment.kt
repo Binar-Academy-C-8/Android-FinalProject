@@ -1,6 +1,7 @@
 package com.raveendra.finalproject_binar.presentation.course
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,31 +9,41 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.R
+import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.FragmentCourseBinding
+import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.course.adapter.CourseAdapter
-import com.raveendra.finalproject_binar.presentation.popup.FilterCourseBottomSheet
+import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
+import com.raveendra.finalproject_binar.presentation.popup.NonLoginDialogFragment
+import com.raveendra.finalproject_binar.presentation.search.SearchActivity
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
 
     private val viewModel: CourseViewModel by viewModel()
 
+    private val preferences: PreferenceManager by inject()
+
     private var filterCourseBottomSheet: FilterCourseBottomSheet? = null
 
     var courseType: String? = null
+    private var selectedCategory : List<Int?>? = listOf()
+    var level: String? = ""
 
     private val adapterCourse: CourseAdapter by lazy {
         CourseAdapter { course: CourseDomain ->
-
+            if (preferences.isLoggedIn())  course.id?.let { id -> DetailCourseActivity.navigate(requireContext(), id,false) }
+            else showNonLoginDialog()
         }
     }
 
+
     private val swipeRefreshListener = SwipeRefreshList {
-        viewModel.getCourse(courseType)
+        viewModel.getCourse(courseType = courseType, category = selectedCategory, difficulty = level ?:"")
     }
 
     override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCourseBinding
@@ -41,11 +52,10 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        getData()
+        setupViews()
         observeData()
         setClickChips()
         setupSwipeRefreshLayout()
-        setupFilter()
     }
 
     private fun observeData() {
@@ -110,29 +120,47 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
                 }
             )
         }
+        viewModel.categories.observe(viewLifecycleOwner) {
+            it.proceedWhen(doOnSuccess = { result ->
+                result.payload?.let { data -> setupFilter(data) }
+            })
+        }
     }
 
     private fun setupRecyclerView() {
         binding.rvList.adapter = adapterCourse
         viewModel.getCourse()
+        viewModel.getCategories()
     }
 
     private fun setClickChips() {
         binding.chip1.setOnClickListener {
-            viewModel.getCourse(courseType = null)
             courseType = null
+            viewModel.getCourse(courseType = courseType, category = selectedCategory, difficulty = level ?:"")
+
         }
         binding.chip2.setOnClickListener {
-            viewModel.getCourse(courseType = "Premium")
             courseType = "Premium"
+            viewModel.getCourse(courseType = courseType, category = selectedCategory, difficulty = level ?:"")
+
         }
         binding.chip3.setOnClickListener {
-            viewModel.getCourse(courseType = "Free")
             courseType = "Free"
+            viewModel.getCourse(courseType = courseType, category = selectedCategory, difficulty = level ?:"")
+
         }
     }
-    private fun getData() {
+    private fun setupViews() = with(binding) {
         viewModel.getCourse()
+        layoutSearchBar.etSearch.inputType = InputType.TYPE_NULL
+        layoutSearchBar.etSearch.isFocusable = false
+        layoutSearchBar.etSearch.isCursorVisible = false
+        layoutSearchBar.etSearch.setOnClickListener {
+            SearchActivity.navigate(requireContext())
+        }
+        layoutSearchBar.ibSearch.setOnClickListener {
+            SearchActivity.navigate(requireContext())
+        }
     }
 
     private fun setupSwipeRefreshLayout() {
@@ -142,15 +170,24 @@ class CourseFragment : BaseFragment<FragmentCourseBinding>()  {
             ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
         )
     }
-    private fun setupFilter() = with(binding){
+    private fun setupFilter(data : List<CategoryDomain>) = with(binding){
         filterCourseBottomSheet = FilterCourseBottomSheet(
-            context = requireContext()
+            context = requireContext(),
+            data,
         )
+        filterCourseBottomSheet?.filterListenerClicked = { category : List<Int?>?, difficulty : String ->
+            selectedCategory = category
+            level = difficulty
+            viewModel.getCourse(courseType = courseType, category = selectedCategory, difficulty = level ?:"")
+        }
         tvFilter.setOnClickListener {
             filterCourseBottomSheet?.show(
                 requireActivity().supportFragmentManager,
                 CourseFragment::class.java.simpleName
             )
         }
+    }
+    private fun showNonLoginDialog(){
+        NonLoginDialogFragment().show(childFragmentManager,null)
     }
 }

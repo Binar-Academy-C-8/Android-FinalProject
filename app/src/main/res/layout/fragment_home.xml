@@ -242,6 +242,7 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="8dp"
                         android:clipToPadding="false"
+                        android:paddingBottom="@dimen/dimen_16_dp"
                         android:orientation="horizontal"
                         android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

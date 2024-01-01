@@ -34,6 +34,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip1"
+                    android:checked="true"
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,18 +73,18 @@
                 app:duration="500"
                 app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
                 tools:layout_editor_absoluteX="16dp"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <include layout="@layout/item_list_course_shimmer" />
+                    <include layout="@layout/item_list_class_shimmer" />
 
-                    <include layout="@layout/item_list_course_shimmer" />
+                    <include layout="@layout/item_list_class_shimmer" />
 
-                    <include layout="@layout/item_list_course_shimmer" />
+                    <include layout="@layout/item_list_class_shimmer" />
                 </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
@@ -92,6 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/dimen_24_dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/chip_group_filter"
                 tools:itemCount="3"

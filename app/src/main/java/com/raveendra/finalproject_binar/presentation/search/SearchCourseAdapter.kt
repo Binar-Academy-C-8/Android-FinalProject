@@ -1,4 +1,4 @@
-package com.raveendra.finalproject_binar.presentation.course.adapter
+package com.raveendra.finalproject_binar.presentation.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,9 +13,9 @@ import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.utils.ViewHolderBinder
 import com.raveendra.finalproject_binar.utils.toIdrCurrency
 
-class CourseAdapter(
+class SearchCourseAdapter(
     private val onItemClick: (CourseDomain) -> Unit
-) : RecyclerView.Adapter<CourseViewHolder>() {
+) : RecyclerView.Adapter<SearchCourseViewHolder>() {
     private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<CourseDomain>() {
         override fun areItemsTheSame(oldItem: CourseDomain, newItem: CourseDomain): Boolean {
             return oldItem.id == newItem.id
@@ -26,8 +26,8 @@ class CourseAdapter(
         }
     })
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
-        return CourseViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchCourseViewHolder {
+        return SearchCourseViewHolder(
             binding = ItemListCourseBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -43,13 +43,13 @@ class CourseAdapter(
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchCourseViewHolder, position: Int) {
         holder.bind(differ.currentList[position])
     }
 
 
 }
-class CourseViewHolder(
+class SearchCourseViewHolder(
     private val binding: ItemListCourseBinding,
     private val onClickListener: (CourseDomain) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<CourseDomain> {

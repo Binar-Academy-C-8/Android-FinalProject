@@ -47,7 +47,9 @@ interface CourseService {
         @Query("order_by") orderBy: String? = "asc",
         @Query("sort_by") sortBy: String? = "createdAt",
         @QueryMap category: Map<String, @JvmSuppressWildcards List<Int?>?>,
-        @Query("type") courseType : String? = null
+        @Query("type") courseType : String? = null,
+        @Query("level") difficulty : String? = null,
+        @Query("search") search : String? = null
     ): ResponseListWrapper<CourseResponse>
 
     @GET("course-user/my-course")

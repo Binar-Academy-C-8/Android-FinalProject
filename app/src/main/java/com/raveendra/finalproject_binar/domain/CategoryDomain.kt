@@ -7,5 +7,6 @@ data class CategoryDomain(
     val createdAt: String?,
     val id: Int?,
     val image: Any?,
-    val updatedAt: String?
+    val updatedAt: String?,
+    var isSelected : Boolean? = null
 )
