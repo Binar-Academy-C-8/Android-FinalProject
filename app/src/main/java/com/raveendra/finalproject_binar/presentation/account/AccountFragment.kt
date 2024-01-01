@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.load
@@ -17,6 +18,8 @@ import com.raveendra.finalproject_binar.presentation.account.change_password.Cha
 import com.raveendra.finalproject_binar.presentation.account.payment_history.PaymentHistoryActivity
 import com.raveendra.finalproject_binar.presentation.account.profile.ProfileActivity
 import com.raveendra.finalproject_binar.presentation.auth.login.LoginActivity
+import com.raveendra.finalproject_binar.utils.ApiException
+import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
@@ -76,7 +79,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                         }
                     }
                     binding.ivProfile.load(result.payload?.data?.image) {
-                        placeholder(R.color.primary_dark_blue_06)
+                        error(R.color.primary_dark_blue_06)
                         transformations(
                             CircleCropTransformation()
                         )
@@ -93,14 +96,41 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                     binding.tvName.text = result.payload?.data?.name ?: "-"
                     binding.tvEmail.text = result.payload?.data?.email ?: "-"
                     binding.swipeRefreshLayout.isRefreshing = false
+                    binding.clNotLogin.isVisible = false
                 },
                 doOnLoading = {
                     binding.shimmerView.startShimmer()
                     binding.shimmerView.isVisible = true
+                    binding.clNotLogin.isVisible = false
                 },
-                doOnError = {
+                doOnError = { error ->
+                    if (error.exception is ApiException) {
+                        if (error.exception.httpCode == 500) {
+                            binding.swipeRefreshLayout.isVisible = false
+                            binding.clNotLogin.isVisible = true
+                        } else {
+                            val exceptionMessage = error.exception.getParsedError()?.message
+                            if (!exceptionMessage.isNullOrBlank()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    exceptionMessage,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    } else if (error.exception is NoInternetException) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.label_error_no_internet),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    binding.swipeRefreshLayout.isRefreshing = false
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
+
+
                 })
         }
 

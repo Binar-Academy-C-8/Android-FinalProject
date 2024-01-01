@@ -12,6 +12,8 @@ import com.raveendra.finalproject_binar.databinding.FragmentClassBinding
 import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.ClassAdapter
 import com.raveendra.finalproject_binar.presentation.course.SwipeRefreshList
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
+import com.raveendra.finalproject_binar.utils.ApiException
+import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,8 +27,8 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
             DetailCourseActivity.navigate(requireContext(),it.courseUserId, true)
         }
     }
+    private var classStatus: String? = null
 
-    var classStatus: String? = null
 
     private val swipeRefreshListener = SwipeRefreshList {
         viewModel.getClass(status = classStatus)
@@ -83,7 +85,7 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
                     binding.layoutStateCourse.tvError.isVisible = true
                     binding.swipeRefreshLayout.isRefreshing = false
                 },
-                doOnError = {
+                doOnError = {error ->
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
                     binding.chipGroupFilter.isVisible = false
@@ -91,12 +93,30 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
                     binding.layoutStateCourse.ivNotFound.isVisible = true
-                    it.exception?.message.toString()
-                    Toast.makeText(
-                        requireContext(),
-                        it.exception?.message.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    if (error.exception is ApiException) {
+                        if (error.exception.httpCode == 500) {
+                            binding.layoutStateCourse.root.isVisible = true
+                            binding.layoutStateCourse.ivNotFound.isVisible = true
+                            binding.layoutStateCourse.tvError.text = getString(R.string.label_error_not_login_general)
+                            binding.layoutStateCourse.tvError.isVisible = true
+                        } else {
+                            val exceptionMessage = error.exception.getParsedError()?.message
+                            if (!exceptionMessage.isNullOrBlank()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    exceptionMessage,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    } else if (error.exception is NoInternetException) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.label_error_no_internet),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     binding.swipeRefreshLayout.isRefreshing = false
                 }
             )

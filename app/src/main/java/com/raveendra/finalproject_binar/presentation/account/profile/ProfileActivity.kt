@@ -63,6 +63,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         binding.ivProfile.load(
             R.drawable.bg_button_dark_blue
         ) {
+            error(R.color.primary_dark_blue_06)
             transformations(
                 CircleCropTransformation()
             )

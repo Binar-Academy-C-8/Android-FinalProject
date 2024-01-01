@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:duration="500"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/chip_group_filter"
                 tools:layout_editor_absoluteX="16dp"
                 tools:visibility="visible">
