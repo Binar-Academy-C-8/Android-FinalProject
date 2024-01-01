@@ -63,7 +63,6 @@ class SeeAllPopularCourseViewHolder(
             buttonClick.invoke(item)
         }
         binding.ivPopularCourse.load(item.image){
-            placeholder(R.color.primary_dark_blue_06)
             error(R.color.primary_dark_blue_06)
             crossfade(true)
         }

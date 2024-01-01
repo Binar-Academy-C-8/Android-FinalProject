@@ -123,6 +123,8 @@
     <string name="label_add_course">Tambahkan Ke Kelas Anda</string>
     <string name="label_empty_class">Maaf, Anda belum mengikuti kelas.</string>
     <string name="label_fragment_not_login">Anda perlu login untuk mengakses fitur ini</string>
+    <string name="label_empty_search_class">Maaf, Kelas yang anda cari tidak ada</string>
+    <string name="label_search_class">Silahkan cari kelas yang anda inginkan</string>
 
     <string name="label_var_module">%s Modul</string>
     <string name="label_var_minute">%s Menit</string>
@@ -133,4 +135,11 @@
 
     <string name="label_error_not_login_general">Silahkan login untuk menikmati fitur ini</string>
     <string name="text_summary">Ringkasan Pembayaran</string>
+    <string name="label_all_level">Semua Level</string>
+    <string name="label_beginner_level">Beginner</string>
+    <string name="label_intermediate_level">Intermediate</string>
+    <string name="label_advanced_level">Advanced</string>
+    <string name="label_category">Kategori</string>
+    <string name="label_level_kesulitan">Level Kesulitan</string>
+    <string name="label_update">Update</string>
 </resources>

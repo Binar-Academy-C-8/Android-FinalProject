@@ -33,10 +33,12 @@ import okhttp3.RequestBody
 interface CourseRepository {
     suspend fun getCourse(
         category: List<Int?>? = null,
-        courseType: String? = null
+        courseType: String? = null,
+        difficulty: String? = null,
+        search: String? = null
     ): Flow<ResultWrapper<List<CourseDomain>>>
 
-    suspend fun getClass(status: String?): Flow<ResultWrapper<List<ClassDomain>>>
+    suspend fun getClass(status : String?): Flow<ResultWrapper<List<ClassDomain>>>
 
     suspend fun getCategory(): Flow<ResultWrapper<List<CategoryDomain>>>
 
@@ -57,11 +59,15 @@ interface CourseRepository {
     suspend fun getCourseById(
         courseId: Int
     ): Flow<ResultWrapper<DetailResponseCourseDomain>>
+
     suspend fun getClassById(
         courseId: Int
     ): Flow<ResultWrapper<DetailResponseCourseDomain>>
 
-    suspend fun patchClassUpdateProgress(courseId: Int, contentId: Int): Flow<ResultWrapper<UpdateClassProgressDomain>>
+    suspend fun patchClassUpdateProgress(
+        courseId: Int,
+        contentId: Int
+    ): Flow<ResultWrapper<UpdateClassProgressDomain>>
 
     suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<Unit>>
 
@@ -101,9 +107,13 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
 
     override suspend fun getCourse(
         category: List<Int?>?,
-        courseType: String?
+        courseType: String?,
+        difficulty: String?,
+        search: String?
     ): Flow<ResultWrapper<List<CourseDomain>>> {
-        return proceedFlow { dataSource.getCourse(category, courseType).data?.toDomain().orEmpty() }
+        return proceedFlow {
+            dataSource.getCourse(category, courseType, difficulty,search).data?.toDomain().orEmpty()
+        }
     }
 
     override suspend fun getClass(status: String?): Flow<ResultWrapper<List<ClassDomain>>> {
@@ -158,14 +168,19 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
             dataSource.getCourseById(courseId).toDomain()
         }
     }
+
     override suspend fun getClassById(courseId: Int): Flow<ResultWrapper<DetailResponseCourseDomain>> {
         return proceedFlow {
             dataSource.getClassById(courseId).toDomain()
         }
     }
-    override suspend fun patchClassUpdateProgress(courseId: Int, contentId: Int): Flow<ResultWrapper<UpdateClassProgressDomain>> {
+
+    override suspend fun patchClassUpdateProgress(
+        courseId: Int,
+        contentId: Int
+    ): Flow<ResultWrapper<UpdateClassProgressDomain>> {
         return proceedFlow {
-            dataSource.patchClassUpdateProgress(courseId,contentId).toDomain()
+            dataSource.patchClassUpdateProgress(courseId, contentId).toDomain()
         }
     }
 
@@ -204,10 +219,9 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
         changePasswordRequest: ChangePasswordRequest
     ): Flow<ResultWrapper<BaseResponse>> {
         return proceedFlow {
-            dataSource.changePasswordUser(userId,changePasswordRequest)
+            dataSource.changePasswordUser(userId, changePasswordRequest)
         }
     }
-
 
     override suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>> {
         return proceedFlow {

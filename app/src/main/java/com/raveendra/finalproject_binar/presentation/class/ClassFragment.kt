@@ -8,15 +8,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.R
-import com.raveendra.finalproject_binar.databinding.FragmentDashboardBinding
+import com.raveendra.finalproject_binar.databinding.FragmentClassBinding
 import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.ClassAdapter
 import com.raveendra.finalproject_binar.presentation.course.SwipeRefreshList
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
+import com.raveendra.finalproject_binar.utils.ApiException
+import com.raveendra.finalproject_binar.utils.NoInternetException
 import com.raveendra.finalproject_binar.utils.base.BaseFragment
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
+class ClassFragment : BaseFragment<FragmentClassBinding>() {
 
     private val viewModel: ClassViewModel by viewModel()
 
@@ -25,18 +27,21 @@ class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
             DetailCourseActivity.navigate(requireContext(),it.courseUserId, true)
         }
     }
+    private var classStatus: String? = null
+
 
     private val swipeRefreshListener = SwipeRefreshList {
-        viewModel.getClass()
+        viewModel.getClass(status = classStatus)
     }
-    override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDashboardBinding
-        get() = FragmentDashboardBinding::inflate
+    override val inflateLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentClassBinding
+        get() = FragmentClassBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeData()
         setupSwipeRefreshLayout()
+        setClickChips()
     }
 
     private fun setupRecyclerView() {
@@ -80,7 +85,7 @@ class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
                     binding.layoutStateCourse.tvError.isVisible = true
                     binding.swipeRefreshLayout.isRefreshing = false
                 },
-                doOnError = {
+                doOnError = {error ->
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
                     binding.chipGroupFilter.isVisible = false
@@ -88,17 +93,41 @@ class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
                     binding.layoutStateCourse.root.isVisible = true
                     binding.layoutStateCourse.pbLoading.isVisible = false
                     binding.layoutStateCourse.ivNotFound.isVisible = true
-                    it.exception?.message.toString()
-                    Toast.makeText(
-                        requireContext(),
-                        it.exception?.message.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    if (error.exception is ApiException) {
+                        if (error.exception.httpCode == 500) {
+                            binding.layoutStateCourse.root.isVisible = true
+                            binding.layoutStateCourse.ivNotFound.isVisible = true
+                            binding.layoutStateCourse.tvError.text = getString(R.string.label_error_not_login_general)
+                            binding.layoutStateCourse.tvError.isVisible = true
+                        } else {
+                            val exceptionMessage = error.exception.getParsedError()?.message
+                            if (!exceptionMessage.isNullOrBlank()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    exceptionMessage,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    } else if (error.exception is NoInternetException) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.label_error_no_internet),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     binding.swipeRefreshLayout.isRefreshing = false
                 }
             )
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getClass(status = classStatus)
+    }
+
     private fun setupSwipeRefreshLayout() {
         val swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
@@ -106,5 +135,18 @@ class ClassFragment : BaseFragment<FragmentDashboardBinding>() {
             ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
         )
     }
-
+    private fun setClickChips() {
+        binding.chip1.setOnClickListener {
+            classStatus = null
+            viewModel.getClass(status = classStatus)
+        }
+        binding.chip2.setOnClickListener {
+            classStatus = "inProgress"
+            viewModel.getClass(status = classStatus)
+        }
+        binding.chip3.setOnClickListener {
+            classStatus = "Selesai"
+            viewModel.getClass(status = classStatus)
+        }
+    }
 }

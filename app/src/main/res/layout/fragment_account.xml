@@ -102,17 +102,32 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_8_dp">
+                        android:paddingVertical="@dimen/dimen_8_dp">
 
                         <ImageView
                             android:id="@+id/ivProfile"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
+                            android:layout_marginStart="@dimen/dimen_8_dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription"
                             tools:src="@tools:sample/avatars" />
 
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:duration="500"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:visibility="visible">
+
+                            <include layout="@layout/item_category_course_shimmer" />
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
                         <TextView
                             android:id="@+id/tvName"
                             style="@style/TextMedium12"

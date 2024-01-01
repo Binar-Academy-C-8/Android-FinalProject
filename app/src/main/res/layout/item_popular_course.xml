@@ -44,7 +44,7 @@
                 android:ellipsize="end"
                 android:layout_marginEnd="@dimen/dimen_4_dp"
                 android:maxLines="1"
-                android:textColor="@color/primary_dark_blue_05"
+                android:textColor="@color/primary_dark_blue_06"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Data Science" />
@@ -118,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:textColor="@color/primary_dark_blue_05"
+                            android:textColor="@color/primary_dark_blue_06"
                             tools:text="Advanced Level" />
                     </LinearLayout>
 

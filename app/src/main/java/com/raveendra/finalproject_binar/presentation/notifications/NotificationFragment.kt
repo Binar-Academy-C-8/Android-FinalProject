@@ -54,6 +54,8 @@ class NotificationFragment  : BaseFragment<FragmentNotificationsBinding>() {
                     binding.layoutStateMenu.root.isVisible = false
                 },
                 doOnError = {
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
                     binding.rvMenuNotification.isVisible = false
                     binding.layoutStateMenu.tvError.error
                     it.exception?.message.orEmpty()

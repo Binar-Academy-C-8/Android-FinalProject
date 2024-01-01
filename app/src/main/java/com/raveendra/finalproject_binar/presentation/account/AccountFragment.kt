@@ -46,6 +46,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         setupSwipeRefreshLayout()
     }
 
+
     @SuppressLint("SetTextI18n")
     private fun setupViews() = with(binding) {
         llPaymentHistory.setOnClickListener {
@@ -68,14 +69,22 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
 
     private fun setupObservers() {
         viewModel.resultProfile.observe(viewLifecycleOwner) {
-            it.proceedWhen(doOnSuccess = { result ->
-                binding.llMyProfile.setOnClickListener {
-                    result.payload?.data?.id.let {
-                        it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
+            it.proceedWhen(
+                doOnSuccess = { result ->
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
+                    binding.llMyProfile.setOnClickListener {
+                        result.payload?.data?.id.let {
+                            it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
+                        }
                     }
-                }
-                binding.ivProfile.load(it.payload?.data?.image) {
-                    placeholder(R.color.primary_dark_blue_06)
+                    binding.ivProfile.load(result.payload?.data?.image) {
+                        error(R.color.primary_dark_blue_06)
+                        transformations(
+                            CircleCropTransformation()
+                        )
+                        crossfade(true)
+                    }
                     binding.changePassword.setOnClickListener {
                         result.payload?.data?.id?.let { it1 ->
                             ChangePasswordActivity.navigate(
@@ -84,18 +93,45 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                             )
                         }
                     }
-                    binding.ivProfile.load(R.drawable.bg_button_dark_blue) {
-                        error(R.color.primary_dark_blue_06)
-                        transformations(
-                            CircleCropTransformation()
-                        )
-                        crossfade(true)
-                    }
                     binding.tvName.text = result.payload?.data?.name ?: "-"
                     binding.tvEmail.text = result.payload?.data?.email ?: "-"
                     binding.swipeRefreshLayout.isRefreshing = false
-                }
-            })
+                    binding.clNotLogin.isVisible = false
+                },
+                doOnLoading = {
+                    binding.shimmerView.startShimmer()
+                    binding.shimmerView.isVisible = true
+                    binding.clNotLogin.isVisible = false
+                },
+                doOnError = { error ->
+                    if (error.exception is ApiException) {
+                        if (error.exception.httpCode == 500) {
+                            binding.swipeRefreshLayout.isVisible = false
+                            binding.clNotLogin.isVisible = true
+                        } else {
+                            val exceptionMessage = error.exception.getParsedError()?.message
+                            if (!exceptionMessage.isNullOrBlank()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    exceptionMessage,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    } else if (error.exception is NoInternetException) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.label_error_no_internet),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    binding.swipeRefreshLayout.isRefreshing = false
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
+
+
+                })
         }
 
 
@@ -105,12 +141,16 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         viewModel.getProfile()
     }
 
-
     private fun setupSwipeRefreshLayout() {
         val swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
         swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(requireContext(), R.color.primary_dark_blue_06)
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfile()
     }
 }

@@ -7,13 +7,14 @@ import androidx.core.view.isVisible
 import com.raveendra.finalproject_binar.databinding.ActivityPaymentHistoryBinding
 import com.raveendra.finalproject_binar.domain.UserTransactionDomain
 import com.raveendra.finalproject_binar.presentation.account.payment_history.adapter.PaymentAdapter
+import com.raveendra.finalproject_binar.presentation.payment.payment_webview.PaymentWebViewActivity
 import com.raveendra.finalproject_binar.utils.base.BaseActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
+class PaymentHistoryActivity : BaseActivity<ActivityPaymentHistoryBinding>() {
 
-    private val viewModel : PaymentHistoryViewModel by viewModel()
+    private val viewModel: PaymentHistoryViewModel by viewModel()
 
     companion object {
         fun navigate(context: Context) = with(context) {
@@ -26,9 +27,11 @@ class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
         }
     }
 
-    private val adapterPayment : PaymentAdapter by lazy {
-        PaymentAdapter{ payment: UserTransactionDomain ->
-
+    private val adapterPayment: PaymentAdapter by lazy {
+        PaymentAdapter { payment: UserTransactionDomain ->
+            if (payment.paymentStatus == "unpaid") {
+                payment.linkPayment?.let { PaymentWebViewActivity.navigate(this, it) }
+            }
         }
     }
     override val bindingInflater: (LayoutInflater) -> ActivityPaymentHistoryBinding
@@ -40,14 +43,14 @@ class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
 
     }
 
-    private fun setUpRecyclerView(){
+    private fun setUpRecyclerView() {
         binding.rvList.adapter = adapterPayment
         viewModel.getHistoryPayment()
     }
 
-    private  fun observeData(){
-        viewModel.historyPayment.observe(this){
-            it.proceedWhen (
+    private fun observeData() {
+        viewModel.historyPayment.observe(this) {
+            it.proceedWhen(
                 doOnSuccess = {
                     binding.shimmerView.stopShimmer()
                     binding.shimmerView.isVisible = false
@@ -64,7 +67,10 @@ class PaymentHistoryActivity: BaseActivity<ActivityPaymentHistoryBinding>() {
                     binding.layoutStateCategory.root.isVisible = false
                 },
                 doOnError = {
+                    binding.shimmerView.stopShimmer()
+                    binding.shimmerView.isVisible = false
                     binding.rvList.isVisible = false
+                    binding.layoutStateCategory.root.isVisible = true
                     binding.layoutStateCategory.tvError.error
                     it.exception?.message.orEmpty()
                 }

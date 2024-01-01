@@ -164,11 +164,16 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
             viewModel.verifyOtpResult.collect {
                 it.proceedWhen(
                     doOnSuccess = { result ->
+                        binding.pbLoading.isVisible = false
                         preferences.appToken = result.payload?.data?.token.toString()
                         MainActivity.navigateWithFlag(this@OtpActivity)
 
                     },
+                    doOnLoading = {
+                        binding.pbLoading.isVisible = true
+                    },
                     doOnError = { error ->
+                        binding.pbLoading.isVisible = false
                         if (error.exception is ApiException) {
                             Toast.makeText(
                                 this@OtpActivity,
@@ -190,11 +195,16 @@ class OtpActivity : BaseViewModelActivity<OtpViewModel, ActivityOtpBinding>() {
             viewModel.forgotPasswordUserId.collect {
                 it.proceedWhen(
                     doOnSuccess = { result ->
+                        binding.pbLoading.isVisible = false
                         val message = result.payload?.message
                         ResetPasswordActivity.navigate(this@OtpActivity, idExtra)
                         Toast.makeText(this@OtpActivity, "$message", Toast.LENGTH_SHORT).show()
                     },
+                    doOnLoading = {
+                        binding.pbLoading.isVisible = true
+                    },
                     doOnError = { error ->
+                        binding.pbLoading.isVisible = false
                         if (error.exception is ApiException) {
                             Toast.makeText(
                                 this@OtpActivity,

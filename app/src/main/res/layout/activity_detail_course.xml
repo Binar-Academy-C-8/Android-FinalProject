@@ -111,6 +111,7 @@
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@drawable/ic_modul"
+                            android:visibility="gone"
                             tools:ignore="ContentDescription" />
 
                         <TextView
@@ -135,6 +136,7 @@
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@drawable/ic_time"
+                            android:visibility="gone"
                             tools:ignore="ContentDescription" />
 
                         <TextView
@@ -144,7 +146,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:textColor="@color/primary_dark_blue_06"
-                            tools:text="10 Menit" />
+                            tools:text="10 Menit"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -189,7 +191,7 @@
                     android:indeterminate="false"
                     android:max="100"
                     android:padding="8dp"
-                    app:indicatorColor="@color/primary_dark_blue_05"
+                    app:indicatorColor="@color/primary_dark_blue_06"
                     app:layout_constraintBottom_toBottomOf="@+id/tvClassPercent"
                     app:layout_constraintEnd_toStartOf="@+id/tvClassPercent"
                     app:layout_constraintStart_toEndOf="@+id/iv_progress"
@@ -210,10 +212,12 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btDescription"
-                style="@style/TextBold14"
+                style="@style/TextMedium14"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="@dimen/dimen_16_dp"
                 android:background="@drawable/bg_button_dark_blue"
                 android:text="@string/lihat_deskripsi"
                 android:textAllCaps="false"
@@ -354,8 +358,6 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:elevation="@dimen/dimen_8_dp"
-        android:paddingHorizontal="@dimen/dimen_16_dp"
-        android:paddingVertical="@dimen/dimen_16_dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -370,7 +372,9 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/dimen_16_dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout

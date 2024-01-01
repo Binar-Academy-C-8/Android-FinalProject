@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="bottom"
     android:background="@drawable/bg_white_top_rounded_16"
     android:orientation="vertical"
-    android:paddingTop="@dimen/dimen_16_dp"
-    android:paddingBottom="@dimen/dimen_16_dp"
+    android:paddingTop="@dimen/dimen_8_dp"
+    android:paddingBottom="@dimen/dimen_8_dp"
     app:behavior_hideable="false"
     app:behavior_peekHeight="0dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -25,11 +26,11 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        style="@style/TextMedium16"
+        style="@style/TextBold20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16_dp"
-        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:layout_marginTop="@dimen/dimen_8_dp"
         android:layout_marginBottom="@dimen/dimen_8_dp"
         android:text="@string/txt_filter"
         app:layout_constraintBottom_toTopOf="@+id/viewSeparator"
@@ -53,218 +54,70 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_kategori"
-            style="@style/TextBold20"
+            style="@style/TextBold18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="6dp"
-            android:text="Kategori" />
-
-        <LinearLayout
-            android:id="@+id/ll_course1"
+            android:text="@string/label_category" />
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:id="@+id/rvCategoryFilter"
+            tools:listitem="@layout/item_category_filter"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"/>
 
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
 
-            <TextView
-                style="@style/TextMedium14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="UI/UX Design" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_course2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Web Development" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_course3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Android Development" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_course4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Data Science" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_course5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Business Intelligence" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_level"
-            style="@style/TextBold20"
+            style="@style/TextBold18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="6dp"
-            android:text="Level Kesulitan" />
+            android:layout_marginTop="6dp"
+            android:text="@string/label_level_kesulitan" />
 
-        <LinearLayout
-            android:id="@+id/ll_level1"
+        <RadioGroup
+            android:id="@+id/rgLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:orientation="vertical">
 
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
+            <RadioButton
+                android:id="@+id/radioButton1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Semua Level" />
-        </LinearLayout>
+                android:checked="true"
+                android:text="@string/label_all_level" />
 
-        <LinearLayout
-            android:id="@+id/ll_level2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
+            <RadioButton
+                android:id="@+id/rbBeginner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Begginer Level" />
-        </LinearLayout>
+                android:text="@string/label_beginner_level" />
 
-        <LinearLayout
-            android:id="@+id/ll_level3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
+            <RadioButton
+                android:id="@+id/rbIntermediate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Intermediate Level" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_level4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <CheckBox
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:shadowRadius="4" />
-
-            <TextView
-                style="@style/TextMedium14"
+                android:text="@string/label_intermediate_level" />
+            <RadioButton
+                android:id="@+id/rbAdvanced"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="Advanced Level" />
-        </LinearLayout>
+                android:text="@string/label_advanced_level" />
+        </RadioGroup>
 
         <Button
-            android:id="@+id/btn_masuk"
+            android:id="@+id/btFilter"
             style="@style/TextBold16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
-            android:backgroundTint="@color/primary_dark_blue_05"
+            android:backgroundTint="@color/primary_dark_blue_06"
             android:paddingVertical="10dp"
             android:text="Terapkan Filter"
             android:textColor="@color/white" />
-
-        <TextView
-            style="@style/TextRegular14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hapus Filter"
-            android:textAlignment="center"
-            android:textColor="@color/alert_warning" />
     </LinearLayout>
 
 

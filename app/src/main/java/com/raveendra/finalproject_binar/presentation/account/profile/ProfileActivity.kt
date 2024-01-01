@@ -4,12 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toFile
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -22,7 +18,6 @@ import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -68,6 +63,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         binding.ivProfile.load(
             R.drawable.bg_button_dark_blue
         ) {
+            error(R.color.primary_dark_blue_06)
             transformations(
                 CircleCropTransformation()
             )
@@ -140,6 +136,13 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
     override fun setupObservers() {
         viewModel.resultProfile.observe(this) {
             it.proceedWhen(doOnSuccess = { result ->
+                binding.ivProfile.load(result.payload?.data?.image) {
+                    placeholder(R.color.primary_dark_blue_06)
+                    transformations(
+                        CircleCropTransformation()
+                    )
+                    crossfade(true)
+                }
                 binding.etProfileName.setText(result.payload?.data?.name ?: "-")
                 binding.etProfileEmail.setText(result.payload?.data?.email ?: "-")
                 binding.etProfilePhone.setText(result.payload?.data?.phoneNumber ?: "-")
@@ -168,7 +171,6 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         viewModel.updateProfile.observe(this) {
             it.proceedWhen(
                 doOnSuccess = {
-                    Toast.makeText(this, "${it.payload?.message}", Toast.LENGTH_SHORT).show()
                     finish()
                 },
                 doOnError = {

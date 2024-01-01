@@ -27,6 +27,7 @@ import com.raveendra.finalproject_binar.presentation.home.HomeViewModel
 import com.raveendra.finalproject_binar.presentation.notifications.NotificationViewModel
 import com.raveendra.finalproject_binar.presentation.payment.payment_summary.PaymentSummaryViewModel
 import com.raveendra.finalproject_binar.presentation.payment.payment_webview.PaymentWebViewViewModel
+import com.raveendra.finalproject_binar.presentation.search.SearchViewModel
 import com.raveendra.finalproject_binar.presentation.seeallpopularcourse.SeeAllPopularCourseViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -75,6 +76,7 @@ object AppModules {
         viewModelOf(::NotificationViewModel)
         viewModelOf(::ClassViewModel)
         viewModelOf(::ChangePasswordViewModel)
+        viewModelOf(::SearchViewModel)
     }
 
     val modules = listOf(

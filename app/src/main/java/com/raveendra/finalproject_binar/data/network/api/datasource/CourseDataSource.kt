@@ -30,12 +30,8 @@ import retrofit2.http.Path
 
 interface CourseDataSource {
 
-    suspend fun getCourse(
-        category: List<Int?>?,
-        courseType: String?
-    ): ResponseListWrapper<CourseResponse>
-
-    suspend fun getClass(status: String?): ResponseListWrapper<ClassResponse>
+    suspend fun getCourse(category: List<Int?>?, courseType : String?, difficulty : String?,search: String?): ResponseListWrapper<CourseResponse>
+    suspend fun getClass(status : String?): ResponseListWrapper<ClassResponse>
     suspend fun getCategory(): ResponseListWrapper<CategoryResponse>
     suspend fun postLogin(loginRequest: LoginRequest): LoginResponse
     suspend fun postRegister(registerRequest: RegisterRequest): RegisterResponse
@@ -101,14 +97,11 @@ class CourseDataSourceImpl(
     private val service: CourseService
 ) : CourseDataSource {
 
-    override suspend fun getCourse(
-        category: List<Int?>?,
-        courseType: String?
-    ): ResponseListWrapper<CourseResponse> {
+    override suspend fun getCourse(category: List<Int?>?, courseType: String?,difficulty : String?,search: String?): ResponseListWrapper<CourseResponse> {
         var listCategory = category ?: emptyList()
         if (listCategory == listOf(null)) listCategory = emptyList()
         val queryParams = mapOf("category" to listCategory)
-        return service.getCourse(category = queryParams, courseType = courseType)
+        return service.getCourse(category = queryParams,courseType = courseType, difficulty = difficulty, search = search)
     }
 
     override suspend fun getClass(status: String?): ResponseListWrapper<ClassResponse> {
