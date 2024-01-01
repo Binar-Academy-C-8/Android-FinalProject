@@ -7,6 +7,7 @@ import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toFile
@@ -56,6 +57,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
             .compress(1024)
             .maxResultSize(1000, 1000)
             .start()
+
     }
 
 
@@ -85,6 +87,11 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         binding.btnUpdate.setOnClickListener {
             updateProfile()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfile()
     }
 
     @Deprecated("Deprecated in Java")
@@ -162,7 +169,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
             it.proceedWhen(
                 doOnSuccess = {
                     Toast.makeText(this, "${it.payload?.message}", Toast.LENGTH_SHORT).show()
-
+                    finish()
                 },
                 doOnError = {
                     Toast.makeText(this, "${it.payload?.message}", Toast.LENGTH_SHORT).show()
@@ -170,5 +177,6 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
             )
         }
     }
+
 
 }

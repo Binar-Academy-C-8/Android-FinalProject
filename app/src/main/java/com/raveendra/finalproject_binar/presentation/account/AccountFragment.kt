@@ -74,63 +74,31 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                         it?.let { it1 -> ProfileActivity.navigate(requireContext(), it1) }
                     }
                 }
-                binding.ivProfile.load(R.drawable.bg_button_dark_blue) {
+                binding.ivProfile.load(it.payload?.data?.image) {
                     placeholder(R.color.primary_dark_blue_06)
-                binding.changePassword.setOnClickListener {
-                    result.payload?.data?.id?.let { it1 ->
-                        ChangePasswordActivity.navigate(requireContext(),
-                            it1
-                        )
-                    }
-                }
-                binding.ivProfile.load(R.drawable.bg_button_dark_blue){
-                    error(R.color.primary_dark_blue_06)
-                    transformations(
-                        CircleCropTransformation()
-                    )
-                    crossfade(true)
-                }
-                binding.tvName.text = result.payload?.data?.name ?: "-"
-                binding.tvEmail.text = result.payload?.data?.email ?: "-"
-                binding.swipeRefreshLayout.isRefreshing = false
-            }, doOnLoading = {
-
-            }, doOnError = { error ->
-                if (error.exception is ApiException) {
-                    if (error.exception.httpCode == 500){
-                        binding.swipeRefreshLayout.isVisible = false
-                        binding.clNotLogin.isVisible = true
-                    }else{
-                        val exceptionMessage = error.exception.getParsedError()?.message
-                        if (!exceptionMessage.isNullOrBlank()){
-                            Toast.makeText(
+                    binding.changePassword.setOnClickListener {
+                        result.payload?.data?.id?.let { it1 ->
+                            ChangePasswordActivity.navigate(
                                 requireContext(),
-                                exceptionMessage,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                it1
+                            )
                         }
-                    val exceptionMessage = error.exception.getParsedError()?.message
-                    if (!exceptionMessage.isNullOrBlank()) {
-                        Toast.makeText(
-                            requireContext(),
-                            exceptionMessage,
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
-
-                } else if (error.exception is NoInternetException) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.label_error_no_internet),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    binding.ivProfile.load(R.drawable.bg_button_dark_blue) {
+                        error(R.color.primary_dark_blue_06)
+                        transformations(
+                            CircleCropTransformation()
+                        )
+                        crossfade(true)
+                    }
+                    binding.tvName.text = result.payload?.data?.name ?: "-"
+                    binding.tvEmail.text = result.payload?.data?.email ?: "-"
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
-                binding.swipeRefreshLayout.isRefreshing = false
-            }, doOnEmpty = {
-                binding.swipeRefreshLayout.isRefreshing = false
-
             })
         }
+
+
     }
 
     private fun getData() {
