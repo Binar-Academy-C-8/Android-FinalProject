@@ -71,13 +71,14 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         }
         binding.etProfileName.isEnabled = false
         binding.etProfileName.isClickable = false
-        binding.etProfileEmail.isEnabled = false
-        binding.etProfileEmail.isClickable = false
         binding.etProfilePhone.isEnabled = false
         binding.etProfilePhone.isClickable = false
 
         viewModel.getProfile()
         binding.ivProfile.setOnClickListener {
+            imagePicker()
+        }
+        binding.ivChangeProfile.setOnClickListener {
             imagePicker()
         }
         binding.btnUpdate.setOnClickListener {
@@ -144,7 +145,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
                     crossfade(true)
                 }
                 binding.etProfileName.setText(result.payload?.data?.name ?: "-")
-                binding.etProfileEmail.setText(result.payload?.data?.email ?: "-")
+                binding.tvEmail.text = result.payload?.data?.email ?: "-"
                 binding.etProfilePhone.setText(result.payload?.data?.phoneNumber ?: "-")
             }, doOnLoading = {
 

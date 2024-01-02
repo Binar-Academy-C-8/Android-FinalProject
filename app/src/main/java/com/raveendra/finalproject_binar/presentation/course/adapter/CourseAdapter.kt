@@ -57,6 +57,7 @@ class CourseViewHolder(
         binding.ivImg.load(item.image) {
             crossfade(true)
         }
+
         binding.tvTitle.text = item.courseName
         binding.tvType.text = item.courseType
         binding.tvCategory.text = item.category
@@ -67,7 +68,11 @@ class CourseViewHolder(
         binding.tvDuration.text = binding.root.context.getString(R.string.label_var_module, item.modulePerCourse.toString())
         if (item.coursePrice != 0) {
             binding.ivPremium.isVisible = true
+            binding.llType.setBackgroundResource(R.drawable.bg_type_premium)
             binding.tvPrice.text = item.coursePrice?.toIdrCurrency()
+        }else{
+            binding.ivPremium.isVisible = false
+            binding.llType.setBackgroundResource(R.drawable.bg_type_free)
         }
         binding.root.setOnClickListener {
             onClickListener.invoke(item)
