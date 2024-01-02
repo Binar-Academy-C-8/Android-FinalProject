@@ -22,7 +22,7 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
 
     private val viewModel: ClassViewModel by viewModel()
 
-    private val adapterDashboard: ClassAdapter by lazy {
+    private val adapterClass: ClassAdapter by lazy {
         ClassAdapter {
             DetailCourseActivity.navigate(requireContext(),it.courseUserId, true)
         }
@@ -45,7 +45,7 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvList.adapter = adapterDashboard
+        binding.rvList.adapter = adapterClass
         viewModel.getClass()
     }
     private fun observeData() {
@@ -60,7 +60,7 @@ class ClassFragment : BaseFragment<FragmentClassBinding>() {
                     binding.layoutStateCourse.tvError.isVisible = false
                     binding.layoutStateCourse.ivNotFound.isVisible = false
                     it.payload?.let {
-                        adapterDashboard.setData(it)
+                        adapterClass.setData(it)
                     }
                     binding.swipeRefreshLayout.isRefreshing = false
                 },

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.raveendra.finalproject_binar.utils.ResultWrapper
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
 import com.raveendra.finalproject_binar.domain.CategoryDomain
+import com.raveendra.finalproject_binar.domain.ClassDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +34,20 @@ class HomeViewModel(private val repository: CourseRepository) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getCategory().collect {
                 _categories.postValue(it)
+            }
+        }
+    }
+
+    private val _classResult = MutableLiveData<ResultWrapper<List<ClassDomain>>>()
+    val classResult: LiveData<ResultWrapper<List<ClassDomain>>>
+        get() = _classResult
+
+    fun getClass(
+        status : String? = null
+    ){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getClass(status).collect {
+                _classResult.postValue(it)
             }
         }
     }

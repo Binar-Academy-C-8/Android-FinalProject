@@ -144,4 +144,5 @@
     <string name="label_update">Update</string>
     <string name="label_paid">Sudah dibayar</string>
     <string name="label_unpaid">Belum dibayar</string>
+    <string name="label_running_class">Kelas Berjalan</string>
 </resources>

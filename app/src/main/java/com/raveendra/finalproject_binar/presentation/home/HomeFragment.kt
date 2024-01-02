@@ -11,6 +11,7 @@ import com.raveendra.finalproject_binar.R
 import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.FragmentHomeBinding
 import com.raveendra.finalproject_binar.domain.CategoryDomain
+import com.raveendra.finalproject_binar.presentation.`class`.class_adapter.ClassAdapter
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
 import com.raveendra.finalproject_binar.presentation.home.adapter.AdapterPopularCourse
 import com.raveendra.finalproject_binar.presentation.home.adapter.CategoryAdapter
@@ -37,6 +38,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    private val adapterClass: ClassAdapter by lazy {
+        ClassAdapter {
+            DetailCourseActivity.navigate(requireContext(),it.courseUserId, true)
+        }
+    }
+
+
 
     private val popularCourseAdapter: AdapterPopularCourse by lazy {
         AdapterPopularCourse(
@@ -53,6 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val swipeRefreshListener = SwipeRefreshList {
         viewModel.getCategories()
         viewModel.getCourses(listOf(category))
+        viewModel.getClass("inProgress")
     }
 
 
@@ -88,7 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             categoryName = "Show All",
                             createdAt = "",
                             id = 0,
-                            image = "https://raw.githubusercontent.com/panipujayanti/FinalProjectAsset/master/app/src/main/res/drawable/ic_show_all.png",
+                            image = "https://raw.githubusercontent.com/Bahrulilmi30/rullfood/master/app/src/main/res/drawable/frame_2400__1_.png",
                             updatedAt = ""
                         )
                     )
@@ -160,11 +169,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.swipeRefreshLayout.isRefreshing = false
             })
         }
+        viewModel.classResult.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.clClass.isVisible = true
+                    binding.rvClass.apply {
+                        adapter = adapterClass
+                    }
+                    it.payload?.let {
+                        adapterClass.setData(it)
+                    }
+                    binding.swipeRefreshLayout.isRefreshing = false
+                },
+                doOnEmpty = {
+                    binding.clClass.isVisible = false
+                    binding.swipeRefreshLayout.isRefreshing = false
+                },
+                doOnError = {error ->
+                    binding.clClass.isVisible = false
+                    binding.swipeRefreshLayout.isRefreshing = false
+                }
+            )
+        }
     }
 
     private fun setupViews() = with(binding) {
         viewModel.getCategories()
         viewModel.getCourses()
+        viewModel.getClass("inProgress")
         layoutSearchBar.etSearch.inputType = InputType.TYPE_NULL
         layoutSearchBar.etSearch.isFocusable = false
         layoutSearchBar.etSearch.isCursorVisible = false
@@ -194,5 +226,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         NonLoginDialogFragment().show(childFragmentManager,null)
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        viewModel.getClass("inProgress")
+    }
 }
