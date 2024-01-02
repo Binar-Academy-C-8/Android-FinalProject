@@ -15,12 +15,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/text_label"
-            style="@style/TextBold24"/>
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="24sp"/>
 
         <include
             android:id="@+id/layout_state_category"

@@ -67,7 +67,11 @@ class SearchCourseViewHolder(
         binding.tvDuration.text = binding.root.context.getString(R.string.label_var_module, item.modulePerCourse.toString())
         if (item.coursePrice != 0) {
             binding.ivPremium.isVisible = true
+            binding.llType.setBackgroundResource(R.drawable.bg_type_premium)
             binding.tvPrice.text = item.coursePrice?.toIdrCurrency()
+        }else{
+            binding.ivPremium.isVisible = false
+            binding.llType.setBackgroundResource(R.drawable.bg_type_free)
         }
         binding.root.setOnClickListener {
             onClickListener.invoke(item)

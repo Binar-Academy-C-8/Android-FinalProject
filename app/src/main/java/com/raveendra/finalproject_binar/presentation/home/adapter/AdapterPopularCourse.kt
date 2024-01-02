@@ -3,6 +3,7 @@ package com.raveendra.finalproject_binar.presentation.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -75,5 +76,10 @@ class PopularCourseViewHolder(
         binding.tvDurationCourse.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(R.string.duration_course)}"
         binding.tvModuleCourse.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
         binding.tvBuy.text =  if (item.coursePrice == 0) binding.root.context.getString(R.string.label_free) else binding.root.context.getString(R.string.label_buy, item.coursePrice?.toIdrCurrency())
+        if (item.coursePrice != 0) {
+            binding.clAddToCart.setBackgroundResource(R.drawable.rounded_button_background)
+        }else{
+            binding.clAddToCart.setBackgroundResource(R.drawable.rounded_button_background_blue)
+        }
     }
 }

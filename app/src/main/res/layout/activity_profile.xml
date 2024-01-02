@@ -27,6 +27,27 @@
         app:layout_constraintTop_toBottomOf="@+id/ivBack"
         tools:ignore="ContentDescription" />
 
+    <ImageView
+        android:id="@+id/ivChangeProfile"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfile"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/TextMedium12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        android:textColor="@color/neutral_03"
+        tools:text="gemarmengaji@gmail.com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
+
     <LinearLayout
         android:id="@+id/textField"
         android:layout_width="match_parent"
@@ -35,7 +56,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfile">
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail">
 
         <com.raveendra.finalproject_binar.utils.LabelTextFieldView
             android:id="@+id/etProfileName"
@@ -45,15 +66,6 @@
             android:inputType="textCapSentences"
             android:textColorHint="@color/neutral_03"
             app:customLabelText="@string/label_name" />
-
-        <com.raveendra.finalproject_binar.utils.LabelTextFieldView
-            android:id="@+id/etProfileEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_12_dp"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/neutral_03"
-            app:customLabelText="@string/label_email" />
 
         <com.raveendra.finalproject_binar.utils.LabelTextFieldView
             android:id="@+id/etProfilePhone"

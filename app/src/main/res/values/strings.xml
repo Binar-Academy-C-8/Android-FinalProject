@@ -142,4 +142,6 @@
     <string name="label_category">Kategori</string>
     <string name="label_level_kesulitan">Level Kesulitan</string>
     <string name="label_update">Update</string>
+    <string name="label_paid">Sudah dibayar</string>
+    <string name="label_unpaid">Belum dibayar</string>
 </resources>
