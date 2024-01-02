@@ -28,6 +28,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:background="@null"
                 android:maxLines="1"
                 android:hint="@string/label_search_course"

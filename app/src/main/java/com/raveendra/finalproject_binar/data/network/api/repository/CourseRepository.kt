@@ -9,12 +9,14 @@ import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
+import com.raveendra.finalproject_binar.data.response.CreateClassResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.ClassDomain
 import com.raveendra.finalproject_binar.domain.CourseDomain
+import com.raveendra.finalproject_binar.domain.CreateClassDomain
 import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 import com.raveendra.finalproject_binar.domain.HistoryPaymentDomain
 import com.raveendra.finalproject_binar.domain.LoginDomain
@@ -69,7 +71,7 @@ interface CourseRepository {
         contentId: Int
     ): Flow<ResultWrapper<UpdateClassProgressDomain>>
 
-    suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<Unit>>
+    suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<CreateClassDomain>>
 
     suspend fun getHistoryPayment(): Flow<ResultWrapper<HistoryPaymentDomain>>
 
@@ -184,9 +186,9 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
         }
     }
 
-    override suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<Unit>> {
+    override suspend fun postCreateClass(courseId: Int): Flow<ResultWrapper<CreateClassDomain>> {
         return proceedFlow {
-            dataSource.postCreateClass(courseId)
+            dataSource.postCreateClass(courseId).toDomain()
         }
     }
 

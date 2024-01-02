@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raveendra.finalproject_binar.data.network.api.repository.CourseRepository
+import com.raveendra.finalproject_binar.domain.CreateClassDomain
 import com.raveendra.finalproject_binar.domain.DetailResponseCourseDomain
 import com.raveendra.finalproject_binar.domain.UpdateClassProgressDomain
 import com.raveendra.finalproject_binar.utils.ResultWrapper
@@ -29,8 +30,8 @@ class DetailViewModel(
     val updateClassProgressResult: LiveData<ResultWrapper<UpdateClassProgressDomain>>
         get() = _updateClassProgressResult
 
-    private val _postCreateClassResult = MutableLiveData<ResultWrapper<Unit>>()
-    val postCreateClassResult: LiveData<ResultWrapper<Unit>>
+    private val _postCreateClassResult = MutableLiveData<ResultWrapper<CreateClassDomain>>()
+    val postCreateClassResult: LiveData<ResultWrapper<CreateClassDomain>>
         get() = _postCreateClassResult
 
 

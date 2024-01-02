@@ -18,7 +18,7 @@ class SearchViewModel(
         get() = _course
 
     fun getCourse(
-        search: String = ""
+        search: String? = ""
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getCourse(

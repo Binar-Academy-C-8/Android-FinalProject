@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.load
 import com.raveendra.finalproject_binar.R
@@ -12,8 +13,10 @@ import com.raveendra.finalproject_binar.data.local.sharedpref.PreferenceManager
 import com.raveendra.finalproject_binar.databinding.ActivitySearchBinding
 import com.raveendra.finalproject_binar.domain.CourseDomain
 import com.raveendra.finalproject_binar.presentation.detailcourse.DetailCourseActivity
+import com.raveendra.finalproject_binar.presentation.home.SwipeRefreshList
 import com.raveendra.finalproject_binar.presentation.popup.NonLoginDialogFragment
 import com.raveendra.finalproject_binar.utils.base.BaseViewModelActivity
+import com.raveendra.finalproject_binar.utils.doneEditing
 import com.raveendra.finalproject_binar.utils.proceedWhen
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,14 +52,18 @@ class SearchActivity  : BaseViewModelActivity<SearchViewModel, ActivitySearchBin
     }
 
     override fun setupViews(): Unit = with(binding) {
-
+        setupSwipeRefreshLayout()
         layoutSearchBar.etSearch.requestFocus()
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(layoutSearchBar.etSearch, InputMethodManager.SHOW_IMPLICIT)
 
         layoutSearchBar.ibSearch.setOnClickListener {
             search = layoutSearchBar.etSearch.text.toString()
-            viewModel.getCourse(layoutSearchBar.etSearch.text.toString())
+            viewModel.getCourse(search)
+        }
+        binding.layoutSearchBar.etSearch.doneEditing {
+            search = layoutSearchBar.etSearch.text.toString()
+            viewModel.getCourse(search)
         }
         binding.layoutStateCourse.tvError.isVisible = true
         binding.layoutStateCourse.tvError.text = getString(R.string.label_search_class)
@@ -126,5 +133,15 @@ class SearchActivity  : BaseViewModelActivity<SearchViewModel, ActivitySearchBin
     }
     private fun showNonLoginDialog(){
         NonLoginDialogFragment().show(supportFragmentManager,null)
+    }
+    private fun setupSwipeRefreshLayout() {
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(swipeRefreshListener)
+        swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(this, R.color.primary_dark_blue_06)
+        )
+    }
+    private val swipeRefreshListener = SwipeRefreshList {
+        viewModel.getCourse(search)
     }
 }

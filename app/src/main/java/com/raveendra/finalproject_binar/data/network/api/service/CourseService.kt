@@ -15,6 +15,7 @@ import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.ClassResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
+import com.raveendra.finalproject_binar.data.response.CreateClassResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.NotificationResponse
@@ -104,7 +105,7 @@ interface CourseService {
     @POST("course-user/create/{courseId}")
     suspend fun postCreateClass(
         @Path("courseId") courseUserId: Int
-    )
+    ) : CreateClassResponse
 
     @POST("auth/forgot-password")
     suspend fun forgotPassword(

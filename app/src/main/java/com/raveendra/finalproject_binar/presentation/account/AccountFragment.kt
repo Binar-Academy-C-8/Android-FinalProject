@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import coil.load
@@ -52,11 +53,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
         llPaymentHistory.setOnClickListener {
             PaymentHistoryActivity.navigate(requireContext())
         }
-
-
         llLogOut.setOnClickListener {
-            preferences.clear()
-            LoginActivity.navigate(requireContext())
+            doLogout()
         }
         tvVersion.text = "${BuildConfig.FLAVOR} (${BuildConfig.VERSION_NAME})"
 
@@ -152,5 +150,21 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
     override fun onResume() {
         super.onResume()
         viewModel.getProfile()
+    }
+
+    private fun doLogout() {
+        val dialog = AlertDialog.Builder(requireContext()).setMessage("Apakah anda ingin logout?")
+            .setPositiveButton(
+                "Yes"
+            ) { dialog, id ->
+                preferences.clear()
+                LoginActivity.navigate(requireContext())
+            }
+            .setNegativeButton(
+                "No"
+            ) { dialog, id ->
+                // no-op , do nothing
+            }.create()
+        dialog.show()
     }
 }

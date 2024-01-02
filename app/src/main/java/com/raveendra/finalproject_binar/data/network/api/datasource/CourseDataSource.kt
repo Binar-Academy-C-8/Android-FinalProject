@@ -13,6 +13,7 @@ import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
 import com.raveendra.finalproject_binar.data.response.ClassResponse
 import com.raveendra.finalproject_binar.data.response.CourseResponse
+import com.raveendra.finalproject_binar.data.response.CreateClassResponse
 import com.raveendra.finalproject_binar.data.response.LoginResponse
 import com.raveendra.finalproject_binar.data.response.NewOtpResponse
 import com.raveendra.finalproject_binar.data.response.NotificationResponse
@@ -61,7 +62,7 @@ interface CourseDataSource {
 
     suspend fun postCreateClass(
         courseId: Int
-    ): Unit
+    ): CreateClassResponse
 
     suspend fun forgotPassword(
         email: ForgotPasswordRequest
@@ -140,7 +141,7 @@ class CourseDataSourceImpl(
     override suspend fun patchClassUpdateProgress(courseId: Int, contentId: Int): UpdateClassProgressResponse {
         return service.patchClassUpdateProgress(courseId,contentId)
     }
-    override suspend fun postCreateClass(courseId: Int): Unit {
+    override suspend fun postCreateClass(courseId: Int): CreateClassResponse {
         return service.postCreateClass(courseId)
     }
 

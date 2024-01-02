@@ -41,6 +41,16 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     .putExtra(EXTRA_IS_FROM_CLASS, isFromClass)
             )
         }
+        fun navigateWithFlag(context: Context, courseId: Int, isFromClass: Boolean) = with(context) {
+            startActivity(
+                Intent(
+                    this,
+                    DetailCourseActivity::class.java
+                ).putExtra(EXTRA_COURSE_ID, courseId)
+                    .putExtra(EXTRA_IS_FROM_CLASS, isFromClass)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            )
+        }
     }
 
     private val courseIdExtra by lazy {
@@ -121,6 +131,16 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                 }
             )
         }
+        viewModel.postCreateClassResult.observe(this){
+            it.proceedWhen (
+                doOnSuccess = { result ->
+                    result.payload?.data?.id?.let { id -> navigateWithFlag(this, id, true) }
+                },
+                doOnError = {
+
+                }
+            )
+        }
         viewModel.detailRefreshCourseData.observe(this) {
             it.proceedWhen(
                 doOnSuccess = { success ->
@@ -174,6 +194,11 @@ class DetailCourseActivity : BaseViewModelActivity<DetailViewModel, ActivityDeta
                     binding.shimmerListDetailCourse.isVisible = false
                     binding.layoutStateRv.ivNotFound2.isVisible = false
                     success.payload?.data?.chapters?.firstOrNull()?.contents?.firstOrNull()?.youtubeId?.let { firstUrl ->
+                        if (isFromClass) success.payload.data.chapters.firstOrNull()?.courseId?.let { courseId ->
+                            viewModel.patchClassUpdateProgress(courseIdExtra,
+                                courseId
+                            )
+                        }
                         viewModel.getContentUrl(
                             firstUrl
                         )
