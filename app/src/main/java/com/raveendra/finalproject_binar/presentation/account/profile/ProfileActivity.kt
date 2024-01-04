@@ -44,7 +44,7 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
     override val bindingInflater: (LayoutInflater) -> ActivityProfileBinding
         get() = ActivityProfileBinding::inflate
 
-
+    var firstTime : Boolean = true
     private fun imagePicker() {
         ImagePicker.with(this)
             .cropSquare()
@@ -98,7 +98,12 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
         if (resultCode == Activity.RESULT_OK) {
             val uri: Uri? = data?.data
             val img = uri?.toFile()
-            binding.ivProfile.load(uri)
+            binding.ivProfile.load(uri){
+                transformations(
+                    CircleCropTransformation()
+                )
+                crossfade(true)
+            }
             getFile = img
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
@@ -137,13 +142,17 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
     override fun setupObservers() {
         viewModel.resultProfile.observe(this) {
             it.proceedWhen(doOnSuccess = { result ->
-                binding.ivProfile.load(result.payload?.data?.image) {
-                    placeholder(R.color.primary_dark_blue_06)
-                    transformations(
-                        CircleCropTransformation()
-                    )
-                    crossfade(true)
+                if (firstTime){
+                    firstTime = false
+                    binding.ivProfile.load(result.payload?.data?.image) {
+                        placeholder(R.color.primary_dark_blue_06)
+                        transformations(
+                            CircleCropTransformation()
+                        )
+                        crossfade(true)
+                    }
                 }
+
                 binding.etProfileName.setText(result.payload?.data?.name ?: "-")
                 binding.tvEmail.text = result.payload?.data?.email ?: "-"
                 binding.etProfilePhone.setText(result.payload?.data?.phoneNumber ?: "-")

@@ -45,7 +45,7 @@ class CourseViewModelTest {
 
     @Test
     fun getCourseWhenCourseTypeNotNull(){
-        coEvery { repository.getCourse(any(),any()) } returns flow {
+        coEvery { repository.getCourse(any(),any(),any(),any()) } returns flow {
             emit(
                 ResultWrapper.Success(
                     listOf(
@@ -57,17 +57,17 @@ class CourseViewModelTest {
             )
         }
 
-        val resultNotNullCategory = viewModel.getCourse()
+        val resultNotNullCategory = viewModel.getCourse("tes", listOf(1),"tes")
         val coursesNotNullCategory = viewModel.course.getOrAwaitValue()
 
         assertEquals(resultNotNullCategory, Unit)
         assertEquals(coursesNotNullCategory.payload?.size, 3)
-        coVerify { repository.getCourse() }
+        coVerify { repository.getCourse(any(),any(),any(),any()) }
     }
 
     @Test
     fun getCourseWhenCourseTypeNull() {
-        coEvery  { repository.getCourse(any(),any()) } returns flow {
+        coEvery  { repository.getCourse(any(),any(),any(),any()) } returns flow {
             emit(
                 ResultWrapper.Success(
                     listOf(
@@ -79,11 +79,11 @@ class CourseViewModelTest {
             )
         }
 
-        val resultNullCategory = viewModel.getCourse()
+        val resultNullCategory = viewModel.getCourse(null, listOf(1),"tes")
         val coursesNullCategory = viewModel.course.getOrAwaitValue()
 
         assertEquals(resultNullCategory, Unit)
         assertEquals(coursesNullCategory.payload?.size, 3)
-        coVerify { repository.getCourse(null) }
+        coVerify { repository.getCourse(any(),any(),any(),any()) }
     }
 }

@@ -43,9 +43,9 @@ class CourseDataSourceImplTest {
     fun getCourse() {
         runTest {
             val mockResponse = mockk<ResponseListWrapper<CourseResponse>>(relaxed = true)
-            coEvery { service.getCourse(any(), any(),any(),any()) } returns mockResponse
-            val response = courseDataSource.getCourse(listOf(1), "Premium")
-            coVerify { service.getCourse(any(), any(),any(),any()) }
+            coEvery { service.getCourse(any(), any(),any(),any(),any(),any()) } returns mockResponse
+            val response = courseDataSource.getCourse(listOf(1), "Premium", "", "")
+            coVerify { service.getCourse(any(), any(),any(),any(),any(),any()) }
             assertEquals(response, mockResponse)
         }
     }

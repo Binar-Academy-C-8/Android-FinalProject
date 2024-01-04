@@ -22,6 +22,11 @@ import com.raveendra.finalproject_binar.data.response.RegisterDataResponse
 import com.raveendra.finalproject_binar.data.response.RegisterDataValuesResponse
 import com.raveendra.finalproject_binar.data.response.RegisterResponse
 import com.raveendra.finalproject_binar.data.response.TransactionResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.ChapterResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.ContentResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.CourseApiResponseNew
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.DetailCourseDataResponse
+import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
 import com.raveendra.finalproject_binar.data.response.historypayment.CoursePaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaymentResponse
 import com.raveendra.finalproject_binar.data.response.historypayment.UserTransactionResponse
@@ -80,7 +85,7 @@ class CourseRepositoryImplTest {
             data = listOf(fakeCourseResponse)
         )
         runTest {
-            coEvery { dataSource.getCourse(any(), any()) } returns fakeResponseListWrapper
+            coEvery { dataSource.getCourse(any(), any(), any(), any()) } returns fakeResponseListWrapper
             repository.getCourse(listOf(1), "Free").map {
                 delay(100)
                 it
@@ -89,7 +94,7 @@ class CourseRepositoryImplTest {
                 val data = expectMostRecentItem()
                 assertTrue(data is ResultWrapper.Success)
                 assertEquals(data.payload?.size, 1)
-                coVerify { dataSource.getCourse(any(), any()) }
+                coVerify { dataSource.getCourse(any(), any(), any(), any()) }
             }
         }
     }
@@ -322,76 +327,76 @@ class CourseRepositoryImplTest {
         }
     }
 
-//    @Test
-//    fun `getCourseById, result success`() {
-//        val content = Content(
-//            id = 1,
-//            contentTitle = "Introduction to Kotlin",
-//            contentUrl = "https://example.com/introduction_video",
-//            duration = "10:00",
-//            status = true,
-//            chapterId = 1,
-//            createdAt = "2023-01-01",
-//            updatedAt = "2023-12-27",
-//            youtubeId = "abc123"
-//        )
-//
-//        val chapter = Chapter(
-//            id = 1,
-//            chapterTitle = "Getting Started",
-//            courseId = 123,
-//            createdAt = "2023-01-01",
-//            updatedAt = "2023-12-27",
-//            contents = listOf(content),
-//            durationPerChapterInMinutes = 10
-//        )
-//
-//        val data = Data(
-//            id = 123,
-//            courseCode = "CSE101",
-//            categoryId = 1,
-//            userId = 456,
-//            courseName = "Kotlin Programming",
-//            image = "https://example.com/course_image.jpg",
-//            courseType = "Online",
-//            courseLevel = "Intermediate",
-//            aboutCourse = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-//            intendedFor = "Developers",
-//            coursePrice = 500,
-//            createdAt = "2023-01-01",
-//            updatedAt = "2023-12-27",
-//            category = "Programming",
-//            courseBy = "John Doe",
-//            rating = 4.5,
-//            durationPerCourseInMinutes = 10,
-//            modulePerCourse = 1,
-//            chapters = listOf(chapter)
-//        )
-//
-//        val courseApiResponseNew = CourseApiResponseNew(
-//            data = data,
-//            status = "success"
-//        )
-//        runTest {
-//            coEvery { dataSource.getCourseById(any()) } returns courseApiResponseNew
-//            repository.getCourseById(1).map {
-//                delay(100)
-//                it
-//            }.test {
-//                delay(220)
-//                val data = expectMostRecentItem()
-//                assertTrue(data is ResultWrapper.Success)
-//                val successData = (data as ResultWrapper.Success).payload
-//
-//                // Convert the expected data to domain
-//                val expectedDomainData = courseApiResponseNew.toDomain()
-//
-//                // Assert that the received data is equal to the expected data
-//                assertEquals(expectedDomainData, successData)
-//                coVerify { dataSource.getCourseById(any()) }
-//            }
-//        }
-//    }
+    @Test
+    fun `getCourseById, result success`() {
+        val content = ContentResponse(
+            id = 1,
+            contentTitle = "Introduction to Kotlin",
+            contentUrl = "https://example.com/introduction_video",
+            duration = "10:00",
+            status = true,
+            chapterId = 1,
+            createdAt = "2023-01-01",
+            updatedAt = "2023-12-27",
+            youtubeId = "abc123"
+        )
+
+        val chapter = ChapterResponse(
+            id = 1,
+            chapterTitle = "Getting Started",
+            courseId = 123,
+            createdAt = "2023-01-01",
+            updatedAt = "2023-12-27",
+            contents = listOf(content),
+            durationPerChapterInMinutes = 10
+        )
+
+        val data = DetailCourseDataResponse(
+            id = 123,
+            courseCode = "CSE101",
+            categoryId = 1,
+            userId = 456,
+            courseName = "Kotlin Programming",
+            image = "https://example.com/course_image.jpg",
+            courseType = "Online",
+            courseLevel = "Intermediate",
+            aboutCourse = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            intendedFor = "Developers",
+            coursePrice = 500,
+            createdAt = "2023-01-01",
+            updatedAt = "2023-12-27",
+            category = "Programming",
+            courseBy = "John Doe",
+            rating = 4.5,
+            durationPerCourseInMinutes = 10,
+            modulePerCourse = 1,
+            chapters = listOf(chapter)
+        )
+
+        val courseApiResponseNew = CourseApiResponseNew(
+            data = data,
+            status = "success"
+        )
+        runTest {
+            coEvery { dataSource.getCourseById(any()) } returns courseApiResponseNew
+            repository.getCourseById(1).map {
+                delay(100)
+                it
+            }.test {
+                delay(220)
+                val data = expectMostRecentItem()
+                assertTrue(data is ResultWrapper.Success)
+                val successData = (data as ResultWrapper.Success).payload
+
+                // Convert the expected data to domain
+                val expectedDomainData = courseApiResponseNew.toDomain()
+
+                // Assert that the received data is equal to the expected data
+                assertEquals(expectedDomainData, successData)
+                coVerify { dataSource.getCourseById(any()) }
+            }
+        }
+    }
 
     @Test
     fun `forgotPassword, result success`() {

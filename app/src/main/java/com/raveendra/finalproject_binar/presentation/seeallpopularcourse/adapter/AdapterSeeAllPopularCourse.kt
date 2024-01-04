@@ -74,5 +74,10 @@ class SeeAllPopularCourseViewHolder(
         binding.tvDuration.text = "${item.durationPerCourseInMinutes} ${binding.root.context.getString(R.string.duration_course)}"
         binding.tvModule.text = "${item.modulePerCourse} ${binding.root.context.getString(R.string.module_course)}"
         binding.tvBuy.text =  if (item.coursePrice == 0) binding.root.context.getString(R.string.label_free) else binding.root.context.getString(R.string.label_buy, item.coursePrice?.toIdrCurrency())
+        if (item.coursePrice != 0) {
+            binding.clAddToCart.setBackgroundResource(R.drawable.rounded_button_background)
+        }else{
+            binding.clAddToCart.setBackgroundResource(R.drawable.rounded_button_background_blue)
+        }
     }
 }
