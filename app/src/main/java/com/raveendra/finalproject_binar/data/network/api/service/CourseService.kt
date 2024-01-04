@@ -9,7 +9,6 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
-import com.raveendra.finalproject_binar.data.request.UpdateUserRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
@@ -139,6 +138,14 @@ interface CourseService {
     @PATCH("user/update/{userId}")
     suspend fun updateProfile(
         @Part image:MultipartBody.Part?,
+        @Path("userId") userId: Int,
+        @Part ("name") name:RequestBody,
+        @Part ("phoneNumber") phoneNumber:RequestBody,
+    ):BaseResponse
+
+    @Multipart
+    @PATCH("user/update/{userId}")
+    suspend fun updateProfile(
         @Path("userId") userId: Int,
         @Part ("name") name:RequestBody,
         @Part ("phoneNumber") phoneNumber:RequestBody,

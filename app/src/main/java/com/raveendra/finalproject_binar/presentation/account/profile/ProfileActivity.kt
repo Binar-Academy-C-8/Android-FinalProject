@@ -113,6 +113,8 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
     }
 
     private fun updateProfile() {
+        val name = binding.etProfileName.getText().toString().trim()
+        val phone = binding.etProfilePhone.getText().toString().trim()
         val imageFile = getFile
         if (imageFile != null) {
             val imageRequestBody =
@@ -124,18 +126,19 @@ class ProfileActivity : BaseViewModelActivity<ProfileViewModel, ActivityProfileB
                     it
                 )
             }
-
-            val name = binding.etProfileName.getText().toString().trim()
-            val phone = binding.etProfilePhone.getText().toString().trim()
-
-            if (imageMultipart != null) {
-                viewModel.updateProfile(
-                    imageMultipart,
-                    idExtra,
-                    name.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
-                    phone.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
-                )
-            }
+            viewModel.updateProfile(
+                imageMultipart,
+                idExtra,
+                name.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
+                phone.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
+            )
+        }else{
+            viewModel.updateProfile(
+                null,
+                idExtra,
+                name.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
+                phone.toRequestBody("multiplatform/form-data".toMediaTypeOrNull()),
+            )
         }
     }
 

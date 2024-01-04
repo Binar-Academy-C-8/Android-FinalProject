@@ -7,7 +7,6 @@ import com.raveendra.finalproject_binar.data.request.LoginRequest
 import com.raveendra.finalproject_binar.data.request.NewOtpRequest
 import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
-import com.raveendra.finalproject_binar.data.request.UpdateUserRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
 import com.raveendra.finalproject_binar.data.response.CategoryResponse
@@ -26,8 +25,6 @@ import com.raveendra.finalproject_binar.data.response.historypayment.HistoryPaym
 import com.raveendra.finalproject_binar.utils.ResponseListWrapper
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Part
-import retrofit2.http.Path
 
 interface CourseDataSource {
 
@@ -83,6 +80,12 @@ interface CourseDataSource {
 
     suspend fun updateProfile(
         image: MultipartBody.Part,
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): BaseResponse
+
+    suspend fun updateProfile(
         userId: Int,
         name: RequestBody,
         phoneNumber: RequestBody
@@ -190,6 +193,13 @@ class CourseDataSourceImpl(
         phoneNumber: RequestBody
     ): BaseResponse {
         return service.updateProfile(image, userId, name, phoneNumber)
+    }
+    override suspend fun updateProfile(
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): BaseResponse {
+        return service.updateProfile(userId, name, phoneNumber)
     }
 
     override suspend fun changePasswordUser(

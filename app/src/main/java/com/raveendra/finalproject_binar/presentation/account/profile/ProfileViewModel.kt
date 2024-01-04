@@ -22,14 +22,20 @@ class ProfileViewModel(private val repository: CourseRepository) : ViewModel() {
     val updateProfile: LiveData<ResultWrapper<BaseResponse>>
         get() = _updateProfile
     fun updateProfile(
-        image: MultipartBody.Part,
+        image: MultipartBody.Part?,
         userId: Int,
         name: RequestBody,
         phoneNumber: RequestBody,
     ){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateProfile(image, userId, name, phoneNumber).collect{
-                _updateProfile.postValue(it)
+            if (image != null){
+                repository.updateProfile(image, userId, name, phoneNumber).collect{
+                    _updateProfile.postValue(it)
+                }
+            }else{
+                repository.updateProfile(userId, name, phoneNumber).collect{
+                    _updateProfile.postValue(it)
+                }
             }
         }
     }

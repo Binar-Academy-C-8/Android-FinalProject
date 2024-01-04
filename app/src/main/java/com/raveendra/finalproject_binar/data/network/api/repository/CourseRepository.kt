@@ -9,9 +9,8 @@ import com.raveendra.finalproject_binar.data.request.RegisterRequest
 import com.raveendra.finalproject_binar.data.request.ResetPasswordRequest
 import com.raveendra.finalproject_binar.data.request.VerifyOtpRequest
 import com.raveendra.finalproject_binar.data.response.BaseResponse
-import com.raveendra.finalproject_binar.data.response.CreateClassResponse
-import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.detaildata.detaildatanew.toDomain
+import com.raveendra.finalproject_binar.data.response.historypayment.toDomain
 import com.raveendra.finalproject_binar.data.response.toDomain
 import com.raveendra.finalproject_binar.domain.CategoryDomain
 import com.raveendra.finalproject_binar.domain.ClassDomain
@@ -98,6 +97,12 @@ interface CourseRepository {
 
     suspend fun updateProfile(
         image: MultipartBody.Part,
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): Flow<ResultWrapper<BaseResponse>>
+
+    suspend fun updateProfile(
         userId: Int,
         name: RequestBody,
         phoneNumber: RequestBody
@@ -245,6 +250,15 @@ class CourseRepositoryImpl(private val dataSource: CourseDataSource) : CourseRep
     ): Flow<ResultWrapper<BaseResponse>> {
         return proceedFlow {
             dataSource.updateProfile(image, userId, name, phoneNumber)
+        }
+    }
+    override suspend fun updateProfile(
+        userId: Int,
+        name: RequestBody,
+        phoneNumber: RequestBody
+    ): Flow<ResultWrapper<BaseResponse>> {
+        return proceedFlow {
+            dataSource.updateProfile(userId, name, phoneNumber)
         }
     }
 }
